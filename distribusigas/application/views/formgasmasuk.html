@@ -9,11 +9,14 @@
 
 	<title>Pemasukkan Gas</title>
 
-	<!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet">
-
-	<!-- Add custom CSS here -->
-	<link href="css/business-casual.css" rel="stylesheet">
+	<link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/business-casual.css'); ?>" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="<?php echo base_url('assets/css/metisMenu.min.css'); ?>" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="<?php echo base_url('assets/css/sb-admin-2.css'); ?>" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="<?php echo base_url('assets/font-awesome-4.1.0/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -190,9 +193,37 @@
 				</div>
 			</footer>
 
-			<!-- JavaScript -->
-			<script src="js/jquery-1.10.2.js"></script>
-			<script src="js/bootstrap.js"></script>
+						<!-- JavaScript -->
+			<script src="<?php echo base_url('assets/js/jquery.js'); ?>"></script>
+
+			<!-- Bootstrap Core JavaScript -->
+			<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+
+			<!-- Metis Menu Plugin JavaScript -->
+			<script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js'); ?>"></script>
+
+			<!-- Custom Theme JavaScript -->
+			<script src="<?php echo base_url('assets/js/sb-admin-2.js'); ?>"></script>
+
+			<!-- DataTables JavaScript -->
+			<script src="<?php echo base_url('assets/js/plugins/dataTables/jquery.dataTables.js'); ?>"></script>
+			<script src="<?php echo base_url('assets/js/plugins/dataTables/dataTables.bootstrap.js'); ?>"></script>
+
+			<!-- Custom Theme JavaScript -->
+			<script src="<?php echo base_url('assets/js/sb-admin-2.js'); ?>"></script>
+			<!-- Page-Level Demo Scripts - Notifications - Use for reference -->
+			<script>
+			    // tooltip demo
+			    $('.tooltip-demo').tooltip({
+			        selector: "[data-toggle=tooltip]",
+			        container: "body"
+			    })
+
+			    // popover demo
+			    $("[data-toggle=popover]")
+			    .popover()
+			    </script>
+
 
 		</body>
 
