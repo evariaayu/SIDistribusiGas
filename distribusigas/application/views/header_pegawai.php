@@ -20,8 +20,8 @@
 
 
          ?>
-        <li><a href="#">Mengelola Data Pangkalan</a></li>
-        <li><a href="#">Mengelola Data </a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Biaya Operasional</a></li>
         <?php } ?>
         </ul>
       
