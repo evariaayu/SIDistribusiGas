@@ -1,4 +1,4 @@
-<h1><center>Kelola Data Pangkalan</center></h1>
+<h1><center>Kelola Biaya Operasional</center></h1>
 <br>
 
 <div class="col-md-2">

@@ -17,12 +17,7 @@
       <textarea id="alamatpangkalan" name="alamatpangkalan" class="form-control" rows="3" placeholder="Alamat Pangkalan"></textarea>
     </div>
   </div>
-  <div class="form-group">
-    <label for="notelppangkalan" class="col-sm-2 control-label">No. Telpon</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="notelppangkalan" name="notelppangkalan" placeholder="No. Telpon Pangkalan">
-    </div>
-  </div>
+  
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       
