@@ -39,7 +39,9 @@ class C_verifyLogin extends CI_Controller {
                  //create the session
                  $sess_array = array(
                      'username' => $row->username,
-                     'hakakses' => $row->hakakses);
+                     'hakakses' => $row->hakakses,
+                     'idPegawai' => $row->idPegawai,
+                  );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
                  }
