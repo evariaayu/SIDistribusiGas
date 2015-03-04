@@ -16,10 +16,7 @@ class C_verifyLogin extends CI_Controller {
         if($this->form_validation->run() == FALSE) {
             $this->load->view('logingagal');
             } else {
-                //Go to private area
-              //  $this->load->view('header');
-              //  $this->load->view('header_pegawai');
-               // $this->load->view('footer');
+
                $session_data = $this->session->userdata('logged_in');
                 if($session_data['hakakses']=="pegawai"){
                 redirect('index.php/pegawai', 'refresh');
@@ -35,11 +32,14 @@ class C_verifyLogin extends CI_Controller {
          $result = $this->login->login($username, $password);
          if($result) {
              $sess_array = array();
+
              foreach($result as $row) {
                  //create the session
                  $sess_array = array(
-                     'username' => $row->username,
-                     'hakakses' => $row->hakakses);
+                     'username'   => $row->username,
+                     'hakakses'   => $row->hakakses,
+                     'idPegawai'  => $row->idPegawai
+                  );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
                  }

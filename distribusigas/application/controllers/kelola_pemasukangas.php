@@ -30,6 +30,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      $data['idPegawai'] = $session_data['idPegawai'];
 
 	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
 
@@ -46,12 +47,6 @@ class Kelola_pemasukangas extends CI_Controller {
 		
 	}
 
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		$this->session->sess_destroy();
-		redirect(site_url()."index.php/c_login");
-	}
 	public function form_tambahgas()
 	{
 		if($this->session->userdata('logged_in'))
@@ -59,6 +54,8 @@ class Kelola_pemasukangas extends CI_Controller {
 	    	$session_data = $this->session->userdata('logged_in');
 	    	$data['username'] = $session_data['username'];
 	    	$data['hakakses'] = $session_data['hakakses'];
+	    	$data['idPegawai'] = $session_data['idPegawai'];
+
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
 		  	$this->load->view('pegawai/form_tambahpemasukangas');
@@ -73,17 +70,21 @@ class Kelola_pemasukangas extends CI_Controller {
 
 	public function insert()
 	{
-		$datapemasukangas=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			
-		);
-		$this->m_pangkalan->insert($datapemasukangas);
-		redirect('index.php/Kelola_pemasukangas');
-		
-	   
-	 //  print_r($datapangkalan);
+		if($this->session->userdata('logged_in'))
+		{
+	    	$session_data = $this->session->userdata('logged_in');
+	    	$idPegawai = $session_data['idPegawai'];
+		  	$datapemasukangas=array
+			(
+				'jumlahgas' => $this->input->post('jumlahgas'),
+				'hargabeli' => $this->input->post('hargabeli'),
+				'hargajual' => $this->input->post('hargajual'),
+				'idPegawai' => $idPegawai,
+			);
+
+		  	$this->m_pemasukangas->insert($datapemasukangas);
+			redirect('index.php/Kelola_pemasukangas');
+	  	}
 	}
 
 	public function delete($idPangkalan)

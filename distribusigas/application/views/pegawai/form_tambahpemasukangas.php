@@ -4,9 +4,17 @@
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/insert">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
   <div class="form-group">
+    <label class="col-sm-2 control-label">Waktu</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" placeholder="<?php
+echo (new \DateTime())->format('d-M-Y H:i:s');?>" readonly>
+    </div>
+      
+  </div>
 
+  <div class="form-group">
     <!--jumlah gas-->
     <label for="jumlahgas" class="col-sm-2 control-label">Jumlah Gas</label>
     <div class="col-sm-10">
@@ -29,11 +37,11 @@
       <input id="hargajual" name="hargajual" class="form-control" placeholder="Harga Jual" required></input>
     </div>
   </div>
-  
+<!--  
 <?php
 $date = new DateTime();
 echo $date->getTimestamp();
-?>
+?>-->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       
