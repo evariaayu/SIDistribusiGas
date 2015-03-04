@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Pemasukkan Gas</title>
+
+	<link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/business-casual.css'); ?>" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="<?php echo base_url('assets/css/metisMenu.min.css'); ?>" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="<?php echo base_url('assets/css/sb-admin-2.css'); ?>" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="<?php echo base_url('assets/font-awesome-4.1.0/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+	<div class="brand">SI KUMIS</div>
+	<div class="address-bar">Sistem Informasi Unit Kegiatan Mahasiswa</div>
+
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">Business Casual</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="index.html">Indeks</a>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Pangkalan<b class="caret"></b></a>
+						<ul class="dropdown-menu" id="menu1">
+							<li><a href="lihatUKM.html">Lihat Pangkalan</a></li>
+							<li class="dropdown-submenu">
+								<a tabindex="-1">Kelola Pangkalan</a>
+								<ul class="dropdown-menu">
+									<li><a href="tambahUKM.html">Tambah Pangkalan</a></li>
+									<li><a href="perbaruiUKM.html">Perbarui Pangkalan</a></li>
+									<li><a href="hapusUKM.html">Hapus Pangkalan</a></li>
+								</ul>
+							</li>
+							
+						</ul>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Pegawai<b class="caret"></b></a>
+						<ul class="dropdown-menu" id="menu1">
+							<li><a href="lihatanggota.html">Lihat Pegawai</a></li>
+							<li class="dropdown-submenu">
+								<a tabindex="-1" >Kelola Pegawai</a>
+								<ul class="dropdown-menu">
+									<li><a href="tambahanggota.html">Tambah Pegawai</a></li>
+									<li><a href="perbaruianggota.html">Perbarui Pegawai</a></li>
+									<li><a href="hapusanggota.html">Hapus Pegawai</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					
+					<li class="dropdown">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle">Operasional<b class="caret"></b></a>
+						<ul class="dropdown-menu" id="menu1">
+							<li><a href="jadwallomba.html">Laporan Biaya</a></li>
+							<li class="dropdown-submenu">
+								<a tabindex="-1">Kelola Operasional</a>
+								<ul class="dropdown-menu">
+									<li><a href="tambahjadwal.html">Kelola Gas</a></li>
+									<li><a href="perbaruijadwal.html">Kelola Biaya</a></li>
+									<li><a href="hapusjadwal.html">Kelola Stok</a></li>
+								</ul>
+							</li>
+							
+						</ul>
+					</li>
+					<li>
+						<div id="logout"><a href="login.html">Log Out</a></div>
+					</li>
+				</ul>
+
+
+			</div>	
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="box">
+				<div class="col-lg-12">
+					<hr>
+					<h2 class="intro-text text-center"> Form Pemasukan Gas
+					</h2>
+					<hr>
+				</div>
+
+				<div class=".col-xs-12 .col-sm-6 .col-md-8">
+					
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-5 control-label">Tanggal</label>
+							<div class="col-sm-2">
+								<input type="date" class="form-control" id="inputEmail3" placeholder="">
+							</div>
+						</div>
+
+                       
+						
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-5 control-label">Jumlah Gas Masuk</label>
+							<div class="col-sm-1">
+								<input type="email" class="form-control" id="inputEmail3" placeholder="">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-5 control-label">Harga Satuan</label>
+							<div class="col-lg-2">
+								<input type="email" class="form-control" id="inputEmail3" placeholder="">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-5 control-label">Harga Jual</label>
+							<div class="col-sm-2">
+								<input type="email" class="form-control" id="inputEmail3" placeholder="">
+							</div>
+						</div>
+						<br>
+						
+					</form>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-5 col-sm-8">
+							
+							<button  class="btn btn-primary" data-toggle="modal" data-target="#myModalt">Tambah</button>
+
+							<div class="modal fade" id="myModalt" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-sm">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>
+											<h4 class="modal-title" id="myModalLabel" align="center">Tambah</h4>
+										</div>
+										<div class="modal-body">
+											<center><h5>Pangkalan baru berhasil ditambah :]</h5></center>
+										</div>
+										<div class="modal-footer">
+											<form action="lihatanggota.html">
+												<button type="submit" class="btn btn-default">Ok</button>
+											</div></form>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			
+
+			</div>
+			<!-- /.container -->
+
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<p>Copyright &copy; 198201</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+						<!-- JavaScript -->
+			<script src="<?php echo base_url('assets/js/jquery.js'); ?>"></script>
+
+			<!-- Bootstrap Core JavaScript -->
+			<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+
+			<!-- Metis Menu Plugin JavaScript -->
+			<script src="<?php echo base_url('assets/js/plugins/metisMenu/metisMenu.min.js'); ?>"></script>
+
+			<!-- Custom Theme JavaScript -->
+			<script src="<?php echo base_url('assets/js/sb-admin-2.js'); ?>"></script>
+
+			<!-- DataTables JavaScript -->
+			<script src="<?php echo base_url('assets/js/plugins/dataTables/jquery.dataTables.js'); ?>"></script>
+			<script src="<?php echo base_url('assets/js/plugins/dataTables/dataTables.bootstrap.js'); ?>"></script>
+
+			<!-- Custom Theme JavaScript -->
+			<script src="<?php echo base_url('assets/js/sb-admin-2.js'); ?>"></script>
+			<!-- Page-Level Demo Scripts - Notifications - Use for reference -->
+			<script>
+			    // tooltip demo
+			    $('.tooltip-demo').tooltip({
+			        selector: "[data-toggle=tooltip]",
+			        container: "body"
+			    })
+
+			    // popover demo
+			    $("[data-toggle=popover]")
+			    .popover()
+			    </script>
+
+
+		</body>
+
+		</html>
