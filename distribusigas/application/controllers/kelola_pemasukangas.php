@@ -46,12 +46,6 @@ class Kelola_pemasukangas extends CI_Controller {
 		
 	}
 
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		$this->session->sess_destroy();
-		redirect(site_url()."index.php/c_login");
-	}
 	public function form_tambahgas()
 	{
 		if($this->session->userdata('logged_in'))
@@ -73,17 +67,21 @@ class Kelola_pemasukangas extends CI_Controller {
 
 	public function insert()
 	{
-		$datapemasukangas=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			
-		);
-		$this->m_pangkalan->insert($datapemasukangas);
-		redirect('index.php/Kelola_pemasukangas');
-		
-	   
-	 //  print_r($datapangkalan);
+		if($this->session->userdata('logged_in'))
+		{
+	    	$session_data = $this->session->userdata('logged_in');
+	    	$data['idPegawai'] = $session_data['idPegawai'];
+		  	$datapemasukangas=array
+			(
+				'jumlahgas' => $this->input->post('jumlahgas'),
+				'hargabeli' => $this->input->post('hargabeli'),
+				'hargajual' => $this->input->post('hargajual'),
+				''
+			);
+
+		  	$this->m_pangkalan->insert($datapemasukangas);
+			redirect('index.php/Kelola_pemasukangas');
+	  }
 	}
 
 	public function delete($idPangkalan)
