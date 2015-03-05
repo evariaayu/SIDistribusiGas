@@ -77,7 +77,6 @@ class Kelola_pangkalan extends CI_Controller {
 		(
 			'namapangkalan' => $this->input->post('namapangkalan'),
 			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			'notelppangkalan' => $this->input->post('notelppangkalan'),
 		);
 		$this->m_pangkalan->insert($datapangkalan);
 		redirect('index.php/kelola_pangkalan');
