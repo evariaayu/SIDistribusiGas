@@ -81,8 +81,13 @@ class Kelola_pemasukangas extends CI_Controller {
 				'hargajual' => $this->input->post('hargajual'),
 				'idPegawai' => $idPegawai,
 			);
-
+			$datetoday =date("Y-m-d");
+			$datamasukgudang=array(
+				'jumlahgas' => $this->input->post('jumlahgas'),
+				'tanggal' => $datetoday
+			);
 		  	$this->m_pemasukangas->insert($datapemasukangas);
+		  	$this->m_pemasukangas->insert($datamasukgudang);
 			redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}

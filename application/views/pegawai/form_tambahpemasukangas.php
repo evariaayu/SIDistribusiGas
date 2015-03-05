@@ -8,8 +8,9 @@
   <div class="form-group">
     <label class="col-sm-2 control-label">Waktu</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" placeholder="<?php
-echo (new \DateTime())->format('d-M-Y H:i:s');?>" readonly>
+      <?php
+echo (new \DateTime())->format('d-M-Y H:i:s');?>
+  
     </div>
       
   </div>

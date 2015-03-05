@@ -10,6 +10,7 @@ class M_pemasukangas extends CI_Model {
     function insert($datapemasukangas) 
     {
         $this->db->insert('pemasukan',$datapemasukangas);
+        $this->db->insert('stokgudang', $dat)
     }
 
     function getall()
