@@ -77,6 +77,7 @@ class Kelola_pangkalan extends CI_Controller {
 		(
 			'namapangkalan' => $this->input->post('namapangkalan'),
 			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
+			
 		);
 		$this->m_pangkalan->insert($datapangkalan);
 		redirect('index.php/kelola_pangkalan');
@@ -93,8 +94,19 @@ class Kelola_pangkalan extends CI_Controller {
 
 	public function edit($idPangkalan)
 	{
-		$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
+		if($this->session->userdata('logged_in'))
+		{
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
+		
+			$this->load->view('header');
+			$this->load->view('header_pegawai', $data);
+			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
+		  	$this->load->view('footer');
+	  }
+		
 	}
 
 	public function update($idPangkalan)
@@ -102,8 +114,10 @@ class Kelola_pangkalan extends CI_Controller {
 		if($this->input->post('submit'))
 		{
 			$this->m_pangkalan->update($idPangkalan);
-			redirect('index.php/kelola_pangkalan');
+			
 		}
+		redirect('index.php/kelola_pangkalan');
+		print_r($datapangkalan);
 	}
 
 }

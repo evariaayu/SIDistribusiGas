@@ -10,10 +10,15 @@ class M_pemasukangas extends CI_Model {
     function insert($datapemasukangas) 
     {
         $this->db->insert('pemasukan',$datapemasukangas);
+        $this->db->insert('stokgudang', $dat)
     }
+
     function getall()
     {
-        $get_data = $this->db->get('pemasukan');
+        $this->db->select('*');
+        $this->db->from('pemasukan');
+        $this->db->join('pegawai','pemasukan.idPegawai=pegawai.idPegawai');
+        $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datapemasukangas) 
@@ -37,22 +42,23 @@ class M_pemasukangas extends CI_Model {
         $get_data           = $this->db->get('pemasukan');
         if($get_data->num_rows() > 0)
         {
+
             foreach ($get_data->result() as $datapemasukangas) {
                 $hasil[] = $datapemasukangas;
             }
+         //   print_r($hasil);
             return $hasil;
         }
     }
 
-    function update($idPemasukan)
+    public function update($data)
     {
         $datapemasukangas=array(
-        
-            'namapangkalan' => $this->input->post('namapangkalan'),
-            'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
+            'jumlahgas' => $data['jumlahgas'],
+            'hargabeli' => $data['hargabeli'],
+            'hargajual' => $data['hargajual']
         );
-        $this->db->where('idPemasukan', $idPemasukan);
+        $this->db->where('idPemasukan',$data['idpemasukan']);
         $this->db->update('pemasukan', $datapemasukangas);
     }
 }
