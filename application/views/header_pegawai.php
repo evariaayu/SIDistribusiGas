@@ -21,8 +21,15 @@
 
          ?>
         <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
-        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Biaya Operasional</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
         <?php } ?>
+        <?php  $session_data = $this->session->userdata('logged_in');
+        if($session_data['hakakses']=="direktur") {?>
+
+         <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
+
+           <?php } ?>
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -30,7 +37,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $username;?><span class="glyphicon glyphicon-user"><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="../index.php/c_login/logout">Logout</a><li>
+            <li><a href="<?php echo base_url("index.php/c_login/logout") ?>">Logout</a><li>
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
