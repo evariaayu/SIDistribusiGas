@@ -52,7 +52,7 @@
         <td><?php echo $datapemasukangas->hargabeli ?></td>
        <td><?php echo $datapemasukangas->hargajual ?></td>
        <td><?php echo $datapemasukangas->tanggalpembelian ?></td>
-       <td><?php echo $datapemasukangas->idPegawai ?></td>
+       <td><?php echo $datapemasukangas->namapegawai ?></td>
         <td>
           <button type="button" class="btn btn-danger btn-link">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
