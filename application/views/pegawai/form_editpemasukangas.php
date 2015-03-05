@@ -40,7 +40,6 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <input type="submit" class="btn btn-default" value="submit"></button>
-      <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>index.php/Kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>" idPemasukan="<?php $hasil[0]->idPemasukan ?>">Update</a></td>
     </div>
   </div>
 </form>
