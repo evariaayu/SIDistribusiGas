@@ -83,11 +83,11 @@ class Kelola_pemasukangas extends CI_Controller {
 			);
 			$datetoday =date("Y-m-d");
 			$datamasukgudang=array(
-				'jumlahgas' => $this->input->post('jumlahgas'),
-				'tanggal' => $datetoday
+				'jumlah_stok' => $this->input->post('jumlahgas'),
+				//'tanggal' => $datetoday
 			);
 		  	$this->m_pemasukangas->insert($datapemasukangas);
-		  	$this->m_pemasukangas->insert($datamasukgudang);
+		  	$this->m_pemasukangas->insertstok($datamasukgudang);
 			redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}
