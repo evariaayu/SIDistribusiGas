@@ -1,23 +1,32 @@
 <h3><center>Form Edit Data Pangkalan</center></h1>
-<br/><br>
-<?php
-			echo form_open('index.php/kelola_pangkalan/update/'.$hasil[0]->idPangkalan);
-		?>
-		<div class="col-md-6 col-md-offset-3">
-			<table>
-				<tr>
-					<td> Nama Pangkalan :</td>
-					<td> <?php echo form_input('namapangkalan',$hasil[0]->namapangkalan);?> </td>
-				</tr>
-				<tr>
-					<td> Alamat Pangkalan : </td>
-					<td> <?php echo form_input('alamatpangkalan',$hasil[0]->alamatpangkalan);?> </td>
-				</tr>
-				
-					<td> </td>
-					<td> <?php echo form_submit('submit', 'update'); ?> </td>
-				</tr>
-				<?php echo form_close(); //menutup form ?>
-			</table>
-		</div>
-	
+  <br>
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/update/<?php echo $hasil[0]->idPangkalan; ?>">
+      
+      <div class="form-group">
+        <!--Nama Pangkalan-->
+        <label for="namapangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="namapangkalan" name="namapangkalan" value="<?php echo $hasil[0]->namapangkalan ?>" required>
+        </div>
+      </div>
+
+      <!---alamat pangkalan -->
+      <div class="form-group">
+        <label for="alamatpangkalan" class="col-sm-2 control-label">Alamat Pangkalan</label>
+        <div class="col-sm-10">
+          <input id="alamatpangkalan" name="alamatpangkalan" class="form-control" value="<?php echo $hasil[0]->alamatpangkalan ?>" required></input>
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" class="btn btn-default" value="submit"></button>
+        </div>
+      </div>
+    </form>
+  </div>
