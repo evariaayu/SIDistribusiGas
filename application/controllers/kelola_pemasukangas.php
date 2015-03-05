@@ -114,10 +114,13 @@ class Kelola_pemasukangas extends CI_Controller {
 
 	public function update($idPemasukan)
 	{
-		if($this->input->post('submit'))
-		{
-			$this->m_pemasukangas->update($idPemasukan);
-		}
+		
+		$data['jumlahgas'] = $this->input->post('jumlahgas');
+		$data['hargabeli'] = $this->input->post('hargabeli');
+		$data['hargajual'] = $this->input->post('hargajual');
+		$data['idpemasukan'] = $idPemasukan;
+		$this->m_pemasukangas->update($data);
+		
 		redirect('index.php/Kelola_pemasukangas');
 	}
 

@@ -4,7 +4,7 @@
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>/index.php/Kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>">
   <div class="form-group">
     <label class="col-sm-2 control-label">Waktu</label>
     <div class="col-sm-10">
@@ -39,8 +39,8 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default" value="Update" idPemasukan="<?php echo $hasil[0]->idPemasukan; ?>"></button>
-      <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>/index.php/Kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>" idPemasukan="<?php $hasil[0]->idPemasukan ?>">Update</a></td>
+      <input type="submit" class="btn btn-default" value="submit"></button>
+      <a class="btn btn-primary btn-xs" href="<?php echo base_url();?>index.php/Kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>" idPemasukan="<?php $hasil[0]->idPemasukan ?>">Update</a></td>
     </div>
   </div>
 </form>

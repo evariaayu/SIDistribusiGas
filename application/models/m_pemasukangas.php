@@ -47,14 +47,14 @@ class M_pemasukangas extends CI_Model {
         }
     }
 
-    function update($idPemasukan)
+    public function update($data)
     {
         $datapemasukangas=array(
-            'jumlahgas' => $this->input->post('jumlahgas'),
-            'hargabeli' => $this->input->post('hargabeli'),
-            'hargajual' => $this->input->post('hargajual'),        
+            'jumlahgas' => $data['jumlahgas'],
+            'hargabeli' => $data['hargabeli'],
+            'hargajual' => $data['hargajual']
         );
-        $this->db->where('idPemasukan',$idPemasukan);
+        $this->db->where('idPemasukan',$data['idpemasukan']);
         $this->db->update('pemasukan', $datapemasukangas);
     }
 }
