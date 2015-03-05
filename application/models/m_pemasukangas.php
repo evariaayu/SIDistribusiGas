@@ -11,6 +11,7 @@ class M_pemasukangas extends CI_Model {
     {
         $this->db->insert('pemasukan',$datapemasukangas);
     }
+
     function getall()
     {
         $get_data = $this->db->get('pemasukan');
@@ -37,9 +38,11 @@ class M_pemasukangas extends CI_Model {
         $get_data           = $this->db->get('pemasukan');
         if($get_data->num_rows() > 0)
         {
+
             foreach ($get_data->result() as $datapemasukangas) {
                 $hasil[] = $datapemasukangas;
             }
+         //   print_r($hasil);
             return $hasil;
         }
     }
@@ -47,12 +50,11 @@ class M_pemasukangas extends CI_Model {
     function update($idPemasukan)
     {
         $datapemasukangas=array(
-        
-            'namapangkalan' => $this->input->post('namapangkalan'),
-            'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
+            'jumlahgas' => $this->input->post('jumlahgas'),
+            'hargabeli' => $this->input->post('hargabeli'),
+            'hargajual' => $this->input->post('hargajual'),        
         );
-        $this->db->where('idPemasukan', $idPemasukan);
+        $this->db->where('idPemasukan',$idPemasukan);
         $this->db->update('pemasukan', $datapemasukangas);
     }
 }

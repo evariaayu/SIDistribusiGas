@@ -22,10 +22,7 @@ class M_pangkalan extends CI_Model {
             }
             return $hasil;
         }
-        else
-        {
-            $this->load->view('v_mengelola_pangkalan');
-        }
+        
     }
     function delete($idPangkalan)
     {
@@ -49,14 +46,11 @@ class M_pangkalan extends CI_Model {
 
     function update($idPangkalan)
     {
-        $namapangkalan      = $this->input->post('namapangkalan');
-        $alamatpangkalan    = $this->input->post('alamatpangkalan');
-        $notelppangkalan    = $this->input->post('notelppangkalan');
-        $datapangkalan= array
-        (
+        $datapangkalan=array(
+        
             'namapangkalan' => $this->input->post('namapangkalan'),
             'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-            'notelppangkalan' => $this->input->post('notelppangkalan'),
+           
         );
         $this->db->where('idPangkalan', $idPangkalan);
         $this->db->update('pangkalan', $datapangkalan);
