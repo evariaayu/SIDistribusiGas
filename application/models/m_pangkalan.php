@@ -51,12 +51,10 @@ class M_pangkalan extends CI_Model {
     {
         $namapangkalan      = $this->input->post('namapangkalan');
         $alamatpangkalan    = $this->input->post('alamatpangkalan');
-        $notelppangkalan    = $this->input->post('notelppangkalan');
         $datapangkalan= array
         (
             'namapangkalan' => $this->input->post('namapangkalan'),
             'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-            'notelppangkalan' => $this->input->post('notelppangkalan'),
         );
         $this->db->where('idPangkalan', $idPangkalan);
         $this->db->update('pangkalan', $datapangkalan);
