@@ -87,37 +87,38 @@ class Kelola_pemasukangas extends CI_Controller {
 	  	}
 	}
 
-	public function delete($idPangkalan)
+	public function delete($idPemasukan)
 	{
-		$this->m_pangkalan->delete($idPangkalan);
+		$this->m_pemasukangas->delete($idPemasukan);
 		redirect('index.php/Kelola_pemasukangas');
 	}
 
-	public function edit($idPangkalan)
+	public function edit($idPemasukan)
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pemasukangas->getby($idPangkalan);
-		
+	     	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	      	$data['idPegawai'] = $session_data['idPegawai'];
+
+	      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
+			
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapemasukangas);
+			$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
 		  	$this->load->view('footer');
 	  }
 		
 	}
 
-	public function update($idPangkalan)
+	public function update($idPemasukan)
 	{
 		if($this->input->post('submit'))
 		{
-			$this->m_pangkalan->update($idPangkalan);
-			
+			$this->m_pemasukangas->update($idPemasukan);
 		}
-		redirect('index.php/Kelola_pemasukan');
+		redirect('index.php/Kelola_pemasukangas');
 	}
 
 }
