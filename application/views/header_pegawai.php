@@ -33,7 +33,7 @@
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
-       
+       <li><script type="text/javascript" src="moment.js">moment().format('MMMM Do YYYY, h:mm:ss a');</script></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $username;?><span class="glyphicon glyphicon-user"><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
