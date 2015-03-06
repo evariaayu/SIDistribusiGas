@@ -75,7 +75,7 @@
 
 <div class="col-md-6">
             <div class="jumbotron">
-                <!-- <form class="form-horizontal" method="POST" action="<?php echo base_url() ?>kelolatempatkp/"> -->
+                <!--<form class="form-horizontal" method="POST" action="<?php echo base_url() ?>report_transaksigas/"> -->
                     <fieldset>
                         <legend>Laporan Transaksi Gas Offline</legend>
                     <!-- Button trigger modal -->
