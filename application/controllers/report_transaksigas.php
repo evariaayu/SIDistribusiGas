@@ -44,7 +44,7 @@ class Report_transaksigas extends CI_Controller {
 			echo '<pre>';
 			var_dump($data);
 			echo '</pre>';
-		//$this->load->view('pegawai/v_report_transaksigas',$data);
+		//$this->load->view('direktur/v_report_transaksigas',$data);
 		}
 	   else
 	   {
