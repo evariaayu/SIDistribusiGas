@@ -41,10 +41,17 @@ class Report_transaksigas extends CI_Controller {
 
 		  $this->load->model('m_reporttransaksigas');
 		$data['records']=$this->m_reporttransaksigas->getall();
+<<<<<<< HEAD
 			//echo '<pre>';
 			//var_dump($data);
 			//echo '</pre>';
 		//$this->load->view('pegawai/v_report_transaksigas',$data);
+=======
+			echo '<pre>';
+			var_dump($data);
+			echo '</pre>';
+		//$this->load->view('direktur/v_report_transaksigas',$data);
+>>>>>>> 848cc86e40f5a150291d9e684fa2d8e39cb72cf4
 		}
 	   else
 	   {

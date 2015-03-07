@@ -9,5 +9,7 @@
 
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
+     <script type="text/javascript" src="<?php echo base_url('assets/js/calendarDateInput.js') ?>"></script>
+       <script type="text/javascript" src="<?php echo base_url('assets/js/moment.js') ?>"></script>
 </head>
 <body>

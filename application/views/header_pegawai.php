@@ -16,15 +16,24 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <?php $session_data = $this->session->userdata('logged_in');
-        if($session_data['hakakses']=="pegawai"){
-
-
-         ?>
+        if($session_data['hakakses']=="pegawai"){?>
         <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_operasional") ?>">Mengelola Biaya Operasional</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Mengelola Data Gudang</a></li>
         <?php } ?>
+
         <?php  $session_data = $this->session->userdata('logged_in');
         if($session_data['hakakses']=="direktur") {?>
+
+         <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
+        <li><a href="<?php echo base_url("index.php/report_transaksigas") ?>">Report Transaksi Gas</a></li>
+
+           <?php } ?>
+
+        <?php  $session_data = $this->session->userdata('logged_in');
+        if($session_data['hakakses']=="pangkalan") {?>
 
          <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
@@ -33,7 +42,7 @@
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
-       
+       <li><script type="text/javascript" src="moment.js">moment().format('MMMM Do YYYY, h:mm:ss a');</script></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $username;?><span class="glyphicon glyphicon-user"><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

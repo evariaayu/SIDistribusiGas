@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   
-class M_operasional extends CI_Model {
+class M_pesanonline extends CI_Model {
  
     function __construct() {
         parent::__construct();
@@ -9,11 +9,11 @@ class M_operasional extends CI_Model {
  
   /*  function insert($datapangkalan) 
     {
-        $this->db->insert('',$datapangkalan);
+        $this->db->insert('pangkalan',$datapangkalan);
     }
-   /* function getall()
+    function getall()
     {
-        $get_data = $this->db->get('');
+        $get_data = $this->db->get('pangkalan');
         if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datapangkalan) 
@@ -22,9 +22,12 @@ class M_operasional extends CI_Model {
             }
             return $hasil;
         }
-        
-    }*/
- /*   function delete($idPangkalan)
+        else
+        {
+            $this->load->view('v_mengelola_pangkalan');
+        }
+    }
+    function delete($idPangkalan)
     {
         $this->db->where('idPangkalan', $idPangkalan);
         $this->db->delete('pangkalan');
@@ -46,11 +49,14 @@ class M_operasional extends CI_Model {
 
     function update($idPangkalan)
     {
-        $datapangkalan=array(
-        
+        $namapangkalan      = $this->input->post('namapangkalan');
+        $alamatpangkalan    = $this->input->post('alamatpangkalan');
+        $notelppangkalan    = $this->input->post('notelppangkalan');
+        $datapangkalan= array
+        (
             'namapangkalan' => $this->input->post('namapangkalan'),
             'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
+            'notelppangkalan' => $this->input->post('notelppangkalan'),
         );
         $this->db->where('idPangkalan', $idPangkalan);
         $this->db->update('pangkalan', $datapangkalan);

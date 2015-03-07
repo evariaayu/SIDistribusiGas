@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class Kelola_operasional extends CI_Controller {
+class Kelola_datagudang extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
@@ -36,7 +36,7 @@ class Kelola_operasional extends CI_Controller {
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  //$this->load->view('pegawai/v_mengelola_biayaoperasioanl',$dataoperasional);
-		  $this->load->view('pegawai/v_mengelola_biayaoperasional');
+		  $this->load->view('pegawai/v_mengelola_datagudang');
 		  $this->load->view('footer');
 		}
 	   else
@@ -48,7 +48,7 @@ class Kelola_operasional extends CI_Controller {
 	}
 
 
-	public function form_tambahbiayaoperasional()
+	public function form_tambahpenukaranbarang()
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -57,7 +57,7 @@ class Kelola_operasional extends CI_Controller {
 		    $data['hakakses'] = $session_data['hakakses'];
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+		  	$this->load->view('pegawai/form_tambahpenukaranbarang');
 		  	$this->load->view('footer');
 	  	}
 	   	else

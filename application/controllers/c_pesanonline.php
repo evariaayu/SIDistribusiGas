@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class Kelola_operasional extends CI_Controller {
+class C_pesanonline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
-        $this->load->model('m_operasional');
+        $this->load->model('m_pesanonline');
     }
 	/**
 	 * Index Page for this controller.
@@ -31,12 +31,11 @@ class Kelola_operasional extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 
-	      //$dataoperasional['hasil'] = $this->m_operasional->getall();
+	      //$datapangkalan['hasil'] = $this->m_pesanonline->getall();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  //$this->load->view('pegawai/v_mengelola_biayaoperasioanl',$dataoperasional);
-		  $this->load->view('pegawai/v_mengelola_biayaoperasional');
+		  $this->load->view('pangkalan/v_pesanonline');
 		  $this->load->view('footer');
 		}
 	   else
@@ -47,24 +46,29 @@ class Kelola_operasional extends CI_Controller {
 		
 	}
 
-
-	public function form_tambahbiayaoperasional()
+	public function logout()
+	{
+		$this->session->unset_userdata('logged_in');
+		$this->session->sess_destroy();
+		redirect(site_url()."index.php/c_login");
+	}
+	public function form_tambahdata()
 	{
 		if($this->session->userdata('logged_in'))
 		{
-		    $session_data = $this->session->userdata('logged_in');
-		    $data['username'] = $session_data['username'];
-		    $data['hakakses'] = $session_data['hakakses'];
-			$this->load->view('header');
-		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahbiayaoperasional');
-		  	$this->load->view('footer');
-	  	}
-	   	else
-	   	{
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+		$this->load->view('header');
+	 	$this->load->view('header_pegawai', $data);
+	  	$this->load->view('pegawai/form_tambahdatapangkalan');
+	  	$this->load->view('footer');
+	  }
+	   else
+	   {
 	     //If no session, redirect to login page
-	    	redirect('index.php/c_login', 'refresh');
-	   	}
+	     redirect('index.php/c_login', 'refresh');
+	   }
 	}
 
 	public function insert()
@@ -73,7 +77,7 @@ class Kelola_operasional extends CI_Controller {
 		(
 			'namapangkalan' => $this->input->post('namapangkalan'),
 			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			
+			'notelppangkalan' => $this->input->post('notelppangkalan'),
 		);
 		$this->m_pangkalan->insert($datapangkalan);
 		redirect('index.php/kelola_pangkalan');
@@ -90,19 +94,8 @@ class Kelola_operasional extends CI_Controller {
 
 	public function edit($idPangkalan)
 	{
-		if($this->session->userdata('logged_in'))
-		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
-		  	$this->load->view('footer');
-	  }
-		
+		$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
+		$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
 	}
 
 	public function update($idPangkalan)
@@ -110,10 +103,8 @@ class Kelola_operasional extends CI_Controller {
 		if($this->input->post('submit'))
 		{
 			$this->m_pangkalan->update($idPangkalan);
-			
+			redirect('index.php/kelola_pangkalan');
 		}
-		redirect('index.php/kelola_pangkalan');
-		print_r($datapangkalan);
 	}
 
 }
