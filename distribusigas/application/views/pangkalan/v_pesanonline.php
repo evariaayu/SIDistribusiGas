@@ -13,9 +13,13 @@
   </div>
   <div class="form-group">
     <label for="namapangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="namapangkalan" name="namapangkalan" placeholder="Nama Pangkalan" required>
-    </div>
+    <select class="form-control">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="hargajualgas" class="col-sm-2 control-label">Harga/1 Gas</label>
