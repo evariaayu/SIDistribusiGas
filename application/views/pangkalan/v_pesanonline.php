@@ -13,13 +13,17 @@
   </div>
   <div class="form-group">
     <label for="namapangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
-    <select class="form-control">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
+    <div class="dropdown">
+        <select class="form-control">
+            <?php 
+
+            foreach($groups as $row)
+            { 
+              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
+            }
+            ?>
+            </select>
+      </div>
   </div>
   <div class="form-group">
     <label for="hargajualgas" class="col-sm-2 control-label">Harga/1 Gas</label>

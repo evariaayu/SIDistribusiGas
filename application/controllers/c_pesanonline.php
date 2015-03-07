@@ -25,24 +25,13 @@ class C_pesanonline extends CI_Controller {
 	 */
 	public function index()
 	{
-		if($this->session->userdata('logged_in'))
-		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-
-	      //$datapangkalan['hasil'] = $this->m_pesanonline->getall();
-
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pangkalan/v_pesanonline');
-		  $this->load->view('footer');
-		}
-	   else
-	   {
-	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
-	   }
+		$data['namapangkalan']= 'namapangkalan';
+        $data['namapangkalan'] = $this->m_pesanonline->getAllGroups();
+        $this->load->view('include/header',$data);
+        $this->load->view('include/navbar',$data);
+        $this->load->view('delivery_view', $data);
+        $this->load->view('include/sidebar',$data);
+        $this->load->view('include/footer',$data);
 		
 	}
 

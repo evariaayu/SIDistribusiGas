@@ -6,7 +6,28 @@ class M_pesanonline extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
- 
+
+
+    function getAllGroups()
+    {
+        /*
+        $query = $this->db->get('location');
+
+        foreach ($query->result() as $row)
+        {
+            echo $row->description;
+        }*/
+
+        $query = $this->db->query('SELECT namapangkalan FROM pangkalan');
+
+
+        return $query->result();
+
+        //echo 'Total Results: ' . $query->num_rows();
+    }
+
+
+
   /*  function insert($datapangkalan) 
     {
         $this->db->insert('pangkalan',$datapangkalan);
