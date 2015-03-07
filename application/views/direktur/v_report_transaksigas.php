@@ -6,18 +6,10 @@
             <div class="jumbotron">
                 <!-- <form class="form-horizontal" method="POST" action="<?php echo base_url() ?>kelolatempatkp/"> -->
                     <fieldset>
-                        <legend>Laporan Transaksi Gas Online</legend>
+                        <legend><center>Laporan Transaksi Gas Online</center></legend>
                     <!-- Button trigger modal -->
                     <div class="form-group">
                       
-            
-                        <div class="col-lg-4 form-group">
-                        <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
-                        Create New
-                         </a>
-                        
-                        </div>
-
               <!-- Modal -->
 
                       </div>
@@ -67,17 +59,14 @@
                                  <li><a href="#">Next</a></li>
                               </ul>
                             </div> -->
+                       </fieldset>
                         </div>
-                    </fieldset>
-                <!-- </form> -->
-            </div>
-        </div>
 
-<div class="col-md-6">
-            <div class="jumbotron">
+
+                         <div class="jumbotron">
                 <!--<form class="form-horizontal" method="POST" action="<?php echo base_url() ?>report_transaksigas/"> -->
                     <fieldset>
-                        <legend>Laporan Transaksi Gas Offline</legend>
+                        <legend><center>Laporan Transaksi Gas Offline</center></legend>
                     <!-- Button trigger modal -->
                     <div class="form-group">
                       
@@ -142,6 +131,8 @@
                     </fieldset>
                 <!-- </form> -->
             </div>
-        </div>
+                    
+                <!-- </form> -->
+            </div>
 
-</div>
+ 
