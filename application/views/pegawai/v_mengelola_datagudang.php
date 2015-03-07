@@ -1,4 +1,4 @@
-<h1><center>Kelola Biaya Operasional</center></h1>
+<h1><center>Kelola Data Gudang</center></h1>
 <br>
 
 <div class="col-md-2">
@@ -6,7 +6,7 @@
   <div class="col-xs-1"></div>
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-  <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayaoperasional','Data Biaya Operasional') ?>
+  <?php echo anchor ('index.php/kelola_datagudang/form_tambahpenukaranbarang','Penukaran Barang') ?>
 </button>
 <br>
 <br>
