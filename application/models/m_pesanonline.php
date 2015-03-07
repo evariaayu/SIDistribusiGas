@@ -7,7 +7,7 @@ class M_pesanonline extends CI_Model {
         $this->load->database();
     }
  
-    function insert($datapangkalan) 
+  /*  function insert($datapangkalan) 
     {
         $this->db->insert('pangkalan',$datapangkalan);
     }
@@ -60,5 +60,5 @@ class M_pesanonline extends CI_Model {
         );
         $this->db->where('idPangkalan', $idPangkalan);
         $this->db->update('pangkalan', $datapangkalan);
-    }
+    }*/
 }

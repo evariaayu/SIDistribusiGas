@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class C_kelolapemesananpangkalan extends CI_Controller {
+class C_pesanonline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
@@ -31,11 +31,11 @@ class C_kelolapemesananpangkalan extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 
-	      $datapangkalan['hasil'] = $this->m_pesanonline->getall();
+	      //$datapangkalan['hasil'] = $this->m_pesanonline->getall();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pangkalan/v_kelolapemesananpangkalan',$datapangkalan);
+		  $this->load->view('pangkalan/v_pesanonline');
 		  $this->load->view('footer');
 		}
 	   else

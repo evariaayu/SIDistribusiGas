@@ -45,6 +45,10 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
     </div>
   </div>
 
+<script>DateInput('orderdate', true, 'DD-MON-YYYY')</script>
+
+<input type="button" onClick="alert(this.form.orderdate.value)" value="Show date value passed">
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Simpan</button>
