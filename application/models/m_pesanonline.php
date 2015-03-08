@@ -1,29 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   
-class M_pesanonline extends CI_Model {
+class M_pesanonline extends CI_Model 
+{
  
-    function __construct() {
+    function __construct() 
+    {
         parent::__construct();
         $this->load->database();
     }
 
 
-    public function get_dropdown() {
-        $namapangkalan = $this->db->select('namapangkalan','pangkalan')
-          
-          ->get($this->database)
-          ->result();
- 
-        $dropdown = array('' => 'Pilih Nama Pangkalan');
-        if( !empty($namapangkalan) ) {
-            foreach( $namapangkalan as $namapangkalan ) {
-                $dropdown[$namapangkalan->idPangkalan] = $namapangkalan->namapangkalan;
-            }
-            return $dropdown;
-        }
-        return array('' => 'Tidak ada kategori');
+    function getAllPangkalan()
+    {
+        $this->db->select('idPangkalan,namapangkalan');
+        $datanamapangkalan = $this->db->get('pangkalan');
+        return $datanamapangkalan;
     }
-
   /*  function insert($datapangkalan) 
     {
         $this->db->insert('pangkalan',$datapangkalan);
