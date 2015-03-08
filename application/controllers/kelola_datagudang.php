@@ -6,7 +6,9 @@ class Kelola_datagudang extends CI_Controller {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
-        $this->load->model('m_operasional');
+        $this->load->model('m_penukaranbarang');
+        $this->load->helper('form');
+        $this->load->helper('url');
     }
 	/**
 	 * Index Page for this controller.
@@ -55,9 +57,12 @@ class Kelola_datagudang extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
+
+		    $datapangkalan['hasil'] = $this->m_penukaranbarang->populate();
+
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahpenukaranbarang');
+		  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datapangkalan);
 		  	$this->load->view('footer');
 	  	}
 	   	else

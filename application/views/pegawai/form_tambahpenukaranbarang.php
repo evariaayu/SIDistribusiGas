@@ -26,6 +26,8 @@
     </div>
   </div>
 
+  <?php echo form_dropdown('pangkalan',$hasil,''); ?>
+
   <div class="form-group">
     <!--jumlah barang rusak-->
     <label for="jumlahbarangrusak" class="col-sm-2 control-label">Jumlah Barang Rusak</label>
