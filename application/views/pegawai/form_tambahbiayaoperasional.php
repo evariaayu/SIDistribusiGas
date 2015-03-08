@@ -1,56 +1,61 @@
 <h3><center>Form Tambah Biaya Operasional</center></h1>
 <br>
+<div class="col-md-3">
+</div>
 
-<div class="col-xs-offset-1 col-md-5">
+<div class="col-md-6">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
 
 
   <div class="form-group">
-    <!--pam-->
-    <label for="pam" class="col-sm-2 control-label">PAM</label>
+    <label class="col-sm-2 control-label">Waktu</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="pam" name="pam" placeholder="pam" required>
-    </div>
-  </div>
-  <!-- input file pam-->
-  <div class="form-group">
-    <label for="filepam" class="col-sm-2 control-label">File PAM</label>
-    <div class="col-sm-10">
-      <input type="file" id="filepam">
-      <p class="help-block">file max. 2mb</p>
-    </div>
-  </div>
-
-
-  <!---pln-->
-  <div class="form-group">
-    <label for="pln" class="col-sm-2 control-label">PLN</label>
-    <div class="col-sm-10">
-      <input id="pln" name="pln" class="form-control" placeholder="pln" required></input>
-    </div>
-  </div>
-   <!-- input file pln-->
-  <div class="form-group">
-    <label for="filepln" class="col-sm-2 control-label">File PLN</label>
-    <div class="col-sm-10">
-      <input type="file" id="filepln">
-      <p class="help-block">file max. 2mb</p>
-    </div>
-  </div>
+      <?php
+echo (new \DateTime())->format('d-M-Y H:i:s');?>
   
-  <!---internet-->
+    </div>
+      
+  </div>
+
+
   <div class="form-group">
-    <label for="internet" class="col-sm-2 control-label">Internet</label>
+    <!--jumlah gas-->
+    <label for="jumlahgas" class="col-sm-2 control-label">Keperluan</label>
     <div class="col-sm-10">
-      <input id="internet" name="internet" class="form-control" placeholder="Internet" required></input>
+      <select type="text" class="form-control" id="keperluan" name="keperluan" required>
+        <option>PAM</option>
+        <option>PLN</option>
+        <option>Telkom</option>
+        <option>Lainnya</option>
+      </select>
     </div>
   </div>
-   <!-- input file pln-->
+
+<!--- lainnya -->
   <div class="form-group">
-    <label for="fileinternet" class="col-sm-2 control-label">File Internet</label>
+    <label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
     <div class="col-sm-10">
-      <input type="file" id="fileinternet">
+      <input id="keterangan" name="keterangan" class="form-control" placeholder="keterangan" required></input>
+    </div>
+  </div>
+
+  <!---Lampirkan File -->
+  <div class="form-group">
+    <label for="file" class="col-sm-2 control-label">Lampiran Nota</label>
+    <div class="col-sm-10">
+      <input type="file" id="file" name="file" required>
       <p class="help-block">file max. 2mb</p>
+    </div>
+  </div>
+
+<!--  
+<?php
+$date = new DateTime();
+echo $date->getTimestamp();
+?>-->
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      
     </div>
   </div>
   <div class="form-group">
