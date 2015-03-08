@@ -90,25 +90,24 @@
                                  
                                 </tr>
                               </thead>
-                             <tbody>
+                              <tbody>
                               <?php if(empty($hasil)) {
-                              echo "Data Pemasukan Gas masih kosong";
+                              echo "Data transaksi gas masih kosong";
                               }
                               else { ?>
-                                <?php foreach ($hasil as $datapemasukangas) {?>
+                                <?php foreach ($hasil as $transaksigasonline) {?>
                                   <tr>
-                                  <td><?php echo $datapemasukangas->idPemasukan ?></td>
-                                  <td><?php echo $datapemasukangas->jumlahgas ?></td>
-                                  <td><?php echo $datapemasukangas->hargabeli ?></td>
-                                  <td><?php echo $datapemasukangas->hargajual ?></td>
-                          <td><?php echo $datapemasukangas->tanggalpembelian ?></td>
-                          <td><?php echo $datapemasukangas->namapegawai ?></td>
-                          
-       <?php } ?>
-       <?php } ?>
-      </tr>
-    </tbody>
-  </table>
+                                  <td><?php echo $transaksigasonline->idTransaksi ?></td>
+                                  <td><?php echo $transaksigasonline->tanggalTransaksiOnline ?></td>
+                                  <td><?php echo $transaksigasonline->idPangkalan ?></td>
+                                  <td><?php echo $transaksigasonline->jumlahGas ?></td>
+                                  <td><?php echo $transaksigasonline->tanggalpembelian ?></td>
+                                  <td><?php echo $transaksigasonline->totalhargabeli ?></td>
+                                  
+                             <?php } ?>
+                             <?php } ?>
+                            </tr>
+                          </tbody>
                             </table> 
                               
                        <!-- <div class="form-group">
