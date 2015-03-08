@@ -21,9 +21,8 @@ class M_reporttransaksigas extends CI_Model {
             }
             return $hasil;
         }
-        
     }
-    function getby($idTransaksi)
+    /*function getby($idTransaksi)
     {
         $by['idTransaksi']  = $idTransaksi;
         $this->db->where($by);
@@ -37,12 +36,12 @@ class M_reporttransaksigas extends CI_Model {
          //   print_r($hasil);
             return $hasil;
         }
-    }
+    }*/
     function getalloffline()
     {
         $this->db->select('*');
         $this->db->from('pengeluaran_gas');
-        $this->db->join('transaksi_offline','pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Offline');
+        $this->db->join('transaksi_offline','pengeluaran_gas.idTransaksi=transaksi_offline.idTransaksi_Offline');
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
