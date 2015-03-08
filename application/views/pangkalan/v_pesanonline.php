@@ -4,7 +4,7 @@
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/insert">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanonline/insert">
   <div class="form-group">
     <label for="tanggalpesan" class="col-sm-2 control-label">Tanggal Pesan</label>
     <div class="col-sm-10">
