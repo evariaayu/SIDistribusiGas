@@ -42,7 +42,7 @@
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
-       <li><script type="text/javascript" src="moment.js">moment().format('MMMM Do YYYY, h:mm:ss a');</script></li>
+        <li><div id="displayMoment"></div></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $username;?><span class="glyphicon glyphicon-user"><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -55,3 +55,14 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<script type="text/javascript">
+(function()
+{
+  // instantiate a moment object
+  var NowMoment = moment().format('MMMM Do YYYY, h:mm:ss a');
+  
+  // display value of moment object in #displayMoment div
+  var eDisplayMoment = document.getElementById('displayMoment');
+  eDisplayMoment.innerHTML = NowMoment;
+})();</script>

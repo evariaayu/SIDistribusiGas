@@ -7,43 +7,52 @@ class M_reporttransaksigas extends CI_Model {
         $this->load->database();
     }
  
-
-    function getall()
+    function getallonline()
     {
         $this->db->select('*');
-        $this->db->from('pemasukan');
-        $this->db->join('pegawai','pemasukan.idPegawai=pegawai.idPegawai');
+        $this->db->from('pengeluaran_gas');
+        $this->db->join('transaksi_online','pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Online');
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
-            foreach ($get_data->result() as $datapemasukangas) 
+            foreach ($get_data->result() as $transaksigasonline) 
             {
-                $hasil[]= $datapemasukangas;
+                $hasil[]= $transaksigasonline;
             }
             return $hasil;
         }
         
     }
-    function delete($idPemasukan)
+    function getby($idTransaksi)
     {
-        $this->db->where('idPemasukan', $idPemasukan);
-        $this->db->delete('pemasukan');
-    }
-
-    function getby($idPemasukan)
-    {
-        $by['idPemasukan']  = $idPemasukan;
+        $by['idTransaksi']  = $idTransaksi;
         $this->db->where($by);
-        $get_data           = $this->db->get('pemasukan');
+        $get_data           = $this->db->get('pengeluaran_gas');
         if($get_data->num_rows() > 0)
         {
 
-            foreach ($get_data->result() as $datapemasukangas) {
-                $hasil[] = $datapemasukangas;
+            foreach ($get_data->result() as $transaksigasonline) {
+                $hasil[] = $transaksigasonline;
             }
          //   print_r($hasil);
             return $hasil;
         }
+    }
+    function getalloffline()
+    {
+        $this->db->select('*');
+        $this->db->from('pengeluaran_gas');
+        $this->db->join('transaksi_offline','pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Offline');
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $transaksigasoffline) 
+            {
+                $hasil[]= $transaksigasoffline;
+            }
+            return $hasil;
+        }
+        
     }
 
 }
