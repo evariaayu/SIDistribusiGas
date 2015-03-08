@@ -3,15 +3,7 @@
 
 <div class="col-xs-offset-1 col-md-5">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Waktu</label>
-    <div class="col-sm-10">
-      <?php
-        echo (new \DateTime())->format('d-M-Y H:i:s');?>
-  
-    </div>
-      
-  </div>
+
 
   <div class="form-group">
     <!--pam-->
