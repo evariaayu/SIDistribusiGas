@@ -108,7 +108,6 @@
                                   <td><?php echo $transaksigasonline->jumlahGas ?></td>
                                   <td><?php echo $transaksigasonline->tanggalpembelian ?></td>
                                   <td><?php echo $transaksigasonline->totalhargabeli ?></td>
-                                  
                              <?php } ?>
                              <?php } ?>
                             </tr>
@@ -130,7 +129,6 @@
                                                               </tr>
                                                           </thead>
                           </table>
-                              
                        <!-- <div class="form-group">
                               <div class="col-lg-10 col-lg-offset-1">
                                  <ul class="pager">
