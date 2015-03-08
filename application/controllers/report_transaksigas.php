@@ -53,7 +53,7 @@ class Report_transaksigas extends CI_Controller {
 	   }
 		
 	}
-	/*public function form_tambahgas()
+	public function transaksi_gas_offline()
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -62,10 +62,12 @@ class Report_transaksigas extends CI_Controller {
 	    	$data['hakakses'] = $session_data['hakakses'];
 	    	$data['idPegawai'] = $session_data['idPegawai'];
 
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahpemasukangas');
-		  	$this->load->view('footer');
+			$transaksigasofline['hasil'] = $this->m_reporttransaksigas->getalloffline();
+
+	      $this->load->view('header');
+		  $this->load->view('header_pegawai', $data);
+		  $this->load->view('direktur/v_report_transaksigas',$transaksigasoffline);
+		  $this->load->view('footer');
 	  }
 	   else
 	   {
@@ -74,7 +76,7 @@ class Report_transaksigas extends CI_Controller {
 	   }
 	}
 
-	public function insert()
+	/*public function insert()
 	{
 		if($this->session->userdata('logged_in'))
 		{
