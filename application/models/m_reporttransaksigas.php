@@ -7,7 +7,6 @@ class M_reporttransaksigas extends CI_Model {
         $this->load->database();
     }
  
-
     function getallonline()
     {
         $this->db->select('*');
