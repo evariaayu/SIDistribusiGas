@@ -14,16 +14,17 @@
   <div class="form-group">
     <label for="namapangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
     <div class="dropdown">
-        <select class="form-control">
-            <?php 
-
-            foreach($groups as $row)
-            { 
-              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
-            }
-            ?>
-            </select>
-      </div>
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+      </ul>
+    </div>
   </div>
   <div class="form-group">
     <label for="hargajualgas" class="col-sm-2 control-label">Harga/1 Gas</label>

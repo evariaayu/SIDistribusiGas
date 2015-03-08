@@ -8,25 +8,21 @@ class M_pesanonline extends CI_Model {
     }
 
 
-    function getAllGroups()
-    {
-        /*
-        $query = $this->db->get('location');
-
-        foreach ($query->result() as $row)
-        {
-            echo $row->description;
-        }*/
-
-        $query = $this->db->query('SELECT namapangkalan FROM pangkalan');
-
-
-        return $query->result();
-
-        //echo 'Total Results: ' . $query->num_rows();
+    public function get_dropdown() {
+        $namapangkalan = $this->db->select('namapangkalan','pangkalan')
+          
+          ->get($this->database)
+          ->result();
+ 
+        $dropdown = array('' => 'Pilih Nama Pangkalan');
+        if( !empty($namapangkalan) ) {
+            foreach( $namapangkalan as $namapangkalan ) {
+                $dropdown[$namapangkalan->idPangkalan] = $namapangkalan->namapangkalan;
+            }
+            return $dropdown;
+        }
+        return array('' => 'Tidak ada kategori');
     }
-
-
 
   /*  function insert($datapangkalan) 
     {
