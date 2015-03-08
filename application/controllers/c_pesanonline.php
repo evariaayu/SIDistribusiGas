@@ -30,12 +30,14 @@ class C_pesanonline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $namapangkalan['hasil'] = $this->m_pesanonline->get_dropdown();
+	      $datanamapangkalan = $this->m_pesanonline->getAllPangkalan();
+
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pangkalan/v_pesanonline',$data);
+		  $this->load->view('pangkalan/v_pesanonline',$datanamapangkalan);
 		  $this->load->view('footer');
 		}
 	   else
