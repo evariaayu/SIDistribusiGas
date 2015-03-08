@@ -27,8 +27,9 @@ class C_pesanonline extends CI_Controller {
 	{
 		$data['namapangkalan']= 'namapangkalan';
         $data['namapangkalan'] = $this->m_pesanonline->getAllGroups();
-        
-	}
+	        $this->load->view('v_pesanonline');
+			
+		}
 
 	public function logout()
 	{
