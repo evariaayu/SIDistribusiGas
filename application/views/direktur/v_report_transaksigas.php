@@ -27,30 +27,25 @@
                                  
                                 </tr>
                               </thead>
-                              <tbody>
-                               
-                             <?php foreach ($records as $row) {?>
-                             <?php echo '<tr>'?>
-
-                            <?php echo'<td>', $row->IDOrganisasi, '</td>'?>
-                            <?php echo '<td>',$row->NamaOrganisasi, '</td>' ?>
-                            <?php echo '<td>',$row->LamaKP, '</td>' ?>
-                            <?php echo '<td>',$row->DeskripsiOrganisasi, '</td>' ?>
-                             <?php echo '<td>',$row->IsBlacklist, '</td>' ?>
-
-
-                            <!-- tombol edit -->
-                          
-                           <!--<td><button id="" class="btn btn-primary btn-xs" onClick="edit(<?php echo $row->IDOrganisasi; ?>)" data-toggle="modal" data-target="editmodal">Edit</button></td>
-
-                              <div> -->
-
-                                <!-- tombol delete -->
-                            <!-- <td><a class="btn btn-primary btn-xs" href="<?php echo base_url();?>kelolatempatkp/delete/<?php echo $row->IDOrganisasi; ?>" id="<?php $row->IDOrganisasi ?>">Delete</a></td> -->
-                            <?php } ?>
-                            <?php echo '<tr>'?>
-                              </tbody>
-                            </table> 
+                               <tbody>
+                              <?php if(empty($hasil)) {
+                              echo "Data transaksi gas masih kosong";
+                              }
+                              else { ?>
+                                <?php foreach ($hasil as $transaksigasonline) {?>
+                                  <tr>
+                                  <td><?php echo $transaksigasonline->idTransaksi ?></td>
+                                  <td><?php echo $transaksigasonline->tanggalTransaksiOnline ?></td>
+                                  <td><?php echo $transaksigasonline->idPangkalan ?></td>
+                                  <td><?php echo $transaksigasonline->jumlahGas ?></td>
+                                  <td><?php echo $transaksigasonline->tanggalpembelian ?></td>
+                                  <td><?php echo $transaksigasonline->totalhargabeli ?></td>
+                                  
+                             <?php } ?>
+                             <?php } ?>
+                            </tr>
+                          </tbody>
+                          </table> 
                               
                        <!-- <div class="form-group">
                               <div class="col-lg-10 col-lg-offset-1">
@@ -95,29 +90,25 @@
                                  
                                 </tr>
                               </thead>
-                              <tbody>
-                               
-                             <?php foreach ($records as $row) {?>
-                             <?php echo '<tr>'?>
-
-                            <?php echo'<td>', $row->IDOrganisasi, '</td>'?>
-                            <?php echo '<td>',$row->NamaOrganisasi, '</td>' ?>
-                            <?php echo '<td>',$row->LamaKP, '</td>' ?>
-                            <?php echo '<td>',$row->DeskripsiOrganisasi, '</td>' ?>
-                             <?php echo '<td>',$row->IsBlacklist, '</td>' ?>
-
-
-                            <!-- tombol edit -->
+                             <tbody>
+                              <?php if(empty($hasil)) {
+                              echo "Data Pemasukan Gas masih kosong";
+                              }
+                              else { ?>
+                                <?php foreach ($hasil as $datapemasukangas) {?>
+                                  <tr>
+                                  <td><?php echo $datapemasukangas->idPemasukan ?></td>
+                                  <td><?php echo $datapemasukangas->jumlahgas ?></td>
+                                  <td><?php echo $datapemasukangas->hargabeli ?></td>
+                                  <td><?php echo $datapemasukangas->hargajual ?></td>
+                          <td><?php echo $datapemasukangas->tanggalpembelian ?></td>
+                          <td><?php echo $datapemasukangas->namapegawai ?></td>
                           
-                           <!--<td><button id="" class="btn btn-primary btn-xs" onClick="edit(<?php echo $row->IDOrganisasi; ?>)" data-toggle="modal" data-target="editmodal">Edit</button></td>
-
-                              <div> -->
-
-                                <!-- tombol delete -->
-                            <!-- <td><a class="btn btn-primary btn-xs" href="<?php echo base_url();?>kelolatempatkp/delete/<?php echo $row->IDOrganisasi; ?>" id="<?php $row->IDOrganisasi ?>">Delete</a></td> -->
-                            <?php } ?>
-                            <?php echo '<tr>'?>
-                              </tbody>
+       <?php } ?>
+       <?php } ?>
+      </tr>
+    </tbody>
+  </table>
                             </table> 
                               
                        <!-- <div class="form-group">

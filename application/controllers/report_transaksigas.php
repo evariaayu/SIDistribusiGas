@@ -32,15 +32,15 @@ class Report_transaksigas extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $datatransaksigas['hasil'] = $this->m_reporttransaksigas->getall();
+	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_report_transaksigas',$datatransaksigas);
+		  $this->load->view('direktur/v_report_transaksigas',$transaksigasonline);
 		  $this->load->view('footer');
 
-		  $this->load->model('m_reporttransaksigas');
-		$data['records']=$this->m_reporttransaksigas->getall();
+		  //$this->load->model('m_reporttransaksigas');
+		//$data['records']=$this->m_reporttransaksigas->getallonline();
 			//echo '<pre>';
 			//var_dump($data);
 			//echo '</pre>';
