@@ -51,7 +51,6 @@ class Report_transaksigas extends CI_Controller {
 	     //If no session, redirect to login page
 	     redirect('index.php/c_login', 'refresh');
 	   }
-		
 	}
 	public function transaksi_gas_offline()
 	{
