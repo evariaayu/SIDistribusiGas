@@ -7,6 +7,20 @@ class M_penukaranbarang extends CI_Model {
         $this->load->database();
     }
  
+    public function populate()
+    {
+        $this->db->select('idPangkalan,namapangkalan');
+        $this->db->from('pangkalan');
+        $query = $this->db->get();
+        if( $query -> num_rows() > 0 )
+        {
+            foreach ($query->result_array() as $row) 
+            {
+                $hasil[$row['idPangkalan']] = $row['namapangkalan'];
+            }
+            return $hasil;
+        }
+    }
   /*  function insert($datapangkalan) 
     {
         $this->db->insert('',$datapangkalan);
