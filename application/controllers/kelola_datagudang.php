@@ -58,7 +58,7 @@ class Kelola_datagudang extends CI_Controller {
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
 
-		    $datapangkalan['hasil'] = $this->m_penukaranbarang->populate();
+		    $datapangkalan['hasil'] = $this->m_penukaranbarang->getall();
 
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
@@ -74,14 +74,20 @@ class Kelola_datagudang extends CI_Controller {
 
 	public function insert()
 	{
-		$datapangkalan=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			
-		);
-		$this->m_pangkalan->insert($datapangkalan);
-		redirect('index.php/kelola_pangkalan');
+		if($this->session->userdata('logged_in'))
+		{
+	    	$session_data = $this->session->userdata('logged_in');
+	    	$idPegawai = $session_data['idPegawai'];
+		  	$tukarbarang=array
+			(
+			'jumlahbarangrusak' => $this->input->post('jumlahbarangrusak'),
+			'jumlahbarangkosong' => $this->input->post('jumlahbarangkosong'),
+			'idPegawai' => $idPegawai
+			);
+			$this->m_penukaranbarang->insert($tukarbarang);
+			redirect('index.php/Kelola_datagudang');
+	  	}
+		
 		
 	   
 	 //  print_r($datapangkalan);
