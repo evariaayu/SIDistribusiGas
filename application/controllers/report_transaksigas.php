@@ -53,7 +53,6 @@ class Report_transaksigas extends CI_Controller {
 	   }
 		
 	}
-
 	/*public function form_tambahgas()
 	{
 		if($this->session->userdata('logged_in'))
