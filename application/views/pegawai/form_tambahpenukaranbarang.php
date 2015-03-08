@@ -5,16 +5,10 @@
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Waktu</label>
-    <div class="col-sm-10" id="displayMoment2">  
-    </div>
-      
-  </div>
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_datagudang/insert">
 
   <div class="form-group">
-    <label for="pangkalan" class="col-sm-2 control-label">Pangkalan</label>
+    <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
     <div class="col-sm-10">
       <select class="form-control" name="idPangkalan" id="idPangkalan">
      <?php foreach ($hasil as $row) {?>
@@ -43,16 +37,6 @@
       <input id="jumlahbarangkosong" name="jumlahbarangkosong" class="form-control" placeholder="Jumlah barang kosong"></input>
     </div>
   </div>
-
-  <div class="form-group">
-    <label for="tanggal" class="col-sm-2 control-label">Jumlah Barang Kosong</label>
-    <div class="col-sm-10">
-      <input id="tanggal" name="jumlahbarangkosong" class="form-control" placeholder="Jumlah barang kosong"></input>
-    </div>
-  </div>
-<!--<script>DateInput('orderdate', true, 'DD-MON-YYYY')</script>
-<input type="button" onClick="alert(this.form.orderdate.value)" value="Show date value passed">-->
-
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
