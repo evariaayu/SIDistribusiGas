@@ -7,6 +7,8 @@ class C_pesanonline extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_pesanonline');
+        $this->load->helper('form');
+        $this->load->helper('url');
     }
 	/**
 	 * Index Page for this controller.
@@ -30,14 +32,14 @@ class C_pesanonline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      $data['idPegawai'] = $session_data['idPegawai'];
+	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
-	      $datanamapangkalan = $this->m_pesanonline->getAllPangkalan();
+	      //$datanamapangkalan = $this->m_pesanonline->getAllPangkalan();
 
 
 	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pangkalan/v_pesanonline',$datanamapangkalan);
+		  $this->load->view('header_pangkalan', $data);
+		  $this->load->view('pangkalan/v_pesanonline');
 		  $this->load->view('footer');
 		}
 	   else
@@ -48,30 +50,35 @@ class C_pesanonline extends CI_Controller {
 		
 	}
 
+	public function form_pesanonline()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+
+		    $datanamapangkalan['hasil'] = $this->m_pesanonline->getall();
+
+			$this->load->view('header');
+		 	$this->load->view('header_pangkalan', $data);
+		  	$this->load->view('pangkalan/form_pesanonline', $datanamapangkalan);
+		  	$this->load->view('footer');
+	  	}
+	   	else
+	   	{
+	     //If no session, redirect to login page
+	    	redirect('index.php/c_login', 'refresh');
+	   	}
+	}
+
 	public function logout()
 	{
 		$this->session->unset_userdata('logged_in');
 		$this->session->sess_destroy();
 		redirect(site_url()."index.php/c_login");
 	}
-	public function form_tambahdata()
-	{
-		if($this->session->userdata('logged_in'))
-		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-		$this->load->view('header');
-	 	$this->load->view('header_pegawai', $data);
-	  	$this->load->view('pegawai/form_tambahdatapangkalan');
-	  	$this->load->view('footer');
-	  }
-	   else
-	   {
-	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
-	   }
-	}
+	
 
 	public function insert()
 	{

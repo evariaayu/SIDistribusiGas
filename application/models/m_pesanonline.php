@@ -10,11 +10,18 @@ class M_pesanonline extends CI_Model
     }
 
 
-    function getAllPangkalan()
+    function getall()
     {
-        $this->db->select('idPangkalan,namapangkalan');
-        $datanamapangkalan = $this->db->get('pangkalan');
-        return $datanamapangkalan;
+        $get_data = $this->db->get('pangkalan');
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datanamapangkalan) 
+            {
+                $hasil[]= $datanamapangkalan;
+            }
+            return $hasil;
+        }
+        
     }
   /*  function insert($datapangkalan) 
     {

@@ -15,7 +15,8 @@ class C_verifyLogin extends CI_Controller {
  
         if($this->form_validation->run() == FALSE) {
             $this->load->view('logingagal');
-            } else {
+            } else 
+            {
 
                $session_data = $this->session->userdata('logged_in');
                 if($session_data['hakakses']=="pegawai"){

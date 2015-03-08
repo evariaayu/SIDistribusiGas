@@ -34,7 +34,7 @@
 
         <?php  $session_data = $this->session->userdata('logged_in');
         if($session_data['hakakses']=="pangkalan") {?>
-        <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
+        <li><a href="<?php echo base_url("index.php/c_pesanonline") ?>">pemesanan</a></li>
 
            <?php } ?>
         </ul>
