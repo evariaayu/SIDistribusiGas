@@ -21,6 +21,12 @@ class C_verifyLogin extends CI_Controller {
                 if($session_data['hakakses']=="pegawai"){
                 redirect('index.php/pegawai', 'refresh');
               }
+              elseif($session_data['hakakses']=="pangkalan"){
+                redirect('index.php/pangkalan', 'refresh');
+              }
+              elseif($session_data['hakakses']=="direktur"){
+                redirect('index.php/direktur', 'refresh');
+              }
                 
             }      
      }

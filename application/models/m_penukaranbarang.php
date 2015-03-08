@@ -7,7 +7,7 @@ class M_penukaranbarang extends CI_Model {
         $this->load->database();
     }
  
-    public function populate()
+/*    public function populate()
     {
         $this->db->select('idPangkalan,namapangkalan');
         $this->db->from('pangkalan');
@@ -21,13 +21,15 @@ class M_penukaranbarang extends CI_Model {
             return $hasil;
         }
     }
-  /*  function insert($datapangkalan) 
+    */
+    function insert($tukarbarang) 
     {
-        $this->db->insert('',$datapangkalan);
+        $this->db->insert('tukar_barang',$tukarbarang);
     }
-   /* function getall()
+   
+    function getall()
     {
-        $get_data = $this->db->get('');
+        $get_data = $this->db->get('pangkalan');
         if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datapangkalan) 
@@ -37,7 +39,7 @@ class M_penukaranbarang extends CI_Model {
             return $hasil;
         }
         
-    }*/
+    }
  /*   function delete($idPangkalan)
     {
         $this->db->where('idPangkalan', $idPangkalan);

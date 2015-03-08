@@ -16,17 +16,17 @@
   <div class="form-group">
     <label for="pangkalan" class="col-sm-2 control-label">Pangkalan</label>
     <div class="col-sm-10">
-        <select class="form-control" name="idPangkalan">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+      <select class="form-control" name="idPangkalan">
+     <?php foreach ($hasil as $row) {?>
+        
+         <option value="<?php echo $row->idPangkalan ?>"> <?php echo $row->namapangkalan ?> </option>
+    
+         <?php } ?>
         </select>
     </div>
   </div>
 
-  <?php echo form_dropdown('pangkalan',$hasil,''); ?>
+<!--  <?php echo form_dropdown('pangkalan',$hasil,''); ?> -->
 
   <div class="form-group">
     <!--jumlah barang rusak-->
