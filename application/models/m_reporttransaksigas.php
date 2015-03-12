@@ -21,7 +21,7 @@ class M_reporttransaksigas extends CI_Model {
             }
 
             return $hasil;
-
+            
         }
     }
     /*function getby($idTransaksi)
