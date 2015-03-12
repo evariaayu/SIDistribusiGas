@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+ <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   
 class M_reporttransaksigas extends CI_Model {
  
@@ -19,7 +19,9 @@ class M_reporttransaksigas extends CI_Model {
             {
                 $hasil[]= $transaksigasonline;
             }
+
             return $hasil;
+
         }
     }
     /*function getby($idTransaksi)
@@ -47,9 +49,9 @@ class M_reporttransaksigas extends CI_Model {
         {
             foreach ($get_data->result() as $transaksigasoffline) 
             {
-                $hasil[]= $transaksigasoffline;
+                $hasiloffline[]= $transaksigasoffline;
             }
-            return $hasil;
+            return $hasiloffline;
         }
         
     }

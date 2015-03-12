@@ -22,7 +22,6 @@
                                   <th>Tanggal</th>
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
-                                  <th>Harga</th>
                                   <th>Total</th>
                                  
                                 </tr>
@@ -32,15 +31,20 @@
                               echo "Data transaksi gas masih kosong";
                               }
                               else { ?>
+
+                                <?php $nomor = 1; ?>
+                                
                                 <?php foreach ($hasil as $transaksigasonline) {?>
+                                <?php if ($transaksigasonline->metode == 1) { ?>
                                   <tr>
-                                  <td><?php echo $transaksigasonline->idTransaksi_Online ?></td>
+                                  <td><?php echo $nomor ?></td>
                                   <td><?php echo $transaksigasonline->tanggalTransaksiOnline ?></td>
                                   <td><?php echo $transaksigasonline->idPangkalan ?></td>
                                   <td><?php echo $transaksigasonline->jumlahGas ?></td>
-                                  <td><?php echo $transaksigasonline->tanggalpembelian ?></td>
+                                  <!--<td><?php echo $transaksigasonline->tanggalpembelian ?></td>-->
                                   <td><?php echo $transaksigasonline->totalhargabeli ?></td>
                                   
+                             <?php $nomor++; } ?>
                              <?php } ?>
                              <?php } ?>
                             </tr>
@@ -55,10 +59,9 @@
                                                 echo "Data transaksi gas masih kosong";
                                                 }
                                                 else { ?>
-                                                  <?php foreach ($hasil as $transaksigasonline) {?>
                                                     <tr>
-                                                    <td><?php echo $transaksigasonline->idTransaksi_Online ?></td>
-                                               <?php } ?>
+                                                    <td><?php echo $nomor-1?></td>
+                                               
                                                <?php } ?></td>
                                                               </tr>
                                                           </thead>
@@ -90,24 +93,29 @@
                                   <th>Tanggal</th>
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
-                                  <th>Harga</th>
                                   <th>Total</th>
                                  
                                 </tr>
                               </thead>
-                              <tbody>
-                              <?php if(empty($hasil)) {
+                               <tbody>
+                              <?php if(empty($hasilOffline)) {
                               echo "Data transaksi gas masih kosong";
                               }
                               else { ?>
-                                <?php foreach ($hasil as $transaksigasonline) {?>
+
+                                <?php $nomorOff = 1 ?>
+
+                                <?php foreach ($hasilOffline as $transaksigasoffline) {?>
+                                 <?php if ($transaksigasoffline->metode == 0) { ?>
                                   <tr>
-                                  <td><?php echo $transaksigasonline->idTransaksi_Offline ?></td>
-                                  <td><?php echo $transaksigasonline->tanggalTransaksiOffline ?></td>
-                                  <td><?php echo $transaksigasonline->idPangkalan ?></td>
-                                  <td><?php echo $transaksigasonline->jumlahGas ?></td>
-                                  <td><?php echo $transaksigasonline->tanggalpembelian ?></td>
-                                  <td><?php echo $transaksigasonline->totalhargabeli ?></td>
+                                  <td><?php echo $nomorOff ?></td>
+                                  <td><?php echo $transaksigasoffline->tanggalTransaksiOffline ?></td>
+                                  <td><?php echo $transaksigasoffline->idPangkalan ?></td>
+                                  <td><?php echo $transaksigasoffline->jumlahGas ?></td>
+                                  <!--<td><?php echo $transaksigasonline->tanggalpembelian ?></td>-->
+                                  <td><?php echo $transaksigasoffline->totalhargabelioff ?></td>
+                                  
+                             <?php $nomorOff++; } ?>
                              <?php } ?>
                              <?php } ?>
                             </tr>
@@ -117,18 +125,11 @@
                                         <thead>
                                             <tr>
                                                 <th>Total :</th>
-                                                <td><?php if(empty($hasil)) {
-                                                echo "Data transaksi gas masih kosong";
-                                                }
-                                                else { ?>
-                                                  <?php foreach ($hasil as $transaksigasoffline) {?>
-                                                    <tr>
-                                                    <td><?php echo $transaksigasoffline->idTransaksi_Offline ?></td>
-                                               <?php } ?>
-                                               <?php } ?></td>
-                                                              </tr>
-                                                          </thead>
+                                                <td><?php echo 0 ?> </td>
+                                            </tr>
+                                        </thead>
                           </table>
+
                        <!-- <div class="form-group">
                               <div class="col-lg-10 col-lg-offset-1">
                                  <ul class="pager">
