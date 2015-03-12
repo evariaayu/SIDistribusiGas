@@ -26,6 +26,9 @@
 <br>
 
 <div class="col-md-8 col-sm-offset-2">
+  Data Gudang <?php foreach ($stok_gudang as $row) {?>
+       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+      <?php } ?>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
