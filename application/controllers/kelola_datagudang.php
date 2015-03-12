@@ -33,12 +33,11 @@ class Kelola_datagudang extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 
-	      //$dataoperasional['hasil'] = $this->m_operasional->getall();
+	      $datatukarbarang['hasil'] = $this->m_penukaranbarang->getall();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  //$this->load->view('pegawai/v_mengelola_biayaoperasioanl',$dataoperasional);
-		  $this->load->view('pegawai/v_mengelola_datagudang');
+		  $this->load->view('pegawai/v_mengelola_datagudang', $datatukarbarang);
 		  $this->load->view('footer');
 		}
 	   else
@@ -58,11 +57,11 @@ class Kelola_datagudang extends CI_Controller {
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
 
-		    $datapangkalan['hasil'] = $this->m_penukaranbarang->getall();
+		    $datatukarbarang['hasil'] = $this->m_penukaranbarang->getall();
 
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datapangkalan);
+		  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datatukarbarang);
 		  	$this->load->view('footer');
 	  	}
 	   	else
@@ -89,43 +88,41 @@ class Kelola_datagudang extends CI_Controller {
 			redirect('index.php/Kelola_datagudang');
 	  	}
 		
-		
-	   
-	 //  print_r($datapangkalan);
 	}
 
-	public function delete($idPangkalan)
+	public function delete($idTukar_Barang)
 	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
+		$this->m_penukaranbarang->delete($idTukar_Barang);
+		redirect('index.php/Kelola_datagudang');
 	}
 
-	public function edit($idPangkalan)
+	public function edit($idTukar_Barang)
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+
+		    $datatukarbarang['hasil'] = $this->m_penukaranbarang->getby($idTukar_Barang);
 		
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
+			$this->load->view('pegawai/form_editpenukaranbarang', $datatukarbarang);
 		  	$this->load->view('footer');
 	  }
 		
 	}
 
-	public function update($idPangkalan)
+	public function update($idTukar_Barang)
 	{
-		if($this->input->post('submit'))
-		{
-			$this->m_pangkalan->update($idPangkalan);
-			
-		}
-		redirect('index.php/kelola_pangkalan');
-		print_r($datapangkalan);
+		$data['jumlahbarangkosong'] = $this->input->post('jumlahbarangkosong');
+		$data['jumlahbarangrusak'] = $this->input->post('jumlahbarangrusak');
+		$data['keterangan'] = $this->input->post('keterangan');
+		$data['idTukar_Barang'] = $idTukar_Barang;
+		
+		$this->m_penukaranbarang->update($data);
+		redirect('index.php/kelola_datagudang');
 	}
 
 }
