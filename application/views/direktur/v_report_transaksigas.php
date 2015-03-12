@@ -17,13 +17,13 @@
                         <table class="table table-striped table-hover ">
                               <thead>
                                 <tr>
-                                
+                               
                                   <th>No</th>
                                   <th>Tanggal</th>
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
                                   <th>Total</th>
-                                 
+                                   
                                 </tr>
                               </thead>
                                <tbody>
