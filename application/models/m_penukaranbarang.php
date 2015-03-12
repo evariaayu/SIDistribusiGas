@@ -9,26 +9,32 @@ class M_penukaranbarang extends CI_Model
         $this->load->database();
     }
  
-/*    public function populate()
-    {
-        $this->db->select('idPangkalan,namapangkalan');
-        $this->db->from('pangkalan');
-        $query = $this->db->get();
-        if( $query -> num_rows() > 0 )
-        {
-            foreach ($query->result_array() as $row) 
-            {
-                $hasil[$row['idPangkalan']] = $row['namapangkalan'];
-            }
-            return $hasil;
-        }
-    }
-    */
     function insert($tukarbarang) 
     {
         $this->db->insert('tukar_barang',$tukarbarang);
     }
    
+    function updatekurangdatagudang($datatukarbarang)
+    {
+        $datatukarbarang=array(
+        
+            'jumlahbarangrusak'     => $datatukarbarang['jumlahbarangrusak'],
+            'jumlahbarangkosong'    => $datatukarbarang['jumlahbarangkosong']
+        );
+        $jumlahkurang= $datatukarbarang['jumlahbarangrusak']+$datatukarbarang['jumlahbarangkosong'];
+        $datetoday =date("Y-m-d");
+        $sql='update stok_gudang s
+                inner join
+                (
+                    select id.idstok_gudang
+                    from stok_gudang as id
+                    where date(tanggal) = $datetoday
+                ) as id on s.idstok_gudang = id.idstok_gudang
+                set jumlah_stok = jumlah_stok - $jumlahkurang
+                where s.idstok_gudang = id.idstok_gudang';
+        $query = $this->db->query($sql);
+    }
+
     function getall()
     {
         $this->db->select('*');
@@ -46,20 +52,25 @@ class M_penukaranbarang extends CI_Model
         }
         
     }
-
-    function updatekurangdatagudang($datatukar)
+    public function ambilstokgudang()
     {
         $datetoday =date("Y-m-d");
-        $query='update stok_gudang s
-                inner join
-                (
-                    select id.idstok_gudang
-                    from stok_gudang as id
-                    where date(tanggal) = $datetoday
-                ) as id on s.idstok_gudang = id.idstok_gudang
-                set jumlah_stok = jumlah_stok - 20
-                where s.idstok_gudang = id.idstok_gudang';
+        $this->db->select('jumlah_stok');
+        $this->db->from('stok_gudang');
+        $this->db->where('date(tanggal)',$datetoday);
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datatukarbarang) 
+            {
+                $stok_gudang[]= $datatukarbarang;
+            }
+            return $stok_gudang;
+        }
+        
     }
+
+   
     function delete($idTukar_barang)
     {
         $this->db->where('idTukar_barang', $idTukar_barang);
