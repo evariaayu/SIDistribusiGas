@@ -35,7 +35,7 @@ class Kelola_datagudang extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 
 	      $datatukarbarang['hasil'] = $this->m_penukaranbarang->getall();
-	       $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+	      $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
