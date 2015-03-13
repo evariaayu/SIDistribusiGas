@@ -33,16 +33,16 @@ class Report_transaksigas extends CI_Controller {
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
 	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
-	      $transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
+	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	      
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  //$this->load->view('direktur/v_report_transaksigas',$transaksigasonline);
-		  $this->load->view('direktur/v_report_transaksigas',$transaksigasoffline);
+		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
+		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
 		  $this->load->view('footer');
 
 		  //$this->load->model('m_reporttransaksigas');
-		//$data['records']=$this->m_reporttransaksigas->getallonline();
+		//$data['records']=$this->m_reporttrasaksigas->getallonline();
 			//echo '<pre>';
 			//var_dump($data);
 			//echo '</pre>';
@@ -67,7 +67,7 @@ class Report_transaksigas extends CI_Controller {
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_report_transaksigas',$transaksigasoffline);
+		  $this->load->view('direktur/v_report_transaksioffline',$transaksigasoffline);
 		  $this->load->view('footer');
 	  }
 	   else
