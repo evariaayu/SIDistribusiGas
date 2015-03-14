@@ -9,68 +9,104 @@ class M_penukaranbarang extends CI_Model
         $this->load->database();
     }
  
-/*    public function populate()
-    {
-        $this->db->select('idPangkalan,namapangkalan');
-        $this->db->from('pangkalan');
-        $query = $this->db->get();
-        if( $query -> num_rows() > 0 )
-        {
-            foreach ($query->result_array() as $row) 
-            {
-                $hasil[$row['idPangkalan']] = $row['namapangkalan'];
-            }
-            return $hasil;
-        }
-    }
-    */
     function insert($tukarbarang) 
     {
         $this->db->insert('tukar_barang',$tukarbarang);
     }
    
+    function updatekurangdatagudang($datatukarbarang)
+    {
+        $datatukarbarang=array(
+        
+            'jumlahbarangrusak'     => $datatukarbarang['jumlahbarangrusak'],
+            'jumlahbarangkosong'    => $datatukarbarang['jumlahbarangkosong']
+        );
+        $jumlahkurang= $datatukarbarang['jumlahbarangrusak']+$datatukarbarang['jumlahbarangkosong'];
+        $datetoday =date("Y-m-d");
+        $sql='update stok_gudang s
+                inner join
+                (
+                    select id.idstok_gudang
+                    from stok_gudang as id
+                    where date(tanggal) = datetoday
+                ) as id on s.idstok_gudang = id.idstok_gudang
+                set jumlah_stok = jumlah_stok - jumlahkurang
+                where s.idstok_gudang = id.idstok_gudang';
+        $query = $this->db->query($sql);
+    }
+
     function getall()
     {
-        $get_data = $this->db->get('pangkalan');
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->join('pegawai','tukar_barang.idPegawai=pegawai.idPegawai');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=tukar_barang.idPangkalan');
+        $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
-            foreach ($get_data->result() as $datapangkalan) 
+            foreach ($get_data->result() as $datatukarbarang) 
             {
-                $hasil[]= $datapangkalan;
+                $hasil[]= $datatukarbarang;
             }
             return $hasil;
         }
         
     }
- /*   function delete($idPangkalan)
+    public function ambilstokgudang()
     {
-        $this->db->where('idPangkalan', $idPangkalan);
-        $this->db->delete('pangkalan');
-    }
-
-    function getby($idPangkalan)
-    {
-        $by['idPangkalan'] = $idPangkalan;
-        $this->db->where($by);
-        $get_data           = $this->db->get('pangkalan');
-        if($get_data->num_rows() > 0)
+        $datetoday =date("Y-m-d");
+        $this->db->select('jumlah_stok');
+        $this->db->from('stok_gudang');
+        $this->db->where('date(tanggal)',$datetoday);
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
         {
-            foreach ($get_data->result() as $datapangkalan) {
-                $hasil[] = $datapangkalan;
+            foreach ($get_data->result() as $datatukarbarang) 
+            {
+                $stok_gudang[]= $datatukarbarang;
+            }
+            return $stok_gudang;
+        }
+        
+    }
+
+   
+    function delete($idTukar_barang)
+    {
+        $this->db->where('idTukar_barang', $idTukar_barang);
+        $this->db->delete('tukar_barang');
+    }
+
+    function getby($idTukar_barang)
+    {
+        $by['idTukar_barang'] = $idTukar_barang;
+        $this->db->where($by);
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->join('pegawai','tukar_barang.idPegawai=pegawai.idPegawai');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=tukar_barang.idPangkalan');
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datatukarbarang) 
+            {
+                $hasil[]= $datatukarbarang;
             }
             return $hasil;
         }
     }
 
-    function update($idPangkalan)
+    function update($data)
     {
-        $datapangkalan=array(
+        $datatukarbarang=array(
         
-            'namapangkalan' => $this->input->post('namapangkalan'),
-            'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
+            'jumlahbarangrusak'     => $data['jumlahbarangrusak'],
+            'jumlahbarangkosong'    => $data['jumlahbarangkosong'],
+            'keterangan'            => $data['keterangan']
         );
-        $this->db->where('idPangkalan', $idPangkalan);
-        $this->db->update('pangkalan', $datapangkalan);
-    }*/
+        $this->db->where('idTukar_Barang', $data['idTukar_Barang']);
+        $this->db->update('tukar_barang', $datatukarbarang);
+
+     //   print_r($datatukarbarang);
+    }
 }

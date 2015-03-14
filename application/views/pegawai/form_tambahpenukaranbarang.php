@@ -4,8 +4,27 @@
 <div class="col-md-3">
 </div>
 
+
 <div class="col-md-6">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_datagudang/insert">
+
+<div class="form-group">
+    <!--jumlah barang rusak-->
+    <label for="stokgudang" class="col-sm-2 control-label">Stok Gudang</label>
+    <div class="col-sm-10">
+      <div class="col-md-8 col-sm-offset-2">
+   <?php if(empty($stok_gudang)) {
+  echo "Data Penukaran Gudang masih kosong";
+}
+  else { ?>
+    
+       <?php foreach ($stok_gudang as $row) {?>
+       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+      <?php } ?>
+        <?php } ?>
+    </div>
+  </div>
+
 
   <div class="form-group">
     <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
@@ -20,8 +39,6 @@
         </select>
     </div>
   </div>
-
-<!--  <?php echo form_dropdown('pangkalan',$hasil,''); ?> -->
 
   <div class="form-group">
     <!--jumlah barang rusak-->
