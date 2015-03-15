@@ -51,7 +51,7 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
   <div class="form-group">
     <label for="file" class="col-sm-2 control-label">Lampiran Nota</label>
     <div class="col-sm-10">
-      <input type="file" id="file" name="file" required>
+      <input type="file" id="file" name="file" >
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>

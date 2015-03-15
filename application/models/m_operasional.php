@@ -6,6 +6,17 @@ class M_operasional extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+
+    function insert($data)
+    {
+        $this->db->insert('pengeluaran_tetap',$data);
+        return $this->db->insert_id();
+    }
+
+    function get_all()
+    {
+        return $this->db->get('pengeluaran_tetap');
+    }
  
   /*  function insert($datapangkalan) 
     {

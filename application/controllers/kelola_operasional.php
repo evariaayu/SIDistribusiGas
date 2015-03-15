@@ -35,6 +35,7 @@ class Kelola_operasional extends CI_Controller {
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
+		  $data['hasil'] = $this->m_operasional->get_all()->result();
 		  //$this->load->view('pegawai/v_mengelola_biayaoperasioanl',$dataoperasional);
 		  $this->load->view('pegawai/v_mengelola_biayaoperasional');
 		  $this->load->view('footer');
