@@ -6,7 +6,7 @@
   <div class="col-xs-1"></div>
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-  <?php echo anchor ('index.php/c_pesanonline/form_pesanonline','Pesan Gas') ?>
+  <?php echo anchor ('index.php/c_pesanonline','Pesan Gas') ?>
 </button>
 <br>
 <br>

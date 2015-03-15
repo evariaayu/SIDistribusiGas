@@ -16,7 +16,7 @@ class C_pesanonline extends CI_Controller {
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
 	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
+	 * 		http://example.com/inderx.php/welcome/index
 	 *	- or -
 	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
@@ -34,12 +34,15 @@ class C_pesanonline extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
-	      //$datanamapangkalan = $this->m_pesanonline->getAllPangkalan();
+	      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall();	
+	      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 
+	      print_r($datanamapangkalan);
 	      $this->load->view('header');
-		  $this->load->view('header_pangkalan', $data);
-		  $this->load->view('pangkalan/v_pesanonline');
+		  $this->load->view('pangkalan/header_pangkalan', $data);
+		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan);
+		   
 		  $this->load->view('footer');
 		}
 	   else
@@ -78,9 +81,38 @@ class C_pesanonline extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect(site_url()."index.php/c_login");
 	}
+
+	public function berhasill()
+	{
+		echo "string";
+	}
+
+	public function cek_ketersediaan()
+	{
+		$waktu = $this->input->post('waktu');
+		$pangkalan = $this->input->post('idPangkalan');
+		$harga = $this->input->post('harga');
+		$jumlahorder = $this->input->post('jumlahorder');
+
+		$jumlahstok = $this->m_pesanonline->cekstok();
+
+		//echo $jumlahstok[0]['jumlah_stok'];
+
+		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
+		{
+			$totaal = $harga*$jumlahorder;
+			redirect(site_url()."pangkalan/berhasill");
+//			$message = "Berhasil! Hore total = $totaal";
+//			echo "<script type='text/javascript'>alert('$message');</script>";
+		}
+		else
+		{
+			alert("gagal!");
+		}
+	}
 	
 
-	public function insert()
+	/*public function insert()
 	{
 		$datapangkalan=array
 		(
@@ -109,12 +141,26 @@ class C_pesanonline extends CI_Controller {
 
 	public function update($idPangkalan)
 	{
-		if($this->input->post('submit'))
+		if($this->input->post('submit'))  
 		{
 			$this->m_pangkalan->update($idPangkalan);
 			redirect('index.php/kelola_pangkalan');
 		}
 	}
+
+	public function submit()	
+	{
+			$jumlahorder = $this->input-post('jumlahorder');
+			$batas = $this->m_pesanonline->cekstok();
+			if($jumlahorder <= $batas) 
+			{
+				echo'tersedia'; echo $jumlahorder;
+			}
+	        else
+	        {
+	        	echo'tidak tersedia';
+	        }
+	}*/
 
 }
 

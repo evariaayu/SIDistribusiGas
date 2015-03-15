@@ -28,9 +28,9 @@ class M_penukaranbarang extends CI_Model
                 (
                     select id.idstok_gudang
                     from stok_gudang as id
-                    where date(tanggal) = $datetoday
+                    where date(tanggal) = datetoday
                 ) as id on s.idstok_gudang = id.idstok_gudang
-                set jumlah_stok = jumlah_stok - $jumlahkurang
+                set jumlah_stok = jumlah_stok - jumlahkurang
                 where s.idstok_gudang = id.idstok_gudang';
         $query = $this->db->query($sql);
     }

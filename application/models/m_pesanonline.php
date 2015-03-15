@@ -23,11 +23,26 @@ class M_pesanonline extends CI_Model
         }
         
     }
-  /*  function insert($datapangkalan) 
+    function getharga()
     {
-        $this->db->insert('pangkalan',$datapangkalan);
+        $query="select * from   pemasukan";
+        $query=$this->db->query($query);
+        return $query->result_array();
     }
-    function getall()
+
+    function cekstok()
+    {
+        $query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY tanggal DESC limit 1");
+        $batas = $query->result_array();
+        return $batas;
+    }
+        
+
+    function insert($a,$b,$c,$d) 
+    {
+       // $sql = insert into 
+    }
+    /*function getall()
     {
         $get_data = $this->db->get('pangkalan');
         if($get_data->num_rows()>0)

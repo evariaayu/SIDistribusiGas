@@ -22,7 +22,7 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
     <!--jumlah gas-->
     <label for="jumlahgas" class="col-sm-2 control-label">Keperluan</label>
     <div class="col-sm-10">
-      <select type="text" class="form-control" id="keperluan" name="keperluan" required>
+      <select type="text" class="form-control" id="keperluan" name="keperluan" >
         <option>PAM</option>
         <option>PLN</option>
         <option>Telkom</option>
@@ -35,7 +35,15 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
   <div class="form-group">
     <label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
     <div class="col-sm-10">
-      <input id="keterangan" name="keterangan" class="form-control" placeholder="keterangan" required></input>
+      <input id="keterangan" name="keterangan" class="form-control" placeholder="keterangan" ></input>
+    </div>
+  </div>
+
+<!--- harga -->
+  <div class="form-group">
+    <label for="nominal" class="col-sm-2 control-label">Nominal</label>
+    <div class="col-sm-10">
+      <input id="nominal" name="nominal" class="form-control" placeholder="nominal" required></input>
     </div>
   </div>
 
@@ -43,7 +51,7 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
   <div class="form-group">
     <label for="file" class="col-sm-2 control-label">Lampiran Nota</label>
     <div class="col-sm-10">
-      <input type="file" id="file" name="file" required>
+      <input type="file" id="file" name="file" >
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>

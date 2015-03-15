@@ -12,9 +12,16 @@
     <!--jumlah barang rusak-->
     <label for="stokgudang" class="col-sm-2 control-label">Stok Gudang</label>
     <div class="col-sm-10">
+      <div class="col-md-8 col-sm-offset-2">
+   <?php if(empty($stok_gudang)) {
+  echo "Data Penukaran Gudang masih kosong";
+}
+  else { ?>
+    
        <?php foreach ($stok_gudang as $row) {?>
        <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
       <?php } ?>
+        <?php } ?>
     </div>
   </div>
 
@@ -23,6 +30,7 @@
     <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
     <div class="col-sm-10">
       <select class="form-control" name="idPangkalan" id="idPangkalan">
+        <option value="0">--- Pilih Pangkalan ----</option>
      <?php foreach ($hasil as $row) {?>
         
          <option value="<?php echo $row->idPangkalan ?>"> <?php echo $row->namapangkalan ?> </option>
