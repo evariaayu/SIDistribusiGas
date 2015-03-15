@@ -22,7 +22,7 @@
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
                                   <th>Total</th>
-                                 
+            
                                 </tr>
                               </thead>
                                <tbody>

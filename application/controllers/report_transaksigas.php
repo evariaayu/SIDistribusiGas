@@ -20,10 +20,48 @@ class Report_transaksigas extends CI_Controller {
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
+	 * map to /index.php/welcome/<method_name> 
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
+	
+	{
+		if($this->session->userdata('logged_in'))
+		{
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+	      $data['idPegawai'] = $session_data['idPegawai'];
+
+	      //$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
+	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
+	      
+	      $this->load->view('header');
+		  $this->load->view('header_pegawai', $data);
+		  $this->load->view('direktur/v_report_transaksigas',$data);
+		  $this->load->view('footer');
+		  /*
+	      $this->load->view('header');
+		  $this->load->view('header_pegawai', $data);
+		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
+		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
+		  $this->load->view('footer');*/
+
+		  //$this->load->model('m_reporttransaksigas');
+		//$data['records']=$this->m_reporttrasaksigas->getallonline();
+			//echo '<pre>';
+			//var_dump($data);
+			//echo '</pre>';
+		//$this->load->view('pegawai/v_report_transaksigas',$data);
+		}
+	   else
+	   {
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   }
+	}
+
+	public function transaksi_gas_online()
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -54,6 +92,7 @@ class Report_transaksigas extends CI_Controller {
 	     redirect('index.php/c_login', 'refresh');
 	   }
 	}
+
 	public function transaksi_gas_offline()
 	{
 		if($this->session->userdata('logged_in'))
@@ -76,6 +115,18 @@ class Report_transaksigas extends CI_Controller {
 	     redirect('index.php/c_login', 'refresh');
 	   }
 	}
+
+
+
+	/*public function report_online_tahun($tahun)
+	{
+		$this->sesi['tahun']=$tahun;
+		
+		$this->load->view('template/admin_header',$this->sesi);
+		$data['lahan']= $this->proyek_model->get_data_lokasi_periode($tahun);
+		$this->load->view('admin/admin_report_lahan',$data);
+		$this->load->view('template/admin_footer');
+	}*/
 
 	/*public function insert()
 	{

@@ -8,11 +8,30 @@
                     <fieldset>
                         <legend><center>Laporan Transaksi Gas Online</center></legend>
                     <!-- Button trigger modal -->
-                    <div class="form-group">
-                      
-              <!-- Modal -->
 
-                      </div>
+                      <div class=" col-sm-8">
+                        <a href="<?php echo base_url();?>index.php/report_transaksigas/">
+                  <button class="btn btn-default">Back</button></a>
+                </div>
+                    
+                    <div class="row">
+                  <div class="col-md-2">
+
+                  <!--<label>Tahun:</label> 
+                  <select class="form-control form-inline" id="tahunOpt" name="tahun">
+                      <option disabled selected>Tahun</option>
+                      <?php  for ($i=$tahun-3; $i <$tahun ; $i++) { ?> 
+                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                      <?php } ?>  
+                      
+                   <option value="<?php echo $tahun; ?>" selected><?php echo $tahun; ?></option>
+                      <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
+                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                      <?php } ?>
+
+                  </select> -->
+                  </div> 
+                </div>
 
                         <table class="table table-striped table-hover ">
                               <thead>
@@ -76,11 +95,38 @@
                               </ul>
                             </div> -->
                        </fieldset>
+
                         </div>
                 <!-- </form> -->
             </div>
                     
                 <!-- </form> -->
     </div>
+    <script type="text/javascript">
+
+$(document).ready(function(){
+  $('#lahanAll').DataTable( {
+      "scrollX": true,
+      "scrollY": "400px"
+  });     
+
+  
+  function changeDataPem()
+  {
+    
+    window.location="<?php echo site_url() ?>report/report_lahan/"+$('#tahunOpt').val();
+    
+  }
+  $('#tahunOpt').change(function(){
+    
+    changeDataPem()
+  });
+  
+
+
+
+});
+  
+</script>
 
  
