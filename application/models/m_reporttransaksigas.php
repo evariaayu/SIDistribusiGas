@@ -20,8 +20,7 @@ class M_reporttransaksigas extends CI_Model {
                 $hasil[]= $transaksigasonline;
             }
 
-            return $hasil;
-            
+            return $hasil;  
         }
     }
     

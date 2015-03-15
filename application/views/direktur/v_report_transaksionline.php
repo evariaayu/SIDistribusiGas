@@ -28,7 +28,6 @@
                       <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <?php } ?>
-
                   </select> -->
                   </div> 
                 </div>
