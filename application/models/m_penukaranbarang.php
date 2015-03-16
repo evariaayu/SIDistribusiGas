@@ -14,23 +14,25 @@ class M_penukaranbarang extends CI_Model
         $this->db->insert('tukar_barang',$tukarbarang);
     }
    
-    function updatekurangdatagudang($datatukarbarang)
+    function updatekurangdatagudang($pengurangan)
     {
-        $datatukarbarang=array(
+        $pengurangan=array(
         
-            'jumlahbarangrusak'     => $datatukarbarang['jumlahbarangrusak'],
-            'jumlahbarangkosong'    => $datatukarbarang['jumlahbarangkosong']
+            'jumlahbarangrusak'     => $pengurangan['jumlahbarangrusak'],
+            'jumlahbarangkosong'    => $pengurangan['jumlahbarangkosong'],
+            'tanggal'               => $pengurangan['tanggal']
         );
-        $jumlahkurang= $datatukarbarang['jumlahbarangrusak']+$datatukarbarang['jumlahbarangkosong'];
+        $jumlahkurang= $pengurangan['jumlahbarangrusak']+$pengurangan['jumlahbarangkosong'];
+        print_r($jumlahbarangrusak);
         $datetoday =date("Y-m-d");
         $sql='update stok_gudang s
                 inner join
                 (
                     select id.idstok_gudang
                     from stok_gudang as id
-                    where date(tanggal) = datetoday
+                    where date(tanggal) = tanggal
                 ) as id on s.idstok_gudang = id.idstok_gudang
-                set jumlah_stok = jumlah_stok - jumlahkurang
+                set jumlah_stok = jumlah_stok - "jumlahkurang"
                 where s.idstok_gudang = id.idstok_gudang';
         $query = $this->db->query($sql);
     }

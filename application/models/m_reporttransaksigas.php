@@ -7,7 +7,7 @@ class M_reporttransaksigas extends CI_Model {
         $this->load->database();
     }
  
-    function getallonline()
+    public function getallonline()
     {
         $this->db->select('*');
         $this->db->from('pengeluaran_gas');
@@ -20,30 +20,16 @@ class M_reporttransaksigas extends CI_Model {
                 $hasil[]= $transaksigasonline;
             }
 
-            return $hasil;
-            
+            return $hasil;  
         }
     }
-    /*function getby($idTransaksi)
-    {
-        $by['idTransaksi']  = $idTransaksi;
-        $this->db->where($by);
-        $get_data           = $this->db->get('pengeluaran_gas');
-        if($get_data->num_rows() > 0)
-        {
-
-            foreach ($get_data->result() as $transaksigasonline) {
-                $hasil[] = $transaksigasonline;
-            }
-         //   print_r($hasil);
-            return $hasil;
-        }
-    }*/
-    function getalloffline()
+    
+    public function getalloffline()
     {
         $this->db->select('*');
         $this->db->from('pengeluaran_gas');
         $this->db->join('transaksi_offline','pengeluaran_gas.idTransaksi=transaksi_offline.idTransaksi_Offline');
+        //$this->db->where('metode = 0')
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
@@ -55,5 +41,30 @@ class M_reporttransaksigas extends CI_Model {
         }
         
     }
+
+    /*public function sort_tahun_online()
+    {
+        $sql = "SELECT tanggalTransaksiOnline, idPangkalan, jumlahGas, totalhargabeli
+                FROM pengeluaran_gas
+                JOIN transaksi_online ON pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Online
+                WHERE tanggalTransaksiOnline like '%'"
+        $get_data = $this->db->query($sql);
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $transaksigasoffline) 
+            {
+                $hasiloffline[]= $transaksigasoffline;
+            }
+            return $hasiloffline;
+        }
+
+
+        $this->db->select('*');
+                FROM pengeluaran_gas
+                JOIN transaksi_offline ON 
+        $this->db->from('pengeluaran_gas');
+        $this->db->join('transaksi_online','pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Online');
+        $get_data = $this->db->get();
+    }*/
 
 }

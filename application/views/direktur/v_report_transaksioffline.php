@@ -1,13 +1,18 @@
-<h3><center>Laporan Transaksi Gas</center></h1>
+<h3><center>Laporan Transaksi Gas</center></h3>
 <div class="col-md-3">
 </div>
 
+<div class="col-md-6">
                 <div class="jumbotron">
                 <!--<form class="form-horizontal" method="POST" action="<?php echo base_url() ?>report_transaksigas/"> -->
                     <fieldset>
                         <legend><center>Laporan Transaksi Gas Offline</center></legend>
                     <!-- Button trigger modal -->
 
+                  <div class=" col-sm-8">
+                        <a href="<?php echo base_url();?>index.php/report_transaksigas/">
+                  <button class="btn btn-default">Back</button></a>
+                </div>
                         <table class="table table-striped table-hover ">
                               <thead>
                                 <tr>
@@ -17,7 +22,6 @@
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
                                   <th>Total</th>
-                                 
                                 </tr>
                               </thead>
                                <tbody>
@@ -60,8 +64,10 @@
                                  <li><a href="#">Next</a></li>
                               </ul>
                             </div> -->
-                        </div>
+                        
                     </fieldset>
+                    </div>
+                  </div>
                 <!-- </form> -->
             </div>
                     

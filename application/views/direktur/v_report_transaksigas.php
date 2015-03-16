@@ -1,4 +1,4 @@
-<h3><center>Laporan Transaksi Gas</center></h1>
+<h3><center>Laporan Transaksi Gas</center></h3>
 <div class="col-md-3">
 </div>
 
@@ -6,19 +6,18 @@
             <div class="jumbotron">
               <div class="col-sm-6">
             <span class="input-group-btn">
+                    <a href="<?php echo base_url();?>index.php/report_transaksigas/transaksi_gas_online/">
                     <button class="btn btn-default btn-lg btn-block" type="button">
-                      <a href="<?php echo base_url();?>index.php/report_transaksigas/delete/">Report Transaksi Online</button>
+                        Report Transaksi Online</button></a>
                   </span>
                 </div>
           <div class="col-sm-6">
             <span class="input-group-btn">
+              <a href="<?php echo base_url();?>index.php/report_transaksigas/transaksi_gas_offline/">
                     <button class="btn btn-default btn-lg btn-block" type="button">
-                      <a href="<?php echo base_url();?>index.php/report_transaksigas/delete/">
-                      Report Transaksi Offline</button>
+                      Report Transaksi Offline</button></a>
                   </span>
                 </div>
                 <br>
               </div>
-
               </div>
- 

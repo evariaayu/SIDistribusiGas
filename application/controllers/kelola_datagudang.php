@@ -86,8 +86,15 @@ class Kelola_datagudang extends CI_Controller {
 			'idPegawai' => $idPegawai,
 			'idPangkalan' => $this->input->post('idPangkalan')
 			);
+
+			$datetoday =date("Y-m-d");
+			$pengurangan=array(
+				'jumlahbarangrusak' => $this->input->post('jumlahbarangrusak'),
+				'jumlahbarangkosong' => $this->input->post('jumlahbarangkosong'),
+				'tanggal' =>$datetoday
+			);
 			$this->m_penukaranbarang->insert($tukarbarang);
-			$this->m_penukaranbarang->updatekurangdatagudang($tukarbarang);
+			$this->m_penukaranbarang->updatekurangdatagudang($pengurangan);
 			redirect('index.php/Kelola_datagudang');
 	  	}
 		

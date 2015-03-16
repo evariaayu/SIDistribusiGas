@@ -67,7 +67,7 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
-
+/*
 	public function insert()
 	{
 		$datapangkalan=array
@@ -115,7 +115,7 @@ class Kelola_operasional extends CI_Controller {
 		}
 		redirect('index.php/kelola_pangkalan');
 		print_r($datapangkalan);
-	}
+	}*/
 
 }
 
