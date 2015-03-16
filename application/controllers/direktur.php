@@ -31,6 +31,7 @@ class Direktur extends CI_Controller {
 	     // $this->load->view('home_view', $data);
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
+		  $this->load->view('pegawai/h_pegawai');
 		  $this->load->view('footer');
 		}
 	   else
