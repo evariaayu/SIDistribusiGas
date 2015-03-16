@@ -38,9 +38,23 @@ class M_pesanonline extends CI_Model
     }
         
 
-    function insert($a,$b,$c,$d) 
+    function insert() 
     {
-       // $sql = insert into 
+        $tanggalTransaksiOnline = $this->input->post('tanggalTransaksiOnline');
+        $jumlahGas = $this->input->post('jumlahGas');
+    //    $totalhargabeli = $this->input->post('totalhargabeli');
+
+        $datapesan= array
+        (
+            'tanggalTransaksiOnline' => $this->input->post('tanggalTransaksiOnline'),
+            'jumlahGas' => $this->input->post('jumlahGas'),
+            'totalhargabeli' => $this->input->post('totalhargabeli'),
+
+
+        );
+        
+        $this->db->insert('transaksi_online', $datapesan);
+
     }
     /*function getall()
     {
