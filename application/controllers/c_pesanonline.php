@@ -82,12 +82,12 @@ class C_pesanonline extends CI_Controller {
 		redirect(site_url()."index.php/c_login");
 	}
 
-	public function berhasill()
+	public function message()
 	{
 		echo "string";
 	}
 
-	public function cek_ketersediaan()
+	public function pesan()
 	{
 		$waktu = $this->input->post('waktu');
 		$pangkalan = $this->input->post('idPangkalan');
@@ -100,10 +100,11 @@ class C_pesanonline extends CI_Controller {
 
 		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
 		{
-			$totaal = $harga*$jumlahorder;
-			redirect(site_url()."pangkalan/berhasill");
-//			$message = "Berhasil! Hore total = $totaal";
-//			echo "<script type='text/javascript'>alert('$message');</script>";
+			
+			$totalhargabeli = $harga*$jumlahorder;
+			$this->load->model('m_pesanonline/insert');
+			$message = "Berhasil! Hore total = $totalhargabeli";
+			echo "<script type='text/javascript'>alert('$message');</script>";
 		}
 		else
 		{
