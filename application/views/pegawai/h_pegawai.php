@@ -1,6 +1,6 @@
 <center>
 		<h1> <br> <br> </h1> <hr>
-		<img src="../assets/img/almas.png" alt="logo" width="500">
+		<img src="../assets/img/almas.png" alt="logo" width="400">
 		<hr>
 		<h1 font-size:3em>Selamat Datang</h1>
 
