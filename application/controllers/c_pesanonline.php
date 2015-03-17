@@ -38,7 +38,7 @@ class C_pesanonline extends CI_Controller {
 	      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 
-	      print_r($datanamapangkalan);
+//	      print_r($datanamapangkalan);
 	      $this->load->view('header');
 		  $this->load->view('pangkalan/header_pangkalan', $data);
 		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan);
@@ -92,7 +92,7 @@ class C_pesanonline extends CI_Controller {
 		$waktu = $this->input->post('waktu');
 		$pangkalan = $this->input->post('idPangkalan');
 		$harga = $this->input->post('harga');
-		$jumlahorder = $this->input->post('jumlahorder');
+		$jumlahorder = $this->input->post('jumlahGas');
 
 		$jumlahstok = $this->m_pesanonline->cekstok();
 
@@ -100,9 +100,18 @@ class C_pesanonline extends CI_Controller {
 
 		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
 		{
-			
+
 			$totalhargabeli = $harga*$jumlahorder;
-			$this->load->model('m_pesanonline/insert');
+			$data = array(
+					'tanggalTransaksiOnline' => Time(),
+					'jumlahGas' => $jumlahorder,
+					'totalhargabeli' => $totalhargabeli,
+					'idstatus_pemesanan' => '1'
+
+				);
+//			$this->m_pesanonline->insert();
+			//$this->load->model('m_pesanonline/insert');
+			$this->m_pesanonline->insert($data);
 			$message = "Berhasil! Hore total = $totalhargabeli";
 			echo "<script type='text/javascript'>alert('$message');</script>";
 		}

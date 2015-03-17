@@ -32,7 +32,7 @@ class Pangkalan extends CI_Controller {
 	      print_r($data);
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pangkalan/v_pesanonline');
+		  $this->load->view('pegawai/h_pegawai');
 		  $this->load->view('footer');
 		}
 	   else
