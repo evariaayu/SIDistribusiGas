@@ -29,6 +29,7 @@
          <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Mengelola Data Pangkalan</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
         <li><a href="<?php echo base_url("index.php/report_transaksigas") ?>">Report Transaksi Gas</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pegawai") ?>">Kelola Pegawai</a></li>
 
            <?php } ?>
 

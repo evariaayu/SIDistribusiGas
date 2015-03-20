@@ -82,42 +82,40 @@ class Kelola_pegawai extends CI_Controller {
 		$this->m_pegawai->insert($datapegawai);
 		redirect('index.php/kelola_pegawai');
 		
-	   
-	 //  print_r($datapangkalan);
 	}
 
 	public function delete($idPegawai)
 	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
+		$this->m_pegawai->delete($idPegawai);
+		redirect('index.php/kelola_pegawai');
 	}
 
-	public function edit($idPangkalan)
+	public function edit($idPegawai)
 	{
 		if($this->session->userdata('logged_in'))
 		{
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
+	      $datapegawai['hasil']	= $this->m_pegawai->getby($idPegawai);
 		
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
+			$this->load->view('direktur/form_editpegawai', $datapegawai);
 		  	$this->load->view('footer');
 	  }
 		
 	}
 
-	public function update($idPangkalan)
+	public function update($idPegawai)
 	{
 
-		$data['namapangkalan'] = $this->input->post('namapangkalan');
-		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
-		$data['idPangkalan'] = $idPangkalan;
-		$this->m_pangkalan->update($data);
+		$data['namapegawai'] = $this->input->post('namapegawai');
+		$data['alamatpegawai'] = $this->input->post('alamatpegawai');
+		$data['idPegawai'] = $idPegawai;
+		$this->m_pegawai->update($data);
 
-		redirect('index.php/kelola_pangkalan');
+		redirect('index.php/kelola_pegawai');
 
 	}
 
