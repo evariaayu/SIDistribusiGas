@@ -23,17 +23,17 @@ class M_penukaranbarang extends CI_Model
             'tanggal'               => $pengurangan['tanggal']
         );
         $jumlahkurang= $pengurangan['jumlahbarangrusak']+$pengurangan['jumlahbarangkosong'];
-        print_r($jumlahbarangrusak);
+        //print_r($jumlahkurang);
         $datetoday =date("Y-m-d");
-        $sql='update stok_gudang s
+        $sql="update stok_gudang s
                 inner join
                 (
                     select id.idstok_gudang
                     from stok_gudang as id
-                    where date(tanggal) = tanggal
+                    where date(tanggal) = '$datetoday'
                 ) as id on s.idstok_gudang = id.idstok_gudang
-                set jumlah_stok = jumlah_stok - "jumlahkurang"
-                where s.idstok_gudang = id.idstok_gudang';
+                set jumlah_stok = jumlah_stok - '$jumlahkurang'
+                where s.idstok_gudang = id.idstok_gudang";
         $query = $this->db->query($sql);
     }
 
@@ -52,6 +52,7 @@ class M_penukaranbarang extends CI_Model
             }
             return $hasil;
         }
+
         
     }
     public function ambilstokgudang()
@@ -68,6 +69,25 @@ class M_penukaranbarang extends CI_Model
                 $stok_gudang[]= $datatukarbarang;
             }
             return $stok_gudang;
+        }
+        else if($get_data->num_rows()==0)
+        {
+            $this->db->select('jumlah_stok');
+            $this->db->from('stok_gudang');
+            $this->db->order_by('tanggal','desc');
+            $this->db->limit(1);
+            $execute = $this->db->get();
+         //   print_r($execute);
+            if($execute->num_rows()>0)
+            {
+                foreach ($execute->result() as $value) {
+                    $laststock=$value->jumlah_stok;
+                    $this->db->set('jumlah_stok', $laststock); 
+                    $this->db->insert('stok_gudang'); 
+                }
+            }
+            
+
         }
         
     }

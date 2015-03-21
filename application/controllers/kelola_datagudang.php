@@ -93,8 +93,9 @@ class Kelola_datagudang extends CI_Controller {
 				'jumlahbarangkosong' => $this->input->post('jumlahbarangkosong'),
 				'tanggal' =>$datetoday
 			);
-			$this->m_penukaranbarang->insert($tukarbarang);
 			$this->m_penukaranbarang->updatekurangdatagudang($pengurangan);
+			$this->m_penukaranbarang->insert($tukarbarang);
+			
 			redirect('index.php/Kelola_datagudang');
 	  	}
 		
