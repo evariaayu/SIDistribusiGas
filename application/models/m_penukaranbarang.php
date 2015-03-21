@@ -84,7 +84,6 @@ class M_penukaranbarang extends CI_Model
                     $laststock=$value->jumlah_stok;
                     $this->db->set('jumlah_stok', $laststock); 
                     $this->db->insert('stok_gudang');
-
                 }
             }
             

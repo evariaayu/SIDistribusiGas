@@ -24,10 +24,19 @@
 <br>
 <br>
 <br>
+<div class="col-md-8 col-sm-offset-2">
+  Data Gudang 
+   <?php if(empty($stok_gudang)) {
+  echo "Masih kosong";
+}
+  else { ?>
+  <?php foreach ($stok_gudang as $row) {?>
+       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+      <?php } ?>
+      <?php } ?>
 
-
-  <div class="col-md-6 col-sm-offset-3">
-  <table class="table table-striped table-hover">
+  <div class="col-md-6 col-sm-offset-2">
+  <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
         <th>ID Pemasukan</th>

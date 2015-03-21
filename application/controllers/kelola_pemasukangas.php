@@ -7,6 +7,8 @@ class Kelola_pemasukangas extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_pemasukangas');
+        $this->load->model('m_penukaranbarang');
+        $this->load->model('m_pangkalan');
     }
 	/**
 	 * Index Page for this controller.
@@ -33,7 +35,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
 	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
-
+	      $datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('pegawai/v_mengelola_pemasukangas',$datapemasukangas);
@@ -88,7 +90,7 @@ class Kelola_pemasukangas extends CI_Controller {
 			);
 		  	$this->m_pemasukangas->insert($datapemasukangas);
 		  	$this->m_pemasukangas->insertstok($datamasukgudang);
-			redirect('index.php/Kelola_pemasukangas');
+		//	redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}
 

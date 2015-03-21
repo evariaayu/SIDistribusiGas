@@ -15,7 +15,23 @@ class M_pemasukangas extends CI_Model {
 
     function insertstok($datamasukgudang)
     {
-        $this->db->insert('stok_gudang', $datamasukgudang);
+       $datamasukgudang=array(
+        
+            'jumlah_stok'     => $datamasukgudang['jumlah_stok']
+        );
+        $tambah=$datamasukgudang['jumlah_stok'];
+       // print_r($tambah);
+        $datetoday =date("Y-m-d");
+        $sql="update stok_gudang s
+                inner join
+                (
+                    select id.idstok_gudang
+                    from stok_gudang as id
+                    where date(tanggal) = '$datetoday'
+                ) as id on s.idstok_gudang = id.idstok_gudang
+                set jumlah_stok = jumlah_stok + '$tambah' where s.idstok_gudang = id.idstok_gudang";
+        $query = $this->db->query($sql);
+       // $this->db->insert('stok_gudang', $datamasukgudang);
     }
 
     function getall()
@@ -36,6 +52,30 @@ class M_pemasukangas extends CI_Model {
     }
     function delete($idPemasukan)
     {
+        $this->db->select('jumlahgas');
+        $this->db->from('pemasukan');
+        $this->db->where('idPemasukan', $idPemasukan);
+        $execute = $this->db->get();
+        if($execute->num_rows()>0)
+            {
+                foreach ($execute->result() as $value) {
+                    $jumlahgas= $value->jumlahgas;
+                   
+                    $datetoday =date("Y-m-d");
+                    $sql="update stok_gudang s
+                        inner join
+                        (
+                        select id.idstok_gudang
+                        from stok_gudang as id
+                        where date(tanggal) = '$datetoday'
+                        ) as id on s.idstok_gudang = id.idstok_gudang
+                        set jumlah_stok = jumlah_stok + '$jumlahgas'
+                        where s.idstok_gudang = id.idstok_gudang";
+                    $query = $this->db->query($sql);
+
+                }
+            }
+
         $this->db->where('idPemasukan', $idPemasukan);
         $this->db->delete('pemasukan');
     }

@@ -35,7 +35,7 @@
        <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
       <?php } ?>
       <?php } ?>
-  <table class="table table-striped table-hover">
+  <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
         <th>ID Tukar Barang</th>

@@ -27,7 +27,7 @@
 
 
   <div class="col-md-6 col-sm-offset-3">
-  <table class="table table-striped table-hover">
+  <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
         <th>ID Pangkalan</th>
