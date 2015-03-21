@@ -35,10 +35,10 @@
                                
                                   <th>No</th>
                                   <th>Tanggal</th>
-                                  <th>Pangkalan</th>
-                                  <th>Jumlah Tabung</th>
-                                  <th>Total</th>
-                                   
+                                  <th>PLN</th>
+                                  <th>PAM</th>
+                                  <th>Internet</th>
+                                   <th></th>
                                 </tr>
                               </thead>
                                <tbody>
@@ -49,15 +49,15 @@
 
                                 <?php $nomor = 1; ?>
                                 
-                                <?php foreach ($hasil as $transaksigasonline) {?>
-                                <?php if ($transaksigasonline->metode == 1) { ?>
+                                <?php foreach ($hasil as $biayaoperasional) {?>
+                                <?php if ($biayaoperasional->metode == 1) { ?>
                                   <tr>
                                   <td><?php echo $nomor ?></td>
-                                  <td><?php echo $transaksigasonline->tanggalTransaksiOnline ?></td>
-                                  <td><?php echo $transaksigasonline->idPangkalan ?></td>
-                                  <td><?php echo $transaksigasonline->jumlahGas ?></td>
+                                  <td><?php echo $biayaoperasional->tanggalTransaksiOnline ?></td>
+                                  <td><?php echo $biayaoperasional->idPangkalan ?></td>
+                                  <td><?php echo $biayaoperasional->jumlahGas ?></td>
                                   <!--<td><?php echo $transaksigasonline->tanggalpembelian ?></td>-->
-                                  <td><?php echo $transaksigasonline->totalhargabeli ?></td>
+                                  <td><?php echo $biayaoperasional->totalhargabeli ?></td>
                                   
                              <?php $nomor++; } ?>
                              <?php } ?>
