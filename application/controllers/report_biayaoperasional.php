@@ -45,7 +45,7 @@ class Report_biayaoperasional extends CI_Controller {
 		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
 		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
 		  $this->load->view('footer');*/
-
+		  
 		  //$this->load->model('m_reporttransaksigas');
 		//$data['records']=$this->m_reporttrasaksigas->getallonline();
 			//echo '<pre>';
