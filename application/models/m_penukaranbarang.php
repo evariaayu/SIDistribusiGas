@@ -83,7 +83,8 @@ class M_penukaranbarang extends CI_Model
                 foreach ($execute->result() as $value) {
                     $laststock=$value->jumlah_stok;
                     $this->db->set('jumlah_stok', $laststock); 
-                    $this->db->insert('stok_gudang'); 
+                    $this->db->insert('stok_gudang');
+
                 }
             }
             
@@ -95,7 +96,33 @@ class M_penukaranbarang extends CI_Model
    
     function delete($idTukar_barang)
     {
+        $this->db->select('jumlahbarangrusak,jumlahbarangkosong');
+        $this->db->from('tukar_barang');
         $this->db->where('idTukar_barang', $idTukar_barang);
+        $execute = $this->db->get();
+        if($execute->num_rows()>0)
+            {
+                foreach ($execute->result() as $value) {
+                    $jumlahbarangkosong= $value->jumlahbarangkosong;
+                    $jumlahbarangrusak= $value->jumlahbarangrusak;
+                    $jumlahtambah=$jumlahbarangrusak+$jumlahbarangkosong;
+                    $datetoday =date("Y-m-d");
+                    $sql="update stok_gudang s
+                        inner join
+                        (
+                        select id.idstok_gudang
+                        from stok_gudang as id
+                        where date(tanggal) = '$datetoday'
+                        ) as id on s.idstok_gudang = id.idstok_gudang
+                        set jumlah_stok = jumlah_stok + '$jumlahtambah'
+                        where s.idstok_gudang = id.idstok_gudang";
+                    $query = $this->db->query($sql);
+
+                }
+            }
+
+        $this->db->where('idTukar_barang', $idTukar_barang);
+
         $this->db->delete('tukar_barang');
     }
 
