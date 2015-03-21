@@ -10,14 +10,14 @@ class M_reportbiayaoperasional extends CI_Model {
     public function getbiayaoperasional()
     {
         $this->db->select('*');
-        $this->db->from('pengeluaran_gas');
-        $this->db->join('transaksi_online','pengeluaran_gas.idTransaksi=transaksi_online.idTransaksi_Online');
+        $this->db->from('pengeluaran_perbulan');
+        $this->db->join('pengeluaran_tetap','pengeluaran_perbulan.idPengeluaran_Perbulan=pengeluaran_tetap.idPengeluaran_Tetap');
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
-            foreach ($get_data->result() as $transaksigasonline) 
+            foreach ($get_data->result() as $biayaoperasional) 
             {
-                $hasil[]= $transaksigasonline;
+                $hasil[]= $biayaoperasional;
             }
 
             return $hasil;  
