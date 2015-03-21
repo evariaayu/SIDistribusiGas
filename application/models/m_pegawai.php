@@ -53,6 +53,7 @@ class M_pegawai extends CI_Model {
             'alamatpegawai' => $this->input->post('alamatpegawai'),
             'jk' => $this->input->post('jk'),
             'notelepon' => $this->input->post('notelepon'),
+            'idKeterangan_jabatan' => $this->input->post('idKeterangan_jabatan'),
            
         );
         $this->db->where('idPegawai',$data['idPegawai']);

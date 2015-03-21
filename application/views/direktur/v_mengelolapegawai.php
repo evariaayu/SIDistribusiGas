@@ -35,6 +35,7 @@
         <th>Alamat</th>
         <th>JK</th>
         <th>No. Telpon</th>
+        <th>Jabatan</th>
         <th></th>
         <th></th>
       </tr>
@@ -51,6 +52,11 @@
         <td><?php echo $datapegawai->alamatpegawai ?></td>
         <td><?php echo $datapegawai->jk ?></td>
         <td><?php echo $datapegawai->notelepon ?></td>
+        <td><?php if ($datapegawai->idKeterangan_jabatan == 1) {echo "Direktur";} 
+                  elseif ($datapegawai->idKeterangan_jabatan == 2) { echo "Pegawai";} 
+                  else echo "Supir"; ?>
+        </td>
+
 
         <td>
           <button type="button" class="btn btn-danger btn-link">

@@ -77,7 +77,9 @@ class Kelola_pegawai extends CI_Controller {
 		(
 			'namapegawai' => $this->input->post('namapegawai'),
 			'alamatpegawai' => $this->input->post('alamatpegawai'),
-			
+			'jk' => $this->input->post('jk'),
+			'notelepon' => $this->input->post('notelepon'),
+			'idKeterangan_jabatan' => $this->input->post('idKeterangan_jabatan'),
 		);
 		$this->m_pegawai->insert($datapegawai);
 		redirect('index.php/kelola_pegawai');
