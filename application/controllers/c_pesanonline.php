@@ -91,7 +91,7 @@ class C_pesanonline extends CI_Controller {
 	{
 		//$data['username'] = $session_data['username'];
 		$waktu = $this->input->post('waktu');
-		$pangkalan = $this->input->post('idPangkalan');
+		$idPangkalan = $this->input->post('username');
 		$harga = $this->input->post('harga');
 		$jumlahorder = $this->input->post('jumlahGas');
 
@@ -105,7 +105,7 @@ class C_pesanonline extends CI_Controller {
 			$totalhargabeli = $harga*$jumlahorder;
 			$data = array(
 					'tanggalTransaksiOnline' => Time(),
-					'idPangkalan' => $pangkalan,
+					'username' => $idPangkalan,
 					'jumlahGas' => $jumlahorder,
 					'totalhargabeli' => $totalhargabeli,
 					'idstatus_pemesanan' => '1'

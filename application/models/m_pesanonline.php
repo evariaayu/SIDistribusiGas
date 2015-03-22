@@ -42,11 +42,13 @@ class M_pesanonline extends CI_Model
     {
         $tanggalTransaksiOnline = $this->input->post('tanggalTransaksiOnline');
         $jumlahGas = $this->input->post('jumlahGas');
+        $idPangkalan = $this->input->post('username');
     //    $totalhargabeli = $this->input->post('totalhargabeli');
 
         $datapesan= array
         (
             'tanggalTransaksiOnline' => $this->input->post('tanggalTransaksiOnline'),
+            'username' => $this->input->post('idPangkalan'),
             'jumlahGas' => $this->input->post('jumlahGas'),
             'totalhargabeli' => $this->input->post('totalhargabeli'),
 
