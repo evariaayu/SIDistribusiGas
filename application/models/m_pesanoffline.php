@@ -10,13 +10,21 @@ class M_pesanoffline extends CI_Model
     }
 
 
-    function getall($data)
+    function getall()
     {
-        $this->db->select();
+        /*$this->db->select();
         $this->db->from('login');
         $this->db->where('username', $data);
         $execute = $this->db->get();
-        return $execute->result_array();
+        return $execute->result_array();*/
+        $get_data = $this->db->get('pangkalan');
+        {
+            foreach ($get_data->result() as $datanamapangkalan) 
+            {
+                $hasil[]= $datanamapangkalan;
+            }
+            return $hasil;
+        }
         
     }
 
@@ -26,6 +34,15 @@ class M_pesanoffline extends CI_Model
         $query="select * from   pemasukan ORDER BY tanggalpembelian DESC";
         $query=$this->db->query($query);
         return $query->result_array();
+    }
+
+    function kurangstok($jumlahGas)
+    {
+        $query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
+        $hasil = $query->row_array();
+        $totalGas = $hasil['jumlah_stok']-$jumlahGas;
+        $data2 = array('jumlah_stok' => $totalGas);
+        $this->db->insert('stok_gudang',$data2);
     }
 
     function cekstok()
@@ -43,7 +60,7 @@ class M_pesanoffline extends CI_Model
     //    $totalhargabeli = $this->input->post('totalhargabeli');
 
         
-        $this->db->insert('transaksi_online', $data);
+        $this->db->insert('transaksi_offline', $data);
         
 
     }
