@@ -38,4 +38,5 @@ class M_cekpesanonline extends CI_Model {
         $data2 = array('jumlah_stok' => $totalGas);
         $this->db->insert('stok_gudang',$data2);
     }
+    
 }
