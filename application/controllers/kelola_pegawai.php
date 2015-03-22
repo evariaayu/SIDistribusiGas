@@ -96,10 +96,11 @@ class Kelola_pegawai extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapegawai['hasil']	= $this->m_pegawai->getby($idPegawai);
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+
+		    $datapegawai['hasil'] = $this->m_pegawai->getby($idPegawai);
 		
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
@@ -109,17 +110,24 @@ class Kelola_pegawai extends CI_Controller {
 		
 	}
 
+
+
 	public function update($idPegawai)
 	{
-
+	
 		$data['namapegawai'] = $this->input->post('namapegawai');
 		$data['alamatpegawai'] = $this->input->post('alamatpegawai');
+		$data['jk'] = $this->input->post('jk');
+		$data['notelepon'] = $this->input->post('notelepon');
+		$data['idKeterangan_jabatan'] = $this->input->post('idKeterangan_jabatan');
 		$data['idPegawai'] = $idPegawai;
+	
 		$this->m_pegawai->update($data);
-
 		redirect('index.php/kelola_pegawai');
 
 	}
+
+
 
 }
 

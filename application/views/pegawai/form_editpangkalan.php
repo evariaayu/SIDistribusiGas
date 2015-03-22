@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-md-6">
-    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/update/<?php echo $hasil[0]->idPangkalan; ?>">
+    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/edit/<?php echo $hasil[0]->idPangkalan; ?>">
       
       <div class="form-group">
         <!--Nama Pangkalan-->
