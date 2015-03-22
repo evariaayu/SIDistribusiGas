@@ -19,7 +19,7 @@
                       <?php } ?>  
                       
                    <option value="<?php echo $tahun; ?>" selected><?php echo $tahun; ?></option>
-                      <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
+                      <?php  for ($i=$tahun+1; $i <$tahun+1; $i++) { ?> 
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <?php } ?>
 
@@ -130,12 +130,12 @@ $(document).ready(function(){
   });     
 
   $('#excelPemDownload').click(function(){
-    window.location="<?php echo site_url(); ?>report/printout_report_lahan_excel/"+$('#tahunOpt').val();
+    window.location="<?php echo site_url(); ?>index.php/report/printout_report_lahan_excel/"+$('#tahunOpt').val();
   })
   function changeDataPem()
   {
     
-    window.location="<?php echo site_url() ?>report_transaksigas/transaksi_gas_online/"+$('#tahunOpt').val();
+    window.location="<?php echo site_url() ?>index.php/report_transaksigas/transaksi_gas_online/"+$('#tahunOpt').val();
     
   }
   $('#tahunOpt').change(function(){
@@ -144,7 +144,7 @@ $(document).ready(function(){
   });
   
 
-  
+
 
 
 });
