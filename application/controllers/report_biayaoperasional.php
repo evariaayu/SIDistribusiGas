@@ -2,11 +2,24 @@
 session_start();
 
 class Report_biayaoperasional extends CI_Controller {
-    function __construct() {
+	public $sesi;
+    public function __construct() {
+
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_reportbiayaoperasional');
+        if ($this->session->userdata('logged_in')) {
+			$session_data=$this->session->userdata('logged_in');
+			$this->sesi['tahun']=$session_data['tahun'];
+			$this->sesi['bulan']=$session_data['bulan'];
+			
+		}
+		else{
+			$this->sesi['tahun']=getdate()['year'];
+			$this->sesi['bulan']=getdate()['mon'];
+
+		}
     }
 	/**
 	 * Index Page for this controller.
@@ -34,10 +47,14 @@ class Report_biayaoperasional extends CI_Controller {
 
 	      //$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
-	      
-	      $this->load->view('header');
+	      //$this->sesi['tahun']=$tahun;
+			//$this->sesi['bulan']=$bulan;
+	     // $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+	      //$biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain();
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_report_biayaoperasional',$data);
+		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
+		  //$this->load->view('direktur/v_report_biayaoperasional',$biayalain);
 		  $this->load->view('footer');
 		  /*
 	      $this->load->view('header');
@@ -60,7 +77,7 @@ class Report_biayaoperasional extends CI_Controller {
 	   }
 	}
 
-	public function biaya_operasional()
+	public function biaya_operasional($bulan,$tahun)
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -69,20 +86,24 @@ class Report_biayaoperasional extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+	      //$biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
 	      
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	      
-	      /*$this->load->view('header');
+	       $this->sesi['tahun']=$tahun;
+			$this->sesi['bulan']=$bulan;
+	      $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional($bulan, $tahun);
+	      $biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain($bulan, $tahun);
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
-		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
-		  $this->load->view('footer');*/
-		  print_r($biayaoperasional);
-		 $this->load->model('m_reportbiayaoperasional');
-		$biayaoperasional['data'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+		  //$this->load->view('direktur/v_report_biayaoperasional',$biayalain);
+		  $this->load->view('footer');
+		  
+		 //$this->load->model('m_reportbiayaoperasional');
+		//$biayaoperasional['data'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
 		
-		$this->load->view('pegawai/v_report_biayaoperasional',$data);
+		//$this->load->view('direktur/v_report_biayaoperasional',$data);
 		}
 	   else
 	   {

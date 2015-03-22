@@ -10,12 +10,12 @@ class Direktur extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
 			$session_data=$this->session->userdata('logged_in');
 			$this->sesi['tahun']=$session_data['tahun'];
-			
+			$this->sesi['bulan']=$session_data['bulan'];
 			
 		}
 		else{
 			$this->sesi['tahun']=getdate()['year'];
-			
+			$this->sesi['bulan']=getdate()['mon'];
 
 			
 		}

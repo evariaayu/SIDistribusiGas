@@ -77,7 +77,7 @@ class M_penukaranbarang extends CI_Model
             $this->db->order_by('tanggal','desc');
             $this->db->limit(1);
             $execute = $this->db->get();
-         //   print_r($execute);
+            print_r($execute);
             if($execute->num_rows()>0)
             {
                 foreach ($execute->result() as $value) {
@@ -146,14 +146,34 @@ class M_penukaranbarang extends CI_Model
 
     function update($data)
     {
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->where('idTukar_barang', $data['idTukar_Barang']);
+        $execute = $this->db->get();
+        if($execute->num_rows() > 0)
+        {
+            foreach ($execute->result() as $key) 
+            {
+                $bandingrusak = $key->jumlahbarangrusak;
+                $bandingkosong = $key->jumlahbarangkosong;
+            }
+           
+        }
+
+        $rusak = $data['jumlahbarangrusak'];
+        $kosong = $data['jumlahbarangkosong'];
+        $hasilrusak=$bandingrusak-$rusak;
+        $hasilkosong=$bandingkosong-$kosong;
+        
         $datatukarbarang=array(
         
             'jumlahbarangrusak'     => $data['jumlahbarangrusak'],
             'jumlahbarangkosong'    => $data['jumlahbarangkosong'],
             'keterangan'            => $data['keterangan']
         );
-        $this->db->where('idTukar_Barang', $data['idTukar_Barang']);
-        $this->db->update('tukar_barang', $datatukarbarang);
+
+      //  $this->db->where('idTukar_Barang', $data['idTukar_Barang']);
+      //  $this->db->update('tukar_barang', $datatukarbarang);
 
      //   print_r($datatukarbarang);
     }

@@ -7,25 +7,15 @@ class M_reportbiayaoperasional extends CI_Model {
         $this->load->database();
     }
  
-    public function getbiayaoperasional()
+    public function getbiayaoperasional($bulan, $tahun)
     {
-        $sql="SELECT p.namapegawai, cl.tanggal, pt.tanggal, cl.namabarang, pt.pengeluaranPLN, pt.pengeluaranPAM, pt.pengeluaranInternet, cl.harga
-                FROM pengeluaran_perbulan pp, pengeluaran_tetap pt, cost_lainlain cl, pegawai p
-                WHERE pp.idPengeluaran_Tetap=pt.idPengeluaran_Tetap
-                AND pp.idCost_lainlain=cl.idCost_lainlain
-                AND pt.idPegawai=p.idPegawai
-                GROUP BY pt.tanggal, cl.tanggal";
-                $query = $this->db->query($sql);
-                $data=$query->result_array();
-                return $data;
-
-
-
-        /*$this->db->select('*');
+        $this->db->select('*');
         $this->db->from('pengeluaran_perbulan');
         $this->db->join('pengeluaran_tetap','pengeluaran_perbulan.idPengeluaran_Tetap=pengeluaran_tetap.idPengeluaran_Tetap');
-        $this->db->join('cost_lainlain','pengeluaran_perbulan.idCost_lainlain=cost_lainlain.idCost_lainlain');
-        //$this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        //$this->db->join('cost_lainlain','pengeluaran_perbulan.idCost_lainlain=cost_lainlain.idCost_lainlain');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $this->db->where('EXTRACT(MONTH FROM pengeluaran_tetap.tanggal)=', $bulan);
+        $this->db->where('EXTRACT(YEAR FROM pengeluaran_tetap.tanggal)=', $tahun);
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
@@ -35,7 +25,32 @@ class M_reportbiayaoperasional extends CI_Model {
             }
 
             return $hasil;  
-        }*/
+        }
+
+       
+
+
+    }
+
+    public function getbiayalain($bulan, $tahun)
+    {
+         $this->db->select('*');
+        $this->db->from('pengeluaran_perbulan');
+        //$this->db->join('pengeluaran_tetap','pengeluaran_perbulan.idPengeluaran_Tetap=pengeluaran_tetap.idPengeluaran_Tetap');
+        $this->db->join('cost_lainlain','pengeluaran_perbulan.idCost_lainlain=cost_lainlain.idCost_lainlain');
+        //$this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $this->db->where('EXTRACT(MONTH FROM cost_lainlain.tanggal)=', $bulan);
+        $this->db->where('EXTRACT(YEAR FROM cost_lainlain.tanggal)=', $tahun);
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $biayaoperasional) 
+            {
+                $hasilbiaya[]= $biayaoperasional;
+            }
+
+            return $hasilbiaya;  
+        }
     }
     
     /*public function getalloffline()

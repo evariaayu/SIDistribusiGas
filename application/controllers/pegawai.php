@@ -29,7 +29,7 @@ class Pegawai extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 	     // $this->load->view('home_view', $data);
-	      print_r($data);
+	    //  print_r($data);
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('pegawai/h_pegawai');
