@@ -34,7 +34,7 @@ class C_pesanonline extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
-	      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall();	
+	      $datanamapangkalan ['username']= $this->m_pesanonline->getall();	
 	      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 
@@ -102,20 +102,33 @@ class C_pesanonline extends CI_Controller {
 		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
 		{
 
-			$totalhargabeli = $harga*$jumlahorder;
-			$data = array(
+			if($this->session->userdata('logged_in'))
+			{
+		    	$session_data = $this->session->userdata('logged_in');
+		    	$idPangkalan = $session_data['idPangkalan'];
+		    	$totalhargabeli = $harga*$jumlahorder;
+			  	$data = array
+			  	(
+				
 					'tanggalTransaksiOnline' => Time(),
-					'username' => $idPangkalan,
-					'jumlahGas' => $jumlahorder,
 					'totalhargabeli' => $totalhargabeli,
-					'idstatus_pemesanan' => '1'
-
+					'idstatus_pemesanan' => '1',
+					'idPangkalan' => $idPangkalan
 				);
-//			$this->m_pesanonline->insert();
-			//$this->load->model('m_pesanonline/insert');
-			$this->m_pesanonline->insert($data);
-			$message = "Berhasil! Hore total = $totalhargabeli";
-			echo "<script type='text/javascript'>alert('$message');</script>";
+				/*$datetoday =date("Y-m-d");
+				$datamasukgudang=array(
+					'jumlah_stok' => $this->input->post('jumlahgas'),
+					//'tanggal' => $datetoday
+				);
+			  	$this->m_pemasukangas->insert($datapemasukangas);
+			  	$this->m_pemasukangas->insertstok($datamasukgudang);
+			//	redirect('index.php/Kelola_pemasukangas');*/
+			//  	$this->m_pesanonline->insert();
+				//$this->load->model('m_pesanonline/insert');
+				$this->m_pesanonline->insert($data);
+				$message = "Berhasil! Hore total = $totalhargabeli";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+	  		}
 		}
 		else
 		{
