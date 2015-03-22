@@ -13,7 +13,6 @@ class M_pesanonline extends CI_Model
     function getall()
     {
         $get_data = $this->db->get('pangkalan');
-        if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datanamapangkalan) 
             {
@@ -51,6 +50,7 @@ class M_pesanonline extends CI_Model
             'username' => $this->input->post('idPangkalan'),
             'jumlahGas' => $this->input->post('jumlahGas'),
             'totalhargabeli' => $this->input->post('totalhargabeli'),
+            'idPangkalan' => $this->input->post('idPangkalan'),
 
 
         );
