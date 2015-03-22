@@ -103,20 +103,26 @@ class C_pesanonline extends CI_Controller {
 
 		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
 		{
+			if($this->session->userdata('logged_in'))
+			{	
+				$session_data = $this->session->userdata('logged_in');
+				$idPangkalan = $session_data['idPangkalan'];
+				$totalhargabeli = $harga*$jumlahorder;
+				$data = array(
+						'tanggalTransaksiOnline' => Time(),
+						'idPangkalan' => $idPangkalan,
+						'jumlahGas' => $jumlahorder,
+						'totalhargabeli' => $totalhargabeli,
+						'idstatus_pemesanan' => '1'
 
-			$totalhargabeli = $harga*$jumlahorder;
-			$data = array(
-					'tanggalTransaksiOnline' => Time(),
-					'jumlahGas' => $jumlahorder,
-					'totalhargabeli' => $totalhargabeli,
-					'idstatus_pemesanan' => '1'
 
-				);
-//			$this->m_pesanonline->insert();
-			//$this->load->model('m_pesanonline/insert');
-			$this->m_pesanonline->insert($data);
-			$message = "Berhasil! Hore total = $totalhargabeli";
-			echo "<script type='text/javascript'>alert('$message');</script>";
+					);
+	//			$this->m_pesanonline->insert();
+				//$this->load->model('m_pesanonline/insert');
+				$this->m_pesanonline->insert($data);
+				$message = "Berhasil! Hore total = $totalhargabeli";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+			}
 		}
 		else
 		{
