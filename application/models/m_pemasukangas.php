@@ -31,7 +31,7 @@ class M_pemasukangas extends CI_Model {
                 ) as id on s.idstok_gudang = id.idstok_gudang
                 set jumlah_stok = jumlah_stok + '$tambah' where s.idstok_gudang = id.idstok_gudang";
         $query = $this->db->query($sql);
-       // $this->db->insert('stok_gudang', $datamasukgudang);
+        $this->db->insert('stok_gudang', $datamasukgudang);
     }
 
     function getall()

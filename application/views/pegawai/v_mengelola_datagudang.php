@@ -28,7 +28,7 @@
 <div class="col-md-8 col-sm-offset-2">
   Data Gudang 
    <?php if(empty($stok_gudang)) {
-  echo "Data Penukaran Gudang masih kosong";
+  echo "masih kosong";
 }
   else { ?>
   <?php foreach ($stok_gudang as $row) {?>
@@ -36,7 +36,12 @@
       <?php } ?>
       <?php } ?>
   <table class="table table-striped table-hover table-bordered">
-    <thead>
+    <br>
+      <?php if(empty($hasil)) {
+  echo "Data Penukarang Gudang masih kosong";
+}
+  else { ?>
+  <thead>
       <tr>
         <th>ID Tukar Barang</th>
         <th>Nama Pangkalan</th>
@@ -50,10 +55,6 @@
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Penukarang Gudang masih kosong";
-}
-  else { ?>
       <?php foreach ($hasil as $datatukarbarang) {?>
       <tr>
         <td><?php echo $datatukarbarang->idTukar_Barang ?></td>
