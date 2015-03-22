@@ -32,11 +32,11 @@ class C_cekpesanonline extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
+	      $datapesanonline['hasil'] = $this->m_pesanonline->getall();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/v_mengelola_pemasukangas',$datapemasukangas);
+		  $this->load->view('pegawai/form_cekpesanonline',$datapesanonline);
 		  $this->load->view('footer');
 		}
 	   else
@@ -47,7 +47,7 @@ class C_cekpesanonline extends CI_Controller {
 		
 	}
 
-	public function form_tambahgas()
+	/*public function form_tambahgas()
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -66,7 +66,7 @@ class C_cekpesanonline extends CI_Controller {
 	     //If no session, redirect to login page
 	     redirect('index.php/c_login', 'refresh');
 	   }
-	}
+	}*/
 
 	public function insert()
 	{
