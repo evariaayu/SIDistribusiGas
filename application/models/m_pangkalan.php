@@ -44,16 +44,18 @@ class M_pangkalan extends CI_Model {
         }
     }
 
-    function update($idPangkalan)
+    function update($data)
     {
-
-        $datapangkalan=array(
+        $datapangkalan = array(
         
-            'namapangkalan' => $this->input->post('namapangkalan'),
-            'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
+            'namapangkalan' => $data ['namapangkalan'],
+            'alamatpangkalan' => $data ['alamatpangkalan']
         );
-        $this->db->where('idPangkalan',$data['idPangkalan']);
+
+        $this->db->where('idPangkalan', $data['idPangkalan']);
         $this->db->update('pangkalan', $datapangkalan);
+
+     //   print_r($datatukarbarang);
     }
+
 }
