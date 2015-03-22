@@ -16,6 +16,7 @@ class Direktur extends CI_Controller {
 		else{
 			$this->sesi['tahun']=getdate()['year'];
 			
+			
 		}
     }
 	/**
