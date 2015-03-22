@@ -9,7 +9,7 @@
                         <legend><center>Laporan Transaksi Gas Offline</center></legend>
                     <!-- Button trigger modal -->
 
-                  <div class=" col-sm-8">
+                  <div class=" col-sm-8 col-sm-offset-8">
                         <a href="<?php echo base_url();?>index.php/report_transaksigas/">
                   <button class="btn btn-default">Back</button></a>
                 </div>
@@ -25,15 +25,15 @@
                                 </tr>
                               </thead>
                                <tbody>
-                              <?php if(empty($hasilOffline)) {
+                              <?php if(empty($hasil)) {
                               echo "Data transaksi gas masih kosong";
                               }
                               else { ?>
 
                                 <?php $nomorOff = 1 ?>
 
-                                <?php foreach ($hasilOffline as $transaksigasoffline) {?>
-                                 <?php if ($transaksigasoffline->metode == 0) { ?>
+                                <?php foreach ($hasil as $transaksigasoffline) {?>
+                                 <?php if ($transaksigasoffline->metode == 2) { ?>
                                   <tr>
                                   <td><?php echo $nomorOff ?></td>
                                   <td><?php echo $transaksigasoffline->tanggalTransaksiOffline ?></td>
@@ -48,14 +48,22 @@
                             </tr>
                           </tbody>
                             </table> 
-                             <table class="table table-striped ">
+                              <table class="table table-striped ">
                                         <thead>
                                             <tr>
                                                 <th>Total :</th>
-                                                <td><?php echo 0 ?> </td>
-                                            </tr>
-                                        </thead>
+                                                <td><?php if(empty($hasil)) {
+                                                echo "Data transaksi gas masih kosong";
+                                                }
+                                                else { ?>
+                                                    <tr>
+                                                    <td><?php echo $nomorOff-1?></td>
+                                               
+                                               <?php } ?></td>
+                                                              </tr>
+                                                          </thead>
                           </table>
+
 
                        <!-- <div class="form-group">
                               <div class="col-lg-10 col-lg-offset-1">
