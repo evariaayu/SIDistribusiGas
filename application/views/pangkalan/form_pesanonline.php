@@ -18,13 +18,13 @@
     <label for="pangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
     <div class="col-sm-5">
       <select class="form-control" name="idPangkalan" id="idPangkalan">
-        <option value="0">--- Pilih Pangkalan ----</option>
-     <?php 
+        <option value="0"><?php echo $username ?></option>
+<!--     <?php 
      foreach ($hasil as $row) {?>
         
          <option value="<?php echo $row->idPangkalan ?>"> <?php echo $row->namapangkalan ?> </option>
     
-         <?php } ?>
+         <?php } ?>-->
         </select>
     </div>
   </div>

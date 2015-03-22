@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class Kelola_pemasukangas extends CI_Controller {
+class C_cekpesanonline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
-        $this->load->model('m_pemasukangas');
+        $this->load->model('m_pesanonline');
     }
 	/**
 	 * Index Page for this controller.

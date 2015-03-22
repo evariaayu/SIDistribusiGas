@@ -96,7 +96,7 @@ class C_pesanonline extends CI_Controller {
 
 		$jumlahstok = $this->m_pesanonline->cekstok();
 
-		//echo $jumlahstok[0]['jumlah_stok'];
+		//echo $jumlahstok[0]['jumlah_stok']; 
 
 		if($jumlahorder<=$jumlahstok[0]['jumlah_stok'])
 		{
