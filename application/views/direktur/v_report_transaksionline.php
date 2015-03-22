@@ -130,12 +130,12 @@ $(document).ready(function(){
   });     
 
   $('#excelPemDownload').click(function(){
-    window.location="<?php echo site_url(); ?>report/printout_report_lahan_excel/"+$('#tahunOpt').val();
+    window.location="<?php echo site_url(); ?>index.php/report/printout_report_lahan_excel/"+$('#tahunOpt').val();
   })
   function changeDataPem()
   {
     
-    window.location="<?php echo site_url() ?>report_transaksigas/transaksi_gas_online/"+$('#tahunOpt').val();
+    window.location="<?php echo site_url() ?>index.php/report_transaksigas/transaksi_gas_online/"+$('#tahunOpt').val();
     
   }
   $('#tahunOpt').change(function(){
