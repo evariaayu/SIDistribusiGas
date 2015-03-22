@@ -33,7 +33,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
-
+	      print_r($session_data);
 	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
 	      $datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 	      $this->load->view('header');

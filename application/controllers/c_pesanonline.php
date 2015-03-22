@@ -32,25 +32,25 @@ class C_pesanonline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      $data['idPangkalan'] = $session_data['idPangkalan'];
-
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
-	      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall();	
+	      //$data['idPangkalan'] = $session_data['idPangkalan'];
+	      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall($session_data['username']);	
 	      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
-
-//	      print_r($datanamapangkalan);
+	      //print_r($session_data);
+	      //print_r($datanamapangkalan['hasil']);
+	      //print_r($datanamapangkalan);
 	      $this->load->view('header');
 		  $this->load->view('pangkalan/header_pangkalan', $data);
-		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan ,$data);
+		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
 		   
 		  $this->load->view('footer');
 		}
 	   else
 	   {
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+//	     redirect('index.php/c_login', 'refresh');
 	   }
 		
 	}
@@ -108,25 +108,27 @@ class C_pesanonline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 				$idPangkalan = $session_data['idPangkalan'];
 				$totalhargabeli = $harga*$jumlahorder;
-				$data = array(
+				$data = array
+					(
 						'tanggalTransaksiOnline' => Time(),
-						'idPangkalan' => $idPangkalan,
-						'jumlahGas' => $jumlahorder,
+						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabeli' => $totalhargabeli,
-						'idstatus_pemesanan' => '1'
-
+						'idstatus_pemesanan' => '1',				
+						'idPangkalan' => $this->input->post('idPangkalan'),
 
 					);
 	//			$this->m_pesanonline->insert();
 				//$this->load->model('m_pesanonline/insert');
+				// print_r($data);
 				$this->m_pesanonline->insert($data);
 				$message = "Berhasil! Hore total = $totalhargabeli";
+				
 				echo "<script type='text/javascript'>alert('$message');</script>";
 			}
 		}
 		else
 		{
-			alert("gagal!");
+			echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
 		}
 	}
 	

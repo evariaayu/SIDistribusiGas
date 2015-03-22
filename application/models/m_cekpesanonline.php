@@ -18,6 +18,14 @@ class M_cekpesanonline extends CI_Model {
         $this->db->insert('stok_gudang', $datamasukgudang);
     }*/
 
+    function cekPesan()
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi_online');
+        $execute = $this->db->get();
+        return $execute;
+    }
+
     function getall()
     {
         $this->db->select('*');

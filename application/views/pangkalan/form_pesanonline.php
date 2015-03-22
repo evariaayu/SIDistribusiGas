@@ -17,15 +17,13 @@
 <div class="form-group">
     <label for="pangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
     <div class="col-sm-5">
-      <select class="form-control" name="idPangkalan" id="idPangkalan">
-        <option value="0"><?php echo $username ?></option>
-<!--     <?php 
-     foreach ($hasil as $row) {?>
-        
-         <option value="<?php echo $row->idPangkalan ?>"> <?php echo $row->namapangkalan ?> </option>
-    
-         <?php } ?>-->
-        </select>
+        <input id="username" name="username" class="form-control" value="<?php echo $hasil[0]['username'] ?>" readonly>
+    </div>
+  </div>
+<div class="form-group">
+    <label for="pangkalan" class="col-sm-2 control-label">ID Pangkalan</label>
+    <div class="col-sm-5">
+        <input id="idPangkalan" name="idPangkalan" class="form-control" value="<?php echo $hasil[0]['idPangkalan'] ?>" readonly>
     </div>
   </div>
   <div class="form-group">

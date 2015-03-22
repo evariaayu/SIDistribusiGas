@@ -10,21 +10,20 @@ class M_pesanonline extends CI_Model
     }
 
 
-    function getall()
+    function getall($data)
     {
-        $get_data = $this->db->get('pangkalan');
-        {
-            foreach ($get_data->result() as $datanamapangkalan) 
-            {
-                $hasil[]= $datanamapangkalan;
-            }
-            return $hasil;
-        }
+        $this->db->select();
+        $this->db->from('login');
+        $this->db->where('username', $data);
+        $execute = $this->db->get();
+        return $execute->result_array();
         
     }
+
+
     function getharga()
     {
-        $query="select * from   pemasukan";
+        $query="select * from   pemasukan ORDER BY tanggalpembelian DESC";
         $query=$this->db->query($query);
         return $query->result_array();
     }
@@ -39,23 +38,13 @@ class M_pesanonline extends CI_Model
 
     function insert($data) 
     {
-        $tanggalTransaksiOnline = $this->input->post('tanggalTransaksiOnline');
-        $jumlahGas = $this->input->post('jumlahGas');
-        $idPangkalan = $this->input->post('username');
+        
+     //   $idPangkalan = $session_data['idPangkalan'];
     //    $totalhargabeli = $this->input->post('totalhargabeli');
 
-        $datapesan= array
-        (
-            'tanggalTransaksiOnline' => $this->input->post('tanggalTransaksiOnline'),
-            'username' => $this->input->post('idPangkalan'),
-            'jumlahGas' => $this->input->post('jumlahGas'),
-            'totalhargabeli' => $this->input->post('totalhargabeli'),
-            'idPangkalan' => $this->input->post('idPangkalan'),
-
-
-        );
         
         $this->db->insert('transaksi_online', $data);
+        redirect('c_')
 
     }
     /*function getall()
