@@ -58,7 +58,7 @@ class Kelola_operasional extends CI_Controller {
 		    $data['hakakses'] = $session_data['hakakses'];
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+		  	$this->load->view('pegawai/form_tambahbiayaoperasional-old');
 		  	$this->load->view('footer');
 	  	}
 	   	else
@@ -67,57 +67,45 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
-/*
-	public function insert()
+	function do_upload()
 	{
-		$datapangkalan=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			
-		);
-		$this->m_pangkalan->insert($datapangkalan);
-		redirect('index.php/kelola_pangkalan');
 		
-	   
-	 //  print_r($datapangkalan);
-	}
-
-	public function delete($idPangkalan)
-	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
-	}
-
-	public function edit($idPangkalan)
-	{
-		if($this->session->userdata('logged_in'))
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size']	= '20480000';
+		
+		
+		$this->load->library('upload', $config);
+		for($i=1;$i<4;$i++)
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
-		  	$this->load->view('footer');
-	  }
-		
-	}
+			$upload = $this->upload->do_upload('image'.$i);
+			if($upload===FALSE) 
+			{
+				echo "error";
+				continue;
+			}
+				
+			$data = $this->upload->data();
 
-	public function update($idPangkalan)
-	{
-		if($this->input->post('submit'))
-		{
-			$this->m_pangkalan->update($idPangkalan);
-			
+			$uploadedFiles[$i] = $data;
+
 		}
-		redirect('index.php/kelola_pangkalan');
-		print_r($datapangkalan);
-	}*/
+		//redirect('index.php/Kelola_operasional', 'refresh');
+/*
+		if ( ! $this->Kelola_operasional->do_upload())
+		{
+			echo "error";
+			$error = array('error' => $this->upload->display_errors());
+
+			$this->load->view('form_tambahbiayaoperasional-old', $error);
+		}
+		else
+		{
+			//$data = array('upload_data' => $this->upload->data());
+			echo "sukses";
+			//$this->load->view('upload_success', $data);
+		}*/
+	}
+
 
 }
-
-
-/* Location: ./application/controllers/welcome.php */

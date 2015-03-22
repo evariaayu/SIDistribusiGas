@@ -101,7 +101,7 @@ class Report_transaksigas extends CI_Controller {
 	    	$data['hakakses'] = $session_data['hakakses'];
 	    	$data['idPegawai'] = $session_data['idPegawai'];
 
-			$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
+			$transaksigasoffline['hasil'] = $this->m_reporttransaksigas->getalloffline();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
