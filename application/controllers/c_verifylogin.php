@@ -48,9 +48,7 @@ class C_verifyLogin extends CI_Controller {
                      'username'   => $row->username,
                      'hakakses'   => $row->hakakses,
                      'idPegawai'  => $row->idPegawai,
-
                      'tahun'      => getdate()['year'],
-
                      'idPangkalan' => $row->idPangkalan
 
                   );

@@ -50,7 +50,7 @@ class Report_transaksigas extends CI_Controller {
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	     
 
-	     
+
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_transaksigas',$data);
@@ -78,7 +78,52 @@ class Report_transaksigas extends CI_Controller {
 
 	public function transaksi_gas_online($tahun)
 	{
-		$this->sesi['tahun']=$tahun;
+		
+		if($this->session->userdata('logged_in'))
+		{
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+	      $data['idPegawai'] = $session_data['idPegawai'];
+
+	      if ($tahun == 'all'){
+	      		$this->sesi['all']=$tahun;
+	    		$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getalldataonline();
+
+			      $this->load->view('header', $this->sesi);
+				  $this->load->view('header_pegawai', $data);
+				  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
+				  $this->load->view('footer');
+
+			}
+			else {
+				$this->sesi['tahun']=$tahun;
+			      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline($tahun);
+			      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
+			      
+			      $this->load->view('header', $this->sesi);
+				  $this->load->view('header_pegawai', $data);
+				  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
+				  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
+				  $this->load->view('footer');
+			}
+		  //$this->load->model('m_reporttransaksigas');
+		//$data['records']=$this->m_reporttrasaksigas->getallonline();
+			//echo '<pre>';
+			//var_dump($data);
+			//echo '</pre>';
+		//$this->load->view('pegawai/v_report_transaksigas',$data);
+		}
+	   else
+	   {
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   }
+	}
+
+	/*public function transaksi_gas_online_all()
+	{
+		
 		if($this->session->userdata('logged_in'))
 		{
 	      $session_data = $this->session->userdata('logged_in');
@@ -87,7 +132,7 @@ class Report_transaksigas extends CI_Controller {
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
 	      
-	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline($tahun);
+	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	      
 	      $this->load->view('header', $this->sesi);
@@ -110,8 +155,48 @@ class Report_transaksigas extends CI_Controller {
 	   }
 	}
 
-	public function transaksi_gas_offline()
+*/
+	public function transaksi_gas_offline($tahun)
 	{
+		
+		
+		if($this->session->userdata('logged_in'))
+		{
+	    	$session_data = $this->session->userdata('logged_in');
+	    	$data['username'] = $session_data['username'];
+	    	$data['hakakses'] = $session_data['hakakses'];
+	    	$data['idPegawai'] = $session_data['idPegawai'];
+
+	    	if ($tahun == 'all'){
+	    		$this->sesi['all']=$tahun;
+	    		$transaksigasoffline['hasil'] = $this->m_reporttransaksigas->getalldataoffline();
+
+			      $this->load->view('header', $this->sesi);
+				  $this->load->view('header_pegawai', $data);
+				  $this->load->view('direktur/v_report_transaksioffline',$transaksigasoffline);
+				  $this->load->view('footer');
+
+			}
+			else {
+					$this->sesi['tahun']=$tahun;
+					$transaksigasoffline['hasil'] = $this->m_reporttransaksigas->getalloffline($tahun);
+
+			      $this->load->view('header', $this->sesi);
+				  $this->load->view('header_pegawai', $data);
+				  $this->load->view('direktur/v_report_transaksioffline',$transaksigasoffline);
+				  $this->load->view('footer');
+			}
+	  	}
+	   else
+	   {
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   }
+	}
+
+	/*public function transaksi_gas_offline()
+	{
+		//$this->sesi['tahun']=$tahun;
 		if($this->session->userdata('logged_in'))
 		{
 	    	$session_data = $this->session->userdata('logged_in');
@@ -121,7 +206,7 @@ class Report_transaksigas extends CI_Controller {
 
 			$transaksigasoffline['hasil'] = $this->m_reporttransaksigas->getalloffline();
 
-	      $this->load->view('header');
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_transaksioffline',$transaksigasoffline);
 		  $this->load->view('footer');
@@ -131,7 +216,7 @@ class Report_transaksigas extends CI_Controller {
 	     //If no session, redirect to login page
 	     redirect('index.php/c_login', 'refresh');
 	   }
-	}
+	}*/
 
 
 
