@@ -48,11 +48,11 @@ class C_verifyLogin extends CI_Controller {
                      'username'   => $row->username,
                      'hakakses'   => $row->hakakses,
                      'idPegawai'  => $row->idPegawai,
-<<<<<<< HEAD
-                     'tahun'      => getdate()['year']
-=======
+
+                     'tahun'      => getdate()['year'],
+
                      'idPangkalan' => $row->idPangkalan
->>>>>>> 1364f88c21b31d5aa94a705bf35140de70d3094e
+
                   );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
