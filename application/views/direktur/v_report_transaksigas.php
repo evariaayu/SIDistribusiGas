@@ -6,7 +6,11 @@
             <div class="jumbotron">
               <div class="col-sm-6">
             <span class="input-group-btn">
-                    <a href="<?php echo base_url();?>index.php/report_transaksigas/transaksi_gas_online/">
+              <?php 
+              $session_data=$this->session->userdata('logged_in'); 
+              ?>
+
+                    <a href="<?php echo base_url();?>index.php/report_transaksigas/transaksi_gas_online/<?php echo $session_data['tahun'] ?>">
                     <button class="btn btn-default btn-lg btn-block" type="button">
                         Report Transaksi Online</button></a>
                   </span>

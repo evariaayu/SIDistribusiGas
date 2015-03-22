@@ -8,11 +8,31 @@
                     <fieldset>
                         <legend><center>Laporan Transaksi Gas Online</center></legend>
                     <!-- Button trigger modal -->
+                    <div class="row">
+                    <div class="col-sm-3">
+                    
+                    <label>Tahun:
+                  <select class="form-control form-inline" id="tahunOpt" name="tahun">
+                      <option disabled selected>Tahun</option>
+                      <?php  for ($i=$tahun-3; $i <$tahun ; $i++) { ?> 
+                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                      <?php } ?>  
+                      
+                   <option value="<?php echo $tahun; ?>" selected><?php echo $tahun; ?></option>
+                      <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
+                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                      <?php } ?>
+</label>
+                  </select>
+                   
+                </div>
 
-                     <div class=" col-sm-8 col-sm-offset-8">
+                     <div class=" col-sm-offset-10">
                         <a href="<?php echo base_url();?>index.php/report_transaksigas/">
                   <button class="btn btn-default">Back</button></a>
                 </div>
+              </div>
+              
                     
                     <div class="row">
                   <div class="col-md-2">
@@ -109,11 +129,13 @@ $(document).ready(function(){
       "scrollY": "400px"
   });     
 
-  
+  $('#excelPemDownload').click(function(){
+    window.location="<?php echo site_url(); ?>report/printout_report_lahan_excel/"+$('#tahunOpt').val();
+  })
   function changeDataPem()
   {
     
-    window.location="<?php echo site_url() ?>report/report_lahan/"+$('#tahunOpt').val();
+    window.location="<?php echo site_url() ?>report_transaksigas/transaksi_gas_online/"+$('#tahunOpt').val();
     
   }
   $('#tahunOpt').change(function(){

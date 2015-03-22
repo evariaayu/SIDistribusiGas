@@ -1,10 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 class Direktur extends CI_Controller {
-    function __construct() {
+	public $sesi;
+    public function __construct() 
+    {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
+        if ($this->session->userdata('logged_in')) {
+			$session_data=$this->session->userdata('logged_in');
+			$this->sesi['tahun']=$session_data['tahun'];
+			
+			
+		}
+		else{
+			$this->sesi['tahun']=getdate()['year'];
+			
+
+		}
     }
 	/**
 	 * Index Page for this controller.
@@ -23,11 +36,14 @@ class Direktur extends CI_Controller {
 	 */
 	public function index()
 	{
+		
 		if($this->session->userdata('logged_in'))
 		{
+			
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      
 	     // $this->load->view('home_view', $data);
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
