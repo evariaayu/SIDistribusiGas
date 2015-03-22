@@ -33,6 +33,7 @@ class C_verifyLogin extends CI_Controller {
      }
 
 
+
      function check_database($password) {
          //Field validation succeeded.  Validate against database
          $username = $this->input->post('username');

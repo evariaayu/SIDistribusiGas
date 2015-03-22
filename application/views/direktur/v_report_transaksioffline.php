@@ -8,6 +8,7 @@
                     <fieldset>
                         <legend><center>Laporan Transaksi Gas Offline</center></legend>
                     <!-- Button trigger modal -->
+
                     
                   <div class=" col-sm-8 col-sm-offset-8">
                         <a href="<?php echo base_url();?>index.php/report_transaksigas/">

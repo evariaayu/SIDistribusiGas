@@ -49,6 +49,7 @@ class Report_transaksigas extends CI_Controller {
 	      //$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	     
+
 	     
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);

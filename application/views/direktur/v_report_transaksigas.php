@@ -15,6 +15,7 @@
                         Report Transaksi Online</button></a>
                   </span>
                 </div>
+                
           <div class="col-sm-6">
             <span class="input-group-btn">
               <a href="<?php echo base_url();?>index.php/report_transaksigas/transaksi_gas_offline/">
@@ -25,4 +26,3 @@
                 <br>
               </div>
               </div>
-              

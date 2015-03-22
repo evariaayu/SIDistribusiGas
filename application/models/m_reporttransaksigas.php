@@ -27,6 +27,7 @@ class M_reporttransaksigas extends CI_Model {
     }
 
 
+
     public function getalloffline()
     {
         $this->db->select('*');
