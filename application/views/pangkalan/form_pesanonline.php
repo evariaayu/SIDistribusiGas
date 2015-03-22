@@ -18,7 +18,7 @@
     <label for="pangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>
     <div class="col-sm-5">
       <select class="form-control" name="idPangkalan" id="idPangkalan">
-        <option value="0"><?php echo $idPangkalan ?></option>
+        <option value="0"><?php echo $username ?></option>
 <!--     <?php 
      foreach ($hasil as $row) {?>
         
