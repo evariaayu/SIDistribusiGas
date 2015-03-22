@@ -1,4 +1,4 @@
-<h3><center>Laporan Biaya Operasional</center></h1>
+<h3><center>Laporan Pengeluaran Biaya Operasional</center></h1>
 <div class="col-md-1">
 </div>
 
@@ -8,8 +8,6 @@
                     <fieldset>
                         <!--<legend><center>Laporan Transaksi Gas Online</center></legend>-->
                     <!-- Button trigger modal -->
-
-                      
                     
                     <div class="row">
                   <div class="col-md-2">
@@ -33,54 +31,45 @@
                               <thead>
                                 <tr>
                                
-                                  <th>No</th>
+                                  <th style="min-width: 50px;">No</th>
+                                  <th style="min-width: 50px;">Pegawai</th>
                                   <th>Tanggal</th>
-                                  <th>PLN</th>
-                                  <th>PAM</th>
-                                  <th>Internet</th>
-                                   <th></th>
+                                  <th style="min-width: 150px;">Uraian</th>
+                                  <th>Harga</th>
+                                  <th>Total</th>
                                 </tr>
                               </thead>
                                <tbody>
                               <?php if(empty($hasil)) {
-                              echo "Data transaksi gas masih kosong";
+                              echo "";
                               }
                               else { ?>
 
                                 <?php $nomor = 1; ?>
                                 
-                                <?php foreach ($hasil as $biayaoperasional) {?>
-                                <?php if ($biayaoperasional->metode == 1) { ?>
+                                <?php foreach ($data as $biayaoperasional) {?>
+                                print_r($data)
                                   <tr>
                                   <td><?php echo $nomor ?></td>
-                                  <td><?php echo $biayaoperasional->tanggalTransaksiOnline ?></td>
-                                  <td><?php echo $biayaoperasional->idPangkalan ?></td>
-                                  <td><?php echo $biayaoperasional->jumlahGas ?></td>
-                                  <!--<td><?php echo $transaksigasonline->tanggalpembelian ?></td>-->
-                                  <td><?php echo $biayaoperasional->totalhargabeli ?></td>
-                                  
+                                  <td><?php echo $biayaoperasional['namapegawai'] ?></td>
+                                  <td><?php echo $biayaoperasional['tanggal'] ?></td>
+                                  <td><?php echo "Pengeluaran Biaya PLN"."<br/>".
+                                  "Pengeluaran Biaya PAM"."<br/>".
+                                  "Pengeluaran Biaya Internet"."<br/>".
+                                  "Pengeluaran lain-lain"."<br/>".
+                                  $biayaoperasional['namabarang'] ?></td>
+                                  <td><?php echo $biayaoperasional['pengeluaranPLN']."<br/>".
+                                  $biayaoperasional['pengeluaranPAM']."<br/>".
+                                  $biayaoperasional['pengeluaranInternet']."<br/>".
+                                  "<br/>". $biayaoperasional['harga'] ?></td>
+                                  <td><?php echo "..." ?></td>
+                                  </tr>
                              <?php $nomor++; } ?>
+                            
                              <?php } ?>
-                             <?php } ?>
-                            </tr>
+                            
                           </tbody>
                           </table> 
-
-                          <table class="table table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Total :</th>
-                                                <td><?php if(empty($hasil)) {
-                                                echo "Data transaksi gas masih kosong";
-                                                }
-                                                else { ?>
-                                                    <tr>
-                                                    <td><?php echo $nomor-1?></td>
-                                               
-                                               <?php } ?></td>
-                                                              </tr>
-                                                          </thead>
-                          </table>
 
                               
                        <!-- <div class="form-group">
