@@ -41,7 +41,7 @@ class C_pesanonline extends CI_Controller {
 //	      print_r($datanamapangkalan);
 	      $this->load->view('header');
 		  $this->load->view('pangkalan/header_pangkalan', $data);
-		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan);
+		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan ,$data);
 		   
 		  $this->load->view('footer');
 		}
@@ -89,6 +89,7 @@ class C_pesanonline extends CI_Controller {
 
 	public function pesan()
 	{
+		//$data['username'] = $session_data['username'];
 		$waktu = $this->input->post('waktu');
 		$pangkalan = $this->input->post('idPangkalan');
 		$harga = $this->input->post('harga');

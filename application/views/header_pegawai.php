@@ -21,6 +21,7 @@
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Mengelola Pemasukan Gas</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_operasional") ?>">Mengelola Biaya Operasional</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Mengelola Data Gudang</a></li>
+        <li><a href="<?php echo base_url("index.php/c_cekpesanonline") ?>">Cek Pesanan Online</a></li>
         <?php } ?>
 
         <?php  $session_data = $this->session->userdata('logged_in');

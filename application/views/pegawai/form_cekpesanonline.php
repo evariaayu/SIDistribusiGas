@@ -1,46 +1,80 @@
-<h3><center>Daftar Pembelian Gas Online</center></h1>
+<h1><center>Kelola Pemasukan Gas</center></h1>
 <br>
-<div class="col-md-3">
-</div>
 
-<div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline<?php echo $hasil[0]->idPemasukan; ?>">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Waktu</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="text" placeholder="<?php
-        echo (new \DateTime())->format('d-M-Y H:i:s');?>" readonly>
-    </div>
+<div class="col-md-2">
+  </div>
+  <div class="col-xs-1"></div>
+    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline/form_cekpesanonline">
+<br>
+<br>
 
-  </div>
-  <div class="form-group">
-    <!--jumlah gas-->
-    <label for="jumlahgas" class="col-sm-2 control-label">Jumlah Gas</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="jumlahgas" name="jumlahgas" value="<?php echo $hasil[0]->jumlahgas ?>" required>
-    </div>
-  </div>
+<div class="row">
 
-  <!---harga beli -->
-  <div class="form-group">
-    <label for="hargabeli" class="col-sm-2 control-label">Harga Beli</label>
-    <div class="col-sm-10">
-      <input id="hargabeli" name="hargabeli" class="form-control" value="<?php echo $hasil[0]->hargabeli ?>" required></input>
-    </div>
-  </div>
-  
-  <!---harga jual -->
-  <div class="form-group">
-    <label for="hargajual" class="col-sm-2 control-label">Harga Jual</label>
-    <div class="col-sm-10">
-      <input id="hargajual" name="hargajual" class="form-control" value="<?php echo $hasil[0]->hargajual ?>" required></input>
-    </div>
-  </div>
+<div class="col-xs-2 col-md-offset-6">
+    <div class="input-group">
+      <input type="text" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Search</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+<br>
+<br>
+<br>
+<div class="col-md-8 col-sm-offset-2">
+  Data Gudang 
+   <?php if(empty($stok_gudang)) {
+  echo "Masih kosong";
+}
+  else { ?>
+  <?php foreach ($stok_gudang as $row) {?>
+       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+      <?php } ?>
+      <?php } ?>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default" value="submit"></button>
-    </div>
-  </div>
-</form>
-</div>
+  <div class="col-md-6 col-sm-offset-2">
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>ID Pemasukan</th>
+        <th>Jumlah Gas</th>
+        <th>Harga Beli</th>
+        <th>Harga Jual</th>
+        <th>Tanggal Pembelian</th>
+        <th>Nama Pegawai</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if(empty($hasil)) {
+  echo "Data Pemasukan Gas masih kosong";
+}
+  else { ?>
+      <?php foreach ($hasil as $datapemasukangas) {?>
+      <tr>
+        <td><?php echo $datapemasukangas->idPemasukan ?></td>
+        <td><?php echo $datapemasukangas->jumlahgas ?></td>
+        <td><?php echo $datapemasukangas->hargabeli ?></td>
+       <td><?php echo $datapemasukangas->hargajual ?></td>
+       <td><?php echo $datapemasukangas->tanggalpembelian ?></td>
+       <td><?php echo $datapemasukangas->namapegawai ?></td>
+        <td>
+          <button type="button" class="btn btn-danger btn-link">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/delete/<?php echo $datapemasukangas->idPemasukan;?>">delete</a> 
+        </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-default btn-link">
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+          <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/edit/<?php echo $datapemasukangas->idPemasukan;?>">edit</a>
+          </button>
+        </td>
+       <?php } ?>
+       <?php } ?>
+      </tr>
+    </tbody>
+  </table>
+  </div><!-- col-md-6 col-sm-offset-2-->
+</div> <!-- div class row-->
