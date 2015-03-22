@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class C_pesanonline extends CI_Controller {
+class C_pesanoffline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
-        $this->load->model('m_pesanonline');
+        $this->load->model('m_pesanoffline');
         $this->load->helper('form');
         $this->load->helper('url');
     }
@@ -35,15 +35,16 @@ class C_pesanonline extends CI_Controller {
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
-	      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall($session_data['username']);	
-	      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
+	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
+	      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
+	      $datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
 
 	      //print_r($session_data);
 	      //print_r($datanamapangkalan['hasil']);
 	      //print_r($datanamapangkalan);
 	      $this->load->view('header');
-		  $this->load->view('pangkalan/header_pangkalan', $data);
-		  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
+		  $this->load->view('pegawai/header_pegawai', $data);
+		  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
 		   
 		  $this->load->view('footer');
 		}
@@ -97,7 +98,7 @@ class C_pesanonline extends CI_Controller {
 		$harga = $this->input->post('harga');
 		$jumlahorder = $this->input->post('jumlahGas');
 
-		$jumlahstok = $this->m_pesanonline->cekstok();
+		$jumlahstok = $this->m_pesanoffline->cekstok();
 
 		//echo $jumlahstok[0]['jumlah_stok']; 
 
@@ -106,22 +107,22 @@ class C_pesanonline extends CI_Controller {
 			if($this->session->userdata('logged_in'))
 			{	
 				$session_data = $this->session->userdata('logged_in');
-				$idPangkalan = $session_data['idPangkalan'];
+				//$idPangkalan = $session_data['idPangkalan'];
 				$totalhargabeli = $harga*$jumlahorder;
 				$data = array
 					(
 						'tanggalTransaksiOnline' => Time(),
 						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabeli' => $totalhargabeli,
-						'idstatus_pemesanan' => '1',				
-						'idPangkalan' => $this->input->post('idPangkalan'),
-						'namapangkalan' => $this->input->post('username')
+						//'idstatus_pemesanan' => '1',				
+						//'idPangkalan' => $this->input->post('idPangkalan'),
+						//'namapangkalan' => $this->input->post('username')
 
 					);
 	//			$this->m_pesanonline->insert();
 				//$this->load->model('m_pesanonline/insert');
 				// print_r($data);
-				$this->m_pesanonline->insert($data);
+				$this->m_pesanoffline->insert($data);
 				$message = "Berhasil! Hore total = $totalhargabeli";
 				
 				echo "<script type='text/javascript'>alert('$message');</script>";

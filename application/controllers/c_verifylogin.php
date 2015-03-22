@@ -48,9 +48,9 @@ class C_verifyLogin extends CI_Controller {
                      'username'   => $row->username,
                      'hakakses'   => $row->hakakses,
                      'idPegawai'  => $row->idPegawai,
-                     'idPangkalan' => $row->idPangkalan,
-                     'tahun'      => getdate()['year']
-                     
+                     'tahun'      => getdate()['year'],
+                     'bulan'      => getdate()['mon'],
+                     'idPangkalan' => $row->idPangkalan
 
                   );
                  //set session with value from database
