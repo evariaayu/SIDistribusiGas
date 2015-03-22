@@ -15,12 +15,10 @@ class M_operasional extends CI_Model {
  
     function insert($dataoperasional) 
     {
-       
+        $this->db->insert('pengeluaran_tetap',$dataoperasional); 
+        redirect('index.php/kelola_operasional','refresh');
     }
-    function insert_images($image_data=array())
-    {
-       
-    }
+   
    /* function getall()
     {
         $get_data = $this->db->get('');

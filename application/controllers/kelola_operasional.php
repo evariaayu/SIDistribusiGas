@@ -73,58 +73,66 @@ class Kelola_operasional extends CI_Controller {
 		{
 		    $session_data = $this->session->userdata('logged_in');
 		    $idPegawai= $session_data['idPegawai'];
-
-			$config['upload_path'] = './uploads/';
+		    $datebaru = date('Y-m-d H:i:s');
+		    $datebaru = str_replace( ':', '', $datebaru);
+			$config['upload_path'] = './uploads/'.$datebaru;
 			$config['allowed_types'] = 'jpg|png|jpeg';
 			$config['remove_spaces'] = 'TRUE';
 			
 			
 			$this->load->library('upload', $config);
-			$uploadpam=$this->upload->do_upload('filePAM');
-			if($uploadpam == TRUE)
+			
+			if (!is_dir('uploads/'.$datebaru)) 
 			{
-				 $datapam = $this->upload->data('filePAM');
-				 $pathpam=$datapam['full_path'];
-			}
-			elseif($uploadpam== FALSE)
-			{
-				echo "error file pam";
-			}
-			$uploadpln=$this->upload->do_upload('filePLN');
-			if($uploadpln == TRUE)
-			{
-				 $datapln = $this->upload->data('filePLN');
-				 $pathpln=$datapln['full_path'];
-			}
-			elseif($uploadpln== FALSE)
-			{
-				echo "error file pln";
-			}
-			$uploadinternet=$this->upload->do_upload('fileInternet');
-			if($uploadinternet == TRUE)
-			{
-				 $datainternet = $this->upload->data('fileInternet');
-				 $pathinternet=$datainternet['full_path'];
-			}
-			elseif($uploadinternet== FALSE)
-			{
-				echo "error fileInternet";
-			}
+    			mkdir('./uploads/' . $datebaru, 0777, TRUE);
+    			$uploadpam=$this->upload->do_upload('filePAM');
+				if($uploadpam == TRUE)
+				{
+					 $datapam = $this->upload->data('filePAM');
+					 $pathpam=$datapam['full_path'];
+				}
+				elseif($uploadpam== FALSE)
+				{
+					echo "error file pam";
+				}
+				$uploadpln=$this->upload->do_upload('filePLN');
+				if($uploadpln == TRUE)
+				{
+					 $datapln = $this->upload->data('filePLN');
+					 $pathpln=$datapln['full_path'];
+				}
+				elseif($uploadpln== FALSE)
+				{
+					echo "error file pln";
+				}
+				$uploadinternet=$this->upload->do_upload('fileInternet');
+				if($uploadinternet == TRUE)
+				{
+					 $datainternet = $this->upload->data('fileInternet');
+					 $pathinternet=$datainternet['full_path'];
+				}
+				elseif($uploadinternet== FALSE)
+				{
+					echo "error fileInternet";
+				}
 
-			$dataoperasional=array
-			(
-				'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
-				'filePAM' => $pathpam,
-				'pengeluaranPLN' => $this->input->post('pengeluaranPLN'),
-				'filePLN' => $pathpln,
-				'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
-				'fileInternet' => $pathinternet,
-				'idPegawai' => $idPegawai
-				
-			);
-			$this->m_operasional->insert($dataoperasional);
-			//print_r($dataoperasional);
-		    
+				$dataoperasional=array
+				(
+					'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
+					'filePAM' => $pathpam,
+					'pengeluaranPLN' => $this->input->post('pengeluaranPLN'),
+					'filePLN' => $pathpln,
+					'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
+					'fileInternet' => $pathinternet,
+					'idPegawai' => $idPegawai
+					
+				);
+				//print_r($dataoperasional);
+				$this->m_operasional->insert($dataoperasional);
+				redirect('index.php/kelola_operasional','refresh');
+			    
+	    	}
+			
 	  	}
 	}
 
