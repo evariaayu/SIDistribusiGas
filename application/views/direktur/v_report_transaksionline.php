@@ -11,7 +11,7 @@
                     <div class="row">
                     <div class="col-sm-3">
                     
-                    <label>Tahun:
+                    <label>Tahun:</label>
                   <select class="form-control form-inline" id="tahunOpt" name="tahun">
                       <option disabled selected>Tahun</option>
                       <?php  for ($i=$tahun-3; $i <$tahun ; $i++) { ?> 
@@ -22,9 +22,9 @@
                       <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <?php } ?>
-</label>
+
                   </select>
-                   
+
                 </div>
 
                      <div class=" col-sm-offset-10">
@@ -143,7 +143,6 @@ $(document).ready(function(){
     changeDataPem()
   });
   
-
 
 
 });
