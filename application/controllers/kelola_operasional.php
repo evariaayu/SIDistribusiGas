@@ -69,42 +69,63 @@ class Kelola_operasional extends CI_Controller {
 	}
 	function do_upload()
 	{
-		
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'jpg|png|jpeg';
-		$config['max_size']	= '20480000';
-		
-		
-		$this->load->library('upload', $config);
-		for($i=1;$i<4;$i++)
+		if($this->session->userdata('logged_in'))
 		{
-			$upload = $this->upload->do_upload('image'.$i);
-			if($upload===FALSE) 
+		    $session_data = $this->session->userdata('logged_in');
+		    $idPegawai= $session_data['idPegawai'];
+
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'jpg|png|jpeg';
+			$config['remove_spaces'] = 'TRUE';
+			
+			
+			$this->load->library('upload', $config);
+			$uploadpam=$this->upload->do_upload('filePAM');
+			if($uploadpam == TRUE)
 			{
-				echo "error";
-				continue;
+				 $datapam = $this->upload->data('filePAM');
+				 $pathpam=$datapam['full_path'];
 			}
+			elseif($uploadpam== FALSE)
+			{
+				echo "error file pam";
+			}
+			$uploadpln=$this->upload->do_upload('filePLN');
+			if($uploadpln == TRUE)
+			{
+				 $datapln = $this->upload->data('filePLN');
+				 $pathpln=$datapln['full_path'];
+			}
+			elseif($uploadpln== FALSE)
+			{
+				echo "error file pln";
+			}
+			$uploadinternet=$this->upload->do_upload('fileInternet');
+			if($uploadinternet == TRUE)
+			{
+				 $datainternet = $this->upload->data('fileInternet');
+				 $pathinternet=$datainternet['full_path'];
+			}
+			elseif($uploadinternet== FALSE)
+			{
+				echo "error fileInternet";
+			}
+
+			$dataoperasional=array
+			(
+				'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
+				'filePAM' => $pathpam,
+				'pengeluaranPLN' => $this->input->post('pengeluaranPLN'),
+				'filePLN' => $pathpln,
+				'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
+				'fileInternet' => $pathinternet,
+				'idPegawai' => $idPegawai
 				
-			$data = $this->upload->data();
-
-			$uploadedFiles[$i] = $data;
-
-		}
-		//redirect('index.php/Kelola_operasional', 'refresh');
-/*
-		if ( ! $this->Kelola_operasional->do_upload())
-		{
-			echo "error";
-			$error = array('error' => $this->upload->display_errors());
-
-			$this->load->view('form_tambahbiayaoperasional-old', $error);
-		}
-		else
-		{
-			//$data = array('upload_data' => $this->upload->data());
-			echo "sukses";
-			//$this->load->view('upload_success', $data);
-		}*/
+			);
+			$this->m_operasional->insert($dataoperasional);
+			//print_r($dataoperasional);
+		    
+	  	}
 	}
 
 

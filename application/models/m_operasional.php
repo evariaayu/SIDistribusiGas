@@ -7,20 +7,19 @@ class M_operasional extends CI_Model {
         $this->load->database();
     }
 
-    function insert($data)
-    {
-        $this->db->insert('pengeluaran_tetap',$data);
-        return $this->db->insert_id();
-    }
-
     function get_all()
     {
         return $this->db->get('pengeluaran_tetap');
     }
+
  
-  /*  function insert($datapangkalan) 
+    function insert($dataoperasional) 
     {
-        $this->db->insert('',$datapangkalan);
+       
+    }
+    function insert_images($image_data=array())
+    {
+       
     }
    /* function getall()
     {

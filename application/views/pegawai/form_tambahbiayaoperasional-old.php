@@ -11,16 +11,16 @@
 
   <div class="form-group">
     <!--pam-->
-    <label for="pam" class="col-sm-2 control-label">PAM</label>
+    <label for="pengeluaranPAM" class="col-sm-2 control-label">PAM</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="pam" name="pam" placeholder="pam" required>
+      <input type="text" class="form-control" id="pengeluaranPAM" name="pengeluaranPAM" placeholder="pam" required>
     </div>
   </div>
   <!-- input file pam-->
   <div class="form-group">
-    <label for="filepam" class="col-sm-2 control-label">File PAM</label>
+    <label for="filePAM" class="col-sm-2 control-label">File PAM</label>
     <div class="col-sm-10">
-      <input type="file" id="filepam">
+      <input type="file" name="filePAM">
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>
@@ -28,32 +28,32 @@
 
   <!---pln-->
   <div class="form-group">
-    <label for="pln" class="col-sm-2 control-label">PLN</label>
+    <label for="pengeluaranPLN" class="col-sm-2 control-label">PLN</label>
     <div class="col-sm-10">
-      <input id="pln" name="pln" class="form-control" placeholder="pln" required></input>
+      <input id="pengeluaranPLN" name="pengeluaranPLN" class="form-control" placeholder="pln" required></input>
     </div>
   </div>
    <!-- input file pln-->
   <div class="form-group">
-    <label for="filepln" class="col-sm-2 control-label">File PLN</label>
+    <label for="filePLN" class="col-sm-2 control-label">File PLN</label>
     <div class="col-sm-10">
-      <input type="file" id="filepln">
+      <input type="file" name="filePLN">
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>
   
   <!---internet-->
   <div class="form-group">
-    <label for="internet" class="col-sm-2 control-label">Internet</label>
+    <label for="pengeluaranInternet" class="col-sm-2 control-label">Internet</label>
     <div class="col-sm-10">
-      <input id="internet" name="internet" class="form-control" placeholder="Internet" required></input>
+      <input id="pengeluaranInternet" name="pengeluaranInternet" class="form-control" placeholder="Internet" required></input>
     </div>
   </div>
    <!-- input file pln-->
   <div class="form-group">
-    <label for="fileinternet" class="col-sm-2 control-label">File Internet</label>
+    <label for="fileInternet" class="col-sm-2 control-label">File Internet</label>
     <div class="col-sm-10">
-      <input type="file" id="fileinternet">
+      <input type="file" name="fileInternet">
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>
