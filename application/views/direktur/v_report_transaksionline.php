@@ -19,7 +19,7 @@
                       <?php } ?>  
                       
                    <option value="<?php echo $tahun; ?>" selected><?php echo $tahun; ?></option>
-                      <?php  for ($i=$tahun+1; $i <$tahun+3; $i++) { ?> 
+                      <?php  for ($i=$tahun+1; $i <$tahun+1; $i++) { ?> 
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <?php } ?>
 
@@ -144,7 +144,7 @@ $(document).ready(function(){
   });
   
 
-  
+
 
 
 });
