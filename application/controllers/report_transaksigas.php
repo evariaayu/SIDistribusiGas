@@ -2,11 +2,25 @@
 session_start();
 
 class Report_transaksigas extends CI_Controller {
-    function __construct() {
+	public $sesi;
+    public function __construct() {
         parent::__construct();
+
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_reporttransaksigas');
+        $this->load->library(array('form_validation','session'));
+        if ($this->session->userdata('logged_in')) {
+			$session_data=$this->session->userdata('logged_in');
+			$this->sesi['tahun']=$session_data['tahun'];
+			
+			
+		}
+		else{
+			$this->sesi['tahun']=getdate()['year'];
+			
+
+		}
     }
 	/**
 	 * Index Page for this controller.
@@ -34,7 +48,9 @@ class Report_transaksigas extends CI_Controller {
 
 	      //$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
-	      
+	     
+
+	     
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_transaksigas',$data);
@@ -60,8 +76,9 @@ class Report_transaksigas extends CI_Controller {
 	   }
 	}
 
-	public function transaksi_gas_online()
+	public function transaksi_gas_online($tahun)
 	{
+		$this->sesi['tahun']=$tahun;
 		if($this->session->userdata('logged_in'))
 		{
 	      $session_data = $this->session->userdata('logged_in');
@@ -69,10 +86,11 @@ class Report_transaksigas extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
+	      
+	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline($tahun);
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	      
-	      $this->load->view('header');
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
 		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
@@ -119,73 +137,27 @@ class Report_transaksigas extends CI_Controller {
 
 	/*public function report_online_tahun($tahun)
 	{
-		$this->sesi['tahun']=$tahun;
-		
-		$this->load->view('template/admin_header',$this->sesi);
-		$data['lahan']= $this->proyek_model->get_data_lokasi_periode($tahun);
-		$this->load->view('admin/admin_report_lahan',$data);
-		$this->load->view('template/admin_footer');
-	}*/
 
-	/*public function insert()
-	{
 		if($this->session->userdata('logged_in'))
 		{
 	    	$session_data = $this->session->userdata('logged_in');
-	    	$idPegawai = $session_data['idPegawai'];
-		  	$datapemasukangas=array
-			(
-				'jumlahgas' => $this->input->post('jumlahgas'),
-				'hargabeli' => $this->input->post('hargabeli'),
-				'hargajual' => $this->input->post('hargajual'),
-				'idPegawai' => $idPegawai,
-			);
-			$datetoday =date("Y-m-d");
-			$datamasukgudang=array(
-				'jumlah_stok' => $this->input->post('jumlahgas'),
-				//'tanggal' => $datetoday
-			);
-		  	$this->m_pemasukangas->insert($datapemasukangas);
-		  	$this->m_pemasukangas->insertstok($datamasukgudang);
-			redirect('index.php/Kelola_pemasukangas');
-	  	}
-	}
+	    	$data['username'] = $session_data['username'];
+	    	$data['hakakses'] = $session_data['hakakses'];
+	    	$data['idPegawai'] = $session_data['idPegawai'];
 
-	public function delete($idPemasukan)
-	{
-		$this->m_pemasukangas->delete($idPemasukan);
-		redirect('index.php/Kelola_pemasukangas');
-	}
+			$this->sesi['tahun']=$tahun;
 
-	public function edit($idPemasukan)
-	{
-		if($this->session->userdata('logged_in'))
-		{
-	     	$session_data = $this->session->userdata('logged_in');
-	      	$data['username'] = $session_data['username'];
-	      	$data['hakakses'] = $session_data['hakakses'];
-	      	$data['idPegawai'] = $session_data['idPegawai'];
-
-	      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
-			
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
-		  	$this->load->view('footer');
+	      $this->load->view('header', $this->sesi);
+	       $this->load->view('header_pegawai', $data);
+	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline($tahun);
+		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
+		  $this->load->view('footer');
 	  }
-		
-	}
+	   else
+	   {
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   }
 
-	public function update($idPemasukan)
-	{
-		
-		$data['jumlahgas'] = $this->input->post('jumlahgas');
-		$data['hargabeli'] = $this->input->post('hargabeli');
-		$data['hargajual'] = $this->input->post('hargajual');
-		$data['idpemasukan'] = $idPemasukan;
-		$this->m_pemasukangas->update($data);
-		
-		redirect('index.php/Kelola_pemasukangas');
-	} */
-
+	}*/
 }

@@ -31,7 +31,9 @@ class C_verifyLogin extends CI_Controller {
                 
             }      
      }
- 
+
+
+
      function check_database($password) {
          //Field validation succeeded.  Validate against database
          $username = $this->input->post('username');
@@ -46,7 +48,11 @@ class C_verifyLogin extends CI_Controller {
                      'username'   => $row->username,
                      'hakakses'   => $row->hakakses,
                      'idPegawai'  => $row->idPegawai,
+
+                     'tahun'      => getdate()['year'],
+
                      'idPangkalan' => $row->idPangkalan
+
                   );
                  //set session with value from database
                  $this->session->set_userdata('logged_in', $sess_array);
