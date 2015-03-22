@@ -17,5 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.dataTables.css') ?>">
  	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>
 
+    <script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
 </head>
 <body>
