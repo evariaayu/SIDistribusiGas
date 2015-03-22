@@ -115,6 +115,7 @@ class C_pesanonline extends CI_Controller {
 						'totalhargabeli' => $totalhargabeli,
 						'idstatus_pemesanan' => '1',				
 						'idPangkalan' => $this->input->post('idPangkalan'),
+						'namapangkalan' => $this->input->post('username')
 
 					);
 	//			$this->m_pesanonline->insert();

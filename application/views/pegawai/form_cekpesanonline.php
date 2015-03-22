@@ -41,11 +41,22 @@
         { ?>
       <tr>
         <td><?php echo $row->idTransaksi_Online ?></td>
+        <td><?php echo $row->namapangkalan ?></td>
         <td><?php echo $row->tanggalTransaksiOnline ?></td>
         <td><?php echo $row->jumlahGas ?></td>
        <td><?php echo $row->totalhargabeli ?></td>
-       <td><?php echo $row->idstatus_pemesanan ?></td>
-       <td><?php echo $row->idPangkalan ?></td>
+       <td>
+        <?php if($row->idstatus_pemesanan == 1) { ?>
+        <form method="post" action="<?php echo base_url();?>index.php/c_cekpesanonline/update">
+        <input type="hidden" name="idTransaksi" value="<?php echo htmlspecialchars($row->idTransaksi_Online); ?>">
+        <input type="hidden" name="jumlahGas" value="<?php echo htmlspecialchars($row->jumlahGas); ?>">
+        <input type="submit" value="konfirmasi" name="konfirmasi">
+        </form>
+          <?php } else { ?>
+          CONFIRMED
+          <?php } ?>
+        </td>
+       
 
       </tr>
       <?php } ?>

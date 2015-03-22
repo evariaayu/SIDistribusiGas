@@ -33,6 +33,8 @@ class C_cekpesanonline extends CI_Controller {
 	      $data['idPegawai'] = $session_data['idPegawai'];
 	      $datapesanonline['hasil'] = $this->m_cekpesanonline->cekPesan();
 
+	      //print_r($datapesanonline['hasil']);
+
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('pegawai/form_cekpesanonline',$datapesanonline);
@@ -44,6 +46,14 @@ class C_cekpesanonline extends CI_Controller {
 	     redirect('index.php/c_login', 'refresh');
 	   }
 		
+	}
+
+	public function update()
+	{
+		$jumlahGas = $this->input->post('jumlahGas');
+		$idTransaksi = $this->input->post('idTransaksi');
+		$this->m_cekpesanonline->update($jumlahGas,$idTransaksi);
+		redirect('index.php/c_cekpesanonline', 'refresh');
 	}
 
 }
