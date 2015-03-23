@@ -9,12 +9,13 @@
                         <legend><center>Laporan Transaksi Gas Online</center></legend>
                     <!-- Button trigger modal -->
                     <div class="row">
+                      <div class="col-sm-1">
+                      <h5><label>Tahun:</label></h5>
+                    </div>
                     <div class="col-sm-3">
-                    
-                    <label>Tahun:</label>
                   <select class="form-control form-inline" id="tahunOpt" name="tahun">
 
-                      <option>Tahun</option>
+                      <option disabled selected>Tahun</option>
                       <?php  for ($i=$tahun-3; $i <$tahun ; $i++) { ?> 
                       <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                       <?php } ?>  
@@ -46,6 +47,7 @@
                                   <th>Pangkalan</th>
                                   <th>Jumlah Tabung</th>
                                   <th>Total</th>
+                                  <th>Status Pemesanan</th>
                                    
                                 </tr>
                               </thead>
@@ -58,37 +60,33 @@
                                 <?php $nomor = 1; ?>
                                 
                                 <?php foreach ($hasil as $transaksigasonline) {?>
-                                <?php if ($transaksigasonline->metode == 1) { ?>
+                                
                                   <tr>
                                   <td><?php echo $nomor ?></td>
                                   <td><?php echo $transaksigasonline->tanggalTransaksiOnline ?></td>
-                                  <td><?php echo $transaksigasonline->idPangkalan ?></td>
+                                  <td><?php echo $transaksigasonline->namapangkalan ?></td>
                                   <td><?php echo $transaksigasonline->jumlahGas ?></td>
                                   <!--<td><?php echo $transaksigasonline->tanggalpembelian ?></td>-->
                                   <td><?php echo $transaksigasonline->totalhargabeli ?></td>
-                                  
-                             <?php $nomor++; } ?>
+                                  <td><?php echo $transaksigasonline->namastatus ?></td>
+                             <?php $nomor++; ?>
                              <?php } ?>
                              <?php } ?>
                             </tr>
                           </tbody>
                           </table> 
 
-                          <table class="table table-striped ">
-                                        <thead>
-                                            <tr>
-                                                <th>Total :</th>
-                                                <td><?php if(empty($hasil)) {
-                                                echo "";
-                                                }
-                                                else { ?>
-                                                    <tr>
-                                                    <td><?php echo $nomor-1?></td>
-                                               
-                                               <?php } ?></td>
-                                                              </tr>
-                                                          </thead>
-                          </table>
+                            
+                                                  <label>Total :</label>
+                                                 
+                                                    <?php if(empty($hasil)) {
+                                                  echo "";
+                                                  }
+                                                  else { ?>
+                                                      
+                                                      <?php echo $nomor-1?>
+                                                 
+                                                 <?php } ?>
 
                               
                        <!-- <div class="form-group">

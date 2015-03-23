@@ -92,12 +92,19 @@ class Report_biayaoperasional extends CI_Controller {
 	      
 	       $this->sesi['tahun']=$tahun;
 			$this->sesi['bulan']=$bulan;
+			/*$total = array(
+            'pengeluaranPLN'     => $this->input->post['pengeluaranPLN'],
+            'pengeluaranPAM'    => $this->input->post['pengeluaranPAM'],
+            'pengeluaranInternet' => $this->input->post['pengeluaranInternet']
+            );*/
+
 	      $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional($bulan, $tahun);
+	      //$biayaoperasional['total'] = $this->m_reportbiayaoperasional->getbiayatotal($bulan, $tahun, $total);
 	      $biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain($bulan, $tahun);
 	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
-		  //$this->load->view('direktur/v_report_biayaoperasional',$biayalain);
+		  
 		  $this->load->view('footer');
 		  
 		 //$this->load->model('m_reportbiayaoperasional');

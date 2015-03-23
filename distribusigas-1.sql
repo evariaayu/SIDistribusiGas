@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2015 at 02:21 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Generation Time: Mar 23, 2015 at 08:51 AM
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,8 +29,10 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `cost_lainlain` (
   `idCost_lainlain` int(11) NOT NULL AUTO_INCREMENT,
   `namabarang` varchar(45) DEFAULT NULL,
-  `harga` varchar(45) DEFAULT NULL,
-  `tanggal` timestamp NULL DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL,
+  `tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `filebarang` varchar(200) NOT NULL,
+  `namafolder` varchar(100) NOT NULL,
   PRIMARY KEY (`idCost_lainlain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -66,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `password` varchar(45) DEFAULT NULL,
   `hakakses` varchar(45) DEFAULT NULL,
   `idPegawai` int(11) DEFAULT NULL,
+  `idPangkalan` int(11) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -73,10 +76,11 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`username`, `password`, `hakakses`, `idPegawai`) VALUES
-('eva', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 1),
-('pegawai', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai', 1),
-('pinas', 'edba1e1129776cba39479609bbb6df4d', 'direktur', 2);
+INSERT INTO `login` (`username`, `password`, `hakakses`, `idPegawai`, `idPangkalan`) VALUES
+('adjiparjono', '6e6bb6ef15e71de0346b7f5d8185072f', 'pangkalan', NULL, 1),
+('eva', '81dc9bdb52d04dc20036dbd8313ed055', 'admin', 1, 0),
+('pegawai', '047aeeb234644b9e2d4138ed3bc7976a', 'pegawai', 1, 0),
+('pinas', 'edba1e1129776cba39479609bbb6df4d', 'direktur', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -139,36 +143,18 @@ CREATE TABLE IF NOT EXISTS `pemasukan` (
   `hargajual` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idPemasukan`),
   KEY `fk_Pemasukan_Pegawai1_idx` (`idPegawai`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `pemasukan`
 --
 
 INSERT INTO `pemasukan` (`idPemasukan`, `jumlahgas`, `hargabeli`, `tanggalpembelian`, `idPegawai`, `hargajual`) VALUES
-(1, '1000', '10000', '2015-03-02 20:23:59', 1, '12000'),
-(2, '100000', '10000', '2015-03-07 06:20:17', 1, '12000'),
-(5, '1000', '7000', '2015-03-05 08:59:19', 1, '100'),
-(7, '100', '11000', '2015-03-05 15:46:11', 1, '12000');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pengeluaran_gas`
---
-
-CREATE TABLE IF NOT EXISTS `pengeluaran_gas` (
-  `idPengeluaran_Gas` int(11) NOT NULL AUTO_INCREMENT,
-  `metode` int(11) DEFAULT NULL,
-  `idTransaksi` int(11) DEFAULT NULL,
-  `idPangkalan` int(11) NOT NULL,
-  `idPegawai` int(11) NOT NULL,
-  `idstatus_pemesanan` int(11) NOT NULL,
-  PRIMARY KEY (`idPengeluaran_Gas`,`idPangkalan`),
-  KEY `fk_Pengeluaran_Gas_Pangkalan1_idx` (`idPangkalan`),
-  KEY `fk_Pengeluaran_Gas_Pegawai1_idx` (`idPegawai`),
-  KEY `fk_Pengeluaran_Gas_status_pemesanan1_idx` (`idstatus_pemesanan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+(1, '1', '1', '2015-03-22 13:02:37', 1, '1'),
+(2, '2', '2', '2015-03-22 13:02:51', 1, '2'),
+(5, '5', '5', '2015-03-22 13:02:56', 1, '5'),
+(7, '100', '11000', '2015-03-05 15:46:11', 1, '12000'),
+(8, '1200', '11300', '2015-03-22 07:04:28', 1, '14000');
 
 -- --------------------------------------------------------
 
@@ -193,14 +179,16 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_perbulan` (
 
 CREATE TABLE IF NOT EXISTS `pengeluaran_tetap` (
   `idPengeluaran_Tetap` int(11) NOT NULL AUTO_INCREMENT,
-  `pengeluaranPLN` varchar(45) DEFAULT NULL,
-  `filePLN` blob,
-  `pengeluaranPAM` varchar(45) DEFAULT NULL,
-  `filePAM` blob,
-  `pengeluaranInternet` varchar(45) DEFAULT NULL,
-  `fileInternent` blob,
-  `tanggal` timestamp NULL DEFAULT NULL,
+  `pengeluaranPLN` int(11) DEFAULT NULL,
+  `filePLN` varchar(300) DEFAULT NULL,
+  `pengeluaranPAM` int(11) DEFAULT NULL,
+  `filePAM` varchar(300) DEFAULT NULL,
+  `pengeluaranInternet` int(11) DEFAULT NULL,
+  `fileInternent` varchar(300) DEFAULT NULL,
+  `total` int(45) DEFAULT NULL,
+  `tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idPegawai` int(11) NOT NULL,
+  `namafolder` varchar(100) NOT NULL,
   PRIMARY KEY (`idPengeluaran_Tetap`),
   KEY `fk_Pengeluaran_Tetap_Pegawai1_idx` (`idPegawai`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -217,6 +205,14 @@ CREATE TABLE IF NOT EXISTS `status_pemesanan` (
   PRIMARY KEY (`idstatus_pemesanan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `status_pemesanan`
+--
+
+INSERT INTO `status_pemesanan` (`idstatus_pemesanan`, `namastatus`) VALUES
+(1, 'waiting'),
+(2, 'confirmed');
+
 -- --------------------------------------------------------
 
 --
@@ -228,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `stok_gudang` (
   `jumlah_stok` varchar(45) DEFAULT NULL,
   `idstok_gudang` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`idstok_gudang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `stok_gudang`
@@ -236,7 +232,30 @@ CREATE TABLE IF NOT EXISTS `stok_gudang` (
 
 INSERT INTO `stok_gudang` (`tanggal`, `jumlah_stok`, `idstok_gudang`) VALUES
 ('2015-03-05 15:30:11', '1000', 1),
-('2015-03-05 15:46:11', '100', 2);
+('2015-03-05 15:46:11', '100', 2),
+('2015-03-22 07:04:28', '1300', 3),
+('2015-03-22 13:37:00', '1299', 4),
+('2015-03-22 13:37:11', '1298', 5),
+('2015-03-22 13:37:13', '1293', 6),
+('2015-03-22 13:37:15', '1291', 7),
+('2015-03-22 13:42:11', '1290', 8),
+('2015-03-22 13:42:18', '1278', 9),
+('2015-03-22 14:20:36', '1276', 10),
+('2015-03-22 14:20:38', '1275', 11),
+('2015-03-22 21:48:16', '1275', 12),
+('2015-03-22 22:03:19', '1275', 13),
+('2015-03-22 22:05:40', '1271', 14),
+('2015-03-22 22:05:54', '1257', 15),
+('2015-03-22 22:09:16', '1254', 16),
+('2015-03-22 22:10:20', '1251', 17),
+('2015-03-23 05:29:36', '1241', 18),
+('2015-03-23 05:29:39', '1231', 19),
+('2015-03-23 05:29:41', '1221', 20),
+('2015-03-23 05:29:43', '1211', 21),
+('2015-03-23 05:29:45', '1201', 22),
+('2015-03-23 05:29:47', '1191', 23),
+('2015-03-23 05:29:48', '1181', 24),
+('2015-03-23 05:30:18', '1171', 25);
 
 -- --------------------------------------------------------
 
@@ -247,10 +266,27 @@ INSERT INTO `stok_gudang` (`tanggal`, `jumlah_stok`, `idstok_gudang`) VALUES
 CREATE TABLE IF NOT EXISTS `transaksi_offline` (
   `idTransaksi_Offline` int(11) NOT NULL AUTO_INCREMENT,
   `jumlahGas` varchar(45) DEFAULT NULL,
-  `tanggalTransaksiOffline` timestamp NULL DEFAULT NULL,
+  `tanggalTransaksiOffline` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `totalhargabelioff` varchar(45) DEFAULT NULL,
+  `idPangkalan` int(100) NOT NULL,
+  `idPegawai` int(100) NOT NULL,
   PRIMARY KEY (`idTransaksi_Offline`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `transaksi_offline`
+--
+
+INSERT INTO `transaksi_offline` (`idTransaksi_Offline`, `jumlahGas`, `tanggalTransaksiOffline`, `totalhargabelioff`, `idPangkalan`, `idPegawai`) VALUES
+(1, '3', NULL, '15', 1, 0),
+(2, '3', NULL, '15', 2, 0),
+(3, '2', '2015-03-22 21:16:42', '10', 1, 0),
+(4, '4', '2015-03-22 21:48:16', '20', 2, 0),
+(5, '4', '2015-03-22 22:03:19', '20', 2, 0),
+(6, '4', '2015-03-22 22:05:40', '20', 1, 0),
+(7, '14', '2015-03-22 22:05:54', '70', 1, 0),
+(8, '3', '2015-03-22 22:09:16', '15', 1, 0),
+(9, '3', '2015-03-22 22:10:20', '15', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -260,11 +296,23 @@ CREATE TABLE IF NOT EXISTS `transaksi_offline` (
 
 CREATE TABLE IF NOT EXISTS `transaksi_online` (
   `idTransaksi_Online` int(11) NOT NULL AUTO_INCREMENT,
-  `tanggalTransaksiOnline` timestamp NULL DEFAULT NULL,
+  `tanggalTransaksiOnline` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `jumlahGas` varchar(45) DEFAULT NULL,
   `totalhargabeli` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idTransaksi_Online`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `idstatus_pemesanan` varchar(45) NOT NULL,
+  `idPangkalan` int(11) NOT NULL,
+  `namapangkalan` varchar(100) NOT NULL,
+  PRIMARY KEY (`idTransaksi_Online`),
+  KEY `idTransaksi_Online` (`idTransaksi_Online`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `transaksi_online`
+--
+
+INSERT INTO `transaksi_online` (`idTransaksi_Online`, `tanggalTransaksiOnline`, `jumlahGas`, `totalhargabeli`, `idstatus_pemesanan`, `idPangkalan`, `namapangkalan`) VALUES
+(19, '2015-03-22 20:05:35', '12', '60', '1', 1, ''),
+(21, '2015-03-23 05:30:18', '10', '50', '2', 1, 'adjiparjono');
 
 -- --------------------------------------------------------
 
@@ -275,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_online` (
 CREATE TABLE IF NOT EXISTS `tukar_barang` (
   `idTukar_Barang` int(11) NOT NULL AUTO_INCREMENT,
   `jumlahbarangrusak` varchar(45) DEFAULT NULL,
-  `tanggalTukarBarang` timestamp NULL DEFAULT NULL,
+  `tanggalTukarBarang` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idPangkalan` int(11) NOT NULL,
   `idPegawai` int(11) NOT NULL,
   `keterangan` varchar(200) DEFAULT NULL,
@@ -300,14 +348,6 @@ ALTER TABLE `pegawai`
 --
 ALTER TABLE `pemasukan`
   ADD CONSTRAINT `fk_Pemasukan_Pegawai1` FOREIGN KEY (`idPegawai`) REFERENCES `pegawai` (`idPegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `pengeluaran_gas`
---
-ALTER TABLE `pengeluaran_gas`
-  ADD CONSTRAINT `fk_Pengeluaran_Gas_Pangkalan1` FOREIGN KEY (`idPangkalan`) REFERENCES `pangkalan` (`idPangkalan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Pengeluaran_Gas_Pegawai1` FOREIGN KEY (`idPegawai`) REFERENCES `pegawai` (`idPegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Pengeluaran_Gas_status_pemesanan1` FOREIGN KEY (`idstatus_pemesanan`) REFERENCES `status_pemesanan` (`idstatus_pemesanan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `pengeluaran_perbulan`
