@@ -2,10 +2,10 @@
 -- version 4.0.9
 -- http://www.phpmyadmin.net
 --
--- Inang: 127.0.0.1
--- Waktu pembuatan: 23 Mar 2015 pada 06.37
--- Versi Server: 5.6.14
--- Versi PHP: 5.5.6
+-- Host: 127.0.0.1
+-- Generation Time: Mar 23, 2015 at 08:51 AM
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Basis data: `distribusigas`
+-- Database: `distribusigas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cost_lainlain`
+-- Table structure for table `cost_lainlain`
 --
 
 CREATE TABLE IF NOT EXISTS `cost_lainlain` (
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `cost_lainlain` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keterangan_jabatan`
+-- Table structure for table `keterangan_jabatan`
 --
 
 CREATE TABLE IF NOT EXISTS `keterangan_jabatan` (
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `keterangan_jabatan` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data untuk tabel `keterangan_jabatan`
+-- Dumping data for table `keterangan_jabatan`
 --
 
 INSERT INTO `keterangan_jabatan` (`idKeterangan_jabatan`, `nama_jabatan`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `keterangan_jabatan` (`idKeterangan_jabatan`, `nama_jabatan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login`
+-- Table structure for table `login`
 --
 
 CREATE TABLE IF NOT EXISTS `login` (
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `login`
+-- Dumping data for table `login`
 --
 
 INSERT INTO `login` (`username`, `password`, `hakakses`, `idPegawai`, `idPangkalan`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `login` (`username`, `password`, `hakakses`, `idPegawai`, `idPangkal
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pangkalan`
+-- Table structure for table `pangkalan`
 --
 
 CREATE TABLE IF NOT EXISTS `pangkalan` (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `pangkalan` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data untuk tabel `pangkalan`
+-- Dumping data for table `pangkalan`
 --
 
 INSERT INTO `pangkalan` (`idPangkalan`, `namapangkalan`, `alamatpangkalan`) VALUES
@@ -106,7 +106,7 @@ INSERT INTO `pangkalan` (`idPangkalan`, `namapangkalan`, `alamatpangkalan`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE IF NOT EXISTS `pegawai` (
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `pegawai` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data untuk tabel `pegawai`
+-- Dumping data for table `pegawai`
 --
 
 INSERT INTO `pegawai` (`idPegawai`, `namapegawai`, `alamatpegawai`, `jk`, `notelepon`, `idKeterangan_jabatan`) VALUES
@@ -131,7 +131,7 @@ INSERT INTO `pegawai` (`idPegawai`, `namapegawai`, `alamatpegawai`, `jk`, `notel
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pemasukan`
+-- Table structure for table `pemasukan`
 --
 
 CREATE TABLE IF NOT EXISTS `pemasukan` (
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `pemasukan` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data untuk tabel `pemasukan`
+-- Dumping data for table `pemasukan`
 --
 
 INSERT INTO `pemasukan` (`idPemasukan`, `jumlahgas`, `hargabeli`, `tanggalpembelian`, `idPegawai`, `hargajual`) VALUES
@@ -159,7 +159,7 @@ INSERT INTO `pemasukan` (`idPemasukan`, `jumlahgas`, `hargabeli`, `tanggalpembel
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengeluaran_perbulan`
+-- Table structure for table `pengeluaran_perbulan`
 --
 
 CREATE TABLE IF NOT EXISTS `pengeluaran_perbulan` (
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_perbulan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengeluaran_tetap`
+-- Table structure for table `pengeluaran_tetap`
 --
 
 CREATE TABLE IF NOT EXISTS `pengeluaran_tetap` (
@@ -185,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_tetap` (
   `filePAM` varchar(300) DEFAULT NULL,
   `pengeluaranInternet` int(11) DEFAULT NULL,
   `fileInternent` varchar(300) DEFAULT NULL,
+  `total` int(45) DEFAULT NULL,
   `tanggal` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idPegawai` int(11) NOT NULL,
   `namafolder` varchar(100) NOT NULL,
@@ -195,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `pengeluaran_tetap` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `status_pemesanan`
+-- Table structure for table `status_pemesanan`
 --
 
 CREATE TABLE IF NOT EXISTS `status_pemesanan` (
@@ -205,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `status_pemesanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `status_pemesanan`
+-- Dumping data for table `status_pemesanan`
 --
 
 INSERT INTO `status_pemesanan` (`idstatus_pemesanan`, `namastatus`) VALUES
@@ -215,7 +216,7 @@ INSERT INTO `status_pemesanan` (`idstatus_pemesanan`, `namastatus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `stok_gudang`
+-- Table structure for table `stok_gudang`
 --
 
 CREATE TABLE IF NOT EXISTS `stok_gudang` (
@@ -226,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `stok_gudang` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
--- Dumping data untuk tabel `stok_gudang`
+-- Dumping data for table `stok_gudang`
 --
 
 INSERT INTO `stok_gudang` (`tanggal`, `jumlah_stok`, `idstok_gudang`) VALUES
@@ -259,7 +260,7 @@ INSERT INTO `stok_gudang` (`tanggal`, `jumlah_stok`, `idstok_gudang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_offline`
+-- Table structure for table `transaksi_offline`
 --
 
 CREATE TABLE IF NOT EXISTS `transaksi_offline` (
@@ -273,24 +274,24 @@ CREATE TABLE IF NOT EXISTS `transaksi_offline` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data untuk tabel `transaksi_offline`
+-- Dumping data for table `transaksi_offline`
 --
 
 INSERT INTO `transaksi_offline` (`idTransaksi_Offline`, `jumlahGas`, `tanggalTransaksiOffline`, `totalhargabelioff`, `idPangkalan`, `idPegawai`) VALUES
-(1, '3', NULL, '15', 0, 0),
-(2, '3', NULL, '15', 0, 0),
+(1, '3', NULL, '15', 1, 0),
+(2, '3', NULL, '15', 2, 0),
 (3, '2', '2015-03-22 21:16:42', '10', 1, 0),
-(4, '4', '2015-03-22 21:48:16', '20', 0, 0),
-(5, '4', '2015-03-22 22:03:19', '20', 0, 0),
-(6, '4', '2015-03-22 22:05:40', '20', 0, 0),
-(7, '14', '2015-03-22 22:05:54', '70', 0, 0),
-(8, '3', '2015-03-22 22:09:16', '15', 0, 0),
+(4, '4', '2015-03-22 21:48:16', '20', 2, 0),
+(5, '4', '2015-03-22 22:03:19', '20', 2, 0),
+(6, '4', '2015-03-22 22:05:40', '20', 1, 0),
+(7, '14', '2015-03-22 22:05:54', '70', 1, 0),
+(8, '3', '2015-03-22 22:09:16', '15', 1, 0),
 (9, '3', '2015-03-22 22:10:20', '15', 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_online`
+-- Table structure for table `transaksi_online`
 --
 
 CREATE TABLE IF NOT EXISTS `transaksi_online` (
@@ -306,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `transaksi_online` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
--- Dumping data untuk tabel `transaksi_online`
+-- Dumping data for table `transaksi_online`
 --
 
 INSERT INTO `transaksi_online` (`idTransaksi_Online`, `tanggalTransaksiOnline`, `jumlahGas`, `totalhargabeli`, `idstatus_pemesanan`, `idPangkalan`, `namapangkalan`) VALUES
@@ -316,7 +317,7 @@ INSERT INTO `transaksi_online` (`idTransaksi_Online`, `tanggalTransaksiOnline`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tukar_barang`
+-- Table structure for table `tukar_barang`
 --
 
 CREATE TABLE IF NOT EXISTS `tukar_barang` (
@@ -333,36 +334,36 @@ CREATE TABLE IF NOT EXISTS `tukar_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `pegawai`
+-- Constraints for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `fk_Pegawai_Keterangan_jabatan1` FOREIGN KEY (`idKeterangan_jabatan`) REFERENCES `keterangan_jabatan` (`idKeterangan_jabatan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `pemasukan`
+-- Constraints for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
   ADD CONSTRAINT `fk_Pemasukan_Pegawai1` FOREIGN KEY (`idPegawai`) REFERENCES `pegawai` (`idPegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `pengeluaran_perbulan`
+-- Constraints for table `pengeluaran_perbulan`
 --
 ALTER TABLE `pengeluaran_perbulan`
   ADD CONSTRAINT `fk_Pengeluaran_Tetap_has_Cost_lainlain_Cost_lainlain1` FOREIGN KEY (`idCost_lainlain`) REFERENCES `cost_lainlain` (`idCost_lainlain`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Pengeluaran_Tetap_has_Cost_lainlain_Pengeluaran_Tetap` FOREIGN KEY (`idPengeluaran_Tetap`) REFERENCES `pengeluaran_tetap` (`idPengeluaran_Tetap`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `pengeluaran_tetap`
+-- Constraints for table `pengeluaran_tetap`
 --
 ALTER TABLE `pengeluaran_tetap`
   ADD CONSTRAINT `fk_Pengeluaran_Tetap_Pegawai1` FOREIGN KEY (`idPegawai`) REFERENCES `pegawai` (`idPegawai`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Ketidakleluasaan untuk tabel `tukar_barang`
+-- Constraints for table `tukar_barang`
 --
 ALTER TABLE `tukar_barang`
   ADD CONSTRAINT `fk_Tukar_Barang_Pangkalan1` FOREIGN KEY (`idPangkalan`) REFERENCES `pangkalan` (`idPangkalan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
