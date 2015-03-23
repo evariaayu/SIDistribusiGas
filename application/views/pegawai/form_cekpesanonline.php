@@ -4,7 +4,7 @@
 <div class="col-md-2">
   </div>
   <div class="col-xs-1"></div>
-    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline/form_cekpesanonline">
+    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline">
 <br>
 <br>
 
@@ -22,58 +22,44 @@
 <br>
 <br>
 <div class="col-md-8 col-sm-offset-2">
-  Data Gudang 
-   <?php if(empty($stok_gudang)) {
-  echo "Masih kosong";
-}
-  else { ?>
-  <?php foreach ($stok_gudang as $row) {?>
-       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
-      <?php } ?>
-      <?php } ?>
 
   <div class="col-md-6 col-sm-offset-2">
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
-        <th>ID Pemasukan</th>
+        <th>ID Transaksi</th>
+        <th>Nama Pangkalan</th>
+        <th>Tanggal Transaksi</th>
         <th>Jumlah Gas</th>
-        <th>Harga Beli</th>
-        <th>Harga Jual</th>
-        <th>Tanggal Pembelian</th>
-        <th>Nama Pegawai</th>
-        <th></th>
-        <th></th>
+        <th>Total Harga</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Pemasukan Gas masih kosong";
-}
-  else { ?>
-      <?php foreach ($hasil as $datapemasukangas) {?>
+      <?php
+      foreach ($hasil->result() as $row)
+        { ?>
       <tr>
-        <td><?php echo $datapemasukangas->idPemasukan ?></td>
-        <td><?php echo $datapemasukangas->jumlahgas ?></td>
-        <td><?php echo $datapemasukangas->hargabeli ?></td>
-       <td><?php echo $datapemasukangas->hargajual ?></td>
-       <td><?php echo $datapemasukangas->tanggalpembelian ?></td>
-       <td><?php echo $datapemasukangas->namapegawai ?></td>
-        <td>
-          <button type="button" class="btn btn-danger btn-link">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/delete/<?php echo $datapemasukangas->idPemasukan;?>">delete</a> 
-        </button>
+        <td><?php echo $row->idTransaksi_Online ?></td>
+        <td><?php echo $row->namapangkalan ?></td>
+        <td><?php echo $row->tanggalTransaksiOnline ?></td>
+        <td><?php echo $row->jumlahGas ?></td>
+       <td><?php echo $row->totalhargabeli ?></td>
+       <td>
+        <?php if($row->idstatus_pemesanan == 1) { ?>
+        <form method="post" action="<?php echo base_url();?>index.php/c_cekpesanonline/update">
+        <input type="hidden" name="idTransaksi" value="<?php echo htmlspecialchars($row->idTransaksi_Online); ?>">
+        <input type="hidden" name="jumlahGas" value="<?php echo htmlspecialchars($row->jumlahGas); ?>">
+        <input type="submit" value="konfirmasi" name="konfirmasi">
+        </form>
+          <?php } else { ?>
+          CONFIRMED
+          <?php } ?>
         </td>
-        <td>
-          <button type="button" class="btn btn-default btn-link">
-          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/edit/<?php echo $datapemasukangas->idPemasukan;?>">edit</a>
-          </button>
-        </td>
-       <?php } ?>
-       <?php } ?>
+       
+
       </tr>
+      <?php } ?>
     </tbody>
   </table>
   </div><!-- col-md-6 col-sm-offset-2-->

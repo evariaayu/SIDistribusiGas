@@ -31,6 +31,7 @@ class M_penukaranbarang extends CI_Model
                     select id.idstok_gudang
                     from stok_gudang as id
                     where date(tanggal) = '$datetoday'
+                    order by tanggal desc limit 1
                 ) as id on s.idstok_gudang = id.idstok_gudang
                 set jumlah_stok = jumlah_stok - '$jumlahkurang'
                 where s.idstok_gudang = id.idstok_gudang";
@@ -61,6 +62,7 @@ class M_penukaranbarang extends CI_Model
         $this->db->select('jumlah_stok');
         $this->db->from('stok_gudang');
         $this->db->where('date(tanggal)',$datetoday);
+        $this->db->limit(1);
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
@@ -72,18 +74,23 @@ class M_penukaranbarang extends CI_Model
         }
         else if($get_data->num_rows()==0)
         {
+            //echo "kosong";
             $this->db->select('jumlah_stok');
             $this->db->from('stok_gudang');
             $this->db->order_by('tanggal','desc');
             $this->db->limit(1);
             $execute = $this->db->get();
-         //   print_r($execute);
+            //$sql="select jumlah_stok from stok_gudang order by tanggal desc limit 1";
+            //$execute = $this->db->query($sql);
+            //print_r($execute);
             if($execute->num_rows()>0)
             {
-                foreach ($execute->result() as $value) {
+                foreach ($execute->result() as $value) 
+                {
                     $laststock=$value->jumlah_stok;
                     $this->db->set('jumlah_stok', $laststock); 
-                    $this->db->insert('stok_gudang');
+                    $insert=$this->db->insert('stok_gudang');
+
                 }
             }
             
@@ -112,6 +119,7 @@ class M_penukaranbarang extends CI_Model
                         select id.idstok_gudang
                         from stok_gudang as id
                         where date(tanggal) = '$datetoday'
+                        order by tanggal desc limit 1
                         ) as id on s.idstok_gudang = id.idstok_gudang
                         set jumlah_stok = jumlah_stok + '$jumlahtambah'
                         where s.idstok_gudang = id.idstok_gudang";
@@ -146,14 +154,48 @@ class M_penukaranbarang extends CI_Model
 
     function update($data)
     {
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->where('idTukar_barang', $data['idTukar_Barang']);
+        $execute = $this->db->get();
+        if($execute->num_rows() > 0)
+        {
+            foreach ($execute->result() as $key) 
+            {
+                $bandingrusak = $key->jumlahbarangrusak;
+                $bandingkosong = $key->jumlahbarangkosong;
+            }
+           
+        }
+
+        $rusak = $data['jumlahbarangrusak'];
+        $kosong = $data['jumlahbarangkosong'];
+        $hasilrusak=$rusak-$bandingrusak;
+        $hasilkosong=$kosong-$bandingkosong;
+        $hasiltotal=$hasilrusak+$hasilkosong;
+        
         $datatukarbarang=array(
         
             'jumlahbarangrusak'     => $data['jumlahbarangrusak'],
             'jumlahbarangkosong'    => $data['jumlahbarangkosong'],
             'keterangan'            => $data['keterangan']
         );
+
         $this->db->where('idTukar_Barang', $data['idTukar_Barang']);
         $this->db->update('tukar_barang', $datatukarbarang);
+
+        $datetoday =date("Y-m-d");
+        $sql="update stok_gudang s 
+                        inner join
+                        (
+                        select id.idstok_gudang
+                        from stok_gudang as id
+                        where date(tanggal) = '$datetoday'
+                        order by tanggal desc limit 1
+                        ) as id on s.idstok_gudang = id.idstok_gudang
+            set jumlah_stok = jumlah_stok + '$hasiltotal'
+            where s.idstok_gudang = id.idstok_gudang";
+        $query = $this->db->query($sql);
 
      //   print_r($datatukarbarang);
     }

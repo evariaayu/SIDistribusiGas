@@ -18,52 +18,25 @@ class M_cekpesanonline extends CI_Model {
         $this->db->insert('stok_gudang', $datamasukgudang);
     }*/
 
-    function getall()
+    function cekPesan()
     {
         $this->db->select('*');
-        $this->db->from('pemasukan');
-        $this->db->join('pegawai','pemasukan.idPegawai=pegawai.idPegawai');
-        $get_data = $this->db->get();
-        if($get_data->num_rows()>0)
-        {
-            foreach ($get_data->result() as $datapemasukangas) 
-            {
-                $hasil[]= $datapemasukangas;
-            }
-            return $hasil;
-        }
-        
-    }
-    function delete($idPemasukan)
-    {
-        $this->db->where('idPemasukan', $idPemasukan);
-        $this->db->delete('pemasukan');
+        $this->db->from('transaksi_online');
+        $execute = $this->db->get();
+        return $execute;
     }
 
-    function getby($idPemasukan)
+    public function update($jumlahGas,$idTransaksi)
     {
-        $by['idPemasukan']  = $idPemasukan;
-        $this->db->where($by);
-        $get_data           = $this->db->get('pemasukan');
-        if($get_data->num_rows() > 0)
-        {
+        $data = array('idstatus_pemesanan' => '2');
+        $this->db->where("idTransaksi_Online",$idTransaksi);
+        $this->db->update("transaksi_online",$data);
 
-            foreach ($get_data->result() as $datapemasukangas) {
-                $hasil[] = $datapemasukangas;
-            }
-         //   print_r($hasil);
-            return $hasil;
-        }
+        $query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
+        $hasil = $query->row_array();
+        $totalGas = $hasil['jumlah_stok']-$jumlahGas;
+        $data2 = array('jumlah_stok' => $totalGas);
+        $this->db->insert('stok_gudang',$data2);
     }
-
-    public function update($data)
-    {
-        $datapemasukangas=array(
-            'jumlahgas' => $data['jumlahgas'],
-            'hargabeli' => $data['hargabeli'],
-            'hargajual' => $data['hargajual']
-        );
-        $this->db->where('idPemasukan',$data['idpemasukan']);
-        $this->db->update('pemasukan', $datapemasukangas);
-    }
+    
 }

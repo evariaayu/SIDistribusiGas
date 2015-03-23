@@ -33,7 +33,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
-
+	   //   print_r($session_data);
 	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
 	      $datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 	      $this->load->view('header');
@@ -81,7 +81,7 @@ class Kelola_pemasukangas extends CI_Controller {
 				'jumlahgas' => $this->input->post('jumlahgas'),
 				'hargabeli' => $this->input->post('hargabeli'),
 				'hargajual' => $this->input->post('hargajual'),
-				'idPegawai' => $idPegawai,
+				'idPegawai' => $idPegawai
 			);
 			$datetoday =date("Y-m-d");
 			$datamasukgudang=array(
@@ -90,7 +90,7 @@ class Kelola_pemasukangas extends CI_Controller {
 			);
 		  	$this->m_pemasukangas->insert($datapemasukangas);
 		  	$this->m_pemasukangas->insertstok($datamasukgudang);
-		//	redirect('index.php/Kelola_pemasukangas');
+			redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}
 
@@ -125,7 +125,7 @@ class Kelola_pemasukangas extends CI_Controller {
 		$data['jumlahgas'] = $this->input->post('jumlahgas');
 		$data['hargabeli'] = $this->input->post('hargabeli');
 		$data['hargajual'] = $this->input->post('hargajual');
-		$data['idpemasukan'] = $idPemasukan;
+		$data['idPemasukan'] = $idPemasukan;
 		$this->m_pemasukangas->update($data);
 		
 		redirect('index.php/Kelola_pemasukangas');

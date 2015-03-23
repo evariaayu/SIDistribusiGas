@@ -2,11 +2,24 @@
 session_start();
 
 class Report_biayaoperasional extends CI_Controller {
-    function __construct() {
+	public $sesi;
+    public function __construct() {
+
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_reportbiayaoperasional');
+        if ($this->session->userdata('logged_in')) {
+			$session_data=$this->session->userdata('logged_in');
+			$this->sesi['tahun']=$session_data['tahun'];
+			$this->sesi['bulan']=$session_data['bulan'];
+			
+		}
+		else{
+			$this->sesi['tahun']=getdate()['year'];
+			$this->sesi['bulan']=getdate()['mon'];
+
+		}
     }
 	/**
 	 * Index Page for this controller.
@@ -34,10 +47,14 @@ class Report_biayaoperasional extends CI_Controller {
 
 	      //$transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
-	      
-	      $this->load->view('header');
+	      //$this->sesi['tahun']=$tahun;
+			//$this->sesi['bulan']=$bulan;
+	     // $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+	      //$biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain();
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_report_biayaoperasional',$data);
+		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
+		  //$this->load->view('direktur/v_report_biayaoperasional',$biayalain);
 		  $this->load->view('footer');
 		  /*
 	      $this->load->view('header');
@@ -60,7 +77,7 @@ class Report_biayaoperasional extends CI_Controller {
 	   }
 	}
 
-	/*public function transaksi_gas_online()
+	public function biaya_operasional($bulan,$tahun)
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -69,21 +86,24 @@ class Report_biayaoperasional extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 	      $data['idPegawai'] = $session_data['idPegawai'];
 
-	      $transaksigasonline['hasil'] = $this->m_reporttransaksigas->getallonline();
+	      //$biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+	      
 	      //$transaksigasoffline['hasiloffline'] = $this->m_reporttransaksigas->getalloffline();
 	      
-	      $this->load->view('header');
+	       $this->sesi['tahun']=$tahun;
+			$this->sesi['bulan']=$bulan;
+	      $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional($bulan, $tahun);
+	      $biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain($bulan, $tahun);
+	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_report_transaksionline',$transaksigasonline);
-		  //$this->load->view('direktur/v_report_transaksionline',$transaksigasoffline);
+		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
+		  //$this->load->view('direktur/v_report_biayaoperasional',$biayalain);
 		  $this->load->view('footer');
-
-		  //$this->load->model('m_reporttransaksigas');
-		//$data['records']=$this->m_reporttrasaksigas->getallonline();
-			//echo '<pre>';
-			//var_dump($data);
-			//echo '</pre>';
-		//$this->load->view('pegawai/v_report_transaksigas',$data);
+		  
+		 //$this->load->model('m_reportbiayaoperasional');
+		//$biayaoperasional['data'] = $this->m_reportbiayaoperasional->getbiayaoperasional();
+		
+		//$this->load->view('direktur/v_report_biayaoperasional',$data);
 		}
 	   else
 	   {
@@ -92,7 +112,7 @@ class Report_biayaoperasional extends CI_Controller {
 	   }
 	}
 
-	public function transaksi_gas_offline()
+	/*public function transaksi_gas_offline()
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -117,75 +137,7 @@ class Report_biayaoperasional extends CI_Controller {
 
 
 
-	/*public function report_online_tahun($tahun)
-	{
-		$this->sesi['tahun']=$tahun;
-		
-		$this->load->view('template/admin_header',$this->sesi);
-		$data['lahan']= $this->proyek_model->get_data_lokasi_periode($tahun);
-		$this->load->view('admin/admin_report_lahan',$data);
-		$this->load->view('template/admin_footer');
-	}*/
+	
 
-	/*public function insert()
-	{
-		if($this->session->userdata('logged_in'))
-		{
-	    	$session_data = $this->session->userdata('logged_in');
-	    	$idPegawai = $session_data['idPegawai'];
-		  	$datapemasukangas=array
-			(
-				'jumlahgas' => $this->input->post('jumlahgas'),
-				'hargabeli' => $this->input->post('hargabeli'),
-				'hargajual' => $this->input->post('hargajual'),
-				'idPegawai' => $idPegawai,
-			);
-			$datetoday =date("Y-m-d");
-			$datamasukgudang=array(
-				'jumlah_stok' => $this->input->post('jumlahgas'),
-				//'tanggal' => $datetoday
-			);
-		  	$this->m_pemasukangas->insert($datapemasukangas);
-		  	$this->m_pemasukangas->insertstok($datamasukgudang);
-			redirect('index.php/Kelola_pemasukangas');
-	  	}
-	}
-
-	public function delete($idPemasukan)
-	{
-		$this->m_pemasukangas->delete($idPemasukan);
-		redirect('index.php/Kelola_pemasukangas');
-	}
-
-	public function edit($idPemasukan)
-	{
-		if($this->session->userdata('logged_in'))
-		{
-	     	$session_data = $this->session->userdata('logged_in');
-	      	$data['username'] = $session_data['username'];
-	      	$data['hakakses'] = $session_data['hakakses'];
-	      	$data['idPegawai'] = $session_data['idPegawai'];
-
-	      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
-			
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
-		  	$this->load->view('footer');
-	  }
-		
-	}
-
-	public function update($idPemasukan)
-	{
-		
-		$data['jumlahgas'] = $this->input->post('jumlahgas');
-		$data['hargabeli'] = $this->input->post('hargabeli');
-		$data['hargajual'] = $this->input->post('hargajual');
-		$data['idpemasukan'] = $idPemasukan;
-		$this->m_pemasukangas->update($data);
-		
-		redirect('index.php/Kelola_pemasukangas');
-	} */
 
 }

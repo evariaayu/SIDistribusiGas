@@ -110,8 +110,6 @@ class Kelola_pegawai extends CI_Controller {
 		
 	}
 
-
-
 	public function update($idPegawai)
 	{
 	
@@ -124,10 +122,7 @@ class Kelola_pegawai extends CI_Controller {
 	
 		$this->m_pegawai->update($data);
 		redirect('index.php/kelola_pegawai');
-
 	}
-
-
 
 }
 
