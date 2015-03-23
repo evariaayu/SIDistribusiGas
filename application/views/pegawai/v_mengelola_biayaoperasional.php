@@ -8,6 +8,10 @@
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayaoperasional','Data Biaya Operasional') ?>
 </button>
+  <button type="button" class="btn btn-default btn-md btn-link">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+    <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayalain','Data Biaya Lain - Lain') ?>
+  </button>
 <br>
 <br>
 

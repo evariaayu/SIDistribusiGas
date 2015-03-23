@@ -1,29 +1,32 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   
-class M_pangkalan extends CI_Model {
+class M_user extends CI_Model {
  
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
+
  
-    function insert($datapangkalan) 
+    function insert($datauser) 
     {
-        $this->db->insert('pangkalan',$datapangkalan);
+        $this->db->insert('login',$datauser);
     }
     function getall()
     {
-        $get_data = $this->db->get('pangkalan');
+        $get_data = $this->db->get('login');
         if($get_data->num_rows()>0)
         {
-            foreach ($get_data->result() as $datapangkalan) 
+            foreach ($get_data->result() as $datauser) 
             {
-                $hasil[]= $datapangkalan;
+                $hasil[]= $datauser;
             }
             return $hasil;
         }
         
     }
+
+/*    
     function delete($idPangkalan)
     {
         $this->db->where('idPangkalan', $idPangkalan);
@@ -46,7 +49,6 @@ class M_pangkalan extends CI_Model {
 
     function update($data)
     {
-
         $datapangkalan = array(
         
             'namapangkalan' => $data ['namapangkalan'],
@@ -56,11 +58,7 @@ class M_pangkalan extends CI_Model {
         $this->db->where('idPangkalan', $data['idPangkalan']);
         $this->db->update('pangkalan', $datapangkalan);
 
-<<<<<<< HEAD
-=======
      //   print_r($datatukarbarang);
-
->>>>>>> f2c56173369aae8d38a6ec6d21c4ae8316959538
     }
-
+*/
 }

@@ -66,6 +66,25 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
+
+	public function form_tambahbiayalain()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+			$this->load->view('header');
+		 	$this->load->view('header_pegawai', $data);
+		  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+		  	$this->load->view('footer');
+	  	}
+	   	else
+	   	{
+	     //If no session, redirect to login page
+	    	redirect('index.php/c_login', 'refresh');
+	   	}
+	}
 /*
 	public function form_coba()
 	{
