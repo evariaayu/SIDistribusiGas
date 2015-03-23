@@ -110,7 +110,7 @@ class C_pesanonline extends CI_Controller {
 				$totalhargabeli = $harga*$jumlahorder;
 				$data = array
 					(
-						//'tanggalTransaksiOnline' => Time(),
+						
 						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabeli' => $totalhargabeli,
 						'idstatus_pemesanan' => '1',				
