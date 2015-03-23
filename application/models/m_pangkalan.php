@@ -46,7 +46,7 @@ class M_pangkalan extends CI_Model {
 
     function update($data)
     {
-<<<<<<< HEAD
+
         $datapangkalan = array(
         
             'namapangkalan' => $data ['namapangkalan'],
@@ -57,17 +57,7 @@ class M_pangkalan extends CI_Model {
         $this->db->update('pangkalan', $datapangkalan);
 
      //   print_r($datatukarbarang);
-=======
-        $datapangkalan=array(
-        
-            'namapangkalan'     => $data['namapangkalan'],
-            'alamatpangkalan'    => $data['alamatpangkalan']
-        );
-        
-        $this->db->where('idPangkalan',$data['idPangkalan']);
-        $this->db->update('pangkalan', $datapangkalan);
-        
->>>>>>> a479dab3215c2bfc207b7c5d075a6a80b4bfe4cf
+
     }
 
 }
