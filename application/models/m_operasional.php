@@ -51,7 +51,43 @@ class M_operasional extends CI_Model {
 
     function insertlainlain($datalainlain)
     {
-         $this->db->insert('cost_lainlain',$datalainlain); 
+        $this->db->insert('cost_lainlain',$datalainlain);
+
+        $this->db->select('idCost_lainlain');
+        $this->db->from('cost_lainlain');
+        $this->db->order_by('tanggal','desc');
+        $this->db->limit(1);
+        $sql=$this->db->get();
+        if($sql -> num_rows() > 0)
+        {
+            foreach ($sql->result() as $cost_lainlain) 
+            {
+                $idCost_lainlain= $cost_lainlain->idCost_lainlain;
+            }
+        }
+
+        $month =date("m");
+        $this->db->select('idPengeluaran_Tetap');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->where('month(tanggal)', $month);
+        $this->db->order_by('tanggal','desc');
+        $this->db->limit(1);
+        $query=$this->db->get();
+        if($query -> num_rows() > 0)
+        {
+            foreach ($query->result() as $pengeluaran_tetap) 
+            {
+                $idPengeluaran_Tetap= $pengeluaran_tetap->idPengeluaran_Tetap;
+            }
+        }
+
+        $perbulan=array(
+            'idPengeluaran_Tetap' => $idPengeluaran_Tetap,
+            'idCost_lainlain' => $idCost_lainlain
+
+        );
+        $this->db->insert('pengeluaran_perbulan',$perbulan);
+        
     }
    /* function getall()
     {
