@@ -32,18 +32,16 @@ class C_pesanoffline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      //$data['idPangkalan'] = $session_data['idPangkalan'];
+	      //$data['idPegawai'] = $session_data['idPegawai'];
 
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
-	      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
-	      $datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
+		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
+	      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+	      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
-	      //print_r($session_data);
-	      //print_r($datanamapangkalan['hasil']);
-	      //print_r($datanamapangkalan);
 	      $this->load->view('header');
-		  $this->load->view('pegawai/header_pegawai', $data);
+		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
 		   
 		  $this->load->view('footer');
@@ -51,7 +49,7 @@ class C_pesanoffline extends CI_Controller {
 	   else
 	   {
 	     //If no session, redirect to login page
-//	     redirect('index.php/c_login', 'refresh');
+	       redirect('index.php/c_login', 'refresh');
 	   }
 		
 	}
@@ -107,23 +105,28 @@ class C_pesanoffline extends CI_Controller {
 			if($this->session->userdata('logged_in'))
 			{	
 				$session_data = $this->session->userdata('logged_in');
+				$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+				$jumlahGas = $this->input->post('jumlahGas');
+
 				//$idPangkalan = $session_data['idPangkalan'];
-				$totalhargabeli = $harga*$jumlahorder;
+				$totalhargabelioff = $harga*$jumlahorder;
 				$data = array
 					(
-						'tanggalTransaksiOnline' => Time(),
+						//'tanggalTransaksiOnline' => Time(),
 						'jumlahGas' => $this->input->post('jumlahGas'),
-						'totalhargabeli' => $totalhargabeli,
+						'totalhargabelioff' => $totalhargabelioff,
 						//'idstatus_pemesanan' => '1',				
-						//'idPangkalan' => $this->input->post('idPangkalan'),
+						'idPangkalan' => $this->input->post('idPangkalan')
 						//'namapangkalan' => $this->input->post('username')
 
 					);
 	//			$this->m_pesanonline->insert();
 				//$this->load->model('m_pesanonline/insert');
-				// print_r($data);
+				$this->m_pesanoffline->kurangstok($jumlahGas);
 				$this->m_pesanoffline->insert($data);
-				$message = "Berhasil! Hore total = $totalhargabeli";
+				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
+		        //$hasil = $query->row_array();
+				$message = "Berhasil! Hore total = $totalhargabelioff";
 				
 				echo "<script type='text/javascript'>alert('$message');</script>";
 			}
