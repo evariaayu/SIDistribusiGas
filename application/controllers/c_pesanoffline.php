@@ -116,7 +116,7 @@ class C_pesanoffline extends CI_Controller {
 						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabelioff' => $totalhargabelioff,
 						//'idstatus_pemesanan' => '1',				
-						'idPangkalan' => $this->input->post('hasil')
+						'idPangkalan' => $this->input->post('idPangkalan')
 						//'namapangkalan' => $this->input->post('username')
 
 					);

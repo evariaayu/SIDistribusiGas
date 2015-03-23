@@ -6,12 +6,7 @@
 
   <div class="col-md-6">
     <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanoffline/pesan">
-      <div class="form-group">
-        <label class="col-sm-2 control-label">Waktu</label>
-        <div class="col-sm-10">
-          <input readonly id="tanggalTransaksiOnline" name="tanggalTransaksiOnline" class="form-control" value="<?php echo (new \DateTime())->format('d-M-Y H:i:s'); ?>">
-        </div>
-      </div>
+      
         <div class="form-group">
           <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
           <div class="col-sm-10">
