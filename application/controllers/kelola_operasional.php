@@ -85,6 +85,7 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
+
 /*
 	public function form_coba()
 	{
@@ -154,6 +155,88 @@ class Kelola_operasional extends CI_Controller {
 				{
 					echo "error fileInternet";
 				}
+				$pengeluaranPAM = $this->input->post('pengeluaranPAM');
+				$pengeluaranPLN = $this->input->post('pengeluaranPLN');
+				$pengeluaranInternet = $this->input->post('pengeluaranInternet');
+				$total = $pengeluaranInternet + $pengeluaranPAM + $pengeluaranPLN;
+			//	print_r($total);
+				$dataoperasional=array
+				(
+					'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
+					'filePAM' => $pathpam,
+					'pengeluaranPLN' => $this->input->post('pengeluaranPLN'),
+					'filePLN' => $pathpln,
+					'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
+					'fileInternet' => $pathinternet,
+					'idPegawai' => $idPegawai,
+					'namafolder' => $datebaru,
+					'total' => $total
+					
+				);
+				//print_r($dataoperasional);
+				$this->m_operasional->insert($dataoperasional);
+				redirect('index.php/kelola_operasional','refresh');
+			    
+	    	}
+			
+	  	}
+	}
+
+	function delete($idPengeluaran_Tetap)
+	{
+		$this->m_operasional->delete($idPengeluaran_Tetap);
+		redirect('index.php/Kelola_operasional');
+	}
+
+	function do_uploadlain()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+		    $session_data = $this->session->userdata('logged_in');
+		    $idPegawai= $session_data['idPegawai'];
+		    $datebaru = date('Y-m-d H:i:s');
+		    $datebaru = str_replace( ':', '', $datebaru);
+			$config['upload_path'] = './uploads/'.$datebaru;
+			$config['allowed_types'] = 'jpg|png|jpeg';
+			$config['remove_spaces'] = 'TRUE';
+			$config['overwrite'] ='FALSE';
+			
+			
+			$this->load->library('upload', $config);
+			
+			if (!is_dir('uploads/'.$datebaru)) 
+			{
+    			mkdir('./uploads/' . $datebaru, 0777, TRUE);
+    			$uploadpam=$this->upload->do_upload('filePAM');
+				if($uploadpam == TRUE)
+				{
+					 $datapam = $this->upload->data('filePAM');
+					 $pathpam=$datapam['file_name'];
+				}
+				elseif($uploadpam== FALSE)
+				{
+					echo "error file pam";
+				}
+				$uploadpln=$this->upload->do_upload('filePLN');
+				if($uploadpln == TRUE)
+				{
+					 $datapln = $this->upload->data('filePLN');
+					 $pathpln=$datapln['file_name'];
+				}
+				elseif($uploadpln== FALSE)
+				{
+					echo "error file pln";
+				}
+				$uploadinternet=$this->upload->do_upload('fileInternet');
+				if($uploadinternet == TRUE)
+				{
+					 $datainternet = $this->upload->data('fileInternet');
+					 $pathinternet=$datainternet['file_name'];
+				}
+				elseif($uploadinternet== FALSE)
+				{
+					echo "error fileInternet";
+				}
 
 				$dataoperasional=array
 				(
@@ -174,12 +257,6 @@ class Kelola_operasional extends CI_Controller {
 	    	}
 			
 	  	}
-	}
-
-	function delete($idPengeluaran_Tetap)
-	{
-		$this->m_operasional->delete($idPengeluaran_Tetap);
-		redirect('index.php/Kelola_operasional');
 	}
 
 

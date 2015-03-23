@@ -55,12 +55,6 @@ class M_pangkalan extends CI_Model {
 
         $this->db->where('idPangkalan', $data['idPangkalan']);
         $this->db->update('pangkalan', $datapangkalan);
-
-<<<<<<< HEAD
-=======
-     //   print_r($datatukarbarang);
-
->>>>>>> f2c56173369aae8d38a6ec6d21c4ae8316959538
     }
 
 }

@@ -34,6 +34,11 @@ class M_operasional extends CI_Model {
         $this->db->where('idPengeluaran_Tetap', $idPengeluaran_Tetap);
         $this->db->delete('pengeluaran_tetap');
     }
+
+    function insertlainlain($datalainlain)
+    {
+        
+    }
    /* function getall()
     {
         $get_data = $this->db->get('');
