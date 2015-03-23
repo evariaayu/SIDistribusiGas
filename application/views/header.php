@@ -19,5 +19,6 @@
 
     <script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
 <script type = "text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+<!--<script type="text/javascript" src="<?php echo base_url('assets/js/function.js') ?>"></script>-->
 </head>
 <body>

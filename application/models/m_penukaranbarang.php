@@ -62,6 +62,7 @@ class M_penukaranbarang extends CI_Model
         $this->db->select('jumlah_stok');
         $this->db->from('stok_gudang');
         $this->db->where('date(tanggal)',$datetoday);
+        $this->db->order_by('tanggal','desc');
         $this->db->limit(1);
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
