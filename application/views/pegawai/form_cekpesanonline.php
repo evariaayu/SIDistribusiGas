@@ -1,4 +1,4 @@
-<h1><center>Kelola Pemasukan Gas</center></h1>
+<h1><center>Pemesanan Gas Online</center></h1>
 <br>
 
 <div class="col-md-2">

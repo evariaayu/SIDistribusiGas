@@ -8,6 +8,7 @@ class Kelola_operasional extends CI_Controller {
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_operasional');
         $this->load->helper('html');
+        $this->load->helper('file');
     }
 	/**
 	 * Index Page for this controller.
@@ -185,6 +186,7 @@ class Kelola_operasional extends CI_Controller {
 
 	function delete($idPengeluaran_Tetap)
 	{
+
 		$this->m_operasional->delete($idPengeluaran_Tetap);
 		redirect('index.php/Kelola_operasional');
 	}

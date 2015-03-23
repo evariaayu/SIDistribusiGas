@@ -31,6 +31,20 @@ class M_operasional extends CI_Model {
     }
     function delete($idPengeluaran_Tetap)
     {
+        $this->db->select('namafolder');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->where('idPengeluaran_Tetap', $idPengeluaran_Tetap);
+        $query=$this->db->get();
+        if($query -> num_rows() > 0)
+        {
+            foreach ($query->result() as $dataoperasional) 
+            {
+                $namafolder= $dataoperasional->namafolder;
+                delete_files('./uploads/'.$namafolder, TRUE);
+                rmdir('./uploads/'.$namafolder);
+            }
+        }
+       
         $this->db->where('idPengeluaran_Tetap', $idPengeluaran_Tetap);
         $this->db->delete('pengeluaran_tetap');
     }
