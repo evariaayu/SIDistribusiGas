@@ -28,6 +28,7 @@ class M_pemasukangas extends CI_Model {
                     select id.idstok_gudang
                     from stok_gudang as id
                     where date(tanggal) = '$datetoday'
+                    order by tanggal desc limit 1
                 ) as id on s.idstok_gudang = id.idstok_gudang
                 set jumlah_stok = jumlah_stok + '$tambah' where s.idstok_gudang = id.idstok_gudang";
         $query = $this->db->query($sql);
@@ -60,7 +61,6 @@ class M_pemasukangas extends CI_Model {
             {
                 foreach ($execute->result() as $value) {
                     $jumlahgas= $value->jumlahgas;
-                   
                     $datetoday =date("Y-m-d");
                     $sql="update stok_gudang s
                         inner join
@@ -68,6 +68,7 @@ class M_pemasukangas extends CI_Model {
                         select id.idstok_gudang
                         from stok_gudang as id
                         where date(tanggal) = '$datetoday'
+                        order by tanggal desc limit 1
                         ) as id on s.idstok_gudang = id.idstok_gudang
                         set jumlah_stok = jumlah_stok + '$jumlahgas'
                         where s.idstok_gudang = id.idstok_gudang";
@@ -98,6 +99,23 @@ class M_pemasukangas extends CI_Model {
 
     public function update($data)
     {
+
+        $this->db->select('*');
+        $this->db->from('pemasukan');
+        $this->db->where('idPemasukan', $data['idPemasukan']);
+        $execute = $this->db->get();
+        if($execute->num_rows() > 0)
+        {
+            foreach ($execute->result() as $key) 
+            {
+                $jumlahgaslama = $key->jumlahgas;
+            }
+           
+        }
+
+        $jumlahgasbaru = $data['jumlahgas'];
+        $jumlahbaru=$jumlahgasbaru-$jumlahgaslama;
+
         $datapemasukangas=array(
             'jumlahgas' => $data['jumlahgas'],
             'hargabeli' => $data['hargabeli'],
@@ -105,5 +123,18 @@ class M_pemasukangas extends CI_Model {
         );
         $this->db->where('idPemasukan',$data['idpemasukan']);
         $this->db->update('pemasukan', $datapemasukangas);
+
+        $datetoday =date("Y-m-d");
+        $sql="update stok_gudang s 
+                        inner join
+                        (
+                        select id.idstok_gudang
+                        from stok_gudang as id
+                        where date(tanggal) = '$datetoday'
+                        order by tanggal desc limit 1
+                        ) as id on s.idstok_gudang = id.idstok_gudang
+            set jumlah_stok = jumlah_stok + '$jumlahbaru'
+            where s.idstok_gudang = id.idstok_gudang";
+        $query = $this->db->query($sql);
     }
 }
