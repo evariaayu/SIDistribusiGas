@@ -23,6 +23,7 @@
         <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Mengelola Data Gudang</a></li>
         <li><a href="<?php echo base_url("index.php/c_cekpesanonline") ?>">Cek Pesanan Online</a></li>
         <li><a href="<?php echo base_url("index.php/c_pesanoffline") ?>">Pesan Gas Offline</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_user") ?>">Mengelola Pengguna</a></li>
         <?php } ?>
 
         <?php  $session_data = $this->session->userdata('logged_in');
