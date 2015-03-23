@@ -10,6 +10,7 @@ class Kelola_datagudang extends CI_Controller {
         $this->load->model('m_pangkalan');
         $this->load->helper('form');
         $this->load->helper('url');
+        $this->load->model('m_operasional');
     }
 	/**
 	 * Index Page for this controller.
@@ -134,6 +135,50 @@ class Kelola_datagudang extends CI_Controller {
 		
 		$this->m_penukaranbarang->update($data);
 		redirect('index.php/kelola_datagudang');
+	}
+	function do_upload()
+	{
+		
+		    $datebaru = date('Y-m-d H:i:s');
+		    $datebaru = str_replace( ':', '', $datebaru);
+			$config['upload_path'] = './uploads/lainlain/'.$datebaru;
+			$config['allowed_types'] = 'jpg|png|jpeg';
+			$config['remove_spaces'] = 'TRUE';
+			$config['overwrite'] ='FALSE';
+			
+			
+			$this->load->library('upload', $config);
+			
+			if (!is_dir('uploads/lainlain/'.$datebaru)) 
+			{
+    			mkdir('./uploads/lainlain/'.$datebaru, 0777, TRUE);
+    			$uploadbarang=$this->upload->do_upload();
+				if($uploadbarang == TRUE)
+				{
+					 $databarang = $this->upload->data();
+					 $pathbarang=$databarang['file_name'];
+				}
+				elseif($uploadbarang== FALSE)
+				{
+					$error = array('error' => $this->upload->display_errors());
+					echo $error;
+				}
+
+				$datalainlain=array
+				(
+					'harga' => $this->input->post('harga'),
+					'namabarang' => $this->input->post('namabarang'),
+					'filebarang' => $pathbarang,
+					'namafolder' => $datebaru
+					
+				);
+				//print_r($dataoperasional);
+				$this->m_operasional->insertlainlain($datalainlain);
+				redirect('index.php/kelola_operasional','refresh');
+			    
+	    	}
+			
+	  	
 	}
 
 }

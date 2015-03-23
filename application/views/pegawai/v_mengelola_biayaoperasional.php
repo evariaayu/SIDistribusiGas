@@ -15,11 +15,10 @@
 <br>
 <br>
 
-<div class="row">
+
 <br>
 <br>
-<br>
-<div class="col-md-8 col-sm-offset-1">
+<div class="col-md-8 col-sm-offset-2">
 <table class="table table-striped table-hover table-bordered">
    <?php $i=0; ?>
       <?php if(empty($hasil)) {
@@ -31,11 +30,11 @@
       <tr>
         <th>ID</th>
         <th>Tanggal</th>
-        <th>Pengeluaran PLN</th>
+        <th>Biaya PLN</th>
         <th>File PLN</th>
-        <th>Pengeluaran PAM</th>
+        <th>Biaya PAM</th>
         <th>File PAM</th>
-        <th>Pengeluaran Internet</th>
+        <th>Biaya Internet</th>
         <th>File Internet</th>
         <th>Nama Pegawai</th>
         <th></th>
@@ -54,7 +53,7 @@
   <?php $i++ ?>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#<?php echo $i ?>">
-<?php echo $datatukarbarang->filePLN ?>
+Nota
 </button>
 
 <!-- Modal -->
@@ -100,7 +99,7 @@
   <?php $i++ ?>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#<?php echo $i ?>">
-<?php echo $datatukarbarang->filePAM ?>
+Nota
 </button>
 
 <!-- Modal -->
@@ -142,7 +141,7 @@
   <?php $i++ ?>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#<?php echo $i ?>">
-<?php echo $datatukarbarang->fileInternet?>
+Nota
 </button>
 
 <!-- Modal -->

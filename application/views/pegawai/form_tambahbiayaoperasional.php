@@ -1,10 +1,10 @@
-<h3><center>Form Tambah Biaya Operasional</center></h1>
+<h3><center>Form Tambah Biaya Lain-lain</center></h1>
 <br>
 <div class="col-md-3">
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_operasional/do_uploadlain">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_operasional/do_uploadlain" enctype="multipart/form-data">
 
 <!--- lainnya -->
   <div class="form-group">
@@ -23,10 +23,10 @@
   </div>
 
   <!---Lampirkan File -->
-  <div class="form-group">
-    <label for="file" class="col-sm-2 control-label">Lampiran Nota</label>
+ <div class="form-group">
+    <label for="filebarang" class="col-sm-2 control-label">File PAM</label>
     <div class="col-sm-10">
-      <input type="file" id="file" name="file" >
+      <input type="file" name="filebarang">
       <p class="help-block">file max. 2mb</p>
     </div>
   </div>

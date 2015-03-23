@@ -37,7 +37,7 @@ class M_operasional extends CI_Model {
 
     function insertlainlain($datalainlain)
     {
-        
+         $this->db->insert('cost_lainlain',$datalainlain); 
     }
    /* function getall()
     {

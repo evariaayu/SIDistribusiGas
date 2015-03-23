@@ -33,11 +33,17 @@ class Kelola_operasional extends CI_Controller {
 	      $data['hakakses'] = $session_data['hakakses'];
 
 	      $dataoperasional['hasil'] = $this->m_operasional->getall();
-
+	       $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
 		  $this->load->view('footer');
+		    }
+		  else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
 		}
 	   else
 	   {
@@ -55,10 +61,17 @@ class Kelola_operasional extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
+		    $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
 		  	$this->load->view('pegawai/form_tambahbiayaoperasional-old');
 		  	$this->load->view('footer');
+		  }
+		  else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
 	  	}
 	   	else
 	   	{
@@ -74,10 +87,18 @@ class Kelola_operasional extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
-			$this->load->view('header');
-		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahbiayaoperasional');
-		  	$this->load->view('footer');
+		    $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
+		    	$this->load->view('header');
+			 	$this->load->view('header_pegawai', $data);
+			  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+			  	$this->load->view('footer');
+		    }
+		    else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
+			
 	  	}
 	   	else
 	   	{
@@ -85,26 +106,6 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
-
-/*
-	public function form_coba()
-	{
-		if($this->session->userdata('logged_in'))
-		{
-		    $session_data = $this->session->userdata('logged_in');
-		    $data['username'] = $session_data['username'];
-		    $data['hakakses'] = $session_data['hakakses'];
-			$this->load->view('header');
-		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/cobarow');
-		  	$this->load->view('footer');
-	  	}
-	   	else
-	   	{
-	     //If no session, redirect to login page
-	    	redirect('index.php/c_login', 'refresh');
-	   	}
-	}*/
 
 	function do_upload()
 	{
@@ -190,73 +191,47 @@ class Kelola_operasional extends CI_Controller {
 
 	function do_uploadlain()
 	{
-		if($this->session->userdata('logged_in'))
-		{
-		    $session_data = $this->session->userdata('logged_in');
-		    $idPegawai= $session_data['idPegawai'];
+		
 		    $datebaru = date('Y-m-d H:i:s');
 		    $datebaru = str_replace( ':', '', $datebaru);
-			$config['upload_path'] = './uploads/'.$datebaru;
-			$config['allowed_types'] = 'jpg|png|jpeg';
-			$config['remove_spaces'] = 'TRUE';
-			$config['overwrite'] ='FALSE';
+			$config2['upload_path'] = './uploads/lainlain/'.$datebaru;
+			$config2['allowed_types'] = 'jpg|png|jpeg';
+			$config2['remove_spaces'] = 'TRUE';
+			$config2['overwrite'] ='FALSE';
 			
 			
-			$this->load->library('upload', $config);
+			$this->load->library('upload', $config2);
 			
-			if (!is_dir('uploads/'.$datebaru)) 
+			if (!is_dir('uploads/lainlain/'.$datebaru)) 
 			{
-    			mkdir('./uploads/' . $datebaru, 0777, TRUE);
-    			$uploadpam=$this->upload->do_upload('filePAM');
-				if($uploadpam == TRUE)
+    			mkdir('./uploads/lainlain/'.$datebaru, 0777, TRUE);
+    			$upload=$this->upload->do_upload('filebarang');
+				if($upload == TRUE)
 				{
-					 $datapam = $this->upload->data('filePAM');
-					 $pathpam=$datapam['file_name'];
+					 $databarang = $this->upload->data('filebarang');
+					 $pathbarang=$databarang['file_name'];
 				}
-				elseif($uploadpam== FALSE)
+				elseif($upload== FALSE)
 				{
-					echo "error file pam";
-				}
-				$uploadpln=$this->upload->do_upload('filePLN');
-				if($uploadpln == TRUE)
-				{
-					 $datapln = $this->upload->data('filePLN');
-					 $pathpln=$datapln['file_name'];
-				}
-				elseif($uploadpln== FALSE)
-				{
-					echo "error file pln";
-				}
-				$uploadinternet=$this->upload->do_upload('fileInternet');
-				if($uploadinternet == TRUE)
-				{
-					 $datainternet = $this->upload->data('fileInternet');
-					 $pathinternet=$datainternet['file_name'];
-				}
-				elseif($uploadinternet== FALSE)
-				{
-					echo "error fileInternet";
+					$error = array('error' => $this->upload->display_errors());
+					print_r($error);
 				}
 
-				$dataoperasional=array
+				$datalainlain=array
 				(
-					'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
-					'filePAM' => $pathpam,
-					'pengeluaranPLN' => $this->input->post('pengeluaranPLN'),
-					'filePLN' => $pathpln,
-					'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
-					'fileInternet' => $pathinternet,
-					'idPegawai' => $idPegawai,
+					'harga' => $this->input->post('harga'),
+					'namabarang' => $this->input->post('namabarang'),
+					'filebarang' => $pathbarang,
 					'namafolder' => $datebaru
 					
 				);
 				//print_r($dataoperasional);
-				$this->m_operasional->insert($dataoperasional);
+				$this->m_operasional->insertlainlain($datalainlain);
 				redirect('index.php/kelola_operasional','refresh');
 			    
 	    	}
 			
-	  	}
+	  	
 	}
 
 
