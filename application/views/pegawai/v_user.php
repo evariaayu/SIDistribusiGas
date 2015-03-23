@@ -38,7 +38,7 @@
         <option value="0">--- Pilih Pegawai ----</option>
      <?php foreach ($hasil2 as $row) {?>
         
-         <option value="<?php echo $row->idPegawai ?>"> <?php echo $row->namapegawai ?> </option>
+         <option value="<?php echo $row->idPegawai ?>" required> <?php echo $row->namapegawai ?> </option>
     
          <?php } ?>
         </select>
@@ -63,8 +63,11 @@
 function validate()
   {
     if(document.getElementById("password").value!=document.getElementById("cpassword").value) 
+    {
       alert("Passwords do no match");
-    return document.getElementById("password").value==document.getElementById("cpassword").value;
-    else alert("Akun berhasil dibuat");
+      return document.getElementById("password").value==document.getElementById("cpassword").value;
+      return false;
+    }
+    //else if(document.getElementById("password").value!=document.getElementById("cpassword").value) alert("Akun berhasil dibuat");
   }
 </script>

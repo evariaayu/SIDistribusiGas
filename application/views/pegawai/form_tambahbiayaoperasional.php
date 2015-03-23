@@ -17,9 +17,9 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
       
   </div>
 
-
+<!--
   <div class="form-group">
-    <!--jumlah gas-->
+    <!--jumlah gas
     <label for="jumlahgas" class="col-sm-2 control-label">Keperluan</label>
     <div class="col-sm-10">
       <select type="text" class="form-control" id="keperluan" name="keperluan" >
@@ -30,20 +30,21 @@ echo (new \DateTime())->format('d-M-Y H:i:s');?>
       </select>
     </div>
   </div>
+-->
 
 <!--- lainnya -->
   <div class="form-group">
-    <label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
+    <label for="namabarang" class="col-sm-2 control-label">Nama Barang</label>
     <div class="col-sm-10">
-      <input id="keterangan" name="keterangan" class="form-control" placeholder="keterangan" ></input>
+      <input id="namabarang" name="namabarang" class="form-control" placeholder="Nama Barang" ></input>
     </div>
   </div>
 
 <!--- harga -->
   <div class="form-group">
-    <label for="nominal" class="col-sm-2 control-label">Nominal</label>
+    <label for="harga" class="col-sm-2 control-label">Harga</label>
     <div class="col-sm-10">
-      <input id="nominal" name="nominal" class="form-control" placeholder="nominal" required></input>
+      <input id="harga" name="harga" class="form-control" placeholder="Harga" required></input>
     </div>
   </div>
 
@@ -71,5 +72,6 @@ echo $date->getTimestamp();
       <button type="submit" class="btn btn-default">Simpan</button>
     </div>
   </div>
+  
 </form>
 </div>
