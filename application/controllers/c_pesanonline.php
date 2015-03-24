@@ -126,7 +126,7 @@ class C_pesanonline extends CI_Controller {
 	//			$this->m_pesanonline->insert();
 				//$this->load->model('m_pesanonline/insert');
 				// print_r($data);
-			//	$datapengeluaran=array
+			
 				$message = "Berhasil! Hore total = $totalhargabeli";
 
 					echo "<script type='text/javascript'> alert('$message'); 
