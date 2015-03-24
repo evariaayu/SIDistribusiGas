@@ -44,19 +44,19 @@ class M_pegawai extends CI_Model {
         }
     }
 
-    function update($idPegawai)
+    function update($data)
     {
-
-        $datapegawai=array(
+        $datapegawai = array(
         
-            'namapegawai' => $this->input->post('namapegawai'),
-            'alamatpegawai' => $this->input->post('alamatpegawai'),
-            'jk' => $this->input->post('jk'),
-            'notelepon' => $this->input->post('notelepon'),
-            'idKeterangan_jabatan' => $this->input->post('idKeterangan_jabatan'),
-           
+            'namapegawai' => $data ['namapegawai'],
+            'alamatpegawai' => $data ['alamatpegawai'],
+            'jk' => $data ['jk'],
+            'notelepon' => $data ['notelepon'],
+            'idKeterangan_jabatan' => $data ['idKeterangan_jabatan']
         );
-        $this->db->where('idPegawai',$data['idPegawai']);
+        $this->db->where('idPegawai', $data['idPegawai']);
         $this->db->update('pegawai', $datapegawai);
+
+     //   print_r($datatukarbarang);
     }
 }

@@ -7,6 +7,8 @@ class Kelola_operasional extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_operasional');
+        $this->load->helper('html');
+        $this->load->helper('file');
     }
 	/**
 	 * Index Page for this controller.
@@ -31,14 +33,18 @@ class Kelola_operasional extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 
-	      //$dataoperasional['hasil'] = $this->m_operasional->getall();
-
+	      $dataoperasional['hasil'] = $this->m_operasional->getall();
+	       $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $data['hasil'] = $this->m_operasional->get_all()->result();
-		  //$this->load->view('pegawai/v_mengelola_biayaoperasioanl',$dataoperasional);
-		  $this->load->view('pegawai/v_mengelola_biayaoperasional');
+		  $this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
 		  $this->load->view('footer');
+		    }
+		  else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
 		}
 	   else
 	   {
@@ -56,10 +62,17 @@ class Kelola_operasional extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
+		    $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
 			$this->load->view('header');
 		 	$this->load->view('header_pegawai', $data);
 		  	$this->load->view('pegawai/form_tambahbiayaoperasional-old');
 		  	$this->load->view('footer');
+		  }
+		  else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
 	  	}
 	   	else
 	   	{
@@ -67,6 +80,34 @@ class Kelola_operasional extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}
+
+	public function form_tambahbiayalain()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+		    $hakakses = $session_data['hakakses'];
+		   if($hakakses=="pegawai")
+		    {
+		    	$this->load->view('header');
+			 	$this->load->view('header_pegawai', $data);
+			  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+			  	$this->load->view('footer');
+		    }
+		    else{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
+			
+	  	}
+	   	else
+	   	{
+	     //If no session, redirect to login page
+	    	redirect('index.php/c_login', 'refresh');
+	   	}
+	}
+
 	function do_upload()
 	{
 		if($this->session->userdata('logged_in'))
@@ -78,6 +119,7 @@ class Kelola_operasional extends CI_Controller {
 			$config['upload_path'] = './uploads/'.$datebaru;
 			$config['allowed_types'] = 'jpg|png|jpeg';
 			$config['remove_spaces'] = 'TRUE';
+			$config['overwrite'] ='FALSE';
 			
 			
 			$this->load->library('upload', $config);
@@ -89,7 +131,7 @@ class Kelola_operasional extends CI_Controller {
 				if($uploadpam == TRUE)
 				{
 					 $datapam = $this->upload->data('filePAM');
-					 $pathpam=$datapam['full_path'];
+					 $pathpam=$datapam['file_name'];
 				}
 				elseif($uploadpam== FALSE)
 				{
@@ -99,7 +141,7 @@ class Kelola_operasional extends CI_Controller {
 				if($uploadpln == TRUE)
 				{
 					 $datapln = $this->upload->data('filePLN');
-					 $pathpln=$datapln['full_path'];
+					 $pathpln=$datapln['file_name'];
 				}
 				elseif($uploadpln== FALSE)
 				{
@@ -109,13 +151,17 @@ class Kelola_operasional extends CI_Controller {
 				if($uploadinternet == TRUE)
 				{
 					 $datainternet = $this->upload->data('fileInternet');
-					 $pathinternet=$datainternet['full_path'];
+					 $pathinternet=$datainternet['file_name'];
 				}
 				elseif($uploadinternet== FALSE)
 				{
 					echo "error fileInternet";
 				}
-
+				$pengeluaranPAM = $this->input->post('pengeluaranPAM');
+				$pengeluaranPLN = $this->input->post('pengeluaranPLN');
+				$pengeluaranInternet = $this->input->post('pengeluaranInternet');
+				$total = $pengeluaranInternet + $pengeluaranPAM + $pengeluaranPLN;
+			//	print_r($total);
 				$dataoperasional=array
 				(
 					'pengeluaranPAM' => $this->input->post('pengeluaranPAM'),
@@ -124,7 +170,9 @@ class Kelola_operasional extends CI_Controller {
 					'filePLN' => $pathpln,
 					'pengeluaranInternet' => $this->input->post('pengeluaranInternet'),
 					'fileInternet' => $pathinternet,
-					'idPegawai' => $idPegawai
+					'idPegawai' => $idPegawai,
+					'namafolder' => $datebaru,
+					'total' => $total
 					
 				);
 				//print_r($dataoperasional);
@@ -134,6 +182,58 @@ class Kelola_operasional extends CI_Controller {
 	    	}
 			
 	  	}
+	}
+
+	function delete($idPengeluaran_Tetap)
+	{
+
+		$this->m_operasional->delete($idPengeluaran_Tetap);
+		redirect('index.php/Kelola_operasional');
+	}
+
+	function do_uploadlain()
+	{
+		
+		    $datebaru = date('Y-m-d H:i:s');
+		    $datebaru = str_replace( ':', '', $datebaru);
+			$config2['upload_path'] = './uploads/lainlain/'.$datebaru;
+			$config2['allowed_types'] = 'jpg|png|jpeg';
+			$config2['remove_spaces'] = 'TRUE';
+			$config2['overwrite'] ='FALSE';
+			
+			
+			$this->load->library('upload', $config2);
+			
+			if (!is_dir('uploads/lainlain/'.$datebaru)) 
+			{
+    			mkdir('./uploads/lainlain/'.$datebaru, 0777, TRUE);
+    			$upload=$this->upload->do_upload('filebarang');
+				if($upload == TRUE)
+				{
+					 $databarang = $this->upload->data('filebarang');
+					 $pathbarang=$databarang['file_name'];
+				}
+				elseif($upload== FALSE)
+				{
+					$error = array('error' => $this->upload->display_errors());
+					print_r($error);
+				}
+
+				$datalainlain=array
+				(
+					'harga' => $this->input->post('harga'),
+					'namabarang' => $this->input->post('namabarang'),
+					'filebarang' => $pathbarang,
+					'namafolder' => $datebaru
+					
+				);
+				//print_r($dataoperasional);
+				$this->m_operasional->insertlainlain($datalainlain);
+				redirect('index.php/kelola_operasional','refresh');
+			    
+	    	}
+			
+	  	
 	}
 
 

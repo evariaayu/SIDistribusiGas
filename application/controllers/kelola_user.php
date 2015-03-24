@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
 
-class Kelola_pegawai extends CI_Controller {
+class Kelola_user extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
+        $this->load->model('m_user');
         $this->load->model('m_pegawai');
     }
 	/**
@@ -31,11 +32,12 @@ class Kelola_pegawai extends CI_Controller {
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
 
-	      $datapegawai['hasil'] = $this->m_pegawai->getall();
+	      $datauser['hasil'] = $this->m_user->getall();
+	      $datauser['hasil2'] = $this->m_pegawai->getall();
 
 	      $this->load->view('header');
 		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('direktur/v_mengelolapegawai',$datapegawai);
+		  $this->load->view('pegawai/v_user', $datauser);
 		  $this->load->view('footer');
 		}
 	   else
@@ -59,9 +61,13 @@ class Kelola_pegawai extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+
+	      $datapegawai['hasil'] = $this->m_pegawai->getall();
+	      $datapegawai['pangkalan'] = $this->m_pangkalan->getall();
+
 		$this->load->view('header');
 	 	$this->load->view('header_pegawai', $data);
-	  	$this->load->view('direktur/form_tambahdatapegawai');
+	  	$this->load->view('pegawai/v_user', $datapegawai);
 	  	$this->load->view('footer');
 	  }
 	   else
@@ -73,57 +79,55 @@ class Kelola_pegawai extends CI_Controller {
 
 	public function insert()
 	{
-		$datapegawai=array
+		$datauser=array
 		(
-			'namapegawai' => $this->input->post('namapegawai'),
-			'alamatpegawai' => $this->input->post('alamatpegawai'),
-			'jk' => $this->input->post('jk'),
-			'notelepon' => $this->input->post('notelepon'),
-			'idKeterangan_jabatan' => $this->input->post('idKeterangan_jabatan'),
+			'username' => $this->input->post('username'),
+			'password' => md5($this->input->post('password')),
+			'hakakses' => $this->input->post('hakakses'),
+			'idPegawai' => $this->input->post('idPegawai'),			
 		);
-		$this->m_pegawai->insert($datapegawai);
-		redirect('index.php/kelola_pegawai');
+		$this->m_user->insert($datauser);
+		redirect('index.php/kelola_user');
 		
+	   
+	 //  print_r($datapangkalan);
 	}
 
-	public function delete($idPegawai)
+/*	public function delete($idPangkalan)
 	{
-		$this->m_pegawai->delete($idPegawai);
-		redirect('index.php/kelola_pegawai');
+		$this->m_pangkalan->delete($idPangkalan);
+		redirect('index.php/kelola_pangkalan');
 	}
 
-	public function edit($idPegawai)
+	public function edit($idPangkalan)
 	{
 		if($this->session->userdata('logged_in'))
 		{
-		    $session_data = $this->session->userdata('logged_in');
-		    $data['username'] = $session_data['username'];
-		    $data['hakakses'] = $session_data['hakakses'];
-
-		    $datapegawai['hasil'] = $this->m_pegawai->getby($idPegawai);
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
 		
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
-			$this->load->view('direktur/form_editpegawai', $datapegawai);
+			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
 		  	$this->load->view('footer');
 	  }
 		
 	}
 
-	public function update($idPegawai)
+	public function update($idPangkalan)
 	{
-	
-		$data['namapegawai'] = $this->input->post('namapegawai');
-		$data['alamatpegawai'] = $this->input->post('alamatpegawai');
-		$data['jk'] = $this->input->post('jk');
-		$data['notelepon'] = $this->input->post('notelepon');
-		$data['idKeterangan_jabatan'] = $this->input->post('idKeterangan_jabatan');
-		$data['idPegawai'] = $idPegawai;
-	
-		$this->m_pegawai->update($data);
-		redirect('index.php/kelola_pegawai');
-	}
 
+		$data['namapangkalan'] = $this->input->post('namapangkalan');
+		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
+		$data['idPangkalan'] = $idPangkalan;
+		$this->m_pangkalan->update($data);
+
+		redirect('index.php/kelola_pangkalan');
+
+	}
+*/
 }
 
 

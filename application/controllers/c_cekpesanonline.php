@@ -51,9 +51,17 @@ class C_cekpesanonline extends CI_Controller {
 	public function update()
 	{
 		$jumlahGas = $this->input->post('jumlahGas');
-		$idTransaksi = $this->input->post('idTransaksi');
-		$this->m_cekpesanonline->update($jumlahGas,$idTransaksi);
+		$idTransaksi_Online = $this->input->post('idTransaksi_Online');
+	//	print_r($idTransaksi_Online);
+		$this->m_cekpesanonline->update($jumlahGas,$idTransaksi_Online);
 		redirect('index.php/c_cekpesanonline', 'refresh');
+		
+	}
+
+	public function delete($idTransaksi_Online)
+	{
+		$this->m_cekpesanonline->delete($idTransaksi_Online);
+		redirect('index.php/c_cekpesanonline','refresh');
 	}
 
 }

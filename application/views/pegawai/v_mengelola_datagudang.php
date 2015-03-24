@@ -28,7 +28,7 @@
 <div class="col-md-8 col-sm-offset-2">
   Data Gudang 
    <?php if(empty($stok_gudang)) {
-  echo "Data Penukaran Gudang masih kosong";
+  echo "masih kosong";
 }
   else { ?>
   <?php foreach ($stok_gudang as $row) {?>

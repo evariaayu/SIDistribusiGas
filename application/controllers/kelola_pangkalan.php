@@ -111,7 +111,6 @@ class Kelola_pangkalan extends CI_Controller {
 
 	public function update($idPangkalan)
 	{
-
 		$data['namapangkalan'] = $this->input->post('namapangkalan');
 		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
 		$data['idPangkalan'] = $idPangkalan;

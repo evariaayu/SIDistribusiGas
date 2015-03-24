@@ -44,8 +44,14 @@ class M_pesanonline extends CI_Model
 
         
         $this->db->insert('transaksi_online', $data);
+
         
 
+    }
+
+    function insertpengeluaran()
+    {
+        
     }
     /*function getall()
     {

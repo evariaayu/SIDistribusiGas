@@ -7,18 +7,88 @@ class M_operasional extends CI_Model {
         $this->load->database();
     }
 
-    function get_all()
+    function getall()
     {
-        return $this->db->get('pengeluaran_tetap');
+        $this->db->select('*');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $dataoperasional) 
+            {
+                $hasil[]= $dataoperasional;
+            }
+            return $hasil;
+        }
     }
 
  
     function insert($dataoperasional) 
     {
         $this->db->insert('pengeluaran_tetap',$dataoperasional); 
-        redirect('index.php/kelola_operasional','refresh');
+
     }
-   
+    function delete($idPengeluaran_Tetap)
+    {
+        $this->db->select('namafolder');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->where('idPengeluaran_Tetap', $idPengeluaran_Tetap);
+        $query=$this->db->get();
+        if($query -> num_rows() > 0)
+        {
+            foreach ($query->result() as $dataoperasional) 
+            {
+                $namafolder= $dataoperasional->namafolder;
+                delete_files('./uploads/'.$namafolder, TRUE);
+                rmdir('./uploads/'.$namafolder);
+            }
+        }
+       
+        $this->db->where('idPengeluaran_Tetap', $idPengeluaran_Tetap);
+        $this->db->delete('pengeluaran_tetap');
+    }
+
+    function insertlainlain($datalainlain)
+    {
+        $this->db->insert('cost_lainlain',$datalainlain);
+
+        $this->db->select('idCost_lainlain');
+        $this->db->from('cost_lainlain');
+        $this->db->order_by('tanggal','desc');
+        $this->db->limit(1);
+        $sql=$this->db->get();
+        if($sql -> num_rows() > 0)
+        {
+            foreach ($sql->result() as $cost_lainlain) 
+            {
+                $idCost_lainlain= $cost_lainlain->idCost_lainlain;
+            }
+        }
+
+        $month =date("m");
+        $this->db->select('idPengeluaran_Tetap');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->where('month(tanggal)', $month);
+        $this->db->order_by('tanggal','desc');
+        $this->db->limit(1);
+        $query=$this->db->get();
+        if($query -> num_rows() > 0)
+        {
+            foreach ($query->result() as $pengeluaran_tetap) 
+            {
+                $idPengeluaran_Tetap= $pengeluaran_tetap->idPengeluaran_Tetap;
+            }
+        }
+
+        $perbulan=array(
+            'idPengeluaran_Tetap' => $idPengeluaran_Tetap,
+            'idCost_lainlain' => $idCost_lainlain
+
+        );
+        $this->db->insert('pengeluaran_perbulan',$perbulan);
+        
+    }
    /* function getall()
     {
         $get_data = $this->db->get('');

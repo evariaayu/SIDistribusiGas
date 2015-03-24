@@ -1,4 +1,4 @@
-<h1><center>Kelola Pemasukan Gas</center></h1>
+<h1><center>Pemesanan Gas Online</center></h1>
 <br>
 
 <div class="col-md-2">
@@ -10,14 +10,7 @@
 
 <div class="row">
 
-<div class="col-xs-2 col-md-offset-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Search</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+
 <br>
 <br>
 <br>
@@ -33,6 +26,7 @@
         <th>Jumlah Gas</th>
         <th>Total Harga</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -48,13 +42,21 @@
        <td>
         <?php if($row->idstatus_pemesanan == 1) { ?>
         <form method="post" action="<?php echo base_url();?>index.php/c_cekpesanonline/update">
-        <input type="hidden" name="idTransaksi" value="<?php echo htmlspecialchars($row->idTransaksi_Online); ?>">
+          <?php print_r($row->idTransaksi_Online) ?>
+        <input type="hidden" name="idTransaksi_Online" value="<?php echo htmlspecialchars($row->idTransaksi_Online); ?>">
         <input type="hidden" name="jumlahGas" value="<?php echo htmlspecialchars($row->jumlahGas); ?>">
         <input type="submit" value="konfirmasi" name="konfirmasi">
         </form>
           <?php } else { ?>
           CONFIRMED
           <?php } ?>
+        </td>
+
+         <td>
+          <button type="button" class="btn btn-danger btn-link">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/delete/<?php echo $row->idTransaksi_Online;?>">delete</a> 
+        </button>
         </td>
        
 

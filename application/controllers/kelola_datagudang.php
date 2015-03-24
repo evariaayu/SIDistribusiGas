@@ -10,6 +10,7 @@ class Kelola_datagudang extends CI_Controller {
         $this->load->model('m_pangkalan');
         $this->load->helper('form');
         $this->load->helper('url');
+        $this->load->model('m_operasional');
     }
 	/**
 	 * Index Page for this controller.
