@@ -128,7 +128,9 @@ class C_pesanoffline extends CI_Controller {
 		        //$hasil = $query->row_array();
 				$message = "Berhasil! Hore total = $totalhargabelioff";
 				
-				echo "<script type='text/javascript'>alert('$message');</script>";
+				echo "<script type='text/javascript'>alert('$message');
+					window.location.href ='" . base_url() . "index.php/pegawai';</script>";
+
 			}
 		}
 		else
