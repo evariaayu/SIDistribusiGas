@@ -56,6 +56,26 @@ class M_penukaranbarang extends CI_Model
 
         
     }
+    function lihat($sampai,$dari){
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->join('pegawai','tukar_barang.idPegawai=pegawai.idPegawai');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=tukar_barang.idPangkalan');
+        $this->db->limit($sampai,$dari);
+        return $query = $this->db->get()->result();
+        
+    }
+    function jumlah()
+    {
+        $this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->join('pegawai','tukar_barang.idPegawai=pegawai.idPegawai');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=tukar_barang.idPangkalan');
+        $get_data = $this->db->get();
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
+
     public function ambilstokgudang()
     {
         $datetoday =date("Y-m-d");
@@ -65,15 +85,16 @@ class M_penukaranbarang extends CI_Model
         $this->db->order_by('tanggal','desc');
         $this->db->limit(1);
         $get_data = $this->db->get();
+       // print_r($get_data);
         if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datatukarbarang) 
             {
-                $stok_gudang[]= $datatukarbarang;
+                $stok_gudang= $datatukarbarang->jumlah_stok;
             }
             return $stok_gudang;
         }
-        else if($get_data->num_rows()==0)
+        elseif($get_data->num_rows()==0)
         {
             //echo "kosong";
             $this->db->select('jumlah_stok');
@@ -88,14 +109,15 @@ class M_penukaranbarang extends CI_Model
             {
                 foreach ($execute->result() as $value) 
                 {
-                    $laststock=$value->jumlah_stok;
-                    $this->db->set('jumlah_stok', $laststock); 
+                    $stok_gudang=$value->jumlah_stok;
+                    $this->db->set('jumlah_stok', $stok_gudang); 
                     $insert=$this->db->insert('stok_gudang');
+                //    return $stok_gudang;
 
                 }
             }
             
-
+            
         }
         
     }

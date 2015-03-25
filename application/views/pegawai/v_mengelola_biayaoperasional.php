@@ -38,7 +38,7 @@
         <th>File Internet</th>
         <th>Nama Pegawai</th>
         <th></th>
-        <th></th>
+      
       </tr>
     </thead>
     <tbody>
@@ -186,12 +186,7 @@ Nota
           <a href="<?php echo base_url();?>index.php/kelola_operasional/delete/<?php echo $datatukarbarang->idPengeluaran_Tetap;?>">delete</a> 
         </button>
         </td>
-        <td>
-          <button type="button" class="btn btn-default btn-link">
-          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/kelola_operasional/edit/<?php echo $datatukarbarang->idPengeluaran_Tetap;?>">edit</a>
-          </button>
-        </td>
+       
        <?php } ?>
        <?php } ?>
       </tr>

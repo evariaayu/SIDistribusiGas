@@ -30,13 +30,20 @@ class Kelola_pangkalan extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pegawai")
+	      {
+		      $datapangkalan['hasil'] = $this->m_pangkalan->getall();
 
-	      $datapangkalan['hasil'] = $this->m_pangkalan->getall();
-
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/v_mengelola_pangkalan',$datapangkalan);
-		  $this->load->view('footer');
+		      $this->load->view('header');
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pegawai/v_mengelola_pangkalan',$datapangkalan);
+			  $this->load->view('footer');
+			}
+			else
+	   		{
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   		}
 		}
 	   else
 	   {
@@ -59,10 +66,18 @@ class Kelola_pangkalan extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pegawai")
+	      {
 		$this->load->view('header');
 	 	$this->load->view('header_pegawai', $data);
 	  	$this->load->view('pegawai/form_tambahdatapangkalan');
 	  	$this->load->view('footer');
+	  	}
+			else
+	   		{
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   		}
 	  }
 	   else
 	   {
@@ -99,12 +114,20 @@ class Kelola_pangkalan extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pegawai")
+	      {
 	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
 		
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
 			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
 		  	$this->load->view('footer');
+		  	}
+			else
+	   		{
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   		}
 	  }
 		
 	}

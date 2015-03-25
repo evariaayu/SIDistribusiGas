@@ -5,7 +5,7 @@ class Kelola_pemasukangas extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session','pagination'));
         $this->load->model('m_pemasukangas');
         $this->load->model('m_penukaranbarang');
         $this->load->model('m_pangkalan');
@@ -29,17 +29,33 @@ class Kelola_pemasukangas extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $data['idPegawai'] = $session_data['idPegawai'];
-	   //   print_r($session_data);
-	      $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
-	      $datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/v_mengelola_pemasukangas',$datapemasukangas);
-		  $this->load->view('footer');
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	      	$data['idPegawai'] = $session_data['idPegawai'];
+	      	if($session_data['hakakses']=="pegawai")
+			{
+	      		$jumlah = $this->m_pemasukangas->jumlah();
+				$config['base_url'] = base_url().'index.php/Kelola_pemasukangas/index';
+				$config['total_rows'] = $jumlah;
+				$config['per_page']=5;
+
+				$dari = $this->uri->segment('3');
+				$datapemasukangas['hasil'] = $this->m_pemasukangas->lihat($config['per_page'],$dari);
+				$this->pagination->initialize($config); 
+			   // $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
+			    $datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+			    $datapemasukangas['success'] = '';
+			    $this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/v_mengelola_pemasukangas',$datapemasukangas);
+				$this->load->view('footer');
+		  	}
+			else
+		   	{
+		     //If no session, redirect to login page
+		     redirect('index.php/c_login', 'refresh');
+		 	}
 		}
 	   else
 	   {
@@ -53,15 +69,23 @@ class Kelola_pemasukangas extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	    	$session_data = $this->session->userdata('logged_in');
-	    	$data['username'] = $session_data['username'];
-	    	$data['hakakses'] = $session_data['hakakses'];
-	    	$data['idPegawai'] = $session_data['idPegawai'];
-
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahpemasukangas');
-		  	$this->load->view('footer');
+			$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	      	$data['idPegawai'] = $session_data['idPegawai'];
+			if($session_data['hakakses']=="pegawai")
+			{
+				$datapemasukangas['success']='';
+				$this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+			  	$this->load->view('pegawai/form_tambahpemasukangas',$datapemasukangas);
+			  	$this->load->view('footer');
+			}
+			else
+		   	{
+		     //If no session, redirect to login page
+		     redirect('index.php/c_login', 'refresh');
+		 	}
 	  }
 	   else
 	   {
@@ -90,14 +114,57 @@ class Kelola_pemasukangas extends CI_Controller {
 			);
 		  	$this->m_pemasukangas->insert($datapemasukangas);
 		  	$this->m_pemasukangas->insertstok($datamasukgudang);
-			redirect('index.php/Kelola_pemasukangas');
+		  	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+					Data Berhasil ditambahkan <a href=".base_url('index.php/Kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
+					</div>";
+					$session_data = $this->session->userdata('logged_in');
+		    		$data['username'] = $session_data['username'];
+		    		$data['hakakses'] = $session_data['hakakses'];
+		    		$data['idPegawai'] = $session_data['idPegawai'];
+		    		$datapemasukangas['success'] = $sukses;
+					$this->load->view('header');
+					$this->load->view('header_pegawai', $data);
+				  	$this->load->view('pegawai/form_tambahpemasukangas',$datapemasukangas);
+				  	$this->load->view('footer');
+		//	redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}
 
 	public function delete($idPemasukan)
 	{
 		$this->m_pemasukangas->delete($idPemasukan);
-		redirect('index.php/Kelola_pemasukangas');
+		//redirect('index.php/Kelola_pemasukangas');
+		if($this->session->userdata('logged_in'))
+		{
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+			if($session_data['hakakses']=="pegawai")
+			{
+			$jumlah = $this->m_pemasukangas->jumlah();
+					    	 $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
+		    	$datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+		      	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+						Data Berhasil dihapus
+						</div>";
+			    $datapemasukangas['success'] = $sukses;
+			    $this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/v_mengelola_pemasukangas', $datapemasukangas);
+				$this->load->view('footer');
+				echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/Kelola_pemasukangas';}, 2000);
+
+				</script>";
+			}
+			else
+		   	{
+		     //If no session, redirect to login page
+		     redirect('index.php/c_login', 'refresh');
+		 	}
+		}
 	}
 
 	public function edit($idPemasukan)

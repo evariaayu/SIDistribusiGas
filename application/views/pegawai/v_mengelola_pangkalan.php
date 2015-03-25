@@ -12,20 +12,6 @@
 <br>
 
 <div class="row">
-
-<div class="col-xs-2 col-md-offset-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Search</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-<br>
-<br>
-<br>
-
-
   <div class="col-md-6 col-sm-offset-3">
   <table class="table table-striped table-hover table-bordered">
     <thead>

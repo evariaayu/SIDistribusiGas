@@ -7,7 +7,7 @@
 
 <div class="col-md-6">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_datagudang/insert">
-
+<?php echo $success;?>
 <div class="form-group">
     <!--jumlah barang rusak-->
     <label for="stokgudang" class="col-sm-2 control-label">Stok Gudang</label>

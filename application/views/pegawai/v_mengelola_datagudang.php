@@ -11,32 +11,22 @@
 <br>
 <br>
 
+<?php echo $success;?>
 <div class="row">
 
-<div class="col-xs-2 col-md-offset-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Search</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-<br>
-<br>
 <br>
 
 <div class="col-md-8 col-sm-offset-2">
   Data Gudang 
-   <?php if(empty($stok_gudang)) {
-  echo "masih kosong";
-}
+   <?php if(empty($stok_gudang)) {?>
+  <div class="alert alert-warning" role="alert">Masih kosong, refresh untuk menambahkan data gudang</div>
+ <?php }
   else { ?>
-  <?php foreach ($stok_gudang as $row) {?>
-       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+       <div class="well well-sm"><?php echo $stok_gudang ?></div>
       <?php } ?>
-      <?php } ?>
+
   <table class="table table-striped table-hover table-bordered">
-    <thead>
+ <thead>
       <tr>
         <th>ID Tukar Barang</th>
         <th>Nama Pangkalan</th>
@@ -50,11 +40,12 @@
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Penukarang Gudang masih kosong";
-}
+      <?php if(empty($hasil)) {?>
+<div class="alert alert-warning" role="alert">Data Penukaran Gudang masih kosong</div>
+<?php }
   else { ?>
       <?php foreach ($hasil as $datatukarbarang) {?>
+         
       <tr>
         <td><?php echo $datatukarbarang->idTukar_Barang ?></td>
         <td><?php echo $datatukarbarang->namapangkalan ?></td>
@@ -82,4 +73,5 @@
       </tr>
     </tbody>
   </table>
+<?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->

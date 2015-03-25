@@ -51,6 +51,25 @@ class M_pemasukangas extends CI_Model {
         }
         
     }
+
+    function lihat($sampai,$dari){
+        $this->db->select('*');
+        $this->db->from('pemasukan');
+        $this->db->join('pegawai','pemasukan.idPegawai=pegawai.idPegawai');
+        $this->db->limit($sampai,$dari);
+        return $query = $this->db->get()->result();
+        
+    }
+    function jumlah()
+    {
+       $this->db->select('*');
+        $this->db->from('pemasukan');
+        $this->db->join('pegawai','pemasukan.idPegawai=pegawai.idPegawai');
+        $get_data = $this->db->get();
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
+    
     function delete($idPemasukan)
     {
         $this->db->select('jumlahgas');

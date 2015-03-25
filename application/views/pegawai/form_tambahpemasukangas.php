@@ -1,8 +1,9 @@
 <h3><center>Form Tambah Pemasukan Gas</center></h1>
 <br>
+<?php echo $success;?>
+
 <div class="col-md-3">
 </div>
-
 <div class="col-md-6">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
   
