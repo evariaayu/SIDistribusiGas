@@ -5,7 +5,7 @@ class Kelola_operasional extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session','pagination'));
         $this->load->model('m_operasional');
         $this->load->helper('html');
         $this->load->helper('file');
@@ -29,20 +29,31 @@ class Kelola_operasional extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
 
-	      $dataoperasional['hasil'] = $this->m_operasional->getall();
-	       $hakakses = $session_data['hakakses'];
-		   if($hakakses=="pegawai")
+	     	//$dataoperasional['hasil'] = $this->m_operasional->getall();
+	     	$hakakses = $session_data['hakakses'];
+		 	if($hakakses=="pegawai")
 		    {
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
-		  $this->load->view('footer');
+		    	$jumlah = $this->m_operasional->jumlah();
+				$config['base_url'] = base_url().'index.php/kelola_operasional/index';
+				$config['total_rows'] = $jumlah;
+				$config['per_page']=5;
+
+				$dari = $this->uri->segment('3');
+				$dataoperasional['hasil'] = $this->m_operasional->lihat($config['per_page'],$dari);
+				$dataoperasional['success'] = '';
+
+				$this->pagination->initialize($config); 
+	      		$this->load->view('header');
+		  		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
+		  		$this->load->view('footer');
 		    }
-		  else{
+		  	else
+		  	{
 		    	redirect('index.php/c_login', 'refresh');
 		    }
 		}
@@ -63,16 +74,19 @@ class Kelola_operasional extends CI_Controller {
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
 		    $hakakses = $session_data['hakakses'];
-		   if($hakakses=="pegawai")
+		   	if($hakakses=="pegawai")
 		    {
-			$this->load->view('header');
-		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahbiayaoperasional-old');
-		  	$this->load->view('footer');
-		  }
-		  else{
+		    	$dataoperasional['success']='';
+
+				$this->load->view('header');
+		 		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/form_tambahbiayaoperasional-old',$dataoperasional);
+		  		$this->load->view('footer');
+		  	}
+		  	else
+		  	{
 		    	redirect('index.php/c_login', 'refresh');
-		    }
+		  	}
 	  	}
 	   	else
 	   	{
@@ -96,7 +110,8 @@ class Kelola_operasional extends CI_Controller {
 			  	$this->load->view('pegawai/form_tambahbiayaoperasional');
 			  	$this->load->view('footer');
 		    }
-		    else{
+		    else
+		    {
 		    	redirect('index.php/c_login', 'refresh');
 		    }
 			
@@ -177,7 +192,27 @@ class Kelola_operasional extends CI_Controller {
 				);
 				//print_r($dataoperasional);
 				$this->m_operasional->insert($dataoperasional);
-				redirect('index.php/kelola_operasional','refresh');
+				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_operasional')." class=\"alert-link\">Kembali?</a>
+					</div>";
+				$session_data = $this->session->userdata('logged_in');
+    			$data['username'] = $session_data['username'];
+    			$data['hakakses'] = $session_data['hakakses'];
+    			$data['idPegawai'] = $session_data['idPegawai'];
+		    	if($session_data['hakakses']=="pegawai")
+				{
+		    		$dataoperasional['success'] = $sukses;
+					$this->load->view('header');
+					$this->load->view('header_pegawai', $data);
+				  	$this->load->view('pegawai/form_tambahbiayaoperasional-old',$dataoperasional);
+				  	$this->load->view('footer');
+				}
+				else
+		   		{
+		    		redirect('index.php/c_login', 'refresh');
+		    	}
+			//	redirect('index.php/kelola_operasional','refresh');
 			    
 	    	}
 			
@@ -188,52 +223,119 @@ class Kelola_operasional extends CI_Controller {
 	{
 
 		$this->m_operasional->delete($idPengeluaran_Tetap);
-		redirect('index.php/Kelola_operasional');
+		echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/kelola_operasional';}, 2000);
+
+				</script>";
+		if($this->session->userdata('logged_in'))
+		{
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+
+	     	$dataoperasional['hasil'] = $this->m_operasional->getall();
+	     	$hakakses = $session_data['hakakses'];
+		 	if($hakakses=="pegawai")
+		    {
+		    	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+						Data Berhasil dihapus
+						</div>";
+				$dataoperasional['success'] = $sukses;
+
+	      		$this->load->view('header');
+		  		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
+		  		$this->load->view('footer');
+		    }
+		  	else
+		  	{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
+		}
+		//redirect('index.php/Kelola_operasional');
 	}
 
 	function do_uploadlain()
 	{
+	
+	    $datebaru = date('Y-m-d H:i:s');
+	    $datebaru = str_replace( ':', '', $datebaru);
+		$config2['upload_path'] = './uploads/lainlain/'.$datebaru;
+		$config2['allowed_types'] = 'jpg|png|jpeg';
+		$config2['remove_spaces'] = 'TRUE';
+		$config2['overwrite'] ='FALSE';
 		
-		    $datebaru = date('Y-m-d H:i:s');
-		    $datebaru = str_replace( ':', '', $datebaru);
-			$config2['upload_path'] = './uploads/lainlain/'.$datebaru;
-			$config2['allowed_types'] = 'jpg|png|jpeg';
-			$config2['remove_spaces'] = 'TRUE';
-			$config2['overwrite'] ='FALSE';
-			
-			
-			$this->load->library('upload', $config2);
-			
-			if (!is_dir('uploads/lainlain/'.$datebaru)) 
+		
+		$this->load->library('upload', $config2);
+		
+		if (!is_dir('uploads/lainlain/'.$datebaru)) 
+		{
+			mkdir('./uploads/lainlain/'.$datebaru, 0777, TRUE);
+			$upload=$this->upload->do_upload('filebarang');
+			if($upload == TRUE)
 			{
-    			mkdir('./uploads/lainlain/'.$datebaru, 0777, TRUE);
-    			$upload=$this->upload->do_upload('filebarang');
-				if($upload == TRUE)
-				{
-					 $databarang = $this->upload->data('filebarang');
-					 $pathbarang=$databarang['file_name'];
-				}
-				elseif($upload== FALSE)
-				{
-					$error = array('error' => $this->upload->display_errors());
-					print_r($error);
-				}
+				 $databarang = $this->upload->data('filebarang');
+				 $pathbarang=$databarang['file_name'];
+			}
+			elseif($upload== FALSE)
+			{
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+			}
 
-				$datalainlain=array
-				(
-					'harga' => $this->input->post('harga'),
-					'namabarang' => $this->input->post('namabarang'),
-					'filebarang' => $pathbarang,
-					'namafolder' => $datebaru
-					
-				);
-				//print_r($dataoperasional);
-				$this->m_operasional->insertlainlain($datalainlain);
-				redirect('index.php/kelola_operasional','refresh');
-			    
-	    	}
-			
-	  	
+			$datalainlain=array
+			(
+				'harga' => $this->input->post('harga'),
+				'namabarang' => $this->input->post('namabarang'),
+				'filebarang' => $pathbarang,
+				'namafolder' => $datebaru
+				
+			);
+			//print_r($dataoperasional);
+			$this->m_operasional->insertlainlain($datalainlain);
+			redirect('index.php/kelola_operasional','refresh');
+		    
+    	}
+	}
+	public function pengeluaranlain()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+
+	     	//$dataoperasional['hasil'] = $this->m_operasional->getall();
+	     	$hakakses = $session_data['hakakses'];
+		 	if($hakakses=="pegawai")
+		    {
+		    	$jumlah = $this->m_operasional->jumlah();
+				$config['base_url'] = base_url().'index.php/kelola_operasional/index';
+				$config['total_rows'] = $jumlah;
+				$config['per_page']=5;
+
+				$dari = $this->uri->segment('3');
+				$dataoperasional['hasil'] = $this->m_operasional->lihat($config['per_page'],$dari);
+				$dataoperasional['success'] = '';
+
+				$this->pagination->initialize($config); 
+	      		$this->load->view('header');
+		  		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
+		  		$this->load->view('footer');
+		    }
+		  	else
+		  	{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
+		}
+	   else
+	   {
+	     //If no session, redirect to login page
+	     redirect('index.php/c_login', 'refresh');
+	   }
+		
 	}
 
 

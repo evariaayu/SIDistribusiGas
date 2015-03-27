@@ -23,6 +23,23 @@ class M_operasional extends CI_Model {
         }
     }
 
+    function lihat($sampai,$dari){
+        $this->db->select('*');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $this->db->limit($sampai,$dari);
+        return $query = $this->db->get()->result();
+        
+    }
+    function jumlah()
+    {
+        $this->db->select('*');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $get_data = $this->db->get();
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
  
     function insert($dataoperasional) 
     {

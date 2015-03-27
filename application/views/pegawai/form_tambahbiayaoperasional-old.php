@@ -5,7 +5,7 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <strong>Warning!</strong> <?php echo $error;?>
 </div>-->
-
+<?php echo $success;?>
 <div class="col-xs-offset-1 col-md-5">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_operasional/do_upload" enctype="multipart/form-data" multiple="true">
 
