@@ -57,7 +57,6 @@ class M_reportbiayaoperasional extends CI_Model {
 
     }*/
 
-
     public function getbiayalain($bulan, $tahun)
     {
          $this->db->select('*');
