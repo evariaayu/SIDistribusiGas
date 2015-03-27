@@ -105,9 +105,10 @@ class Kelola_operasional extends CI_Controller {
 		    $hakakses = $session_data['hakakses'];
 		   if($hakakses=="pegawai")
 		    {
+		    	$datalainlain['success'] = '';
 		    	$this->load->view('header');
 			 	$this->load->view('header_pegawai', $data);
-			  	$this->load->view('pegawai/form_tambahbiayaoperasional');
+			  	$this->load->view('pegawai/form_tambahbiayaoperasional',$datalainlain);
 			  	$this->load->view('footer');
 		    }
 		    else
@@ -294,7 +295,27 @@ class Kelola_operasional extends CI_Controller {
 			);
 			//print_r($dataoperasional);
 			$this->m_operasional->insertlainlain($datalainlain);
-			redirect('index.php/kelola_operasional','refresh');
+			$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_operasional/pengeluaranlain')." class=\"alert-link\">Kembali?</a>
+					</div>";
+			$session_data = $this->session->userdata('logged_in');
+			$data['username'] = $session_data['username'];
+			$data['hakakses'] = $session_data['hakakses'];
+			$data['idPegawai'] = $session_data['idPegawai'];
+	    	if($session_data['hakakses']=="pegawai")
+			{
+	    		$datalainlain['success'] = $sukses;
+				$this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+			  	$this->load->view('pegawai/form_tambahbiayaoperasional',$datalainlain);
+			  	$this->load->view('footer');
+			}
+			else
+	   		{
+	    		redirect('index.php/c_login', 'refresh');
+	    	}
+		//	redirect('index.php/kelola_operasional','refresh');
 		    
     	}
 	}
@@ -310,19 +331,19 @@ class Kelola_operasional extends CI_Controller {
 	     	$hakakses = $session_data['hakakses'];
 		 	if($hakakses=="pegawai")
 		    {
-		    	$jumlah = $this->m_operasional->jumlah();
-				$config['base_url'] = base_url().'index.php/kelola_operasional/index';
+		    	$jumlah = $this->m_operasional->jumlahlain();
+				$config['base_url'] = base_url().'index.php/kelola_operasional/pengeluaranlain/';
 				$config['total_rows'] = $jumlah;
 				$config['per_page']=5;
 
 				$dari = $this->uri->segment('3');
-				$dataoperasional['hasil'] = $this->m_operasional->lihat($config['per_page'],$dari);
-				$dataoperasional['success'] = '';
+				$datalainlain['hasil'] = $this->m_operasional->lihatlain($config['per_page'],$dari);
+				$datalainlain['success'] = '';
 
 				$this->pagination->initialize($config); 
 	      		$this->load->view('header');
 		  		$this->load->view('header_pegawai', $data);
-		  		$this->load->view('pegawai/v_mengelola_biayaoperasional',$dataoperasional);
+		  		$this->load->view('pegawai/v_mengelola_biayalainlain',$datalainlain);
 		  		$this->load->view('footer');
 		    }
 		  	else
@@ -336,6 +357,44 @@ class Kelola_operasional extends CI_Controller {
 	     redirect('index.php/c_login', 'refresh');
 	   }
 		
+	}
+
+	function deletelain($idCost_lainlain)
+	{
+
+		$this->m_operasional->deletelain($idCost_lainlain);
+		$this->m_operasional->delete_costlain($idCost_lainlain);
+		echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/kelola_operasional/pengeluaranlain';}, 2000);
+
+				</script>";
+		if($this->session->userdata('logged_in'))
+		{
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+
+	     	$datalainlain['hasil'] = $this->m_operasional->getall_lain();
+	     	$hakakses = $session_data['hakakses'];
+		 	if($hakakses=="pegawai")
+		    {
+		    	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+						Data Berhasil dihapus
+						</div>";
+				$datalainlain['success'] = $sukses;
+
+	      		$this->load->view('header');
+		  		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/v_mengelola_biayalainlain',$datalainlain);
+		  		$this->load->view('footer');
+		    }
+		  	else
+		  	{
+		    	redirect('index.php/c_login', 'refresh');
+		    }
+		}
+		//redirect('index.php/Kelola_operasional');
 	}
 
 

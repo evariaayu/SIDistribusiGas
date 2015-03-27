@@ -23,7 +23,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Biaya Operasional <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="<?php echo base_url("index.php/kelola_operasional") ?>">Pengeluaran Tetap</a></li>
-            <li><a href="#">Pengeluaran Lain-lain</a></li>
+            <li><a href="<?php echo base_url('index.php/kelola_operasional/pengeluaranlain') ?>">Pengeluaran Lain-lain</a></li>
           </ul>
         </li>
         <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Data Gudang</a></li>
