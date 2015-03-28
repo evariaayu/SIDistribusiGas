@@ -5,11 +5,12 @@ class C_pesanonline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session' , 'pagination'));
         $this->load->model('m_pesanonline');
-        $this->load->model('m_pangkalan');
-        $this->load->helper('form');
-        $this->load->helper('url');
+        //$this->load->model('m_pangkalan');
+        
+        $this->load->helper('html');
+        $this->load->helper('file');
     }
 	/**
 	 * Index Page for this controller.
@@ -39,12 +40,24 @@ class C_pesanonline extends CI_Controller {
 		      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
 		      //$data['idPangkalan'] = $session_data['idPangkalan'];
-		      $datapangkalan ['hasil']= $this->m_pangkalan->getby($session_data['username']);	
+		      $datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
 		      //$datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 		      //print_r($session_data);
 		      //print_r($datanamapangkalan['hasil']);
 		      //print_r($datanamapangkalan);
+		      //$jumlah = $this->m_pesanonline->jumlah($session_data['username']);
+				//$config['base_url'] = base_url().'index.php/v_mengelola_pesanonline/index';
+				//$config['total_rows'] = $jumlah;
+				//$config['per_page']=5;
+
+				//$dari = $this->uri->segment('3');
+				$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
+				//$datapangkalan['hasil'] = $this->m_pesanonline->lihat($config['per_page'],$dari,$session_data['username']);
+				$datapangkalan['success'] = '';
+
+				//$this->pagination->initialize($config); 
+
 		      $datapangkalan['success']='';
 		      $this->load->view('header');
 			  $this->load->view('header_pegawai', $data);
@@ -69,6 +82,8 @@ class C_pesanonline extends CI_Controller {
 	   }
 		
 	}
+
+
 
 	/*public function form_pesanonline()
 	{

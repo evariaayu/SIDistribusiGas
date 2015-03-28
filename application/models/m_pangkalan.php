@@ -43,19 +43,13 @@ class M_pangkalan extends CI_Model {
 
     function getby($idPangkalan)
     {
-
-        $this->db->select('*');
-        $this->db->from('transaksi_online');
-        $this->db->join('Pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
-        $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
-        $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
-        $this->db->where('username', $idPangkalan);
-        $get_data = $this->db->get();
-        if($get_data->num_rows()>0)
+        $by['idPangkalan'] = $idPangkalan;
+        $this->db->where($by);
+        $get_data           = $this->db->get('pangkalan');
+        if($get_data->num_rows() > 0)
         {
-            foreach ($get_data->result() as $datapangkalan) 
-            {
-                $hasil[]= $datapangkalan;
+            foreach ($get_data->result() as $datapangkalan) {
+                $hasil[] = $datapangkalan;
             }
             return $hasil;
         }

@@ -14,6 +14,8 @@
 
 
 <br>
+<div class="col-md-1">
+  </div>
 
   <div class="col-md-6 col-sm-offset-2">
   <table class="table table-striped table-hover table-bordered">
@@ -29,8 +31,11 @@
       </tr>
     </thead>
     <tbody>
-      <?php
-      foreach ($hasil as $datapangkalan)
+       <?php if(empty($hasil)) {?>
+   <div class="alert alert-warning" role="alert">Riwayat pemesanan gas masih kosong</div>
+<?php } 
+else { ?>
+      <?php foreach ($hasil as $datapangkalan)
         { ?>
       <tr>
         <td><?php echo $datapangkalan->idTransaksi_Online ?></td>
@@ -39,12 +44,10 @@
         <td><?php echo $datapangkalan->jumlahGas ?></td>
        <td><?php echo $datapangkalan->totalhargabeli ?></td>
        <td><?php echo $datapangkalan->namastatus ?></td>
-
-         
-       
-
       </tr>
       <?php } ?>
+      <?php } ?>
+      
     </tbody>
   </table>
     <?php echo $this->pagination->create_links(); ?>
