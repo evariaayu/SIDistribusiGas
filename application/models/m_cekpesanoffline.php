@@ -26,7 +26,8 @@ class M_cekpesanoffline extends CI_Model {
         return $execute;
     }
 
-    public function update($jumlahGas,$idTransaksi_Online)
+
+     public function update($jumlahGas,$idTransaksi_Offline)
     {
         $data = array('idstatus_pemesanan' => '2');
         $this->db->where("idTransaksi_Online",$idTransaksi_Online);

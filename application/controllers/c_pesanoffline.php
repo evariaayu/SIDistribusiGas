@@ -32,19 +32,26 @@ class C_pesanoffline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pegawai")
+	      {
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
 		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
-	      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
-	      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+		      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
-		   
-		  $this->load->view('footer');
+		      $this->load->view('header');
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
+			   
+			  $this->load->view('footer');
+		  }
+		  else
+		  {
+		  	redirect('index.php/c_login', 'refresh');
+		  }
 		}
 	   else
 	   {
