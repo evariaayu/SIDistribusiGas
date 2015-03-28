@@ -35,7 +35,8 @@ class Kelola_datagudang extends CI_Controller {
 		     $session_data = $this->session->userdata('logged_in');
 		     $data['username'] = $session_data['username'];
 		     $data['hakakses'] = $session_data['hakakses'];
-			if($session_data['hakakses']=="pegawai")
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 
 				$jumlah = $this->m_penukaranbarang->jumlah();
@@ -78,7 +79,8 @@ class Kelola_datagudang extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
-			if($session_data['hakakses']=="pegawai")
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 		    	$datatukarbarang['hasil'] = $this->m_pangkalan->getall();
 		    	$datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
@@ -219,7 +221,8 @@ class Kelola_datagudang extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
-			if($session_data['hakakses']=="pegawai")
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 				$datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 		    	$datatukarbarang['hasil'] = $this->m_penukaranbarang->getby($idTukar_Barang);
