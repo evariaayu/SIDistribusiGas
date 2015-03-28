@@ -7,6 +7,7 @@ class C_pesanonline extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_pesanonline');
+        $this->load->model('m_pangkalan');
         $this->load->helper('form');
         $this->load->helper('url');
     }
@@ -38,16 +39,21 @@ class C_pesanonline extends CI_Controller {
 		      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
 		      //$data['idPangkalan'] = $session_data['idPangkalan'];
-		      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall($session_data['username']);	
-		      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
+		      $datapangkalan ['hasil']= $this->m_pangkalan->getby($session_data['username']);	
+		      //$datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 		      //print_r($session_data);
 		      //print_r($datanamapangkalan['hasil']);
 		      //print_r($datanamapangkalan);
-		      $datanamapangkalan['success']='';
+		      $datapangkalan['success']='';
 		      $this->load->view('header');
-			  $this->load->view('pangkalan/header_pangkalan', $data);
-			  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pangkalan/v_mengelola_pesanonline',$datapangkalan );
+
+
+
+
+
 			   
 			  $this->load->view('footer');
 		  }
@@ -85,6 +91,48 @@ class C_pesanonline extends CI_Controller {
 	    	redirect('index.php/c_login', 'refresh');
 	   	}
 	}*/
+
+
+	public function insert()
+	{
+		if($this->session->userdata('logged_in'))
+		{
+
+	      $session_data = $this->session->userdata('logged_in');
+	      $data['username'] = $session_data['username'];
+	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pangkalan")
+	      {
+		      //$data['idPangkalan'] = $session_data['idPangkalan'];
+
+		      //$data['idPangkalan'] = $session_data['idPangkalan'];
+		      $datanamapangkalan ['hasil']= $this->m_pesanonline->getall($session_data['username']);	
+		      $datanamapangkalan['harga']=$this->m_pesanonline->getharga();
+
+		      //print_r($session_data);
+		      //print_r($datanamapangkalan['hasil']);
+		      //print_r($datanamapangkalan);
+		      $datanamapangkalan['success']='';
+		      $this->load->view('header');
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
+			   
+			  $this->load->view('footer');
+		  }
+		  else
+		  {
+		  	redirect('index.php/c_login', 'refresh');
+		  }
+		}
+
+	   else
+	   {
+	     redirect('index.php/c_login', 'refresh');
+	   }
+		
+	}
+
+
 
 	public function logout()
 	{
@@ -199,6 +247,8 @@ class C_pesanonline extends CI_Controller {
 			}
 		}
 	}
+
+
 	
 
 	/*public function insert()
