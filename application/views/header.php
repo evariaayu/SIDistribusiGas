@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="description" content="">
-    
+    <script src="<?php echo base_url('assets/js/index.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
   	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
