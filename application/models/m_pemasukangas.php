@@ -140,7 +140,7 @@ class M_pemasukangas extends CI_Model {
             'hargabeli' => $data['hargabeli'],
             'hargajual' => $data['hargajual']
         );
-        $this->db->where('idPemasukan',$data['idpemasukan']);
+        $this->db->where('idPemasukan',$data['idPemasukan']);
         $this->db->update('pemasukan', $datapemasukangas);
 
         $datetoday =date("Y-m-d");

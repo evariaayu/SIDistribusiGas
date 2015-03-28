@@ -18,10 +18,9 @@
 }
   else { ?>
     
-       <?php foreach ($stok_gudang as $row) {?>
-       <div class="well well-sm"><?php echo $row->jumlah_stok ?></div>
+       
+       <div class="well well-sm"><?php echo $stok_gudang ?></div>
       <?php } ?>
-        <?php } ?>
     </div>
   </div>
 

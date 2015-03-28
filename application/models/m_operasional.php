@@ -22,8 +22,47 @@ class M_operasional extends CI_Model {
             return $hasil;
         }
     }
+    function getall_lain()
+    {
+        $get_data = $this->db->get('cost_lainlain');
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datalainlain) 
+            {
+                $hasil[]= $datalainlain;
+            }
+            return $hasil;
+        }
+    }
 
- 
+    function lihat($sampai,$dari){
+        $this->db->select('*');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $this->db->limit($sampai,$dari);
+        return $query = $this->db->get()->result();
+        
+    }
+    function jumlah()
+    {
+        $this->db->select('*');
+        $this->db->from('pengeluaran_tetap');
+        $this->db->join('pegawai','pengeluaran_tetap.idPegawai=pegawai.idPegawai');
+        $get_data = $this->db->get();
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
+    function lihatlain($sampai,$dari)
+    {
+        return $query = $this->db->get('cost_lainlain',$sampai,$dari)->result();
+        
+    }
+    function jumlahlain()
+    {
+        $get_data = $this->db->get('cost_lainlain');
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
     function insert($dataoperasional) 
     {
         $this->db->insert('pengeluaran_tetap',$dataoperasional); 
@@ -87,50 +126,35 @@ class M_operasional extends CI_Model {
 
         );
         $this->db->insert('pengeluaran_perbulan',$perbulan);
-        
     }
-   /* function getall()
+    function deletelain($idCost_lainlain)
     {
-        $get_data = $this->db->get('');
-        if($get_data->num_rows()>0)
+        $this->db->select('namafolder');
+        $this->db->from('cost_lainlain');
+        $this->db->where('idCost_lainlain', $idCost_lainlain);
+        $query=$this->db->get();
+        if($query -> num_rows() > 0)
         {
-            foreach ($get_data->result() as $datapangkalan) 
+            foreach ($query->result() as $datalainlain) 
             {
-                $hasil[]= $datapangkalan;
+               $namafolder= $datalainlain->namafolder;
+               delete_files('./uploads/lainlain/'.$namafolder, TRUE);
+               rmdir('./uploads/lainlain/'.$namafolder);
             }
-            return $hasil;
         }
+        $this->db->select('idPengeluaran_Perbulan');
+        $this->db->from('pengeluaran_perbulan');
+        $this->db->where('idCost_lainlain', $idCost_lainlain);
+        $query=$this->db->get()->result();
+        $idPengeluaran_Perbulan = $query[0]->idPengeluaran_Perbulan;
+        $this->db->where('idPengeluaran_Perbulan', $idPengeluaran_Perbulan);
+        $this->db->delete('pengeluaran_perbulan');
+        //print_r($idCost_lainlain);
         
-    }*/
- /*   function delete($idPangkalan)
-    {
-        $this->db->where('idPangkalan', $idPangkalan);
-        $this->db->delete('pangkalan');
     }
-
-    function getby($idPangkalan)
+    function delete_costlain($idCost_lainlain)
     {
-        $by['idPangkalan'] = $idPangkalan;
-        $this->db->where($by);
-        $get_data           = $this->db->get('pangkalan');
-        if($get_data->num_rows() > 0)
-        {
-            foreach ($get_data->result() as $datapangkalan) {
-                $hasil[] = $datapangkalan;
-            }
-            return $hasil;
-        }
+        $this->db->where('idCost_lainlain', $idCost_lainlain);
+        $this->db->delete('cost_lainlain');
     }
-
-    function update($idPangkalan)
-    {
-        $datapangkalan=array(
-        
-            'namapangkalan' => $this->input->post('namapangkalan'),
-            'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-           
-        );
-        $this->db->where('idPangkalan', $idPangkalan);
-        $this->db->update('pangkalan', $datapangkalan);
-    }*/
 }

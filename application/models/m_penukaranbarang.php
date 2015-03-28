@@ -130,22 +130,22 @@ class M_penukaranbarang extends CI_Model
         $this->db->where('idTukar_barang', $idTukar_barang);
         $execute = $this->db->get();
         if($execute->num_rows()>0)
-            {
-                foreach ($execute->result() as $value) {
-                    $jumlahbarangkosong= $value->jumlahbarangkosong;
-                    $jumlahbarangrusak= $value->jumlahbarangrusak;
-                    $jumlahtambah=$jumlahbarangrusak+$jumlahbarangkosong;
-                    $datetoday =date("Y-m-d");
-                    $sql="update stok_gudang s
-                        inner join
-                        (
-                        select id.idstok_gudang
-                        from stok_gudang as id
-                        where date(tanggal) = '$datetoday'
-                        order by tanggal desc limit 1
-                        ) as id on s.idstok_gudang = id.idstok_gudang
-                        set jumlah_stok = jumlah_stok + '$jumlahtambah'
-                        where s.idstok_gudang = id.idstok_gudang";
+        {
+            foreach ($execute->result() as $value) {
+                $jumlahbarangkosong= $value->jumlahbarangkosong;
+                $jumlahbarangrusak= $value->jumlahbarangrusak;
+                $jumlahtambah=$jumlahbarangrusak+$jumlahbarangkosong;
+                $datetoday =date("Y-m-d");
+                $sql="update stok_gudang s
+                     inner join
+                     (
+                     select id.idstok_gudang
+                     from stok_gudang as id
+                     where date(tanggal) = '$datetoday'
+                     order by tanggal desc limit 1
+                     ) as id on s.idstok_gudang = id.idstok_gudang
+                     set jumlah_stok = jumlah_stok + '$jumlahtambah'
+                     where s.idstok_gudang = id.idstok_gudang";
                     $query = $this->db->query($sql);
 
                 }
@@ -196,7 +196,6 @@ class M_penukaranbarang extends CI_Model
         $hasilrusak=$rusak-$bandingrusak;
         $hasilkosong=$kosong-$bandingkosong;
         $hasiltotal=$hasilrusak+$hasilkosong;
-        
         $datatukarbarang=array(
         
             'jumlahbarangrusak'     => $data['jumlahbarangrusak'],
@@ -216,7 +215,7 @@ class M_penukaranbarang extends CI_Model
                         where date(tanggal) = '$datetoday'
                         order by tanggal desc limit 1
                         ) as id on s.idstok_gudang = id.idstok_gudang
-            set jumlah_stok = jumlah_stok + '$hasiltotal'
+            set jumlah_stok = jumlah_stok - '$hasiltotal'
             where s.idstok_gudang = id.idstok_gudang";
         $query = $this->db->query($sql);
 

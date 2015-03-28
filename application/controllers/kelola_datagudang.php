@@ -32,9 +32,9 @@ class Kelola_datagudang extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
+		     $session_data = $this->session->userdata('logged_in');
+		     $data['username'] = $session_data['username'];
+		     $data['hakakses'] = $session_data['hakakses'];
 			if($session_data['hakakses']=="pegawai")
 			{
 
@@ -107,8 +107,8 @@ class Kelola_datagudang extends CI_Controller {
 		if($this->session->userdata('logged_in'))
 		{
 			$stok_gudang = $this->m_penukaranbarang->ambilstokgudang();
-			$jumlah_stok = $stok_gudang[0]->jumlah_stok;
-
+			//$jumlah_stok = $stok_gudang[0]->jumlah_stok;
+			$jumlah_stok = $stok_gudang;
 	    	$session_data = $this->session->userdata('logged_in');
 	    	$idPegawai = $session_data['idPegawai'];
 			
@@ -131,24 +131,26 @@ class Kelola_datagudang extends CI_Controller {
 					'jumlahbarangkosong' => $this->input->post('jumlahbarangkosong'),
 					'tanggal' =>$datetoday
 				);
-				$query= $this->m_penukaranbarang->updatekurangdatagudang($pengurangan);
-				$query2=$this->m_penukaranbarang->insert($tukarbarang);
+				$this->m_penukaranbarang->updatekurangdatagudang($pengurangan);
+				$this->m_penukaranbarang->insert($tukarbarang);
 				
-					$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
-  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_datagudang')." class=\"alert-link\">Kembali?</a>
-					</div>";
-					$session_data = $this->session->userdata('logged_in');
-				    $data['username'] = $session_data['username'];
-				    $data['hakakses'] = $session_data['hakakses'];
-				    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
+				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_datagudang')." class=\"alert-link\">Kembali?</a>
+				</div>";
+				$session_data = $this->session->userdata('logged_in');
+				$data['username'] = $session_data['username'];
+			    $data['hakakses'] = $session_data['hakakses'];
+				if($session_data['hakakses']=="pegawai")
+				{
+			   	    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
 				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				    $datatukarbarang['success'] = $sukses;
 					$this->load->view('header');
 				 	$this->load->view('header_pegawai', $data);
 				  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datatukarbarang);
 				  	$this->load->view('footer');
-				
+				}
 			}
 			else
 			{
@@ -159,13 +161,16 @@ class Kelola_datagudang extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
-			    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
-			    $datatukarbarang['success'] = $sukses;
-				$this->load->view('header');
-			 	$this->load->view('header_pegawai', $data);
-			  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datatukarbarang);
-			  	$this->load->view('footer');
+			    if($session_data['hakakses']=="pegawai")
+				{
+				    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
+				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+				    $datatukarbarang['success'] = $sukses;
+					$this->load->view('header');
+				 	$this->load->view('header_pegawai', $data);
+				  	$this->load->view('pegawai/form_tambahpenukaranbarang', $datatukarbarang);
+				  	$this->load->view('footer');
+				}
 			}
 		}
 		
@@ -174,6 +179,10 @@ class Kelola_datagudang extends CI_Controller {
 	public function delete($idTukar_Barang)
 	{
 		$this->m_penukaranbarang->delete($idTukar_Barang);
+		echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/kelola_datagudang';}, 2000);
+
+				</script>";
 		if($this->session->userdata('logged_in'))
 		{
 	      $session_data = $this->session->userdata('logged_in');
@@ -192,10 +201,7 @@ class Kelola_datagudang extends CI_Controller {
 			  $this->load->view('header_pegawai', $data);
 			  $this->load->view('pegawai/v_mengelola_datagudang', $datatukarbarang);
 			  $this->load->view('footer');
-			echo "<script type='text/javascript'>
-				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/kelola_datagudang';}, 2000);
-
-				</script>";
+			
 			}
 			else
 		   	{
@@ -215,15 +221,16 @@ class Kelola_datagudang extends CI_Controller {
 		    $data['hakakses'] = $session_data['hakakses'];
 			if($session_data['hakakses']=="pegawai")
 			{
+				$datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 		    	$datatukarbarang['hasil'] = $this->m_penukaranbarang->getby($idTukar_Barang);
-		
+				$datatukarbarang['success'] = '';
 				$this->load->view('header');
 				$this->load->view('header_pegawai', $data);
 				$this->load->view('pegawai/form_editpenukaranbarang', $datatukarbarang);
 		  		$this->load->view('footer');
 		  	}
-				else
-	  		 {
+			else
+	  		{
 	    	 //If no session, redirect to login page
 	    	 redirect('index.php/c_login', 'refresh');
 	   		}
@@ -237,9 +244,63 @@ class Kelola_datagudang extends CI_Controller {
 		$data['jumlahbarangrusak'] = $this->input->post('jumlahbarangrusak');
 		$data['keterangan'] = $this->input->post('keterangan');
 		$data['idTukar_Barang'] = $idTukar_Barang;
-		
-		$this->m_penukaranbarang->update($data);
-		redirect('index.php/kelola_datagudang');
+		$jumlahbarangrusak = $this->input->post('jumlahbarangrusak');
+		$jumlahbarangkosong = $this->input->post('jumlahbarangkosong');
+		$totaltukar = $jumlahbarangrusak + $jumlahbarangkosong;
+		$stok_gudang = $this->m_penukaranbarang->ambilstokgudang();
+		if($totaltukar<=$stok_gudang)
+		{
+
+			$this->m_penukaranbarang->update($data);
+
+			$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+	  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+						Data berhasil diubah <a href=".base_url('index.php/kelola_datagudang')." class=\"alert-link\">Kembali?</a>
+						</div>";
+			if($this->session->userdata('logged_in'))
+			{
+		     	$session_data = $this->session->userdata('logged_in');
+		      	$data['username'] = $session_data['username'];
+		      	$data['hakakses'] = $session_data['hakakses'];
+		      	$datapangkalan['success'] = $sukses;
+		      	if($session_data['hakakses']=="pegawai")
+		      	{
+		      		$datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+				    $datatukarbarang['success'] = $sukses;
+					$datatukarbarang['hasil']	= $this->m_penukaranbarang->getby($idTukar_Barang);
+					$datatukarbarang['success'] = $sukses;
+					$this->load->view('header');
+					$this->load->view('header_pegawai', $data);
+					$this->load->view('pegawai/form_editpenukaranbarang', $datatukarbarang);
+				  	$this->load->view('footer');
+			  	}
+				else
+		   		{
+		     //If no session, redirect to login page
+		     		redirect('index.php/c_login', 'refresh');
+		   		}
+		   	}
+	   	}
+	   	else
+			{
+				$sukses = "<div class=\"alert alert-warning alert-dismissible\" role=\"alert\">
+				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Stok Gudang tidak mencukupi kebutuhan <a href=".base_url('index.php/kelola_datagudang')." class=\"alert-link\">Kembali?</a>
+				</div>";
+				$session_data = $this->session->userdata('logged_in');
+			    $data['username'] = $session_data['username'];
+			    $data['hakakses'] = $session_data['hakakses'];
+			    if($session_data['hakakses']=="pegawai")
+				{
+					$datatukarbarang['hasil'] = $this->m_penukaranbarang->getby($idTukar_Barang);
+				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+				    $datatukarbarang['success'] = $sukses;
+					$this->load->view('header');
+				 	$this->load->view('header_pegawai', $data);
+				  	$this->load->view('pegawai/form_editpenukaranbarang', $datatukarbarang);
+				  	$this->load->view('footer');
+				}
+			}
 	}
 
 }

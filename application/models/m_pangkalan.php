@@ -24,6 +24,17 @@ class M_pangkalan extends CI_Model {
         }
         
     }
+    function lihat($sampai,$dari){
+        
+        return $query = $this->db->get('pangkalan',$sampai,$dari)->result();
+        
+    }
+    function jumlah()
+    {
+        $get_data = $this->db->get('pangkalan');
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
     function delete($idPangkalan)
     {
         $this->db->where('idPangkalan', $idPangkalan);
@@ -56,5 +67,20 @@ class M_pangkalan extends CI_Model {
         $this->db->where('idPangkalan', $data['idPangkalan']);
         $this->db->update('pangkalan', $datapangkalan);
     }
-
+    public function get_id($idPangkalan)
+    {
+        /*$by['idPangkalan']=$id;
+        $this->db->where($by);*/
+        $this->db->where('idPangkalan', $idPangkalan);
+        $query = $this->db->get('pangkalan');
+        return $query;
+    }
+    public function deletedata($data,$idPangkalan)
+    {
+        echo "model";
+        print_r($data);
+        $by['idPangkalan']=$idPangkalan;
+        $this->db->where($by);
+        $this->db->delete('pangkalan');
+    }
 }

@@ -1,5 +1,6 @@
 <h3><center>Form Edit Pemasukan Gas</center></h1>
 <br>
+<?php echo $success; ?>
 <div class="col-md-3">
 </div>
 
