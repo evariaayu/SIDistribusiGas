@@ -1,26 +1,27 @@
-<section id="login">
-    <div class="container">
-      <div class="row">
-          <div class="col-xs-12">
-              <div class="form-wrap">
-                <h1>Silahkan masuk</h1>
-                    <form role="form" action="<?php echo base_url() ?>index.php/c_verifylogin/" method="post" id="login-form">
-                        <div class="form-group">
-                            <label for="username" class="sr-only">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="sr-only">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-                        </div>
-                        <input type="submit" id="btn-login" class="btn btn-primary btn-lg btn-block" value="Log in">
-                    </form>
-                    <hr>
-              </div>
-        </div> <!-- /.col-xs-12 -->
-      </div> <!-- /.row -->
-    </div> <!-- /.container -->
-</section>
+<div class="login">
+        <div class="login-screen">
+          <div class="login-icon">
+            <img src="../assets/img/icon.png" alt="Welcome to Mail App" />
+            <h4>Welcome to <small>Mail App</small></h4>
+          </div>
+          <form role="form" action="<?php echo base_url() ?>index.php/c_verifylogin/" method="post" id="login-form">
+          <div class="login-form">
+            <div class="form-group">
+              <input type="text" class="form-control login-field" placeholder="Enter your username" name="username" id="login-name" />
+              <label class="login-field-icon fui-user" for="login-name"></label>
+            </div>
 
+            <div class="form-group">
+              <input type="password" class="form-control login-field" placeholder="Password" name="password" id="login-pass" />
+              <label class="login-field-icon fui-lock" for="login-pass"></label>
+            </div>
 
-</div> <!-- /.modal -->
+            <input type="submit" class="btn btn-primary btn-lg btn-block" value="log in">
+
+          </div>
+        </form>
+        </div>
+      </div>
+
+      <link href="dist/css/flat-ui.css" rel="stylesheet">
+    <link href="docs/assets/css/demo.css" rel="stylesheet">
