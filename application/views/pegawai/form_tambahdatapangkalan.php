@@ -1,10 +1,11 @@
 <h3><center>Form Tambah Data Pangkalan</center></h1>
 <br>
-<?php echo $success ?>
+
 <div class="col-md-3">
 </div>
 
 <div class="col-md-6">
+  <?php echo $success ?>
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pangkalan/insert">
   <div class="form-group">
     <label for="namapangkalan" class="col-sm-2 control-label">Nama Pangkalan</label>

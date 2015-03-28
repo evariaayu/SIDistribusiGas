@@ -17,11 +17,10 @@
 <div class="col-md-8 col-sm-offset-2">
 <table class="table table-striped table-hover table-bordered">
    <?php $i=0; ?>
-      <?php if(empty($hasil)) {
-  echo "Data Biaya Operasional masih kosong";
-}
-
-  else { ?>
+      <?php if(empty($hasil)) {?>
+   <div class="alert alert-warning" role="alert">Data biaya lain-lain masih kosong</div>
+<?php } 
+   else { ?>
    <thead>
       <tr>
         <th>ID</th>

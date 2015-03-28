@@ -81,7 +81,7 @@
                                   <td><?php echo $biayaoperasional->pengeluaranPLN ?></td>
                                   <td><?php echo $biayaoperasional->pengeluaranPAM ?></td>
                                   <td><?php echo $biayaoperasional->pengeluaranInternet ?></td>
-                                  <td><?php echo "..." ?></td>
+                                  <td><?php echo $biayaoperasional->total ?></td>
                                   </tr>
                              <?php $nomor++; } ?>
                             
@@ -113,7 +113,7 @@
                         <!--<legend><center>Laporan Transaksi Gas Online</center></legend>-->
                     <!-- Button trigger modal -->
                     
-                   
+                
 
                         <table class="table table-striped table-hover ">
                               <thead>
@@ -123,7 +123,7 @@
                                   <th>Tanggal</th>
                                   <th style="min-width: 150px;">Uraian</th>
                                   <th>Harga</th>
-                                  <th>Total</th>
+                                 
                                 </tr>
                               </thead>
                                <tbody>
@@ -141,7 +141,7 @@
                                   <td><?php echo $biayaoperasional->tanggal ?></td>
                                   <td><?php echo $biayaoperasional->namabarang ?></td>
                                   <td><?php echo $biayaoperasional->harga ?></td>
-                                  <td><?php echo ".." ?></td>
+                                  
                                   </tr>
                              <?php $nomor++; } ?>
                             
