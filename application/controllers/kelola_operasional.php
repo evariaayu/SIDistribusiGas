@@ -34,8 +34,8 @@ class Kelola_operasional extends CI_Controller {
 	      	$data['hakakses'] = $session_data['hakakses'];
 
 	     	//$dataoperasional['hasil'] = $this->m_operasional->getall();
-	     	$hakakses = $session_data['hakakses'];
-		 	if($hakakses=="pegawai" && $hakakses="direktur")
+	     	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$jumlah = $this->m_operasional->jumlah();
 				$config['base_url'] = base_url().'index.php/kelola_operasional/index';
@@ -73,8 +73,8 @@ class Kelola_operasional extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
-		    $hakakses = $session_data['hakakses'];
-		   	if($hakakses=="pegawai" && $hakakses="direktur")
+		    $hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$dataoperasional['success']='';
 
@@ -102,8 +102,8 @@ class Kelola_operasional extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
-		    $hakakses = $session_data['hakakses'];
-		   if($hakakses=="pegawai")
+		    $hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$datalainlain['success'] = '';
 		    	$this->load->view('header');
@@ -201,7 +201,8 @@ class Kelola_operasional extends CI_Controller {
     			$data['username'] = $session_data['username'];
     			$data['hakakses'] = $session_data['hakakses'];
     			$data['idPegawai'] = $session_data['idPegawai'];
-		    	if($session_data['hakakses']=="pegawai")
+		    	$hakakses=$session_data['hakakses'];
+	    		if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 				{
 		    		$dataoperasional['success'] = $sukses;
 					$this->load->view('header');
@@ -236,7 +237,8 @@ class Kelola_operasional extends CI_Controller {
 
 	     	$dataoperasional['hasil'] = $this->m_operasional->getall();
 	     	$hakakses = $session_data['hakakses'];
-		 	if($hakakses=="pegawai")
+		 	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
@@ -328,8 +330,8 @@ class Kelola_operasional extends CI_Controller {
 	      	$data['hakakses'] = $session_data['hakakses'];
 
 	     	//$dataoperasional['hasil'] = $this->m_operasional->getall();
-	     	$hakakses = $session_data['hakakses'];
-		 	if($hakakses=="pegawai")
+	     	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$jumlah = $this->m_operasional->jumlahlain();
 				$config['base_url'] = base_url().'index.php/kelola_operasional/pengeluaranlain/';
@@ -375,8 +377,8 @@ class Kelola_operasional extends CI_Controller {
 	      	$data['hakakses'] = $session_data['hakakses'];
 
 	     	$datalainlain['hasil'] = $this->m_operasional->getall_lain();
-	     	$hakakses = $session_data['hakakses'];
-		 	if($hakakses=="pegawai")
+	     	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		    {
 		    	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>

@@ -33,7 +33,8 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$data['idPegawai'] = $session_data['idPegawai'];
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 	      		$jumlah = $this->m_pemasukangas->jumlah();
 				$config['base_url'] = base_url().'index.php/Kelola_pemasukangas/index';
@@ -73,7 +74,8 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$data['idPegawai'] = $session_data['idPegawai'];
-			if($session_data['hakakses']=="pegawai")
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 				$datapemasukangas['success']='';
 				$this->load->view('header');
@@ -147,7 +149,8 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$session_data = $this->session->userdata('logged_in');
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
-			if($session_data['hakakses']=="pegawai")
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 				$jumlah = $this->m_pemasukangas->jumlah();
 					    	 $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
@@ -208,8 +211,8 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$data['idPegawai'] = $session_data['idPegawai'];
-	      	$datapemasukangas['success'] = $sukses;
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      	{
 
 		      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);

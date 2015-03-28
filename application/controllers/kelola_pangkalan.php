@@ -82,13 +82,13 @@ class Kelola_pangkalan extends CI_Controller {
 			else
 	   		{
 	     //If no session, redirect to login page
-	     		redirect('index.php/c_login', 'refresh');
+	     		redirect('index.php/c_login/logout', 'refresh');
 	   		}
 	  }
 	   else
 	   {
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+	     redirect('index.php/c_login/logout', 'refresh');
 	   }
 	}
 
@@ -122,7 +122,7 @@ class Kelola_pangkalan extends CI_Controller {
 			else
 	   		{
 	     //If no session, redirect to login page
-	     		redirect('index.php/c_login', 'refresh');
+	     		redirect('index.php/c_login/logout', 'refresh');
 	   		}
 	   	}
 	}
@@ -157,8 +157,13 @@ class Kelola_pangkalan extends CI_Controller {
 			else
 	   		{
 	     //If no session, redirect to login page
-	     		redirect('index.php/c_login', 'refresh');
+	     		redirect('index.php/c_login/logout', 'refresh');
 	   		}
+	   	}
+	   	else
+	   	{
+
+	   		redirect('index.php/c_login/logout', 'refresh');
 	   	}
 	//	redirect('index.php/kelola_pangkalan');
 	}
