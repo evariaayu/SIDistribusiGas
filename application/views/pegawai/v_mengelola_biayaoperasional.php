@@ -1,6 +1,6 @@
 <h1><center>Kelola Biaya Operasional</center></h1>
 <br>
-<?php echo $success;?>
+
 <div class="col-md-2">
   </div>
   <div class="col-xs-1"></div>
@@ -8,24 +8,15 @@
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayaoperasional','Data Biaya Operasional') ?>
 </button>
-  <button type="button" class="btn btn-default btn-md btn-link">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-    <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayalain','Data Biaya Lain - Lain') ?>
-  </button>
-<br>
-<br>
-
-
-<br>
 <br>
 <div class="col-md-8 col-sm-offset-2">
+<?php echo $success;?>
 <table class="table table-striped table-hover table-bordered">
    <?php $i=0; ?>
-      <?php if(empty($hasil)) {
-  echo "Data Biaya Operasional masih kosong";
-}
-
-  else { ?>
+      <?php if(empty($hasil)) {?>
+   <div class="alert alert-warning" role="alert">Data biaya operasional masih kosong</div>
+<?php } 
+   else { ?>
    <thead>
       <tr>
         <th>ID</th>

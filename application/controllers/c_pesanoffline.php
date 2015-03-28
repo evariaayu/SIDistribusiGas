@@ -32,19 +32,26 @@ class C_pesanoffline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      if($session_data['hakakses']=="pegawai")
+	      {
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 
 	      //$data['idPangkalan'] = $session_data['idPangkalan'];
 	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
 		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
-	      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
-	      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+		      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
-		   
-		  $this->load->view('footer');
+		      $this->load->view('header');
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
+			   
+			  $this->load->view('footer');
+		  }
+		  else
+		  {
+		  	redirect('index.php/c_login', 'refresh');
+		  }
 		}
 	   else
 	   {
@@ -124,18 +131,75 @@ class C_pesanoffline extends CI_Controller {
 				//$this->load->model('m_pesanonline/insert');
 				$this->m_pesanoffline->kurangstok($jumlahGas);
 				$this->m_pesanoffline->insert($data);
+
+				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
-				$message = "Berhasil! Hore total = $totalhargabelioff";
+				/*$message = "Berhasil! Hore total = $totalhargabelioff";
 				
 				echo "<script type='text/javascript'>alert('$message');
-					window.location.href ='" . base_url() . "index.php/pegawai';</script>";
+					window.location.href ='" . base_url() . "index.php/pegawai';</script>";*/
+				$session_data = $this->session->userdata('logged_in');
+			    $data['username'] = $session_data['username'];
+			    $data['hakakses'] = $session_data['hakakses'];
+			    if($session_data['hakakses']=="pegawai")
+	      		{
+	      //$data['idPegawai'] = $session_data['idPegawai'];
+
+	      //$data['idPangkalan'] = $session_data['idPangkalan'];
+	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
+		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
+		      		$datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+		      		$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+
+
+		      		$datanamapangkalan['success']=$sukses;
+		      		$this->load->view('header');
+			  		$this->load->view('header_pegawai', $data);
+			  		$this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
+			   
+			  		$this->load->view('footer');
+		  		}
 
 			}
 		}
 		else
 		{
-			echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
+			//echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
+				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				</div>";
+				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
+		        //$hasil = $query->row_array();
+				/*$message = "Berhasil! Hore total = $totalhargabelioff";
+				
+				echo "<script type='text/javascript'>alert('$message');
+					window.location.href ='" . base_url() . "index.php/pegawai';</script>";*/
+				$session_data = $this->session->userdata('logged_in');
+			    $data['username'] = $session_data['username'];
+			    $data['hakakses'] = $session_data['hakakses'];
+			    if($session_data['hakakses']=="pegawai")
+	      		{
+	      //$data['idPegawai'] = $session_data['idPegawai'];
+
+	      //$data['idPangkalan'] = $session_data['idPangkalan'];
+	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
+		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
+		      		$datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+		      		$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+
+
+		      		$datanamapangkalan['success']=$sukses;
+		      		$this->load->view('header');
+			  		$this->load->view('header_pegawai', $data);
+			  		$this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
+			   
+			  		$this->load->view('footer');
+		  		}
 		}
 	}
 	

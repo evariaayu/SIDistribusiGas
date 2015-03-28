@@ -5,10 +5,10 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <strong>Warning!</strong> <?php echo $error;?>
 </div>-->
-<?php echo $success;?>
-<div class="col-xs-offset-1 col-md-5">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_operasional/do_upload" enctype="multipart/form-data" multiple="true">
 
+<div class="col-xs-offset-4 col-md-5">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_operasional/do_upload" enctype="multipart/form-data" multiple="true">
+<?php echo $success;?>
   <div class="form-group">
     <!--pam-->
     <label for="pengeluaranPAM" class="col-sm-2 control-label">PAM</label>

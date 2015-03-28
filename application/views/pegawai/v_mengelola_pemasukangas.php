@@ -38,10 +38,10 @@
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Pemasukan Gas masih kosong";
-}
-  else { ?>
+      <?php if(empty($hasil)) {?>
+   <div class="alert alert-warning" role="alert">Data pemasukan gas masih kosong</div>
+<?php } 
+   else { ?>
       <?php foreach ($hasil as $datapemasukangas) {?>
       <tr>
         <td><?php echo $datapemasukangas->idPemasukan ?></td>

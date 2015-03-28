@@ -5,13 +5,9 @@
 </div>
 
 <div class="col-md-6">
+  <?php echo $success;?>
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanonline/pesan">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Waktu</label>
-      <div class="col-sm-10">
-        <input readonly id="tanggalTransaksiOnline" name="tanggalTransaksiOnline" class="form-control" value="<?php echo (new \DateTime())->format('d-M-Y H:i:s'); ?>">
-      </div>
-  </div>
+  
 
 <!--  <?php echo form_dropdown('pangkalan',$hasil,''); ?> -->
 <div class="form-group">
@@ -22,14 +18,14 @@
   </div>
 <div class="form-group">
     <label for="pangkalan" class="col-sm-2 control-label">ID Pangkalan</label>
-    <div class="col-sm-5">
+    <div class="col-sm-3">
         <input id="idPangkalan" name="idPangkalan" class="form-control" value="<?php echo $hasil[0]['idPangkalan'] ?>" readonly>
     </div>
   </div>
   <div class="form-group">
     <!--jumlah barang rusak-->
     <label for="hargagas" class="col-sm-2 control-label">Harga/1 gas</label>
-    <div class="col-sm-10">
+    <div class="col-sm-5">
       <input id="harga" name="harga" class="form-control" value="<?php echo $harga[0]['hargajual'] ?>" readonly>
     </div>
   </div>

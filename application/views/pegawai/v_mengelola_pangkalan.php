@@ -19,7 +19,7 @@
     $("#hapus").click(function(e){
         $.ajax({
           url: '<?php  echo site_url() ?>index.php/kelola_pangkalan/deletedata',
-          type: 'GET',
+          type: 'POST',
           data: {
             "idPangkalan": $("#idPangkalan").val()
           },
@@ -33,7 +33,39 @@
 
  </script>
 
-
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+ $(".delbutton").click(function(){
+ 
+ //Save the link in a variable called element
+ var element = $(this);
+ 
+ //Find the id of the link that was clicked
+ var del_id = element.attr("id");
+ 
+ //Built a url to send
+ var info = 'id=' + del_id;
+ if(confirm("Anda yakin akan menghapus?"))
+ {
+ $.ajax({
+ type: "POST",
+ url : "<?php echo site_url('index.php/kelola_pangkalan/deleteajax')?>",
+ data: info,
+ success: function(){
+ }
+ });
+ 
+ $(this).parents(".hasil").animate({ opacity: "hide" }, "slow");
+ 
+ }
+ 
+ return false;
+ 
+ });
+ 
+})
+</script>
 <div class="col-md-2">
   </div>
   <div class="col-xs-1"></div>
@@ -43,9 +75,10 @@
 </button>
 <br>
 <br>
-<?php echo $success;?>
+
 
   <div class="col-md-6 col-sm-offset-3">
+    <?php echo $success;?>
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
@@ -57,10 +90,10 @@
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Pangkalan masih kosong";
-}
-  else { ?>
+      <?php if(empty($hasil)) {?>
+   <div class="alert alert-warning" role="alert">Data pangkalan masih kosong</div>
+<?php } 
+   else { ?>
       <?php foreach ($hasil as $datapangkalan) {?>
       <tr>
         <td><?php echo $datapangkalan->idPangkalan ?></td>
@@ -73,10 +106,10 @@
           <a href="<?php echo base_url();?>index.php/kelola_pangkalan/delete/<?php echo $datapangkalan->idPangkalan;?>">delete</a> 
         </button>
         </td>
-  <!--      <td>
+    <!--   <td>
    <button id="" class="btn btn-primary btn-xs" onClick="editdata(<?php echo $datapangkalan->idPangkalan; ?>)" data-toggle="modal" data-target="hapusmodal">Hapus</button>
         </td>-->
-
+<!--<td><a class="delbutton" id="<?php echo $datapangkalan->idPangkalan ?>"  href="#" >Delete</a></td>-->
 
 
 
@@ -110,7 +143,7 @@
              <br>
             
            </div>
-           <!-- <form class="form-horizontal" method="POST" action="#" > -->
+            <form class="form-horizontal"> 
            <div class="form-group">
               <label for="idPangkalan" class="col-sm-2 control-label">ID Pangkalan</label>
               <div class="col-sm-6">
@@ -133,7 +166,7 @@
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                <input type="submit" id="hapus"class="btn btn-primary" value="Hapus"></input>
             </div>
-          <!-- </form> -->
+           </form> 
           </div>
         </div>
       </div>

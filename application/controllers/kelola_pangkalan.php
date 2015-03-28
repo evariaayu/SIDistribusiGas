@@ -30,7 +30,8 @@ class Kelola_pangkalan extends CI_Controller {
 	      	$session_data = $this->session->userdata('logged_in');
 	      	$data['username'] = $session_data['username'];
 	     	$data['hakakses'] = $session_data['hakakses'];
-	      	if($session_data['hakakses']=="pegawai")
+	     	$hakakses=$session_data['hakakses'];
+	      	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      	{
 
 		      	$jumlah = $this->m_pangkalan->jumlah();
@@ -51,13 +52,13 @@ class Kelola_pangkalan extends CI_Controller {
 			else
 	   		{
 	     //If no session, redirect to login page
-	    		redirect('index.php/c_login', 'refresh');
+	    		redirect('index.php/c_login/logout', 'refresh');
 	   		}
 		}
 	   else
 	   {
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+	     redirect('index.php/c_login/logout', 'refresh');
 	   }
 		
 	}
@@ -66,21 +67,22 @@ class Kelola_pangkalan extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      if($session_data['hakakses']=="pegawai")
-	      {
-	      	$datapangkalan['success']='';
-			$this->load->view('header');
-		 	$this->load->view('header_pegawai', $data);
-		  	$this->load->view('pegawai/form_tambahdatapangkalan', $datapangkalan);
-		  	$this->load->view('footer');
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	     	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
+	      	{
+	      		$datapangkalan['success']='';
+				$this->load->view('header');
+		 		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/form_tambahdatapangkalan', $datapangkalan);
+		  		$this->load->view('footer');
 		  	}
 			else
 	   		{
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+	     		redirect('index.php/c_login', 'refresh');
 	   		}
 	  }
 	   else
@@ -109,7 +111,8 @@ class Kelola_pangkalan extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$datapangkalan['success'] = $sukses;
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      	{
 				$this->load->view('header');
 		 		$this->load->view('header_pegawai', $data);
@@ -142,7 +145,8 @@ class Kelola_pangkalan extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$datapangkalan['success'] = $sukses;
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      	{
 	      		$datapangkalan['hasil'] = $this->m_pangkalan->getall();
 				$this->load->view('header');
@@ -166,7 +170,8 @@ class Kelola_pangkalan extends CI_Controller {
 	      	$session_data = $this->session->userdata('logged_in');
 	      	$data['username'] = $session_data['username'];
 	     	$data['hakakses'] = $session_data['hakakses'];
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	     	{
 	    		$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
 				$datapangkalan['success'] = '';
@@ -199,7 +204,8 @@ class Kelola_pangkalan extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$datapangkalan['success'] = $sukses;
-	      	if($session_data['hakakses']=="pegawai")
+	      	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      	{
 				$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
 				$datapangkalan['success'] = $sukses;
@@ -229,27 +235,13 @@ class Kelola_pangkalan extends CI_Controller {
 
 	public function deletedata()
 	{
-		/*$data['namapangkalan'] = $this->input->post('namapangkalan');
-		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
-		$data['idPangkalan'] = $idPangkalan;
-		echo "testes";
-		print_r($idPangkalan);
-		print_r($namapangkalan);
-		$this->m_pangkalan->deletedata($idPangkalan);	*/
-		echo "kontroller";
-		$data=array(
-			'idPangkalan' => $this->input->post('idPangkalan'),
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-
-		);
-		print_r($data);
-
-		$this->m_pangkalan->deletedata($data,$this->input->post('idPangkalan'));
-		
-	//	redirect(base_url('Kelolatempatkp'));	
+		$this->m_pangkalan->deletedata($this->input->post('idPangkalan'));
 	}
-
+	function deleteajax()
+	{
+		$idPangkalan = $this->input->post('id');
+		$this->db->delete('pangkalan', array('idPangkalan' => $idPangkalan));
+	}
 }
 
 

@@ -35,7 +35,7 @@ class Kelola_operasional extends CI_Controller {
 
 	     	//$dataoperasional['hasil'] = $this->m_operasional->getall();
 	     	$hakakses = $session_data['hakakses'];
-		 	if($hakakses=="pegawai")
+		 	if($hakakses=="pegawai" && $hakakses="direktur")
 		    {
 		    	$jumlah = $this->m_operasional->jumlah();
 				$config['base_url'] = base_url().'index.php/kelola_operasional/index';
@@ -54,13 +54,13 @@ class Kelola_operasional extends CI_Controller {
 		    }
 		  	else
 		  	{
-		    	redirect('index.php/c_login', 'refresh');
+		    	redirect('index.php/c_login/logout', 'refresh');
 		    }
 		}
 	   else
 	   {
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+	     redirect('index.php/c_login/logout', 'refresh');
 	   }
 		
 	}
@@ -74,7 +74,7 @@ class Kelola_operasional extends CI_Controller {
 		    $data['username'] = $session_data['username'];
 		    $data['hakakses'] = $session_data['hakakses'];
 		    $hakakses = $session_data['hakakses'];
-		   	if($hakakses=="pegawai")
+		   	if($hakakses=="pegawai" && $hakakses="direktur")
 		    {
 		    	$dataoperasional['success']='';
 
@@ -85,13 +85,13 @@ class Kelola_operasional extends CI_Controller {
 		  	}
 		  	else
 		  	{
-		    	redirect('index.php/c_login', 'refresh');
+		    	redirect('index.php/c_login/logout', 'refresh');
 		  	}
 	  	}
 	   	else
 	   	{
 	     //If no session, redirect to login page
-	    	redirect('index.php/c_login', 'refresh');
+	    	redirect('index.php/c_login/logout', 'refresh');
 	   	}
 	}
 
