@@ -76,7 +76,6 @@ class Report_biayaoperasional extends CI_Controller {
 	     redirect('index.php/c_login', 'refresh');
 	   }
 	}
-
 	public function biaya_operasional($bulan,$tahun)
 	{
 		if($this->session->userdata('logged_in'))
