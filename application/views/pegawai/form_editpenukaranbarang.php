@@ -5,7 +5,7 @@
 </div>
 
 <div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_datagudang/update/<?php echo $hasil[0]->idTukar_Barang ?>">
+<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_datagudang/update/<?php echo $hasil[0]->idTransaksi_Online ?>">
   <?php echo $success;?>
  <div class="form-group">
     <!--jumlah barang rusak-->
@@ -24,25 +24,23 @@
   </div>
   <!--jumlah barang rusak-->
   <div class="form-group">
-    <label for="jumlahbarangrusak" class="col-sm-2 control-label">Jumlah Barang Rusak</label>
+    <label for="jumlahGas" class="col-sm-2 control-label">Jumlah Gas</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="jumlahbarangrusak" name="jumlahbarangrusak" value="<?php echo $hasil[0]->jumlahbarangrusak ?>">
-    </div>
-  </div>
-
-  <!---jumlah barang kosong -->
-  <div class="form-group">
-    <label for="jumlahbarangkosong" class="col-sm-2 control-label">Jumlah Barang Kosong</label>
-    <div class="col-sm-10">
-      <input id="jumlahbarangkosong" name="jumlahbarangkosong" class="form-control" value="<?php echo $hasil[0]->jumlahbarangkosong ?>"></input>
+      <input type="text" class="form-control" id="jumlahGas" name="jumlahGas" value="<?php echo $hasil[0]->jumlahGas ?>" disabled>
     </div>
   </div>
   
-  <!---Keterangan -->
   <div class="form-group">
-    <label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
+    <label for="idstatus_pemesanan" class="col-sm-2 control-label">Status Pemesanan</label>
     <div class="col-sm-10">
-      <input id="keterangan" name="keterangan" class="form-control" value="<?php echo $hasil[0]->keterangan ?>"></input>
+      <select class="form-control" name="idstatus_pemesanan" id="idstatus_pemesanan">
+        <option value="0">--- Pilih Status Pemesanan ----</option>
+     <?php foreach ($hasil as $row) {?>
+        
+         <option value="<?php echo $row->idstatus_pemesanan ?>"> <?php echo $row->namastatus ?> </option>
+    
+         <?php } ?>
+        </select>
     </div>
   </div>
 

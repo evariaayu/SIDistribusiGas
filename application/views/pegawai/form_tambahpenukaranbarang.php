@@ -23,12 +23,12 @@
       <?php } ?>
     </div>
   </div>
-
+</div>
 
   <div class="form-group">
     <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
     <div class="col-sm-10">
-      <select class="form-control" name="idPangkalan" id="idPangkalan">
+      <select class="form-control" name="idPangkalan" id="idPpangkalan">
         <option value="0">--- Pilih Pangkalan ----</option>
      <?php foreach ($hasil as $row) {?>
         

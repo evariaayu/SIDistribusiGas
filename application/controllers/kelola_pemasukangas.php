@@ -153,7 +153,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 				$jumlah = $this->m_pemasukangas->jumlah();
-					    	 $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
+				$datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
 		    	$datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 		      	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
