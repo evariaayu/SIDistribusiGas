@@ -16,6 +16,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/moment.js') ?>"></script>
     <link href="<?php echo base_url('dist/css/flat-ui.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('docs/assets/css/demo.css') ?>" rel="stylesheet">
+    <script type="text/javascript" src="<?php echo base_url('assets/js/date_time.js') ?>"></script>
     
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/jquery.dataTables.css') ?>">
 </head>

@@ -78,14 +78,19 @@ class M_penukaranbarang extends CI_Model
 
     public function ambilstokgudang()
     {
+     // echo date_default_timezone_get();
+        date_default_timezone_set("Asia/Jakarta");
+     //   echo date_default_timezone_get();
+    //   $datecoba= date("Y/m/d H:i:s");
         $datetoday =date("Y-m-d");
+     //   print_r($datetoday);
         $this->db->select('jumlah_stok');
         $this->db->from('stok_gudang');
         $this->db->where('date(tanggal)',$datetoday);
         $this->db->order_by('tanggal','desc');
         $this->db->limit(1);
         $get_data = $this->db->get();
-       // print_r($get_data);
+        //print_r($get_data);
         if($get_data->num_rows()>0)
         {
             foreach ($get_data->result() as $datatukarbarang) 
@@ -112,7 +117,7 @@ class M_penukaranbarang extends CI_Model
                     $stok_gudang=$value->jumlah_stok;
                     $this->db->set('jumlah_stok', $stok_gudang); 
                     $insert=$this->db->insert('stok_gudang');
-                //    return $stok_gudang;
+                    return $stok_gudang;
 
                 }
             }

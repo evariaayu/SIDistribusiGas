@@ -51,9 +51,9 @@ class C_cekpesanoffline extends CI_Controller {
 	public function update()
 	{
 		$jumlahGas = $this->input->post('jumlahGas');
-		$idTransaksi_Onffline = $this->input->post('idTransaksi_Onffline');
+		$idTransaksi_Offline = $this->input->post('idTransaksi_Offline');
 	//	print_r($idTransaksi_Online);
-		$this->m_cekpesanoffline->update($jumlahGas,$idTransaksi_Onffline);
+		$this->m_cekpesanoffline->update($jumlahGas,$idTransaksi_Offline);
 		redirect('index.php/c_cekpesanoffline', 'refresh');
 		
 	}

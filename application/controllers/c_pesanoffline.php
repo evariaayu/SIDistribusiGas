@@ -7,6 +7,7 @@ class C_pesanoffline extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_pesanoffline');
+        $this->load->model('m_penukaranbarang');
         $this->load->helper('form');
         $this->load->helper('url');
     }
@@ -32,14 +33,10 @@ class C_pesanoffline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      if($session_data['hakakses']=="pegawai")
+	      $hakakses=$session_data['hakakses'];
+	      if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      {
-	      //$data['idPegawai'] = $session_data['idPegawai'];
-
-	      //$data['idPangkalan'] = $session_data['idPangkalan'];
-	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
-		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
-		      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+	          $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
 		      $this->load->view('header');
@@ -60,6 +57,8 @@ class C_pesanoffline extends CI_Controller {
 	   }
 		
 	}
+
+	
 
 	/*public function form_pesanonline()
 	{
@@ -83,12 +82,6 @@ class C_pesanoffline extends CI_Controller {
 	   	}
 	}*/
 
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		$this->session->sess_destroy();
-		redirect(site_url()."index.php/c_login");
-	}
 
 	public function message()
 	{
@@ -203,56 +196,6 @@ class C_pesanoffline extends CI_Controller {
 		}
 	}
 	
-
-	/*public function insert()
-	{
-		$datapangkalan=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			'notelppangkalan' => $this->input->post('notelppangkalan'),
-		);
-		$this->m_pangkalan->insert($datapangkalan);
-		redirect('index.php/kelola_pangkalan');
-		
-	   
-	 //  print_r($datapangkalan);
-	}
-
-	public function delete($idPangkalan)
-	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
-	}
-
-	public function edit($idPangkalan)
-	{
-		$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
-	}
-
-	public function update($idPangkalan)
-	{
-		if($this->input->post('submit'))  
-		{
-			$this->m_pangkalan->update($idPangkalan);
-			redirect('index.php/kelola_pangkalan');
-		}
-	}
-
-	public function submit()	
-	{
-			$jumlahorder = $this->input-post('jumlahorder');
-			$batas = $this->m_pesanonline->cekstok();
-			if($jumlahorder <= $batas) 
-			{
-				echo'tersedia'; echo $jumlahorder;
-			}
-	        else
-	        {
-	        	echo'tidak tersedia';
-	        }
-	}*/
 
 }
 
