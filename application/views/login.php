@@ -1,8 +1,8 @@
 <div class="login">
         <div class="login-screen">
           <div class="login-icon">
-            <img src="../assets/img/icon.png" alt="Welcome to Mail App" />
-            <h4>Welcome to <small>Mail App</small></h4>
+            <img src="../assets/img/almas.png" alt="Welcome to Almas Gasindo" />
+            <h4><center>Welcome to <small> Almas Gasindo Jaya Abadi</small></center></h4>
           </div>
           <form role="form" action="<?php echo base_url() ?>index.php/c_verifylogin/" method="post" id="login-form">
           <div class="login-form">
