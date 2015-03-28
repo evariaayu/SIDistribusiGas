@@ -75,10 +75,10 @@ class M_pangkalan extends CI_Model {
         $query = $this->db->get('pangkalan');
         return $query;
     }
-    public function deletedata($data,$idPangkalan)
+    public function deletedata($idPangkalan)
     {
-        echo "model";
-        print_r($data);
+      //  echo "model";
+       // print_r($data);
         $by['idPangkalan']=$idPangkalan;
         $this->db->where($by);
         $this->db->delete('pangkalan');

@@ -229,27 +229,13 @@ class Kelola_pangkalan extends CI_Controller {
 
 	public function deletedata()
 	{
-		/*$data['namapangkalan'] = $this->input->post('namapangkalan');
-		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
-		$data['idPangkalan'] = $idPangkalan;
-		echo "testes";
-		print_r($idPangkalan);
-		print_r($namapangkalan);
-		$this->m_pangkalan->deletedata($idPangkalan);	*/
-		echo "kontroller";
-		$data=array(
-			'idPangkalan' => $this->input->post('idPangkalan'),
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-
-		);
-		print_r($data);
-
-		$this->m_pangkalan->deletedata($data,$this->input->post('idPangkalan'));
-		
-	//	redirect(base_url('Kelolatempatkp'));	
+		$this->m_pangkalan->deletedata($this->input->post('idPangkalan'));
 	}
-
+	function deleteajax()
+	{
+		$idPangkalan = $this->input->post('id');
+		$this->db->delete('pangkalan', array('idPangkalan' => $idPangkalan));
+	}
 }
 
 
