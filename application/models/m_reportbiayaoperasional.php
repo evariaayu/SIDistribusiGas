@@ -6,7 +6,8 @@ class M_reportbiayaoperasional extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
- 
+
+
     public function getbiayaoperasional($bulan, $tahun)
     {
         $this->db->select('*');
