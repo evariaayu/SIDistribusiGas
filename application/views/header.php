@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="description" content="">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"> </script>
     
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
   	<script src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>

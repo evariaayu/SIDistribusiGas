@@ -1,5 +1,6 @@
 <h3><center>Form Tambah Biaya Lain-lain</center></h1>
 <br>
+<?php echo $success;?>
 <div class="col-md-3">
 </div>
 

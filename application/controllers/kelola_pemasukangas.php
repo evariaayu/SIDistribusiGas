@@ -118,15 +118,18 @@ class Kelola_pemasukangas extends CI_Controller {
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
 					Data Berhasil ditambahkan <a href=".base_url('index.php/Kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
 					</div>";
-					$session_data = $this->session->userdata('logged_in');
-		    		$data['username'] = $session_data['username'];
-		    		$data['hakakses'] = $session_data['hakakses'];
-		    		$data['idPegawai'] = $session_data['idPegawai'];
+			$session_data = $this->session->userdata('logged_in');
+    		$data['username'] = $session_data['username'];
+    		$data['hakakses'] = $session_data['hakakses'];
+    		$data['idPegawai'] = $session_data['idPegawai'];
+		    if($session_data['hakakses']=="pegawai")
+			{
 		    		$datapemasukangas['success'] = $sukses;
 					$this->load->view('header');
 					$this->load->view('header_pegawai', $data);
 				  	$this->load->view('pegawai/form_tambahpemasukangas',$datapemasukangas);
 				  	$this->load->view('footer');
+			}
 		//	redirect('index.php/Kelola_pemasukangas');
 	  	}
 	}
@@ -134,15 +137,19 @@ class Kelola_pemasukangas extends CI_Controller {
 	public function delete($idPemasukan)
 	{
 		$this->m_pemasukangas->delete($idPemasukan);
+		echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/Kelola_pemasukangas';}, 2000);
+
+				</script>";
 		//redirect('index.php/Kelola_pemasukangas');
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
 			if($session_data['hakakses']=="pegawai")
 			{
-			$jumlah = $this->m_pemasukangas->jumlah();
+				$jumlah = $this->m_pemasukangas->jumlah();
 					    	 $datapemasukangas['hasil'] = $this->m_pemasukangas->getall();
 		    	$datapemasukangas['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 		      	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
@@ -154,10 +161,7 @@ class Kelola_pemasukangas extends CI_Controller {
 				$this->load->view('header_pegawai', $data);
 				$this->load->view('pegawai/v_mengelola_pemasukangas', $datapemasukangas);
 				$this->load->view('footer');
-				echo "<script type='text/javascript'>
-				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/Kelola_pemasukangas';}, 2000);
-
-				</script>";
+				
 			}
 			else
 		   	{
@@ -177,12 +181,12 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$data['idPegawai'] = $session_data['idPegawai'];
 
 	      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
-			
+			$datapemasukangas['success']='';
 			$this->load->view('header');
 			$this->load->view('header_pegawai', $data);
 			$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
 		  	$this->load->view('footer');
-	  }
+	 	}
 		
 	}
 
@@ -193,9 +197,30 @@ class Kelola_pemasukangas extends CI_Controller {
 		$data['hargabeli'] = $this->input->post('hargabeli');
 		$data['hargajual'] = $this->input->post('hargajual');
 		$data['idPemasukan'] = $idPemasukan;
+		$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+					Data berhasil diubah <a href=".base_url('index.php/Kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
+					</div>";
 		$this->m_pemasukangas->update($data);
-		
-		redirect('index.php/Kelola_pemasukangas');
+		if($this->session->userdata('logged_in'))
+		{
+	     	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	      	$data['idPegawai'] = $session_data['idPegawai'];
+	      	$datapemasukangas['success'] = $sukses;
+	      	if($session_data['hakakses']=="pegawai")
+	      	{
+
+		      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
+				$datapemasukangas['success']=$sukses;
+				$this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
+			  	$this->load->view('footer');
+			}
+	 	}
+	//	redirect('index.php/Kelola_pemasukangas');
 	}
 
 }

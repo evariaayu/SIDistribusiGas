@@ -1,6 +1,6 @@
 <h1><center>Kelola Biaya Operasional</center></h1>
 <br>
-
+<?php echo $success;?>
 <div class="col-md-2">
   </div>
   <div class="col-xs-1"></div>
@@ -192,7 +192,7 @@ Nota
       </tr>
     </tbody>
   </table>
-
+  <?php echo $this->pagination->create_links(); ?>
 
 
   </div><!-- col-md-6 col-sm-offset-2-->

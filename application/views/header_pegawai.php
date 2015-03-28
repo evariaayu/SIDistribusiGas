@@ -19,11 +19,18 @@
         if($session_data['hakakses']=="pegawai"){?>
         <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Data Pangkalan</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Pemasukan Gas</a></li>
-        <li><a href="<?php echo base_url("index.php/kelola_operasional") ?>">Biaya Operasional</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Biaya Operasional <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php echo base_url("index.php/kelola_operasional") ?>">Pengeluaran Tetap</a></li>
+            <li><a href="<?php echo base_url('index.php/kelola_operasional/pengeluaranlain') ?>">Pengeluaran Lain-lain</a></li>
+          </ul>
+        </li>
         <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Data Gudang</a></li>
         <li><a href="<?php echo base_url("index.php/c_cekpesanonline") ?>">Cek Pesanan Online</a></li>
         <li><a href="<?php echo base_url("index.php/c_pesanoffline") ?>">Pesan Gas Offline</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_user") ?>">Pengguna</a></li>
+        
         <?php } ?>
 
         <?php  $session_data = $this->session->userdata('logged_in');
