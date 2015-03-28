@@ -38,7 +38,7 @@ class C_pesanoffline extends CI_Controller {
 	      {
 	          $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
-
+		      $datanamapangkalan['success']='';
 		      $this->load->view('header');
 			  $this->load->view('header_pegawai', $data);
 			  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
@@ -91,7 +91,7 @@ class C_pesanoffline extends CI_Controller {
 	public function pesan()
 	{
 		//$data['username'] = $session_data['username'];
-		$waktu = $this->input->post('waktu');
+	    
 		$pangkalan = $this->input->post('idPangkalan');
 		$harga = $this->input->post('harga');
 		$jumlahorder = $this->input->post('jumlahGas');
@@ -107,7 +107,7 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 				$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 				$jumlahGas = $this->input->post('jumlahGas');
-
+				$idPegawai = $session_data['idPegawai'];
 				//$idPangkalan = $session_data['idPangkalan'];
 				$totalhargabelioff = $harga*$jumlahorder;
 				$data = array
@@ -116,7 +116,8 @@ class C_pesanoffline extends CI_Controller {
 						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabelioff' => $totalhargabelioff,
 						//'idstatus_pemesanan' => '1',				
-						'idPangkalan' => $this->input->post('idPangkalan')
+						'idPangkalan' => $this->input->post('idPangkalan'),
+						'idPegawai' => $idPegawai
 						//'namapangkalan' => $this->input->post('username')
 
 					);
@@ -127,7 +128,7 @@ class C_pesanoffline extends CI_Controller {
 
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -138,7 +139,8 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    $hakakses=$session_data['hakakses'];
+	      		if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      		{
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 
@@ -164,7 +166,7 @@ class C_pesanoffline extends CI_Controller {
 			//echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -175,7 +177,8 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    $hakakses=$session_data['hakakses'];
+	      		if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      		{
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 

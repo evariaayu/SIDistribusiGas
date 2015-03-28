@@ -130,6 +130,7 @@ class Kelola_operasional extends CI_Controller {
 		{
 		    $session_data = $this->session->userdata('logged_in');
 		    $idPegawai= $session_data['idPegawai'];
+         	date_default_timezone_set("Asia/Jakarta");
 		    $datebaru = date('Y-m-d H:i:s');
 		    $datebaru = str_replace( ':', '', $datebaru);
 			$config['upload_path'] = './uploads/'.$datebaru;
@@ -261,7 +262,7 @@ class Kelola_operasional extends CI_Controller {
 
 	function do_uploadlain()
 	{
-	
+		date_default_timezone_set("Asia/Jakarta");
 	    $datebaru = date('Y-m-d H:i:s');
 	    $datebaru = str_replace( ':', '', $datebaru);
 		$config2['upload_path'] = './uploads/lainlain/'.$datebaru;

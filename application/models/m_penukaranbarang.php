@@ -24,6 +24,7 @@ class M_penukaranbarang extends CI_Model
         );
         $jumlahkurang= $pengurangan['jumlahbarangrusak']+$pengurangan['jumlahbarangkosong'];
         //print_r($jumlahkurang);
+        date_default_timezone_set("Asia/Jakarta");
         $datetoday =date("Y-m-d");
         $sql="update stok_gudang s
                 inner join
@@ -140,6 +141,7 @@ class M_penukaranbarang extends CI_Model
                 $jumlahbarangkosong= $value->jumlahbarangkosong;
                 $jumlahbarangrusak= $value->jumlahbarangrusak;
                 $jumlahtambah=$jumlahbarangrusak+$jumlahbarangkosong;
+                date_default_timezone_set("Asia/Jakarta");
                 $datetoday =date("Y-m-d");
                 $sql="update stok_gudang s
                      inner join
@@ -210,7 +212,7 @@ class M_penukaranbarang extends CI_Model
 
         $this->db->where('idTukar_Barang', $data['idTukar_Barang']);
         $this->db->update('tukar_barang', $datatukarbarang);
-
+        date_default_timezone_set("Asia/Jakarta");
         $datetoday =date("Y-m-d");
         $sql="update stok_gudang s 
                         inner join
