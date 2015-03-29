@@ -1,5 +1,5 @@
 <div class="col-md-8 col-md-offset-2">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">
     <h3 class="panel-title"><b><center>Kelola Pemasukan Gas</center></b></h3>
@@ -11,8 +11,8 @@
         <?php echo anchor ('index.php/kelola_pemasukangas/form_tambahgas','Data Pemasukan Gas') ?>
       </button>
       <div class="form-group">
-          <label for="datagudang" class="col-sm-3 control-label">Jumlah Stok</label>
-          <div class="col-sm-6">
+          <label for="datagudang" class="col-sm-2 control-label">Jumlah Stok</label>
+          <div class="col-sm-2">
             <?php if(empty($stok_gudang)) {?>
               <div class="alert alert-warning" role="alert">Masih kosong, refresh untuk menambahkan data gudang</div>
             <?php }
