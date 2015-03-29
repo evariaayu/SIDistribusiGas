@@ -14,7 +14,7 @@
           <label for="datagudang" class="col-sm-2 control-label">Jumlah Stok</label>
           <div class="col-sm-2">
             <?php if(empty($stok_gudang)) {?>
-              <div class="alert alert-warning" role="alert">Masih kosong, refresh untuk menambahkan data gudang</div>
+              <div class="alert alert-warning" role="alert">Masih kosong, refresh untuk menambahkan data gudang </div>
             <?php }
             else { ?>
               <div class="well well-sm"><?php echo $stok_gudang ?></div>

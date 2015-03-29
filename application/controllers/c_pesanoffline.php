@@ -52,7 +52,7 @@ class C_pesanoffline extends CI_Controller {
 
 				$dari = $this->uri->segment('3');
 			//	$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
-				//$datanamapangkalan['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
+				$datanamapangkalan['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				$datanamapangkalan['hasil'] = $this->m_pesanoffline->lihat($config['per_page'],$dari);
 				$datanamapangkalan['success'] = '';
 
