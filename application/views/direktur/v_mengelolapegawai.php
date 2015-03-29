@@ -1,3 +1,4 @@
+
 <div class="col-md-6 col-sm-offset-3">
     <div class="panel panel-primary">
     <!-- Default panel contents -->
@@ -59,4 +60,5 @@
   </table>
   <?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->
-</div>
+
+</div> <!-- div class row-->
