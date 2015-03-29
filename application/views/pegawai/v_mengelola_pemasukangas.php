@@ -52,13 +52,13 @@
           <td>
             <button type="button" class="btn btn-danger btn-link">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/delete/<?php echo $datapemasukangas->idPemasukan;?>">delete</a> 
+            <a href="<?php echo base_url();?>index.php/kelola_pemasukangas/delete/<?php echo $datapemasukangas->idPemasukan;?>">delete</a> 
           </button>
           </td>
           <td>
             <button type="button" class="btn btn-default btn-link">
             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            <a href="<?php echo base_url();?>index.php/Kelola_pemasukangas/edit/<?php echo $datapemasukangas->idPemasukan;?>">edit</a>
+            <a href="<?php echo base_url();?>index.php/kelola_pemasukangas/edit/<?php echo $datapemasukangas->idPemasukan;?>">edit</a>
             </button>
           </td>
          <?php } ?>

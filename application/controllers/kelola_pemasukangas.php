@@ -37,7 +37,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 	      		$jumlah = $this->m_pemasukangas->jumlah();
-				$config['base_url'] = base_url().'index.php/Kelola_pemasukangas/index';
+				$config['base_url'] = base_url().'index.php/kelola_pemasukangas/index';
 				$config['total_rows'] = $jumlah;
 				$config['per_page']=5;
 
@@ -118,7 +118,7 @@ class Kelola_pemasukangas extends CI_Controller {
 		  	$this->m_pemasukangas->insertstok($datamasukgudang);
 		  	$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data Berhasil ditambahkan <a href=".base_url('index.php/Kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
+					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
 					</div>";
 			$session_data = $this->session->userdata('logged_in');
     		$data['username'] = $session_data['username'];
@@ -140,7 +140,7 @@ class Kelola_pemasukangas extends CI_Controller {
 	{
 		$this->m_pemasukangas->delete($idPemasukan);
 		echo "<script type='text/javascript'>
-				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/Kelola_pemasukangas';}, 2000);
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/kelola_pemasukangas';}, 2000);
 
 				</script>";
 		//redirect('index.php/Kelola_pemasukangas');
@@ -202,7 +202,7 @@ class Kelola_pemasukangas extends CI_Controller {
 		$data['idPemasukan'] = $idPemasukan;
 		$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data berhasil diubah <a href=".base_url('index.php/Kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
+					Data berhasil diubah <a href=".base_url('index.php/kelola_pemasukangas')." class=\"alert-link\">Kembali?</a>
 					</div>";
 		$this->m_pemasukangas->update($data);
 		if($this->session->userdata('logged_in'))
