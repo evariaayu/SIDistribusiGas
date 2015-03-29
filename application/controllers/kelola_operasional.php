@@ -306,7 +306,8 @@ class Kelola_operasional extends CI_Controller {
 			$data['username'] = $session_data['username'];
 			$data['hakakses'] = $session_data['hakakses'];
 			$data['idPegawai'] = $session_data['idPegawai'];
-	    	if($session_data['hakakses']=="pegawai")
+	    	$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 	    		$datalainlain['success'] = $sukses;
 				$this->load->view('header');
