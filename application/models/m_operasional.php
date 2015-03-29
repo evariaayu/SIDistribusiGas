@@ -92,40 +92,6 @@ class M_operasional extends CI_Model {
     {
         $this->db->insert('cost_lainlain',$datalainlain);
 
-        $this->db->select('idCost_lainlain');
-        $this->db->from('cost_lainlain');
-        $this->db->order_by('tanggal','desc');
-        $this->db->limit(1);
-        $sql=$this->db->get();
-        if($sql -> num_rows() > 0)
-        {
-            foreach ($sql->result() as $cost_lainlain) 
-            {
-                $idCost_lainlain= $cost_lainlain->idCost_lainlain;
-            }
-        }
-        date_default_timezone_set("Asia/Jakarta");
-        $month =date("m");
-        $this->db->select('idPengeluaran_Tetap');
-        $this->db->from('pengeluaran_tetap');
-        $this->db->where('month(tanggal)', $month);
-        $this->db->order_by('tanggal','desc');
-        $this->db->limit(1);
-        $query=$this->db->get();
-        if($query -> num_rows() > 0)
-        {
-            foreach ($query->result() as $pengeluaran_tetap) 
-            {
-                $idPengeluaran_Tetap= $pengeluaran_tetap->idPengeluaran_Tetap;
-            }
-        }
-
-        $perbulan=array(
-            'idPengeluaran_Tetap' => $idPengeluaran_Tetap,
-            'idCost_lainlain' => $idCost_lainlain
-
-        );
-        $this->db->insert('pengeluaran_perbulan',$perbulan);
     }
     function deletelain($idCost_lainlain)
     {
@@ -142,14 +108,6 @@ class M_operasional extends CI_Model {
                rmdir('./uploads/lainlain/'.$namafolder);
             }
         }
-        $this->db->select('idPengeluaran_Perbulan');
-        $this->db->from('pengeluaran_perbulan');
-        $this->db->where('idCost_lainlain', $idCost_lainlain);
-        $query=$this->db->get()->result();
-        $idPengeluaran_Perbulan = $query[0]->idPengeluaran_Perbulan;
-        $this->db->where('idPengeluaran_Perbulan', $idPengeluaran_Perbulan);
-        $this->db->delete('pengeluaran_perbulan');
-        //print_r($idCost_lainlain);
         
     }
     function delete_costlain($idCost_lainlain)
