@@ -25,20 +25,27 @@ class Pangkalan extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	     // $this->load->view('home_view', $data);
-	     // print_r($data);
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/h_pegawai');
-		  $this->load->view('footer');
+	      	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pangkalan") )
+			{
+	      		$this->load->view('header');
+			  $this->load->view('header_pegawai', $data);
+			  $this->load->view('pegawai/h_pegawai');
+			  $this->load->view('footer');
+		  	}
+			else
+		   	{
+		     //If no session, redirect to login page
+		     redirect('index.php/c_login', 'refresh');
+		 	}
 		}
 	   else
 	   {
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
+	     redirect('index.php/c_login/logout', 'refresh');
 	   }
 		
 	}

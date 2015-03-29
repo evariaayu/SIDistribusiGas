@@ -13,10 +13,14 @@ class C_verifyLogin extends CI_Controller {
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
  
-        if($this->form_validation->run() == FALSE) {
+        if($this->form_validation->run() == FALSE) 
+        {
+            $this->load->view('header');
             $this->load->view('logingagal');
-            } else 
-            {
+            $this->load->view('footer');
+        } 
+        else 
+        {
 
                $session_data = $this->session->userdata('logged_in');
                 if($session_data['hakakses']=="pegawai"){
