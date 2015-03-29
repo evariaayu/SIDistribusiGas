@@ -1,23 +1,17 @@
-<h1><center>Pemesanan Online</center></h1>
-<br>
-
-<div class="col-md-2">
+<div class="col-md-offset-3 col-md-7 ">
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title"><b><center>Pemesanan Online</center></b></h3>
   </div>
-  <div class="col-xs-1"></div>
+  <div class="panel-body">
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/c_pesanonline/insert','Data Pesanan Gas') ?>
-</button>
-<br>
-<br>
+
 <?php echo $success;?>
 
-
-<br>
-<div class="col-md-1">
-  </div>
-
-  <div class="col-md-6 col-sm-offset-2">
+</div>
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
@@ -54,3 +48,5 @@ else { ?>
   </div><!-- col-md-6 col-sm-offset-2-->
 
 
+</div>
+</div>

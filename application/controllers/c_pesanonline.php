@@ -194,7 +194,7 @@ class C_pesanonline extends CI_Controller {
 					$this->m_pesanonline->insert($data);
 					$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+					Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline/pesan')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 					</div>";
 					
 					$session_data = $this->session->userdata('logged_in');
@@ -213,7 +213,7 @@ class C_pesanonline extends CI_Controller {
 					      //print_r($datanamapangkalan);
 					  $datanamapangkalan['success']=$sukses;
 					  $this->load->view('header');
-					  $this->load->view('pangkalan/header_pangkalan', $data);
+					  $this->load->view('header_pegawai', $data);
 					  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
 						   
 					  $this->load->view('footer');
