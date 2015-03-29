@@ -43,7 +43,7 @@
   <div class="form-group">
     <label for="jumlahGas" class="col-sm-3 control-label">Jumlah Order</label>
     <div class="col-sm-7">
-      <input id="jumlahGas" name="jumlahGas" class="form-control" placeholder=" "></input>
+      <input id="jumlahGas" name="jumlahGas" class="form-control" placeholder="Jumlah Gas yang dibeli" required></input>
     </div>
   </div>
 
