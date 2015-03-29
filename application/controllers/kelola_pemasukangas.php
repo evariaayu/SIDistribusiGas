@@ -124,7 +124,8 @@ class Kelola_pemasukangas extends CI_Controller {
     		$data['username'] = $session_data['username'];
     		$data['hakakses'] = $session_data['hakakses'];
     		$data['idPegawai'] = $session_data['idPegawai'];
-		    if($session_data['hakakses']=="pegawai")
+		    $hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 			{
 		    		$datapemasukangas['success'] = $sukses;
 					$this->load->view('header');
@@ -182,13 +183,21 @@ class Kelola_pemasukangas extends CI_Controller {
 	      	$data['username'] = $session_data['username'];
 	      	$data['hakakses'] = $session_data['hakakses'];
 	      	$data['idPegawai'] = $session_data['idPegawai'];
-
-	      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
-			$datapemasukangas['success']='';
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
-		  	$this->load->view('footer');
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
+			{
+		      	$datapemasukangas['hasil']	= $this->m_pemasukangas->getby($idPemasukan);
+				$datapemasukangas['success']='';
+				$this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/form_editpemasukangas', $datapemasukangas);
+			  	$this->load->view('footer');
+			}
+			else
+		   	{
+		     //If no session, redirect to login page
+		    	redirect('index.php/c_login', 'refresh');
+		 	}
 	 	}
 		
 	}

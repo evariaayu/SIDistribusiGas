@@ -1,5 +1,5 @@
 
-<div class="col-md-6 col-sm-offset-3">
+<div class="col-md-8 col-sm-offset-2">
     <div class="panel panel-primary">
     <!-- Default panel contents -->
     <div class="panel-heading">
