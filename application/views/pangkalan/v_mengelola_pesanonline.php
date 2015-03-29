@@ -8,9 +8,8 @@
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/c_pesanonline/insert','Data Pesanan Gas') ?>
-
+</button>
 <?php echo $success;?>
-
 </div>
   <table class="table table-striped table-hover table-bordered">
     <thead>
@@ -27,8 +26,8 @@
     <tbody>
        <?php if(empty($hasil)) {?>
    <div class="alert alert-warning" role="alert">Riwayat pemesanan gas masih kosong</div>
-<?php } 
-else { ?>
+    <?php } 
+      else { ?>
       <?php foreach ($hasil as $datapangkalan)
         { ?>
       <tr>
@@ -41,12 +40,10 @@ else { ?>
       </tr>
       <?php } ?>
       <?php } ?>
-      
-    </tbody>
+     </tbody>
   </table>
     <?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->
 
 
-</div>
 </div>
