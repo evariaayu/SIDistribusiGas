@@ -1,15 +1,13 @@
-<h1><center>Pemesanan Gas Online</center></h1>
-<br>
-
-<div class="col-md-2">
+<div class="col-md-10 col-sm-offset-1">
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title"><b><center>Pemesanan Gas Online</center></b></h3>
   </div>
-  <div class="col-xs-1"></div>
+  <div class="panel-body">
+  <!--  <?php echo $success; ?>-->
+  </div>
     <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline">
-<br>
-<br>
-<div class="col-md-8 col-sm-offset-2">
-
-  <div class="col-md-6 col-sm-offset-2">
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
@@ -35,11 +33,16 @@
        <td><?php echo $row->totalhargabeli ?></td>
        <td>
         <?php if($row->idstatus_pemesanan == 1) { ?>
+        <!--
         <form method="POST" action="<?php echo base_url();?>index.php/c_cekpesanonline/update">
           <input type="hidden" name="idTransaksi_Online" value="<?php echo $row->idTransaksi_Online; ?>">
           <input type="hidden" name="jumlahGas" value="<?php echo $row->jumlahGas; ?>">
           <input type="submit" value="konfirmasi" name="konfirmasi">
-        </form>
+        </form>-->
+        <button type="button" class="btn btn-danger btn-link">
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/editbaru/<?php echo $row->idTransaksi_Online;?>">Konfirmasi</a> 
+        </button>
           <?php } else { ?>
           CONFIRMED
           <?php } ?>
@@ -51,13 +54,13 @@
           <a href="<?php echo base_url();?>index.php/c_cekpesanonline/delete/<?php echo $row->idTransaksi_Online;?>">delete</a> 
         </button>
         </td>
-       
+       <!--
         <td>
           <button type="button" class="btn btn-danger btn-link">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/editbaru/<?php echo $row->idTransaksi_Online;?>">Edit baru</a> 
+          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/editbaru/<?php echo $row->idTransaksi_Online;?>">Konfirmasi</a> 
         </button>
-        </td>
+        </td>-->
 
       </tr>
       <?php } ?>
@@ -65,3 +68,5 @@
   </table>
   </div><!-- col-md-6 col-sm-offset-2-->
 </div> <!-- div class row-->
+</div>
+</div>
