@@ -20,7 +20,7 @@ class M_pemasukangas extends CI_Model {
             'jumlah_stok'     => $datamasukgudang['jumlah_stok']
         );
         $tambah=$datamasukgudang['jumlah_stok'];
-       // print_r($tambah);
+        date_default_timezone_set("Asia/Jakarta");
         $datetoday =date("Y-m-d");
         $sql="update stok_gudang s
                 inner join
@@ -78,8 +78,11 @@ class M_pemasukangas extends CI_Model {
         $execute = $this->db->get();
         if($execute->num_rows()>0)
             {
-                foreach ($execute->result() as $value) {
+                foreach ($execute->result() as $value) 
+                {
                     $jumlahgas= $value->jumlahgas;
+                    //print_r($jumlahgas);
+                    date_default_timezone_set("Asia/Jakarta");
                     $datetoday =date("Y-m-d");
                     $sql="update stok_gudang s
                         inner join
@@ -142,7 +145,7 @@ class M_pemasukangas extends CI_Model {
         );
         $this->db->where('idPemasukan',$data['idPemasukan']);
         $this->db->update('pemasukan', $datapemasukangas);
-
+        date_default_timezone_set("Asia/Jakarta");
         $datetoday =date("Y-m-d");
         $sql="update stok_gudang s 
                         inner join

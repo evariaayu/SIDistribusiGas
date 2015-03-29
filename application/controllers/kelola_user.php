@@ -8,6 +8,7 @@ class Kelola_user extends CI_Controller {
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_user');
         $this->load->model('m_pegawai');
+        $this->load->model('m_pangkalan');
     }
 	/**
 	 * Index Page for this controller.
@@ -28,23 +29,32 @@ class Kelola_user extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+			$hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
+	     	{
+			    $datauser['hasil'] = $this->m_user->getall();
+			    $datauser['hasil2'] = $this->m_pegawai->getall();
+			    $datauser['hasil3'] = $this->m_pangkalan->getall();
 
-	      $datauser['hasil'] = $this->m_user->getall();
-	      $datauser['hasil2'] = $this->m_pegawai->getall();
-
-	      $this->load->view('header');
-		  $this->load->view('header_pegawai', $data);
-		  $this->load->view('pegawai/v_user', $datauser);
-		  $this->load->view('footer');
+			    $this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/v_user', $datauser);
+				$this->load->view('footer');
+			}
+			else
+			{
+		     //If no session, redirect to login page
+		   		redirect('index.php/c_login/logout', 'refresh');
+			}
 		}
-	   else
-	   {
-	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
-	   }
+		else
+		{
+		     //If no session, redirect to login page
+		    redirect('index.php/c_login/logout', 'refresh');
+		}
 		
 	}
 
@@ -58,23 +68,30 @@ class Kelola_user extends CI_Controller {
 	{
 		if($this->session->userdata('logged_in'))
 		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
+		    $session_data = $this->session->userdata('logged_in');
+		    $data['username'] = $session_data['username'];
+		    $data['hakakses'] = $session_data['hakakses'];
+		    $hakakses=$session_data['hakakses'];
+	    	if( ($hakakses=="pegawai") || ($hakakses="direktur"))
+	     	{
+			    $datapegawai['hasil'] = $this->m_pegawai->getall();
+			    $datapegawai['pangkalan'] = $this->m_pangkalan->getall();
 
-	      $datapegawai['hasil'] = $this->m_pegawai->getall();
-	      $datapegawai['pangkalan'] = $this->m_pangkalan->getall();
-
-		$this->load->view('header');
-	 	$this->load->view('header_pegawai', $data);
-	  	$this->load->view('pegawai/v_user', $datapegawai);
-	  	$this->load->view('footer');
-	  }
-	   else
-	   {
+				$this->load->view('header');
+			 	$this->load->view('header_pegawai', $data);
+			  	$this->load->view('pegawai/v_user', $datapegawai);
+			  	$this->load->view('footer');
+			}
+			else
+			{
+				redirect('index.php/c_login/logout', 'refresh');
+			}
+	  	}
+	  	else
+	   	{
 	     //If no session, redirect to login page
-	     redirect('index.php/c_login', 'refresh');
-	   }
+	    	redirect('index.php/c_login/logout', 'refresh');
+	   	}
 	}
 
 	public function insert()
@@ -84,50 +101,14 @@ class Kelola_user extends CI_Controller {
 			'username' => $this->input->post('username'),
 			'password' => md5($this->input->post('password')),
 			'hakakses' => $this->input->post('hakakses'),
-			'idPegawai' => $this->input->post('idPegawai'),			
+			'idPegawai' => $this->input->post('idPegawai'),
+			'idPangkalan' => $this->input->post('idPangkalan'),			
 		);
 		$this->m_user->insert($datauser);
-		redirect('index.php/kelola_user');
-		
-	   
-	 //  print_r($datapangkalan);
+		redirect('index.php/kelola_user','refresh');
 	}
 
-/*	public function delete($idPangkalan)
-	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
-	}
 
-	public function edit($idPangkalan)
-	{
-		if($this->session->userdata('logged_in'))
-		{
-	      $session_data = $this->session->userdata('logged_in');
-	      $data['username'] = $session_data['username'];
-	      $data['hakakses'] = $session_data['hakakses'];
-	      $datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		
-			$this->load->view('header');
-			$this->load->view('header_pegawai', $data);
-			$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
-		  	$this->load->view('footer');
-	  }
-		
-	}
-
-	public function update($idPangkalan)
-	{
-
-		$data['namapangkalan'] = $this->input->post('namapangkalan');
-		$data['alamatpangkalan'] = $this->input->post('alamatpangkalan');
-		$data['idPangkalan'] = $idPangkalan;
-		$this->m_pangkalan->update($data);
-
-		redirect('index.php/kelola_pangkalan');
-
-	}
-*/
 }
 
 

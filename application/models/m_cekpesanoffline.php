@@ -32,14 +32,14 @@ class M_cekpesanoffline extends CI_Model {
         $data = array('idstatus_pemesanan' => '2');
         $this->db->where("idTransaksi_Online",$idTransaksi_Online);
         $this->db->update("transaksi_online",$data);
-        print_r($idTransaksi_Online);
+       // print_r($idTransaksi_Online);
         $query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
         $hasil = $query->row_array();
         $totalGas = $hasil['jumlah_stok']-$jumlahGas;
        // $data2 = array('jumlah_stok' => $totalGas);
      //   $this->db->insert('stok_gudang',$data2);
-
-         $datetoday =date("Y-m-d");
+        date_default_timezone_set("Asia/Jakarta");
+        $datetoday =date("Y-m-d");
         $sql="update stok_gudang s
                 inner join
                 (

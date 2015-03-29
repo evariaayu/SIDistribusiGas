@@ -1,12 +1,12 @@
-<h3><center>Form Tambah Pemasukan Gas</center></h1>
-<br>
-<?php echo $success;?>
-
-<div class="col-md-3">
-</div>
-<div class="col-md-6">
-<form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
-  
+<div class="col-md-8 col-sm-offset-2">
+  <div class="panel panel-primary">
+<!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title"><b><center>Form Edit Pemasukan Gas</center></b></h1>
+  </div>
+  <div class="panel-body">
+  <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/insert">
+  <?php echo $success;?>
 
   <div class="form-group">
     <!--jumlah gas-->
@@ -31,11 +31,6 @@
       <input id="hargajual" name="hargajual" class="form-control" placeholder="Harga Jual" required></input>
     </div>
   </div>
-<!--  
-<?php
-$date = new DateTime();
-echo $date->getTimestamp();
-?>-->
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       
@@ -43,8 +38,11 @@ echo $date->getTimestamp();
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Simpan</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <input class="btn btn-danger" type="reset" value="Cancel"><br>
     </div>
   </div>
 </form>
+</div>
+</div>
 </div>

@@ -5,7 +5,7 @@
 <div class="col-md-10">
             <div class="row">
                       <div class="col-md-2">
-
+                        
                   <label>Bulan:</label> 
                  <select class="form-control form-inline" id="bulanOpt" name="bulan">
                     <option disabled selected>Bulan</option>
@@ -65,10 +65,10 @@
                                 </tr>
                               </thead>
                                <tbody>
-                              <?php if(empty($hasil)) {
-                              echo "";
-                              }
-                              else { ?>
+                              <?php if(empty($hasil)) { ?>
+                              <div class="alert alert-warning" role="alert">Data Laporan Tetap Perbulan masih kosong</div>
+                              <?php } 
+                               else { ?>
 
                                 <?php $nomor = 1; ?>
                                 
@@ -86,6 +86,7 @@
                              <?php $nomor++; } ?>
                             
                              <?php } ?>
+
                             
                           </tbody>
                           </table> 
@@ -127,9 +128,9 @@
                                 </tr>
                               </thead>
                                <tbody>
-                              <?php if(empty($hasilbiaya)) {
-                              echo "";
-                              }
+                              <?php if(empty($hasilbiaya)) { ?>
+                              <div class="alert alert-warning" role="alert">Data Biaya Lain-lain masih kosong</div>
+                              <?php } 
                               else { ?>
 
                                 <?php $nomor = 1; ?>

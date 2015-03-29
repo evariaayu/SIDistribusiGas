@@ -7,6 +7,7 @@ class C_pesanoffline extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_pesanoffline');
+        $this->load->model('m_penukaranbarang');
         $this->load->helper('form');
         $this->load->helper('url');
     }
@@ -32,16 +33,15 @@ class C_pesanoffline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      if($session_data['hakakses']=="pegawai")
+	      $hakakses=$session_data['hakakses'];
+	      if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      {
-	      //$data['idPegawai'] = $session_data['idPegawai'];
-
-	      //$data['idPangkalan'] = $session_data['idPangkalan'];
-	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
-		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
-		      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
+	          $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
+<<<<<<< HEAD
 
+=======
+>>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 		      $datanamapangkalan['success']='';
 		      $this->load->view('header');
 			  $this->load->view('header_pegawai', $data);
@@ -61,6 +61,8 @@ class C_pesanoffline extends CI_Controller {
 	   }
 		
 	}
+
+	
 
 	/*public function form_pesanonline()
 	{
@@ -84,12 +86,6 @@ class C_pesanoffline extends CI_Controller {
 	   	}
 	}*/
 
-	public function logout()
-	{
-		$this->session->unset_userdata('logged_in');
-		$this->session->sess_destroy();
-		redirect(site_url()."index.php/c_login");
-	}
 
 	public function message()
 	{
@@ -99,7 +95,7 @@ class C_pesanoffline extends CI_Controller {
 	public function pesan()
 	{
 		//$data['username'] = $session_data['username'];
-		$waktu = $this->input->post('waktu');
+	    
 		$pangkalan = $this->input->post('idPangkalan');
 		$harga = $this->input->post('harga');
 		$jumlahorder = $this->input->post('jumlahGas');
@@ -115,7 +111,7 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 				$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 				$jumlahGas = $this->input->post('jumlahGas');
-
+				$idPegawai = $session_data['idPegawai'];
 				//$idPangkalan = $session_data['idPangkalan'];
 				$totalhargabelioff = $harga*$jumlahorder;
 				$data = array
@@ -124,7 +120,8 @@ class C_pesanoffline extends CI_Controller {
 						'jumlahGas' => $this->input->post('jumlahGas'),
 						'totalhargabelioff' => $totalhargabelioff,
 						//'idstatus_pemesanan' => '1',				
-						'idPangkalan' => $this->input->post('idPangkalan')
+						'idPangkalan' => $this->input->post('idPangkalan'),
+						'idPegawai' => $idPegawai
 						//'namapangkalan' => $this->input->post('username')
 
 					);
@@ -135,7 +132,11 @@ class C_pesanoffline extends CI_Controller {
 
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+<<<<<<< HEAD
 				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+=======
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+>>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -146,7 +147,8 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    $hakakses=$session_data['hakakses'];
+	      		if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      		{
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 
@@ -170,9 +172,15 @@ class C_pesanoffline extends CI_Controller {
 		else
 		{
 			//echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
+<<<<<<< HEAD
 				$sukses = "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
 				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
 				Stok Gudang tidak mencukupi kebutuhan <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Pesan Lagi</a>
+=======
+				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+>>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -183,7 +191,8 @@ class C_pesanoffline extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    $hakakses=$session_data['hakakses'];
+	      		if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      		{
 	      //$data['idPegawai'] = $session_data['idPegawai'];
 
@@ -204,56 +213,6 @@ class C_pesanoffline extends CI_Controller {
 		}
 	}
 	
-
-	/*public function insert()
-	{
-		$datapangkalan=array
-		(
-			'namapangkalan' => $this->input->post('namapangkalan'),
-			'alamatpangkalan' => $this->input->post('alamatpangkalan'),
-			'notelppangkalan' => $this->input->post('notelppangkalan'),
-		);
-		$this->m_pangkalan->insert($datapangkalan);
-		redirect('index.php/kelola_pangkalan');
-		
-	   
-	 //  print_r($datapangkalan);
-	}
-
-	public function delete($idPangkalan)
-	{
-		$this->m_pangkalan->delete($idPangkalan);
-		redirect('index.php/kelola_pangkalan');
-	}
-
-	public function edit($idPangkalan)
-	{
-		$datapangkalan['hasil']	= $this->m_pangkalan->getby($idPangkalan);
-		$this->load->view('pegawai/form_editpangkalan', $datapangkalan);
-	}
-
-	public function update($idPangkalan)
-	{
-		if($this->input->post('submit'))  
-		{
-			$this->m_pangkalan->update($idPangkalan);
-			redirect('index.php/kelola_pangkalan');
-		}
-	}
-
-	public function submit()	
-	{
-			$jumlahorder = $this->input-post('jumlahorder');
-			$batas = $this->m_pesanonline->cekstok();
-			if($jumlahorder <= $batas) 
-			{
-				echo'tersedia'; echo $jumlahorder;
-			}
-	        else
-	        {
-	        	echo'tidak tersedia';
-	        }
-	}*/
 
 }
 

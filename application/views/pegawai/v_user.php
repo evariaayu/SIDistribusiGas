@@ -35,10 +35,24 @@
     <label for="idPegawai" class="col-sm-3 control-label">Pegawai</label>
     <div class="col-sm-3">
       <select class="form-control" name="idPegawai" id="idPegawai">
-        <option value="0">--- Pilih Pegawai ----</option>
+        <option value=NULL>--- Pilih Pegawai ----</option>
      <?php foreach ($hasil2 as $row) {?>
         
          <option value="<?php echo $row->idPegawai ?>" required> <?php echo $row->namapegawai ?> </option>
+    
+         <?php } ?>
+        </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="idPangkalan" class="col-sm-3 control-label">Pangkalan</label>
+    <div class="col-sm-3">
+      <select class="form-control" name="idPangkalan" id="idPangkalan">
+        <option value=NULL>--- Pilih Pangkalan ----</option>
+     <?php foreach ($hasil3 as $row) {?>
+        
+         <option value="<?php echo $row->idPangkalan ?>" required> <?php echo $row->namapangkalan ?> </option>
     
          <?php } ?>
         </select>

@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav">
         <?php $session_data = $this->session->userdata('logged_in');
         if($session_data['hakakses']=="pegawai"){?>
-        <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Data Pangkalan</a></li>
+        <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Pangkalan</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Pemasukan Gas</a></li>
         <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Data Gudang</a></li>
         <li class="dropdown">
@@ -43,7 +43,7 @@
            <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pegawai<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Data Pangkalan</a></li>
+              <li><a href="<?php echo base_url("index.php/kelola_pangkalan") ?>">Pangkalan</a></li>
               <li><a href="<?php echo base_url("index.php/kelola_pemasukangas") ?>">Pemasukan Gas</a></li>
               <li><a href="<?php echo base_url("index.php/kelola_datagudang") ?>">Data Gudang</a></li>
               <li><a href="<?php echo base_url("index.php/c_cekpesanonline") ?>">Cek Pesanan Online</a></li>
@@ -74,7 +74,11 @@
         </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><div id="displayMoment"></div></li>
+          <li>
+            <a id="date_time" href="#"></a>
+            <script type="text/javascript">window.onload = date_time('date_time');</script>
+          </li>
+     <!--   <li><div id="displayMoment"></div></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $username;?><span class="glyphicon glyphicon-user"><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -85,7 +89,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
+<!--
 <script type="text/javascript">
 (function()
 {
@@ -96,3 +100,4 @@
   var eDisplayMoment = document.getElementById('displayMoment');
   eDisplayMoment.innerHTML = NowMoment;
 })();</script>
+-->

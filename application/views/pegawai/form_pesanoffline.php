@@ -7,7 +7,7 @@
   <div class="col-md-6">
     <?php echo $success;?>
     <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanoffline/pesan">
-      
+      <?php echo $success;?>
         <div class="form-group">
           <label for="idPangkalan" class="col-sm-2 control-label">Pangkalan</label>
           <div class="col-sm-10">
@@ -26,7 +26,8 @@
         <!--jumlah barang rusak-->
         <label for="hargagas" class="col-sm-2 control-label">Harga/1 gas</label>
         <div class="col-sm-10">
-          <input id="harga" name="harga" class="form-control" value="<?php echo $harga[0]['hargajual'] ?>" readonly>
+          <div class="well well-sm"><?php echo $harga[0]['hargajual'] ?></div>
+          <input type="hidden" id="harga" name="harga" class="form-control" value="<?php echo $harga[0]['hargajual'] ?>" readonly>
         </div>
       </div>
 

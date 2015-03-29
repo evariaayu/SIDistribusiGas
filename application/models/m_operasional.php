@@ -104,7 +104,7 @@ class M_operasional extends CI_Model {
                 $idCost_lainlain= $cost_lainlain->idCost_lainlain;
             }
         }
-
+        date_default_timezone_set("Asia/Jakarta");
         $month =date("m");
         $this->db->select('idPengeluaran_Tetap');
         $this->db->from('pengeluaran_tetap');

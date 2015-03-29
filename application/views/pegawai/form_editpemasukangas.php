@@ -1,10 +1,11 @@
-<h3><center>Form Edit Pemasukan Gas</center></h1>
-<br>
-<?php echo $success; ?>
-<div class="col-md-3">
-</div>
-
-<div class="col-md-6">
+<div class="col-md-8 col-sm-offset-2">
+  <div class="panel panel-primary">
+<!-- Default panel contents -->
+  <div class="panel-heading">
+    <h1 class="panel-title"><b><center>Form Edit Pemasukan Gas</center></b></h1>
+  </div>
+  <div class="panel-body">
+  <?php echo $success; ?>
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pemasukangas/update/<?php echo $hasil[0]->idPemasukan; ?>">
   
   <div class="form-group">
@@ -33,8 +34,11 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default" value="submit"></button>
+      <input type="submit" class="btn btn-primary" value="Submit"></button>
+      <input class="btn btn-danger" type="reset" value="Cancel"><br>
     </div>
   </div>
 </form>
+</div>
+</div>
 </div>
