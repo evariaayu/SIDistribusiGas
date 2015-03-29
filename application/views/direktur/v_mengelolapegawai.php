@@ -1,33 +1,16 @@
-<h1><center>Kelola Data Pegawai</center></h1>
-<br>
-
-<div class="col-md-2">
+<div class="col-md-offset-2 col-md-8 ">
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title"><b><center>Kelola Data Pegawai</center></b></h3>
   </div>
-  <div class="col-xs-1"></div>
+  <div class="panel-body">
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/kelola_pegawai/form_tambahdata','Data Pegawai') ?>
 </button>
-<br>
-<br>
-
-<div class="row">
-
-<div class="col-xs-2 col-md-offset-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Search</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-<br>
-<br>
-<br>
-
-
-  <div class="col-md-6 col-sm-offset-3">
-  <table class="table table-striped table-hover">
+</body>
+  <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
         <th>ID</th>
@@ -77,3 +60,4 @@
   </table>
   </div><!-- col-md-6 col-sm-offset-2-->
 </div> <!-- div class row-->
+</div>

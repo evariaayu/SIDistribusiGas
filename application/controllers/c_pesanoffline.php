@@ -38,10 +38,7 @@ class C_pesanoffline extends CI_Controller {
 	      {
 	          $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
-<<<<<<< HEAD
 
-=======
->>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 		      $datanamapangkalan['success']='';
 		      $this->load->view('header');
 			  $this->load->view('header_pegawai', $data);
@@ -132,11 +129,8 @@ class C_pesanoffline extends CI_Controller {
 
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-<<<<<<< HEAD
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
-=======
+
 				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
->>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -179,7 +173,7 @@ class C_pesanoffline extends CI_Controller {
 =======
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/C_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 >>>>>>> aaefb3a04a023bb7f8e9481b6d326ca30a14dec7
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
@@ -194,11 +188,11 @@ class C_pesanoffline extends CI_Controller {
 			    $hakakses=$session_data['hakakses'];
 	      		if( ($hakakses=="pegawai") || ($hakakses=="direktur")  )
 	      		{
-	      //$data['idPegawai'] = $session_data['idPegawai'];
+			      //$data['idPegawai'] = $session_data['idPegawai'];
 
-	      //$data['idPangkalan'] = $session_data['idPangkalan'];
-	      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
-		  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
+			      //$data['idPangkalan'] = $session_data['idPangkalan'];
+			      //$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall($session_data['username']);
+				  //$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();	
 		      		$datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      		$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
