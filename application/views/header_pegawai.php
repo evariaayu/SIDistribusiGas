@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -9,7 +8,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">PT. Almas</a>
+      <a class="navbar-brand" href="#">PT. Almas
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

@@ -8,6 +8,7 @@
   <!--  <?php echo $success; ?>-->
   </div>
     <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline">
+       <?php echo $success;?>
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
