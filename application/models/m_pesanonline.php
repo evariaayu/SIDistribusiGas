@@ -23,10 +23,10 @@ class M_pesanonline extends CI_Model
     function lihat($sampai,$dari,$idPangkalan){
         $this->db->select('*');
         $this->db->from('transaksi_online');
-       $this->db->join('Pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
         $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
         $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
-        $this->db->where('username', $idPangkalan);
+        $this->db->where('transaksi_online.idPangkalan', $idPangkalan);
         $this->db->limit($sampai,$dari);
         return $query = $this->db->get()->result();
         
@@ -39,7 +39,7 @@ class M_pesanonline extends CI_Model
         $this->db->join('Pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
         $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
         $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
-        $this->db->where('username', $idPangkalan);
+        $this->db->where('transaksi_online.idPangkalan', $idPangkalan);
         $get_data = $this->db->get();
         $jumlah = $get_data->num_rows();
         return $jumlah;
