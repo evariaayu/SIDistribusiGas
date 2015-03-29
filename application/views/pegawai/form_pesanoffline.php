@@ -5,6 +5,7 @@
   </div>
 
   <div class="col-md-6">
+    <?php echo $success;?>
     <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanoffline/pesan">
       
         <div class="form-group">

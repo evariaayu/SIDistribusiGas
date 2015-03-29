@@ -42,6 +42,7 @@ class C_pesanoffline extends CI_Controller {
 		      $datanamapangkalan['harga']= $this->m_pesanoffline->getharga();
 		      $datanamapangkalan['hasil'] = $this->m_pesanoffline->getall();
 
+		      $datanamapangkalan['success']='';
 		      $this->load->view('header');
 			  $this->load->view('header_pegawai', $data);
 			  $this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
@@ -134,7 +135,7 @@ class C_pesanoffline extends CI_Controller {
 
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanoffline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();
@@ -169,9 +170,9 @@ class C_pesanoffline extends CI_Controller {
 		else
 		{
 			//echo "<script type='text/javascript'>alert('gagal ! order melebihi jumlah stock');</script>";
-				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
-  				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-				Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabelioff <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+				$sukses = "<div class=\"alert alert-danger alert-dismissible\" role=\"alert\">
+				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+				Stok Gudang tidak mencukupi kebutuhan <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Pesan Lagi</a>
 				</div>";
 				//$query = $this->db->query("SELECT jumlah_stok FROM `stok_gudang` ORDER BY idstok_gudang DESC limit 1");
 		        //$hasil = $query->row_array();

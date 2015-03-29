@@ -4,7 +4,7 @@
 <div class="col-md-2">
   </div>
   <div class="col-xs-1"></div>
-    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanonline">
+    <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_cekpesanoffline">
 <br>
 <br>
 
