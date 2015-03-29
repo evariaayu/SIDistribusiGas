@@ -1,20 +1,16 @@
-<h1><center>Kelola Biaya Lain-lain</center></h1>
-<br>
-<?php echo $success;?>
-<div class="col-md-2">
+<div class="col-sm-offset-3 col-md-7 ">
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title"><b><center>Kelola Biaya Lain-lain</center></b></h3>
   </div>
-  <div class="col-xs-1"></div>
+  <div class="panel-body">
   <button type="button" class="btn btn-default btn-md btn-link">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
     <?php echo anchor ('index.php/kelola_operasional/form_tambahbiayalain','Data Biaya Lain - Lain') ?>
   </button>
-<br>
-<br>
-
-
-<br>
-<br>
-<div class="col-md-8 col-sm-offset-2">
+    <?php echo $success;?>
+</div>
 <table class="table table-striped table-hover table-bordered">
    <?php $i=0; ?>
       <?php if(empty($hasil)) {?>
@@ -95,3 +91,5 @@ Nota
 
 
   </div><!-- col-md-6 col-sm-offset-2-->
+</div>
+</div>
