@@ -38,7 +38,7 @@ class C_cekpesanonline extends CI_Controller {
 	      		$datapesanonline['hasil'] = $this->m_cekpesanonline->cekPesan();
 
 	      //print_r($datapesanonline['hasil']);
-
+	      		$datapesanonline['success']='';
 	      		$this->load->view('header');
 		  		$this->load->view('header_pegawai', $data);
 		  		$this->load->view('pegawai/form_cekpesanonline',$datapesanonline);

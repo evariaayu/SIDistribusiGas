@@ -20,7 +20,8 @@
         <th>Jumlah Gas</th>
         <th>Total Harga</th>
         <th>Status</th>
-       
+       <th></th>
+       <th></th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +38,25 @@
         <td><?php echo $datapangkalan->jumlahGas ?></td>
        <td><?php echo $datapangkalan->totalhargabeli ?></td>
        <td><?php echo $datapangkalan->namastatus ?></td>
+       
+        <?php if ($datapangkalan->namastatus =="waiting") {  ?>
+        <td>
+          <button type="button" class="btn btn-primary btn-link">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <a href="<?php echo base_url();?>index.php/c_pesanonline/edit/<?php echo $datapangkalan->idTransaksi_Online;?>">Edit</a> 
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-link">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <a href="<?php echo base_url();?>index.php/c_pesanonline/delete/<?php echo $datapangkalan->idTransaksi_Online;?>">Delete</a> 
+          </button>
+        </td>
+        <?php } else { ?>
+        <td></td>
+        <td></td>
+       <?php } ?>
+       
       </tr>
       <?php } ?>
       <?php } ?>

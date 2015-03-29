@@ -63,15 +63,7 @@ class M_pesanonline extends CI_Model
 
     function insert($data) 
     {
-        
-     //   $idPangkalan = $session_data['idPangkalan'];
-    //    $totalhargabeli = $this->input->post('totalhargabeli');
-
-        
         $this->db->insert('transaksi_online', $data);
-
-        
-
     }
 
     function getby($idPangkalan)
@@ -79,10 +71,10 @@ class M_pesanonline extends CI_Model
 
         $this->db->select('*');
         $this->db->from('transaksi_online');
-        $this->db->join('Pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
         $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
         $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
-        $this->db->where('username', $idPangkalan);
+        $this->db->where('transaksi_online.idPangkalan', $idPangkalan);
         $get_data = $this->db->get();
         if($get_data->num_rows()>0)
         {
@@ -93,4 +85,35 @@ class M_pesanonline extends CI_Model
             return $hasil;
         }
     }
+    function getby_edit($idTransaksi_Online)
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi_online');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
+        $this->db->where('transaksi_online.idTransaksi_Online', $idTransaksi_Online);
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datapesanonline) 
+            {
+                $hasil[]= $datapesanonline;
+            }
+            return $hasil;
+        }
+    }
+
+    function update($data)
+    {
+        $this->db->set('jumlahGas', $data['jumlahGas']); 
+        $this->db->where('idTransaksi_Online', $data['idTransaksi_Online']);
+        $this->db->update('transaksi_online');
+    }
+
+    function delete($idTransaksi_Online)
+    {
+        $this->db->where('idTransaksi_Online', $idTransaksi_Online);
+        $this->db->delete('transaksi_online');
+    }
+
 }

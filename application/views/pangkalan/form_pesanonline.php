@@ -2,30 +2,40 @@
   <div class="panel panel-primary">
   <!-- Default panel contents -->
   <div class="panel-heading">
-    <h3 class="panel-title"><b><center>Form Pemesanan Gas</center></b></h3>
+    <h3 class="panel-title"><b><center>Form Pemesanan Gas Online</center></b></h3>
   </div>
   <div class="panel-body">
 
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/c_pesanonline/pesan">
   
   <?php echo $success;?>
-<!--  <?php echo form_dropdown('pangkalan',$hasil,''); ?> -->
+
+<div class="form-group">
+        <label for="stokgudang" class="col-sm-3 control-label">Stok Gudang</label>
+        <div class="col-sm-6">
+       <?php if(empty($stok_gudang)) { echo "Data Penukaran Gudang masih kosong";}
+        else { ?>
+           <div class="well well-sm"><?php echo $stok_gudang ?></div>
+        <?php } ?>
+      </div>
+    </div>
+    
 <div class="form-group">
     <label for="pangkalan" class="col-sm-3 control-label">Nama Pangkalan</label>
     <div class="col-sm-7">
         <div class="well well-sm">
-        <?php echo $hasil[0]['username'] ?>
+        <?php echo $hasil[0]->namapangkalan ?>
       </div>
-        <input type="hidden" id="username" name="username" class="form-control" value="<?php echo $hasil[0]['username'] ?>" readonly>
+        <input type="hidden" id="username" name="username" class="form-control" value="<?php echo $hasil[0]->namapangkalan ?>" readonly>
     </div>
   </div>
 <div class="form-group">
     <label for="pangkalan" class="col-sm-3 control-label">ID Pangkalan</label>
     <div class="col-sm-7">
       <div class="well well-sm">
-        <?php echo $hasil[0]['idPangkalan'] ?>
+        <?php echo $hasil[0]->idPangkalan ?>
       </div>
-        <input type="hidden" id="idPangkalan" name="idPangkalan" class="form-control" value="<?php echo $hasil[0]['idPangkalan'] ?>" readonly>
+        <input type="hidden" id="idPangkalan" name="idPangkalan" class="form-control" value="<?php echo $hasil[0]->idPangkalan ?>" readonly>
     </div>
   </div>
   <div class="form-group">
