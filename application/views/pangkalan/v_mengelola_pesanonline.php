@@ -1,16 +1,23 @@
-<div class="col-md-offset-3 col-md-7 ">
-  <div class="panel panel-primary">
-  <!-- Default panel contents -->
-  <div class="panel-heading">
-    <h3 class="panel-title"><b><center>Pemesanan Online</center></b></h3>
+<h1><center>Pemesanan Online</center></h1>
+<br>
+
+<div class="col-md-2">
   </div>
-  <div class="panel-body">
+  <div class="col-xs-1"></div>
     <button type="button" class="btn btn-default btn-md btn-link">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
   <?php echo anchor ('index.php/c_pesanonline/insert','Data Pesanan Gas') ?>
 </button>
+<br>
+<br>
 <?php echo $success;?>
-</div>
+
+
+<br>
+<div class="col-md-1">
+  </div>
+
+  <div class="col-md-6 col-sm-offset-2">
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
@@ -26,8 +33,8 @@
     <tbody>
        <?php if(empty($hasil)) {?>
    <div class="alert alert-warning" role="alert">Riwayat pemesanan gas masih kosong</div>
-    <?php } 
-      else { ?>
+<?php } 
+else { ?>
       <?php foreach ($hasil as $datapangkalan)
         { ?>
       <tr>
@@ -40,10 +47,10 @@
       </tr>
       <?php } ?>
       <?php } ?>
-     </tbody>
+      
+    </tbody>
   </table>
     <?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->
 
 
-</div>

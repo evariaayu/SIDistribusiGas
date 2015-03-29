@@ -7,7 +7,7 @@ class C_pesanonline extends CI_Controller {
         //load session and connect to database
         $this->load->library(array('form_validation','session' , 'pagination'));
         $this->load->model('m_pesanonline');
-        $this->load->model('m_pangkalan');
+        //$this->load->model('m_pangkalan');
         
         $this->load->helper('html');
         $this->load->helper('file');
@@ -35,24 +35,28 @@ class C_pesanonline extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-	      $idPangkalan		= $session_data['idPangkalan'];
-	      $username = $session_data['username'];
 	      if($session_data['hakakses']=="pangkalan")
 	      {
-		     	//$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
+		      //$data['idPangkalan'] = $session_data['idPangkalan'];
+
+		      //$data['idPangkalan'] = $session_data['idPangkalan'];
+		      $datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
 		      //$datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
-		      	$jumlah = $this->m_pesanonline->jumlah($idPangkalan);
-				$config['base_url'] = base_url().'index.php/c_pesanonline/index';
-				$config['total_rows'] = $jumlah;
-				$config['per_page']=5;
+		      //print_r($session_data);
+		      //print_r($datanamapangkalan['hasil']);
+		      //print_r($datanamapangkalan);
+		      //$jumlah = $this->m_pesanonline->jumlah($session_data['username']);
+				//$config['base_url'] = base_url().'index.php/v_mengelola_pesanonline/index';
+				//$config['total_rows'] = $jumlah;
+				//$config['per_page']=5;
 
-				$dari = $this->uri->segment('3');
-			//	$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
-				$datapangkalan['hasil'] = $this->m_pesanonline->lihat($config['per_page'],$dari,$idPangkalan);
+				//$dari = $this->uri->segment('3');
+				$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
+				//$datapangkalan['hasil'] = $this->m_pesanonline->lihat($config['per_page'],$dari,$session_data['username']);
 				$datapangkalan['success'] = '';
 
-				$this->pagination->initialize($config); 
+				//$this->pagination->initialize($config); 
 
 		      $datapangkalan['success']='';
 		      $this->load->view('header');
@@ -190,7 +194,7 @@ class C_pesanonline extends CI_Controller {
 					$this->m_pesanonline->insert($data);
 					$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline/pesan')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
+					Data Berhasil ditambahkan. Jumlah Pembayaran =Rp $totalhargabeli <a href=".base_url('index.php/c_pesanonline')." class=\"alert-link\">Klik Untuk Pesan Kembali</a>
 					</div>";
 					
 					$session_data = $this->session->userdata('logged_in');
@@ -209,7 +213,7 @@ class C_pesanonline extends CI_Controller {
 					      //print_r($datanamapangkalan);
 					  $datanamapangkalan['success']=$sukses;
 					  $this->load->view('header');
-					  $this->load->view('header_pegawai', $data);
+					  $this->load->view('pangkalan/header_pangkalan', $data);
 					  $this->load->view('pangkalan/form_pesanonline',$datanamapangkalan );
 						   
 					  $this->load->view('footer');

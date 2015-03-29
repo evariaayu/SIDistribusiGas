@@ -24,6 +24,19 @@ class M_pegawai extends CI_Model {
         }
         
     }
+
+    function lihat($sampai,$dari){
+        
+        return $query = $this->db->get('pegawai',$sampai,$dari)->result();
+        
+    }
+    function jumlah()
+    {
+        $get_data = $this->db->get('pegawai');
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
+
     function delete($idPegawai)
     {
         $this->db->where('idPegawai', $idPegawai);
