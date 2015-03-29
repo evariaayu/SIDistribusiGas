@@ -8,6 +8,7 @@ class Kelola_user extends CI_Controller {
         $this->load->library(array('form_validation','session'));
         $this->load->model('m_user');
         $this->load->model('m_pegawai');
+        $this->load->model('m_pangkalan');
     }
 	/**
 	 * Index Page for this controller.
@@ -36,6 +37,7 @@ class Kelola_user extends CI_Controller {
 	     	{
 			    $datauser['hasil'] = $this->m_user->getall();
 			    $datauser['hasil2'] = $this->m_pegawai->getall();
+			    $datauser['hasil3'] = $this->m_pangkalan->getall();
 
 			    $this->load->view('header');
 				$this->load->view('header_pegawai', $data);
@@ -99,7 +101,8 @@ class Kelola_user extends CI_Controller {
 			'username' => $this->input->post('username'),
 			'password' => md5($this->input->post('password')),
 			'hakakses' => $this->input->post('hakakses'),
-			'idPegawai' => $this->input->post('idPegawai'),			
+			'idPegawai' => $this->input->post('idPegawai'),
+			'idPangkalan' => $this->input->post('idPangkalan'),			
 		);
 		$this->m_user->insert($datauser);
 		redirect('index.php/kelola_user','refresh');
