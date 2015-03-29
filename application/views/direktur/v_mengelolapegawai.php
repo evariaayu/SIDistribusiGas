@@ -1,36 +1,20 @@
-<h1><center>Kelola Data Pegawai</center></h1>
-<br>
-
-<div class="col-md-2">
-  </div>
-  <div class="col-xs-1"></div>
-    <button type="button" class="btn btn-default btn-md btn-link">
-  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
-  <?php echo anchor ('index.php/kelola_pegawai/form_tambahdata','Data Pegawai') ?>
-</button>
-<br>
-<br>
-
-<div class="row">
-
-<div class="col-xs-2 col-md-offset-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Search</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-<br>
-<br>
-<br>
-
-
-  <div class="col-md-6 col-sm-offset-3">
-  <table class="table table-striped table-hover">
+<div class="col-md-6 col-sm-offset-3">
+    <div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+     <h1 class="panel-title"><b><center>Kelola Pegawai</center></b></h1>
+    </div>
+    <div class="panel-body">
+      <?php echo $success;?>
+      <button type="button" class="btn btn-default btn-md btn-link">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+        <?php echo anchor ('index.php/kelola_pegawai/form_tambahdata','Data Pegawai') ?>
+      </button>
+    </div>
+  <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>ID Pegawai</th>
         <th>Nama</th>
         <th>Alamat</th>
         <th>JK</th>
@@ -41,10 +25,10 @@
       </tr>
     </thead>
     <tbody>
-      <?php if(empty($hasil)) {
-  echo "Data Pegawai masih kosong";
-}
-  else { ?>
+      <?php if(empty($hasil)) {?>
+      <div class="alert alert-warning" role="alert">Data pegawai masih kosong</div>
+      <?php } 
+   else { ?>
       <?php foreach ($hasil as $datapegawai) {?>
       <tr>
         <td><?php echo $datapegawai->idPegawai ?></td>
@@ -56,18 +40,16 @@
                   elseif ($datapegawai->idKeterangan_jabatan == 2) { echo "Pegawai";} 
                   else echo "Supir"; ?>
         </td>
-
-
+       
         <td>
           <button type="button" class="btn btn-danger btn-link">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
           <a href="<?php echo base_url();?>index.php/kelola_pegawai/delete/<?php echo $datapegawai->idPegawai;?>">delete</a> 
         </button>
-        </td>
         <td>
-          <button type="button" class="btn btn-default btn-link">
+          <button type="button" class="btn btn-danger btn-link">
           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/kelola_pegawai/edit/<?php echo $datapegawai->idPegawai;?>">edit</a>
+          <a href="<?php echo base_url();?>index.php/kelola_pegawai/edit/<?php echo $datapegawai->idPegawai; ?>">edit</a>
           </button>
         </td>
        <?php } ?>
@@ -75,5 +57,6 @@
       </tr>
     </tbody>
   </table>
+  <?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->
-</div> <!-- div class row-->
+</div>
