@@ -44,6 +44,7 @@ class Direktur extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
+	      $hakakses= $session_data['hakakses'];
 	      if( ($hakakses=="direktur") )
 			{
 	      $this->load->view('header');

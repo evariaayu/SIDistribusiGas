@@ -36,7 +36,7 @@ class M_pesanonline extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('transaksi_online');
-        $this->db->join('Pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
         $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
         $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
         $this->db->where('transaksi_online.idPangkalan', $idPangkalan);
