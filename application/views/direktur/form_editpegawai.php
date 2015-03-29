@@ -1,11 +1,10 @@
-
-
-  <h3><center>Form Tambah Data Pegawai</center></h1>
-<br>
-<div class="col-md-3">
-</div>
-
-<div class="col-md-6">
+<div class="col-md-offset-3 col-md-7 ">
+  <div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title"><b><center>Form Tambah Data Pegawai</center></b></h3>
+  </div>
+  <div class="panel-body">
 <form class="form-horizontal"  method="POST" action="<?php echo base_url() ?>index.php/kelola_pegawai/update/<?php echo $hasil[0]->idPegawai ?>">
   <div class="form-group">
     <label for="namapegawai" class="col-sm-3 control-label">Nama Pegawai</label>
@@ -41,13 +40,11 @@
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Simpan</button>
+      <input class="btn btn-danger" type="reset" value="Cancel"><br>
     </div>
   </div>
 </form>
+</div>
+</div>
 </div>
