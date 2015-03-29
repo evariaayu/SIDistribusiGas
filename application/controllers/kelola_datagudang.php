@@ -124,7 +124,8 @@ class Kelola_datagudang extends CI_Controller {
 					'jumlahbarangrusak' => $jumlahbarangrusak,
 					'jumlahbarangkosong' => $jumlahbarangkosong,
 					'idPegawai' => $idPegawai,
-					'idPangkalan' => $this->input->post('idPangkalan')
+					'idPangkalan' => $this->input->post('idPangkalan'),
+					'keterangan' => $this->input->post('keterangan')
 				);
 
 				$datetoday =date("Y-m-d");
@@ -143,7 +144,7 @@ class Kelola_datagudang extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 				$data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-				if($session_data['hakakses']=="pegawai")
+				if($session_data['hakakses']=="pegawai" || $session_data['hakakses']=="direktur")
 				{
 			   	    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
 				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
@@ -163,7 +164,7 @@ class Kelola_datagudang extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    if($session_data['hakakses']=="pegawai" || $session_data['hakakses']=="direktur")
 				{
 				    $datatukarbarang['hasil'] = $this->m_pangkalan->getall();
 				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
@@ -190,7 +191,7 @@ class Kelola_datagudang extends CI_Controller {
 	      $session_data = $this->session->userdata('logged_in');
 	      $data['username'] = $session_data['username'];
 	      $data['hakakses'] = $session_data['hakakses'];
-			if($session_data['hakakses']=="pegawai")
+			if($session_data['hakakses']=="pegawai" || $session_data['hakakses']=="direktur")
 			{
 		      $datatukarbarang['hasil'] = $this->m_penukaranbarang->getall();
 		      $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
@@ -249,7 +250,26 @@ class Kelola_datagudang extends CI_Controller {
 		$data['idTukar_Barang'] = $idTukar_Barang;
 		$jumlahbarangrusak = $this->input->post('jumlahbarangrusak');
 		$jumlahbarangkosong = $this->input->post('jumlahbarangkosong');
-		$totaltukar = $jumlahbarangrusak + $jumlahbarangkosong;
+		//$totaltukar = $jumlahbarangrusak + $jumlahbarangkosong;
+
+		$this->db->select('*');
+        $this->db->from('tukar_barang');
+        $this->db->where('idTukar_Barang', $idTukar_Barang);
+        $execute = $this->db->get();
+        if($execute->num_rows() > 0)
+        {
+            foreach ($execute->result() as $key) 
+            {
+                $rusaklama = $key->jumlahbarangrusak;
+                $kosonglama = $key->jumlahbarangkosong;
+            }
+           
+        }
+
+        $selisihrusak=$jumlahbarangrusak-$rusaklama;
+        $selisihkosong=$jumlahbarangkosong-$kosonglama;
+        $totaltukar=$selisihrusak+$selisihkosong;
+
 		$stok_gudang = $this->m_penukaranbarang->ambilstokgudang();
 		if($totaltukar<=$stok_gudang)
 		{
@@ -266,7 +286,7 @@ class Kelola_datagudang extends CI_Controller {
 		      	$data['username'] = $session_data['username'];
 		      	$data['hakakses'] = $session_data['hakakses'];
 		      	$datapangkalan['success'] = $sukses;
-		      	if($session_data['hakakses']=="pegawai")
+		      	if($session_data['hakakses']=="pegawai" || $session_data['hakakses']=="direktur")
 		      	{
 		      		$datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				    $datatukarbarang['success'] = $sukses;
@@ -293,7 +313,7 @@ class Kelola_datagudang extends CI_Controller {
 				$session_data = $this->session->userdata('logged_in');
 			    $data['username'] = $session_data['username'];
 			    $data['hakakses'] = $session_data['hakakses'];
-			    if($session_data['hakakses']=="pegawai")
+			    if($session_data['hakakses']=="pegawai" || $session_data['hakakses']=="direktur")
 				{
 					$datatukarbarang['hasil'] = $this->m_penukaranbarang->getby($idTukar_Barang);
 				    $datatukarbarang['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();

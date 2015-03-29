@@ -48,6 +48,13 @@
         </div>
 
         <div class="form-group">
+          <label for="keterangan" class="col-sm-3 control-label">Keterangan</label>
+          <div class="col-sm-6">
+            <input id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan"></input>
+          </div>
+        </div>
+
+        <div class="form-group">
           <div class="col-sm-offset-3 col-sm-6">
             <button type="submit" class="btn btn-primary">Submit</button>
             <input class="btn btn-danger" type="reset" value="Cancel"><br>
