@@ -39,8 +39,7 @@ class C_pesanonline extends CI_Controller {
 	      $username = $session_data['username'];
 	      if($session_data['hakakses']=="pangkalan")
 	      {
-		     	//$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
-		      //$datanamapangkalan['harga']=$this->m_pesanonline->getharga();
+		 
 
 		      	$jumlah = $this->m_pesanonline->jumlah($idPangkalan);
 				$config['base_url'] = base_url().'index.php/c_pesanonline/index';
