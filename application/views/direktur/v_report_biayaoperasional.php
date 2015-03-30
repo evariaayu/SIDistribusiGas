@@ -162,6 +162,40 @@
                        </fieldset>
 
                         </div>
+
+              <div class="jumbotron">
+                <!-- <form class="form-horizontal" method="POST" action="<?php echo base_url() ?>kelolatempatkp/"> -->
+                    <fieldset>
+                      <legend><center>Total Gaji Karyawan</center></legend>
+                      <table class="table table-striped table-hover ">
+                              <thead>
+                                <tr>
+                               
+                                  <th>Total Pemasukan</th>
+                                  <th>Total Pengeluaran</th>
+                                  <th>Total Gaji</th>
+                                 
+                                </tr>
+                              </thead>
+                               <tbody>
+                              <?php if(empty($total)) { ?>
+                              <div class="alert alert-warning" role="alert">Total Gaji Karyawan masih kosong</div>
+                              <?php } 
+                              else { ?>
+                                
+                                  <tr>
+                                  <td><?php echo 'Rp';echo $totalpemasukan;echo',00'; ?></td>
+                                  <td><?php echo 'Rp';echo $totalpengeluaran; echo',00'; ?></td>
+                                  <td><?php echo 'Rp'; echo $total; echo',00';?></td>                                  
+                                  </tr>
+                           
+                             <?php } ?>
+                            
+                          </tbody>
+                          </table> 
+                       </fieldset>
+
+                        </div>
                 <!-- </form> -->
             </div>
                     

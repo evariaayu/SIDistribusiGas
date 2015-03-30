@@ -101,6 +101,24 @@ class Report_biayaoperasional extends CI_Controller {
 	      $biayaoperasional['hasil'] = $this->m_reportbiayaoperasional->getbiayaoperasional($bulan, $tahun);
 	      //$biayaoperasional['total'] = $this->m_reportbiayaoperasional->getbiayatotal($bulan, $tahun, $total);
 	      $biayaoperasional['hasilbiaya'] = $this->m_reportbiayaoperasional->getbiayalain($bulan, $tahun);
+
+	      $totalpengeluarantetap=$this->m_reportbiayaoperasional->totalpengeluarantetap($bulan, $tahun);
+		$totalpengeluaranlainlain=$this->m_reportbiayaoperasional->totalpengeluaranlainlain($bulan, $tahun);
+
+		$totalpengeluaran = $totalpengeluarantetap+$totalpengeluaranlainlain;
+
+		$totalhargabelionline = $this->m_reportbiayaoperasional->totalhargabelionline($bulan, $tahun);
+		$totalhargabelioffline = $this->m_reportbiayaoperasional->totalhargabelioffline($bulan, $tahun);
+
+		$totalpemasukan = $totalhargabelioffline+$totalhargabelionline;
+
+		$totalgaji = $totalpemasukan-$totalpengeluaran;
+		$biayaoperasional['totalpengeluaran'] = $totalpengeluaran;
+		$biayaoperasional['totalpemasukan']=$totalpemasukan;
+	      $biayaoperasional['total'] = $totalgaji;
+
+
+
 	      $this->load->view('header', $this->sesi);
 		  $this->load->view('header_pegawai', $data);
 		  $this->load->view('direktur/v_report_biayaoperasional',$biayaoperasional);
