@@ -5,7 +5,7 @@ class C_cekpesanonline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session','pagination'));
         $this->load->model('m_cekpesanonline');
         $this->load->model('m_penukaranbarang');
     }
@@ -35,9 +35,17 @@ class C_cekpesanonline extends CI_Controller {
 	      	$hakakses=$session_data['hakakses'];
 	      	if($hakakses=="pegawai" || $hakakses=="direktur")
 	      	{
-	      		$datapesanonline['hasil'] = $this->m_cekpesanonline->cekPesan();
+	      		//$datapesanonline['hasil'] = $this->m_cekpesanonline->cekPesan();
+	      		$jumlah =$this->m_cekpesanonline->jumlah();
+				$config['base_url'] = base_url().'index.php/c_cekpesanonline/index';
+				$config['total_rows'] = $jumlah;
+				$config['per_page']=5;
 
-	      //print_r($datapesanonline['hasil']);
+				$dari = $this->uri->segment('3');
+				$datapesanonline['hasil'] = $this->m_cekpesanonline->lihat($config['per_page'],$dari);
+				$datapesanonline['success'] = '';
+
+				$this->pagination->initialize($config); 
 	      		$datapesanonline['success']='';
 	      		$this->load->view('header');
 		  		$this->load->view('header_pegawai', $data);
@@ -68,11 +76,49 @@ class C_cekpesanonline extends CI_Controller {
 		
 	}
 
+
 	public function delete($idTransaksi_Online)
 	{
 		$this->m_cekpesanonline->delete($idTransaksi_Online);
-		redirect('index.php/c_cekpesanonline','refresh');
+		//redirect setelah 2 detik
+		echo "<script type='text/javascript'>
+				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/c_cekpesanonline';}, 2000);
+
+				</script>";
+		$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
+  					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+					Data berhasil dihapus
+					</div>";
+		if($this->session->userdata('logged_in'))
+		{
+	     	$session_data = $this->session->userdata('logged_in');
+	      	$data['username'] = $session_data['username'];
+	      	$data['hakakses'] = $session_data['hakakses'];
+	      	$datapesanonline['success'] = $sukses;
+	      	$idPangkalan	= 	$session_data['idPangkalan'];
+	      	$hakakses=$session_data['hakakses'];
+	      	if($hakakses=="pegawai" || $hakakses=="direktur")
+	      	{
+	      		$datapesanonline['hasil'] = $this->m_cekpesanonline->getall();
+				$this->load->view('header');
+		 		$this->load->view('header_pegawai', $data);
+		  		$this->load->view('pegawai/form_cekpesanonline',$datapesanonline);
+		  		$this->load->view('footer');
+		  	}
+			else
+	   		{
+	     //If no session, redirect to login page
+	     		redirect('index.php/c_login/logout', 'refresh');
+	   		}
+	   	}
+	   	else
+	   	{
+
+	   		redirect('index.php/c_login/logout', 'refresh');
+	   	}
+	//	redirect('index.php/kelola_pangkalan');
 	}
+
 	public function editbaru($idTransaksi_Online)
 	{
 		if($this->session->userdata('logged_in'))

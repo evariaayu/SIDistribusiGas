@@ -23,9 +23,11 @@
       </tr>
     </thead>
     <tbody>
-      <?php
-      foreach ($hasil->result() as $row)
-        { ?>
+      <?php if(empty($hasil)) {?>
+          <div class="alert alert-warning" role="alert">Data pemesanan masih kosong</div>
+        <?php } 
+        else { ?>
+          <?php foreach ($hasil as $row) {?>
       <tr>
         <td><?php echo $row->idTransaksi_Online ?></td>
         <td><?php echo $row->namapangkalan ?></td>
@@ -34,13 +36,7 @@
        <td><?php echo $row->totalhargabeli ?></td>
        <td>
         <?php if($row->idstatus_pemesanan == 1) { ?>
-        <!--
-        <form method="POST" action="<?php echo base_url();?>index.php/c_cekpesanonline/update">
-          <input type="hidden" name="idTransaksi_Online" value="<?php echo $row->idTransaksi_Online; ?>">
-          <input type="hidden" name="jumlahGas" value="<?php echo $row->jumlahGas; ?>">
-          <input type="submit" value="konfirmasi" name="konfirmasi">
-        </form>-->
-        <button type="button" class="btn btn-danger btn-link">
+        <button type="button" class="btn btn-primary btn-link">
           <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
           <a href="<?php echo base_url();?>index.php/c_cekpesanonline/editbaru/<?php echo $row->idTransaksi_Online;?>">Konfirmasi</a> 
         </button>
@@ -48,25 +44,22 @@
           CONFIRMED
           <?php } ?>
         </td>
-
+         <?php if($row->idstatus_pemesanan == 1) { ?>
          <td>
           <button type="button" class="btn btn-danger btn-link">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/delete/<?php echo $row->idTransaksi_Online;?>">delete</a> 
+          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/delete/<?php echo $row->idTransaksi_Online;?>">Delete</a> 
         </button>
         </td>
-       <!--
-        <td>
-          <button type="button" class="btn btn-danger btn-link">
-          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          <a href="<?php echo base_url();?>index.php/c_cekpesanonline/editbaru/<?php echo $row->idTransaksi_Online;?>">Konfirmasi</a> 
-        </button>
-        </td>-->
-
+         <?php } else { ?>
+          <td></td>
+          <?php } ?>
       </tr>
+      <?php } ?>
       <?php } ?>
     </tbody>
   </table>
+      <?php echo $this->pagination->create_links(); ?>
   </div><!-- col-md-6 col-sm-offset-2-->
 </div> <!-- div class row-->
 </div>

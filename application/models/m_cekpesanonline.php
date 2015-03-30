@@ -25,7 +25,47 @@ class M_cekpesanonline extends CI_Model {
         $execute = $this->db->get();
         return $execute;
     }
+     function getall()
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi_online');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
+        $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
+        $get_data = $this->db->get();
+        if($get_data->num_rows()>0)
+        {
+            foreach ($get_data->result() as $datatukarbarang) 
+            {
+                $hasil[]= $datatukarbarang;
+            }
+            return $hasil;
+        }
 
+        
+    }
+    function lihat($sampai,$dari){
+        $this->db->select('*');
+        $this->db->from('transaksi_online');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
+        $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
+        $this->db->limit($sampai,$dari);
+        return $query = $this->db->get()->result();
+        
+    }
+
+    function jumlah()
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi_online');
+        $this->db->join('pangkalan','transaksi_online.idPangkalan=pangkalan.idPangkalan');
+        $this->db->join('status_pemesanan','transaksi_online.idstatus_pemesanan=status_pemesanan.idstatus_pemesanan');
+        $this->db->join('login','transaksi_online.idPangkalan=login.idPangkalan');
+        $get_data = $this->db->get();
+        $jumlah = $get_data->num_rows();
+        return $jumlah;
+    }
     public function update($jumlahGas,$idTransaksi_Online)
     {
         //$data = array('idstatus_pemesanan' => '2');
