@@ -112,7 +112,7 @@ class Kelola_pegawai extends CI_Controller {
 		$this->m_pegawai->insert($datapegawai);
 		$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_pegawai')." class=\"alert-link\">Kembali?</a>
+					Data Berhasil ditambahkan <a href=".base_url('index.php/kelola_pangkalan')." class=\"alert-link\">Kembali?</a>
 					</div>";
 
 		if($this->session->userdata('logged_in'))
@@ -217,7 +217,7 @@ class Kelola_pegawai extends CI_Controller {
 		$this->m_pegawai->update($data);
 		$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   					<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-					Data berhasil diubah <a href=".base_url('index.php/kelola_pegawai')." class=\"alert-link\">Kembali?</a>
+					Data berhasil diubah <a href=".base_url('index.php/kelola_pangkalan')." class=\"alert-link\">Kembali?</a>
 					</div>";
 		if($this->session->userdata('logged_in'))
 		{
