@@ -27,7 +27,7 @@ class M_pesanoffline extends CI_Model
         }
         
     }
-    function getall_view()
+    public function getall_view()
     {
         
         $this->db->select('*');
@@ -46,10 +46,12 @@ class M_pesanoffline extends CI_Model
 
         
     }
-    function lihat($sampai,$dari){
+
+    function lihat($sampai,$dari)
+    {
         $this->db->select('*');
         $this->db->from('transaksi_offline');
-        $this->db->join('pangkalan','pangkalan.idPangkalan = transaksi_offline.idPangkalan');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=transaksi_offline.idPangkalan');
         $this->db->join('pegawai', 'pegawai.idPegawai=transaksi_offline.idPegawai');
         $this->db->limit($sampai,$dari);
         return $query = $this->db->get()->result();
@@ -59,7 +61,7 @@ class M_pesanoffline extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('transaksi_offline');
-        $this->db->join('pangkalan','pangkalan.idPangkalan = transaksi_offline.idPangkalan');
+        $this->db->join('pangkalan','pangkalan.idPangkalan=transaksi_offline.idPangkalan');
         $this->db->join('pegawai', 'pegawai.idPegawai=transaksi_offline.idPegawai');
         $get_data = $this->db->get();
         $jumlah = $get_data->num_rows();
@@ -194,10 +196,7 @@ class M_pesanoffline extends CI_Model
 
     function insert($data) 
     {
-        
-     //   $idPangkalan = $session_data['idPangkalan'];
-    //    $totalhargabeli = $this->input->post('totalhargabeli');
-
+     //   print_r($data);
         
         $this->db->insert('transaksi_offline', $data);
         

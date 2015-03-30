@@ -5,15 +5,13 @@ class C_pesanoffline extends CI_Controller {
     function __construct() {
         parent::__construct();
         //load session and connect to database
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session','pagination'));
         $this->load->model('m_penukaranbarang');
         $this->load->model('m_pangkalan');
         $this->load->helper('form','html');
         $this->load->model('m_pesanoffline');
         $this->load->helper('url');
         $this->load->model('m_operasional');
-        $this->load->library("pagination");
-        $this->load->model('m_penukaranbarang');
     }
 	/**
 	 * Index Page for this controller.
@@ -42,8 +40,6 @@ class C_pesanoffline extends CI_Controller {
 		  $hakakses= $session_data['hakakses'];
 	      if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 	      {
-		     	//$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
-		      //$datanamapangkalan['harga']=$this->m_pesanonline->getharga();
 
 		      	$jumlah = $this->m_pesanoffline->jumlah();
 				$config['base_url'] = base_url().'index.php/c_pesanoffline/index';
@@ -51,18 +47,15 @@ class C_pesanoffline extends CI_Controller {
 				$config['per_page']=5;
 
 				$dari = $this->uri->segment('3');
-			//	$datapangkalan ['hasil']= $this->m_pesanonline->getby($session_data['username']);	
-				$datanamapangkalan['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				$datanamapangkalan['hasil'] = $this->m_pesanoffline->lihat($config['per_page'],$dari);
+				$datanamapangkalan['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				$datanamapangkalan['success'] = '';
-
+			//	$datanamapangkalan['hasil'] = $this->m_pesanoffline->getall_view();
 				$this->pagination->initialize($config); 
-
-		      
-		      $this->load->view('header');
-			  $this->load->view('header_pegawai', $data);
-			  $this->load->view('pegawai/v_mengelola_pesanoffline',$datanamapangkalan );
-			  $this->load->view('footer');
+			    $this->load->view('header');
+				$this->load->view('header_pegawai', $data);
+				$this->load->view('pegawai/v_mengelola_pesanoffline',$datanamapangkalan);
+				$this->load->view('footer');
 		  }
 		  else
 		  {
@@ -76,31 +69,6 @@ class C_pesanoffline extends CI_Controller {
 	   }
 		
 	}
-
-
-
-	/*public function form_pesanonline()
-	{
-		if($this->session->userdata('logged_in'))
-		{
-		    $session_data = $this->session->userdata('logged_in');
-		    $data['username'] = $session_data['username'];
-		    $data['hakakses'] = $session_data['hakakses'];
-
-		    $datanamapangkalan['hasil'] = $this->m_pesanonline->getall();
-
-			$this->load->view('header');
-		 	$this->load->view('header_pangkalan', $data);
-		  	$this->load->view('pangkalan/form_pesanonline', $datanamapangkalan);
-		  	$this->load->view('footer');
-	  	}
-	   	else
-	   	{
-	     //If no session, redirect to login page
-	    	redirect('index.php/c_login', 'refresh');
-	   	}
-	}*/
-
 
 	public function insert()
 	{
@@ -158,8 +126,7 @@ class C_pesanoffline extends CI_Controller {
 
 	public function pesan()
 	{
-		//$data['username'] = $session_data['username'];
-		$waktu = $this->input->post('waktu');
+		
 		$pangkalan = $this->input->post('idPangkalan');
 		$harga = $this->input->post('harga');
 		$jumlahorder = $this->input->post('jumlahGas');
@@ -183,7 +150,7 @@ class C_pesanoffline extends CI_Controller {
 						'totalhargabelioff' => $totalhargabelioff,
 						//'idstatus_pemesanan' => '1',
 						'idPegawai' => $idPegawai,
-						'idPangkalan' => $this->input->post('idPangkalan'),
+						'idPangkalan' => $pangkalan
 						//'namapangkalan' => $this->input->post('username')
 
 					);
@@ -202,7 +169,7 @@ class C_pesanoffline extends CI_Controller {
 					      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
 					      //$data['idPangkalan'] = $session_data['idPangkalan'];
-						$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall();	
+						$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall_view();	
 					    $datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
 
 					      //print_r($session_data);
@@ -232,7 +199,7 @@ class C_pesanoffline extends CI_Controller {
 					      //$data['idPangkalan'] = $session_data['idPangkalan'];
 
 					      //$data['idPangkalan'] = $session_data['idPangkalan'];
-				$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall();	
+				$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall_view();	
 				$datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
 			
 
@@ -253,7 +220,6 @@ class C_pesanoffline extends CI_Controller {
 		$this->m_pesanoffline->delete($idTransaksi_Offline);
 		echo "<script type='text/javascript'>
 				window.setTimeout(function(){window.location.href ='" . base_url() . "index.php/c_pesanoffline';}, 2000);
-
 				</script>";
 		if($this->session->userdata('logged_in'))
 		{
@@ -263,20 +229,18 @@ class C_pesanoffline extends CI_Controller {
 	      $hakakses = $session_data['hakakses'];
 		  if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		  {
-		    	$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall();	
+		  		//$jumlah = $this->m_pemasukangas->jumlah();
+		    	$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall_view();	
 				$datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
+				$datanamapangkalan['stok_gudang'] = $this->m_penukaranbarang->ambilstokgudang();
 				$sukses = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">
   						<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
 						Data Berhasil dihapus
 						</div>";
-
-					      //print_r($session_data);
-					      //print_r($datanamapangkalan['hasil']);
-					      //print_r($datanamapangkalan);
 				$datanamapangkalan['success']= $sukses;
 				$this->load->view('header');
 				$this->load->view('header_pegawai', $data);
-				$this->load->view('pegawai/form_pesanoffline',$datanamapangkalan );
+				$this->load->view('pegawai/v_mengelola_pesanoffline',$datanamapangkalan );
 				$this->load->view('footer');
 			
 			}
@@ -289,7 +253,7 @@ class C_pesanoffline extends CI_Controller {
 		//redirect('index.php/Kelola_datagudang/success');
 	}
 
-	public function edit($idTukar_Barang)
+	public function edit($idTransaksi_Offline)
 	{
 		if($this->session->userdata('logged_in'))
 		{
@@ -299,7 +263,7 @@ class C_pesanoffline extends CI_Controller {
 		    $hakakses = $session_data['hakakses'];
 			if( ($hakakses=="pegawai") || ($hakakses="direktur"))
 		  	{
-		    	$datanamapangkalan ['hasil']= $this->m_pesanoffline->getall();	
+		    	$datanamapangkalan ['hasil']= $this->m_pesanoffline->getby($idTransaksi_Offline);	
 				$datanamapangkalan['harga']=$this->m_pesanoffline->getharga();
 				$datatukarbarang['success'] ='';
 
